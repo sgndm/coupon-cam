@@ -1,0 +1,230 @@
+/* styles for radio and check boxes */
+
+/* Customize the label (the btn-container) */
+.btn-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 12px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.btn-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+/* On mouse-over, add a grey background color */
+.btn-container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.btn-container input:checked ~ .checkmark {
+    background-color: #e80602;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.btn-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.btn-container .checkmark:after {
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+/* Create a custom radio button */
+.checkRadio {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 14px;
+  width: 14px;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.btn-container:hover input ~ .checkRadio {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.btn-container input:checked ~ .checkRadio {
+  background-color: #ccc;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkRadio:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.btn-container input:checked ~ .checkRadio:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.btn-container .checkRadio:after {
+  top: 2px;
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e80602;
+}
+
+
+
+
+/* custom submit btns */
+.custom_btn {
+    position: relative;
+    width: 100%;
+    height: 53px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.custom_btn_2 {
+    position: relative;
+    width: 100%;
+    height: 83px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.save_c_c{
+    position: relative;
+    width: 100%;
+    height: 83px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-bottom: 20px;
+    cursor: pointer;
+    background-image: url('../images/save_c.png');
+}
+.save_e_c{
+    position: relative;
+    width: 100%;
+    height: 83px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-bottom: 20px;
+    cursor: pointer;
+    background-image: url('../images/up_c.png');
+}
+
+.save_c{
+    background-image: url('../images/save_c.png');
+}
+
+.up_store{
+    background-image: url('../images/up_st.png');
+}
+
+.cls_store{
+    background-image: url('../images/cls_st.png');
+}
+
+.reop_store{
+    background-image: url('../images/rep_st.png');
+}
+
+.del_store{
+    background-image: url('../images/del_store.png');
+}
+
+.reop_store{
+    background-image: url('../images/rep_st.png');
+}
+
+.del_store{
+    background-image: url('../images/del_store.png');
+}
+
+.paus_promo{
+    background-image: url('../images/paus_promo.png');
+}
+
+.up_promo{
+    background-image: url('../images/up_pro.png');
+}
+
+.finish_promo{
+    background-image: url('../images/fin_promo.png');
+}
+
+.act_promo{
+    background-image: url('../images/act_promo.png');
+}
+
+.update{
+    background-image: url('../images/update.png');
+}
+
+.crt_qr_code {
+  background-image: url('../images/crt_qr_code.png');
+}
+
+.view_qr_code {
+  background-image: url('../images/view_qr_code.png');
+}
+
+.refresh_qr_code{
+  background-image: url('../images/edit_qr_code.png');
+}
+
+.send_push{
+  background-image: url('../images/send_push.png');
+}
+
+.start_geo{
+  background-image: url('../images/start_geo.png');
+}
+
+.stop_geo{
+  background-image: url('../images/end_geo.png');
+}
+
+/* switch */

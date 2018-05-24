@@ -1,0 +1,212 @@
+.stat-container{
+    position: relative;
+    left: 10px;
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    padding: 0;
+/*    background-image: url('../images/stat-back.png');*/
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.stat-container .stat-tile {
+    position: relative;
+    width: 50%;
+    background-color: #e80602;
+    border-radius: 15px;
+    border: 2px solid white;
+    padding: 2px;
+    overflow: hidden;
+}
+
+.stat-container .stat-larg-tile {
+    position: relative;
+    width: 50%;
+    background-color: #e80602;
+    border-radius: 15px;
+    border: 2px solid white;
+}
+
+.stat-larg-tile > h2,p,.stat-tile > h2,P{
+    color: #fff;
+}
+
+.category_container{
+    position: relative;
+	width: 100%;
+    border: 1px solid #d7dbe0;
+	height: 28vh;
+	overflow-y: auto;
+    overflow-x: visible;
+}
+.store_container {
+    position: relative;
+	width: 100%;
+    border: 1px solid #d7dbe0;
+	height: 35vh;
+	overflow-y: auto;
+    overflow-x: visible;
+}
+
+.store_p_container{
+    position: relative;
+	width: 100%;
+    border: 1px solid #d7dbe0;
+	height: 22vh;
+	overflow-y: auto;
+    overflow-x: visible;
+}
+
+.category_table{
+    border: 0;
+    width: 100%;
+}
+.category_table tr {
+    
+}
+
+.category_table tr td  {
+    height: 30px;
+    padding: 5px 0 0 0;
+}
+
+.custom-input {
+    width: 90%;
+    height: 19px;
+    border: 0;
+    border-bottom: 1px solid #e80602;
+    
+}
+
+.ar_list{
+    color: #e80602;
+    cursor: pointer;
+}
+
+/* custom scroll bar left */
+.left_scroll.ps .ps__scrollbar-y-rail {
+    left: 2px;
+    background: none;
+    width: 6px;
+}
+
+.searc_ar_model{
+    width: 100%;
+    position: relative;
+    top: 1140px;
+}
+
+.imagecontainer{
+    position: relative;
+    height: 400px;
+    width:200px;
+    background-position: center;
+    padding: 45px 9px 78px 10px;
+    margin: 0 auto;
+    background-image: url('../images/i-phone.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.imagecontainer .headingc{
+    position: relative;
+    top: 0;
+    height: 18px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    padding-top: 0px;
+    font-size: 15px;
+}
+.imagecontainer .contentc{
+    height: 58px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+.imagecontainer .contentc img{
+    height: inherit;
+    width: auto;
+    text-align: center;
+    overflow: hidden;
+}
+.imagecontainer .contentc .goimagec{
+    /* background-image: url({{ url('resources/assets/user/images/goimage.png') }});*/
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 64px;
+    width: 230px;
+    position: absolute;
+}
+
+#heading_c_1,#heading_e_1{ top: -4px; }
+#heading_c_2,#heading_e_2{ top: -3px; }
+#heading_c_3,#heading_e_3{ top: -3px; }
+#heading_c_4,#heading_e_4{ top: -3px; }
+
+#content_c3,#content_e3{ height: 58px; margin-top: -2px;}
+#content_c4,#content_e4{ height: 58px; margin-top: -2px;}
+
+
+.imagecontainer2{
+    position: relative;
+    height: 350px;
+    width:160px;
+    background-position: center;
+    padding: 45px 9px 78px 10px;
+    margin: 0 auto;
+    background-image: url('../images/i-phone.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.imagecontainer2 .headinga{
+    position: relative;
+    top: 0;
+    height: 17px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    padding-top: 0px;
+    font-size: 15px;
+}
+.imagecontainer2 .contenta{
+    height: 43px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+.imagecontainer2 .contenta img{
+    height: inherit;
+    width: auto;
+    text-align: center;
+    overflow: hidden;
+}
+.imagecontainer2 .contenta .goimagea{
+    /* background-image: url({{ url('resources/assets/user/images/goimage.png') }});*/
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 24px;
+    width: 230px;
+    position: absolute;
+}
+
+#content_a1{ margin-top: 2px; }
+#content_a2{ margin-top: 2px; }
+#content_a3{ margin-top: 2px; }
+#content_a4{ margin-top: 2px; }
+
+#heading_a_1{ margin-top: 2px; }
+#heading_a_2{ margin-top: -2px; }
+#heading_a_3{ margin-top: -2px; }
+#heading_a_4{ margin-top: -2px; }
+
+
+.ar_search_res{
+    width: auto;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #ccc;
+}

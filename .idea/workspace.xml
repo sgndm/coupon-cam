@@ -1,0 +1,1188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b0abb61c-39f4-4d98-8a55-6d3dc9a1c70c" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/2VhAFvYfeyRoqb4NOAW85yCR3FQebUirAI6BQovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/3RTOTSOVciTxA3SVlCIOho7DUhfplk0JLLmH79dn" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/KdCgfYtrSNJ0c5wHeKjqMYIyrcXnS7GdpqNuiU9i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/xle9oVAZWOK8k5qgJpU7VGWaPPxtEkQ7ulETjhkP" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.env" afterPath="$PROJECT_DIR$/.env" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/get_saved_coupons_main.php" afterPath="$PROJECT_DIR$/api/get_saved_coupons_main.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/save_coupon.php" afterPath="$PROJECT_DIR$/api/save_coupon.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Coupon/UserCouponController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Coupon/UserCouponController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Promo/PromoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Promo/PromoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Store/UserStoreController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Store/UserStoreController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/User/UserPanelController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/User/UserPanelController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/users_panel/profile_user.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/users_panel/profile_user.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/users_panel/team_user.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/users_panel/team_user.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/business.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/business.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/user/coupons/coupon.blade.php" afterPath="$PROJECT_DIR$/resources/views/user/coupons/coupon.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/user/stores/store.blade.php" afterPath="$PROJECT_DIR$/resources/views/user/stores/store.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/paths/coupons.php" afterPath="$PROJECT_DIR$/routes/paths/coupons.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/paths/users_panel.php" afterPath="$PROJECT_DIR$/routes/paths/users_panel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/3fa4068d75d23a6ad8ee058a02146065e85c6a43.php" afterPath="$PROJECT_DIR$/storage/framework/views/3fa4068d75d23a6ad8ee058a02146065e85c6a43.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/5a2e3b6ebae412963b0dbafbb451ab2bb4658ad2.php" afterPath="$PROJECT_DIR$/storage/framework/views/5a2e3b6ebae412963b0dbafbb451ab2bb4658ad2.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/9e2d26d07d3675261cec6a613f67a3a272036750.php" afterPath="$PROJECT_DIR$/storage/framework/views/9e2d26d07d3675261cec6a613f67a3a272036750.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/f37b98caac1a3030445c764b566e73fedb14761d.php" afterPath="$PROJECT_DIR$/storage/framework/views/f37b98caac1a3030445c764b566e73fedb14761d.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/f842d7aa06823583bb383e7ee3ef4b8132e9b506.php" afterPath="$PROJECT_DIR$/storage/framework/views/f842d7aa06823583bb383e7ee3ef4b8132e9b506.php" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="cc_new@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="cc_new@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="cc_new" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="cc_new@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="cc_new" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="user_team" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="CC_new" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="UserCouponController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Coupon/UserCouponController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="205">
+              <caret line="274" column="46" lean-forward="false" selection-start-line="274" selection-start-column="46" selection-end-line="274" selection-end-column="46" />
+              <folding>
+                <element signature="e#524#631#0#PHP" expanded="false" />
+                <element signature="e#637#3235#0#PHP" expanded="false" />
+                <element signature="e#3241#5983#0#PHP" expanded="false" />
+                <element signature="e#5989#8902#0#PHP" expanded="false" />
+                <element signature="e#8908#9058#0#PHP" expanded="false" />
+                <element signature="e#9064#10177#0#PHP" expanded="false" />
+                <element signature="e#10757#11225#0#PHP" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="coupon.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/user/coupons/coupon.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="33014">
+              <caret line="1942" column="0" lean-forward="false" selection-start-line="1942" selection-start-column="0" selection-end-line="1942" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PromoController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Promo/PromoController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="188">
+              <caret line="418" column="87" lean-forward="false" selection-start-line="418" selection-start-column="87" selection-end-line="418" selection-end-column="87" />
+              <folding>
+                <marker date="1527165215097" expanded="true" signature="12526:12577" ph="..." />
+                <marker date="1527165215097" expanded="true" signature="12848:12893" ph="..." />
+                <marker date="1527165215097" expanded="true" signature="13040:13059" ph="..." />
+                <marker date="1527165215097" expanded="true" signature="13979:13991" ph="..." />
+                <marker date="1527165215097" expanded="true" signature="14192:14252" ph="..." />
+                <marker date="1527165215097" expanded="true" signature="14835:14886" ph="..." />
+                <marker date="1527165215097" expanded="true" signature="15882:15927" ph="..." />
+                <marker date="1527165215097" expanded="true" signature="16068:16087" ph="..." />
+                <marker date="1527165215097" expanded="true" signature="16639:16684" ph="..." />
+                <marker date="1527165215097" expanded="true" signature="16825:16844" ph="..." />
+                <marker date="1527165215097" expanded="true" signature="17859:17871" ph="..." />
+                <marker date="1527165215097" expanded="true" signature="18072:18132" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".env" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.env">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="18" lean-forward="false" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="conn.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/conn.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="coupons.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/paths/coupons.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="28" column="90" lean-forward="false" selection-start-line="28" selection-start-column="72" selection-end-line="28" selection-end-column="90" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>index</find>
+      <find>coupon_photo_2</find>
+      <find>store_id</find>
+      <find>&lt;scrip</find>
+      <find>search_ar_models</find>
+      <find>search_coupon_1</find>
+      <find>ar_search_result_1</find>
+      <find>coupon_nam</find>
+      <find>geo_start</find>
+      <find>geo_stop</find>
+      <find>&lt;form</find>
+      <find>create(</find>
+      <find>$checkSaved</find>
+      <find>$saveed_coupons</find>
+      <find>$out_saved</find>
+      <find>$reSvd</find>
+      <find>$getReSaved</find>
+      <find>select('</find>
+      <find>create</find>
+      <find>get_user_details_by_id</find>
+      <find>Auth::id()</find>
+      <find>$cou</find>
+      <find>user/team</find>
+      <find>userTeam</find>
+      <find>Auth</find>
+      <find>estimated</find>
+      <find>estim</find>
+      <find>redPromosave</find>
+      <find>get_coupon_details</find>
+      <find>estima</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>$puasedPromos</replace>
+      <replace>_e_</replace>
+      <replace>input type=&quot;number&quot; min=&quot;0&quot; max=&quot;10&quot;</replace>
+      <replace>input type=&quot;number&quot; min=&quot;0&quot; max=&quot;10&quot; value=&quot;0&quot;</replace>
+      <replace>Promo</replace>
+      <replace>View Suggestions</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/config/app.php" />
+        <option value="$PROJECT_DIR$/resources/assets/custom/css/custom.css" />
+        <option value="$PROJECT_DIR$/app/PromoStats.php" />
+        <option value="$PROJECT_DIR$/api/save_coupon_new.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/users_panel/profile.blade.php" />
+        <option value="$PROJECT_DIR$/api/get_red_friday_promos.php" />
+        <option value="$PROJECT_DIR$/api/save_red_coupon.php" />
+        <option value="$PROJECT_DIR$/app/Console/Commands/selectWinner.php" />
+        <option value="$PROJECT_DIR$/api/get_clues.php" />
+        <option value="$PROJECT_DIR$/resources/assets/custom/css/override.css" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/User/UserAcceptController.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/user.blade.php" />
+        <option value="$PROJECT_DIR$/routes/paths/promos.php" />
+        <option value="$PROJECT_DIR$/api/redeem_coupon.php" />
+        <option value="$PROJECT_DIR$/api/get_qr_code_by_id.php" />
+        <option value="$PROJECT_DIR$/resources/assets/custom/css/custom-btns.css" />
+        <option value="$PROJECT_DIR$/app/RetargetCoupon.php" />
+        <option value="$PROJECT_DIR$/app/Classes/ExtraFunctions.php" />
+        <option value="$PROJECT_DIR$/app/RetargetSaved.php" />
+        <option value="$PROJECT_DIR$/app/RetargetStats.php" />
+        <option value="$PROJECT_DIR$/api/geo_fencing.php" />
+        <option value="$PROJECT_DIR$/resources/views/user/dashboard/dashboard_user.blade.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/51a65d1a-b44f-492b-837a-f35a574d28ab/console.sql" />
+        <option value="dbtable:/29e3b760/51a65d1a-b44f-492b-837a-f35a574d28ab/coupon_cam.retarget_saved" />
+        <option value="$PROJECT_DIR$/app/Console/Commands/expireCoupons.php" />
+        <option value="$PROJECT_DIR$/api/conn.php" />
+        <option value="$PROJECT_DIR$/app/UserStore.php" />
+        <option value="$PROJECT_DIR$/app/StoreUser.php" />
+        <option value="$PROJECT_DIR$/app/UserTeam.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Promo/UserPromoController.php" />
+        <option value="$PROJECT_DIR$/api/get_device_info.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/stores/store_create.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/promos/promo_create.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Store/StoreController.php" />
+        <option value="$PROJECT_DIR$/resources/views/user/promos/promo.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/promos/promo_list.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Coupon/CouponController.php" />
+        <option value="$PROJECT_DIR$/api/get_saved_coupons_main.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/business.blade.php" />
+        <option value="$PROJECT_DIR$/routes/paths/users_panel.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/users_panel/team_user.blade.php" />
+        <option value="$PROJECT_DIR$/api/save_coupon.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/User/UserPanelController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Store/UserStoreController.php" />
+        <option value="$PROJECT_DIR$/resources/views/user/stores/store.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/users_panel/profile_user.blade.php" />
+        <option value="$PROJECT_DIR$/routes/paths/coupons.php" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/resources/views/user/coupons/coupon.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Coupon/UserCouponController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Promo/PromoController.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
+    <package-json value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>false</service-enabled>
+    <exe-path />
+    <annotation-enable>false</annotation-enable>
+    <other-services-enabled>false</other-services-enabled>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <gulpfiles>
+      <GulpfileState>
+        <gulpfile-path>$PROJECT_DIR$/gulpfile.js</gulpfile-path>
+      </GulpfileState>
+    </gulpfiles>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit-mock-objects" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php56" />
+      <path value="$PROJECT_DIR$/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-util" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/mtdowling/cron-expression" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/jeremeamia/SuperClosure" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-color" />
+      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-highlighter" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/classpreloader/classpreloader" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/bacon/bacon-qr-code" />
+      <path value="$PROJECT_DIR$/vendor/simplesoftwareio/simple-qrcode" />
+      <path value="$PROJECT_DIR$/vendor/treinetic/imageartist" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CC_new" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CC_new" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CC_new" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CC_new" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CC_new" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CC_new" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="paths" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="SQL Dialects" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="SearchEverywhereHistoryKey" value="user/team&#9;FILE&#9;file://C:/xampp/htdocs/couponcam/CC_new/resources/views/admin/users_panel/team_user.blade.php&#10;if (Auth::attempt&#9;null&#9;null" />
+    <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\couponcam\CC_new\app" />
+      <recent name="C:\xampp\htdocs\workspace\CC_new\app" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="CodeceptionConfigurationType" factoryName="Codeception">
+      <PhpTestRunnerSettings />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpSpecConfigurationType" factoryName="PHPSpec">
+      <PhpTestRunnerSettings />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b0abb61c-39f4-4d98-8a55-6d3dc9a1c70c" name="Default" comment="" />
+      <created>1522991444827</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1522991444827</updated>
+      <workItem from="1522991453421" duration="987000" />
+      <workItem from="1523001495445" duration="465000" />
+      <workItem from="1523002554882" duration="335000" />
+      <workItem from="1523017936175" duration="389000" />
+      <workItem from="1523246802001" duration="31000" />
+      <workItem from="1523246864295" duration="5296000" />
+      <workItem from="1523349371162" duration="649000" />
+      <workItem from="1523352851864" duration="19298000" />
+      <workItem from="1523372875979" duration="4735000" />
+      <workItem from="1523423447192" duration="1822000" />
+      <workItem from="1523454934171" duration="965000" />
+      <workItem from="1526566714720" duration="3055000" />
+      <workItem from="1526621211002" duration="37159000" />
+      <workItem from="1526662812141" duration="612000" />
+      <workItem from="1526667701505" duration="227000" />
+      <workItem from="1526879123484" duration="48338000" />
+      <workItem from="1526966258325" duration="10690000" />
+      <workItem from="1526992954385" duration="2898000" />
+      <workItem from="1527011148684" duration="11076000" />
+      <workItem from="1527052577524" duration="19354000" />
+      <workItem from="1527083647068" duration="608000" />
+      <workItem from="1527089202326" duration="6450000" />
+      <workItem from="1527149706156" duration="2961000" />
+      <workItem from="1527164752362" duration="45000" />
+      <workItem from="1527165184277" duration="36000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="178481000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1482602" sideWeight="0.49346405" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12405446" sideWeight="0.50653595" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.026143791" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myShow1" value="true" />
+    <option name="myLimit" value="86400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="SHOW_DIRTY_RECURSIVELY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/User/UserPanelController.php</url>
+          <line>398</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/User/UserPanelController.php</url>
+          <line>647</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/User/UserPanelController.php</url>
+          <line>114</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/api/get_saved_coupons_main.php</url>
+          <line>89</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/api/get_saved_coupons_main.php</url>
+          <line>74</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/api/get_saved_coupons_main.php</url>
+          <line>61</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/api/get_saved_coupons_main.php</url>
+          <line>70</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/api/get_saved_coupons_main.php</url>
+          <line>55</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/api/get_saved_coupons_main.php</url>
+          <line>14</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="18" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/RetargetCoupon.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/DeviceInfo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Classes/PushNotification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="78" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Classes/ExtraFunctions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="140" column="20" lean-forward="true" selection-start-line="136" selection-start-column="8" selection-end-line="140" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/RetargetSaved.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/RetargetStats.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/assets/custom/css/override.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1360">
+          <caret line="80" column="15" lean-forward="false" selection-start-line="80" selection-start-column="15" selection-end-line="80" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/assets/custom/css/custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2584">
+          <caret line="27" column="24" lean-forward="true" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/assets/custom/css/custom-btns.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2295">
+          <caret line="135" column="0" lean-forward="true" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/geo_fencing.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="52" column="5" lean-forward="true" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/user/dashboard/dashboard_user.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="1120" column="42" lean-forward="false" selection-start-line="1120" selection-start-column="42" selection-end-line="1120" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/51a65d1a-b44f-492b-837a-f35a574d28ab/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/29e3b760/51a65d1a-b44f-492b-837a-f35a574d28ab/coupon_cam.retarget_saved" />
+    <entry file="dbDummy://dbtable:/29e3b760/51a65d1a-b44f-492b-837a-f35a574d28ab/coupon_cam.retarget_coupons" />
+    <entry file="file://$PROJECT_DIR$/api/get_clues_main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="64" column="60" lean-forward="false" selection-start-line="64" selection-start-column="12" selection-end-line="64" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Commands/expireCoupons.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2057">
+          <caret line="128" column="42" lean-forward="true" selection-start-line="128" selection-start-column="42" selection-end-line="128" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/get_rem_time_promo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="120" column="148" lean-forward="true" selection-start-line="120" selection-start-column="16" selection-end-line="120" selection-end-column="148" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/StoreUser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/paths/stores.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="53" column="92" lean-forward="false" selection-start-line="53" selection-start-column="70" selection-end-line="53" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Store/UserStoreCategoryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/UserTeam.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/UserTable.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/User/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="33" column="45" lean-forward="false" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/get_device_info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="149" column="29" lean-forward="false" selection-start-line="149" selection-start-column="29" selection-end-line="149" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/stores/store_create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="393" column="0" lean-forward="true" selection-start-line="393" selection-start-column="0" selection-end-line="393" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/promos/promo_create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="332" column="0" lean-forward="true" selection-start-line="332" selection-start-column="0" selection-end-line="332" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Store/StoreController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="55" column="65" lean-forward="false" selection-start-line="55" selection-start-column="65" selection-end-line="55" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Promo/UserPromoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="439" column="42" lean-forward="true" selection-start-line="439" selection-start-column="42" selection-end-line="439" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/promos/promo_list.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Coupon/CouponController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1037">
+          <caret line="79" column="20" lean-forward="true" selection-start-line="79" selection-start-column="20" selection-end-line="79" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/29150038-24fd-4a3d-bc98-0ce9e84ed403/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phpMyAdmin/user_password.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/user/promos/promo.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="910" column="9" lean-forward="true" selection-start-line="865" selection-start-column="8" selection-end-line="910" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/business.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4641">
+          <caret line="268" column="74" lean-forward="false" selection-start-line="268" selection-start-column="74" selection-end-line="268" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/paths/users_panel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1054">
+          <caret line="62" column="76" lean-forward="false" selection-start-line="62" selection-start-column="76" selection-end-line="62" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/promos/add_red_coupons.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/users_panel/team_user.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3910">
+          <caret line="229" column="37" lean-forward="false" selection-start-line="229" selection-start-column="37" selection-end-line="229" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/get_saved_coupons_main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1666">
+          <caret line="138" column="4" lean-forward="false" selection-start-line="138" selection-start-column="4" selection-end-line="138" selection-end-column="4" />
+          <folding>
+            <element signature="e#3770#5712#0#PHP" expanded="false" />
+            <marker date="1527076701888" expanded="true" signature="399:750" ph="SELECT `plac... places" />
+            <marker date="1527076701888" expanded="true" signature="1112:1198" ph="SELECT * FRO... retarget_coupons" />
+            <marker date="1527076701888" expanded="true" signature="1517:1638" ph="SELECT * FRO... retarget_saved" />
+            <marker date="1527076701888" expanded="true" signature="2118:2763" ph="SELECT `reta... retarget_saved" />
+            <marker date="1527076701888" expanded="true" signature="3072:3571" ph="SELECT DISTI... user_coupons" />
+            <marker date="1527076701888" expanded="true" signature="4138:4472" ph="SELECT `user... user_coupons" />
+            <marker date="1527076701888" expanded="true" signature="4861:4943" ph="SELECT * FRO... promo_locations" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/save_coupon.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2329">
+          <caret line="173" column="80" lean-forward="false" selection-start-line="173" selection-start-column="80" selection-end-line="173" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/User/UserPanelController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="1251" column="33" lean-forward="true" selection-start-line="1251" selection-start-column="33" selection-end-line="1251" selection-end-column="33" />
+          <folding>
+            <element signature="e#45#73#0#PHP" expanded="true" />
+            <element signature="e#911#40888#0#PHP" expanded="false" />
+            <element signature="e#945#40860#0#PHP" expanded="false" />
+            <element signature="e#4047#17652#0#PHP" expanded="false" />
+            <element signature="e#4912#7111#0#PHP" expanded="false" />
+            <element signature="e#7393#8040#0#PHP" expanded="false" />
+            <element signature="e#8144#10418#0#PHP" expanded="false" />
+            <element signature="e#10723#11379#0#PHP" expanded="false" />
+            <element signature="e#11484#13763#0#PHP" expanded="false" />
+            <element signature="e#14056#14715#0#PHP" expanded="false" />
+            <element signature="e#14818#16933#0#PHP" expanded="false" />
+            <element signature="e#17878#30128#0#PHP" expanded="false" />
+            <element signature="e#18937#20544#0#PHP" expanded="false" />
+            <element signature="e#19394#20525#0#PHP" expanded="false" />
+            <element signature="e#20826#21467#0#PHP" expanded="false" />
+            <element signature="e#21867#23525#0#PHP" expanded="false" />
+            <element signature="e#22347#23506#0#PHP" expanded="false" />
+            <element signature="e#23832#24495#0#PHP" expanded="false" />
+            <element signature="e#24906#26636#0#PHP" expanded="false" />
+            <element signature="e#25403#26614#0#PHP" expanded="false" />
+            <element signature="e#26931#27602#0#PHP" expanded="false" />
+            <element signature="e#28376#29479#0#PHP" expanded="false" />
+            <element signature="e#31080#32526#0#PHP" expanded="false" />
+            <element signature="e#31490#32512#0#PHP" expanded="false" />
+            <element signature="e#32751#33316#0#PHP" expanded="false" />
+            <element signature="e#33643#35138#0#PHP" expanded="false" />
+            <element signature="e#34074#35124#0#PHP" expanded="false" />
+            <element signature="e#35368#35931#0#PHP" expanded="false" />
+            <element signature="e#36268#37766#0#PHP" expanded="false" />
+            <element signature="e#36701#37752#0#PHP" expanded="false" />
+            <element signature="e#37984#38563#0#PHP" expanded="false" />
+            <element signature="e#38845#40233#0#PHP" expanded="false" />
+            <element signature="e#39225#40219#0#PHP" expanded="false" />
+            <element signature="e#40894#41565#0#PHP" expanded="false" />
+            <element signature="e#41571#42534#0#PHP" expanded="false" />
+            <element signature="e#42540#42735#0#PHP" expanded="false" />
+            <element signature="e#42741#43437#0#PHP" expanded="false" />
+            <element signature="e#43443#44216#0#PHP" expanded="false" />
+            <element signature="e#44222#44333#0#PHP" expanded="false" />
+            <element signature="e#44339#44461#0#PHP" expanded="false" />
+            <element signature="e#44466#44572#0#PHP" expanded="false" />
+            <element signature="e#44578#48507#0#PHP" expanded="false" />
+            <element signature="e#48513#48633#0#PHP" expanded="false" />
+            <element signature="e#48640#48888#0#PHP" expanded="false" />
+            <element signature="e#48894#49190#0#PHP" expanded="false" />
+            <element signature="e#49196#52129#0#PHP" expanded="false" />
+            <element signature="e#52135#52399#0#PHP" expanded="false" />
+            <element signature="e#52405#52723#0#PHP" expanded="false" />
+            <element signature="e#52729#53023#0#PHP" expanded="false" />
+            <element signature="e#53029#54033#0#PHP" expanded="false" />
+            <element signature="e#55591#55892#0#PHP" expanded="false" />
+            <element signature="e#55898#56205#0#PHP" expanded="false" />
+            <element signature="e#56211#56494#0#PHP" expanded="false" />
+            <element signature="e#56500#56781#0#PHP" expanded="false" />
+            <element signature="e#56787#57782#0#PHP" expanded="false" />
+            <element signature="e#57788#58225#0#PHP" expanded="false" />
+            <element signature="e#58231#58558#0#PHP" expanded="false" />
+            <element signature="e#58564#59959#0#PHP" expanded="false" />
+            <element signature="e#59965#60398#0#PHP" expanded="false" />
+            <element signature="e#60404#60982#0#PHP" expanded="false" />
+            <element signature="e#60988#62570#0#PHP" expanded="false" />
+            <element signature="e#62597#64384#0#PHP" expanded="false" />
+            <element signature="e#64390#66838#0#PHP" expanded="false" />
+            <element signature="e#66844#67505#0#PHP" expanded="false" />
+            <element signature="e#67511#67945#0#PHP" expanded="false" />
+            <element signature="e#67951#68359#0#PHP" expanded="false" />
+            <element signature="e#68365#77428#0#PHP" expanded="false" />
+            <element signature="e#69016#69588#0#PHP" expanded="false" />
+            <element signature="e#72258#77418#0#PHP" expanded="false" />
+            <element signature="e#72432#72964#0#PHP" expanded="false" />
+            <element signature="e#73034#73144#0#PHP" expanded="false" />
+            <element signature="e#73194#73855#1#PHP" expanded="false" />
+            <element signature="e#73908#74514#0#PHP" expanded="false" />
+            <element signature="e#74528#77406#0#PHP" expanded="false" />
+            <element signature="e#77434#80891#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Store/UserStoreController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="55" column="51" lean-forward="false" selection-start-line="55" selection-start-column="51" selection-end-line="55" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/user/stores/store.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="245" column="43" lean-forward="false" selection-start-line="245" selection-start-column="43" selection-end-line="245" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/users_panel/profile.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/users_panel/profile_user.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="122" column="109" lean-forward="false" selection-start-line="122" selection-start-column="109" selection-end-line="122" selection-end-column="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/conn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="18" lean-forward="false" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/paths/coupons.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="90" lean-forward="false" selection-start-line="28" selection-start-column="72" selection-end-line="28" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/user/coupons/coupon.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33014">
+          <caret line="1942" column="0" lean-forward="false" selection-start-line="1942" selection-start-column="0" selection-end-line="1942" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Coupon/UserCouponController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="274" column="46" lean-forward="false" selection-start-line="274" selection-start-column="46" selection-end-line="274" selection-end-column="46" />
+          <folding>
+            <element signature="e#524#631#0#PHP" expanded="false" />
+            <element signature="e#637#3235#0#PHP" expanded="false" />
+            <element signature="e#3241#5983#0#PHP" expanded="false" />
+            <element signature="e#5989#8902#0#PHP" expanded="false" />
+            <element signature="e#8908#9058#0#PHP" expanded="false" />
+            <element signature="e#9064#10177#0#PHP" expanded="false" />
+            <element signature="e#10757#11225#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Promo/PromoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="418" column="87" lean-forward="false" selection-start-line="418" selection-start-column="87" selection-end-line="418" selection-end-column="87" />
+          <folding>
+            <marker date="1527165215097" expanded="true" signature="12526:12577" ph="..." />
+            <marker date="1527165215097" expanded="true" signature="12848:12893" ph="..." />
+            <marker date="1527165215097" expanded="true" signature="13040:13059" ph="..." />
+            <marker date="1527165215097" expanded="true" signature="13979:13991" ph="..." />
+            <marker date="1527165215097" expanded="true" signature="14192:14252" ph="..." />
+            <marker date="1527165215097" expanded="true" signature="14835:14886" ph="..." />
+            <marker date="1527165215097" expanded="true" signature="15882:15927" ph="..." />
+            <marker date="1527165215097" expanded="true" signature="16068:16087" ph="..." />
+            <marker date="1527165215097" expanded="true" signature="16639:16684" ph="..." />
+            <marker date="1527165215097" expanded="true" signature="16825:16844" ph="..." />
+            <marker date="1527165215097" expanded="true" signature="17859:17871" ph="..." />
+            <marker date="1527165215097" expanded="true" signature="18072:18132" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

@@ -1,0 +1,90 @@
+@font-face {
+    font-family: 'NixieOne-regular';
+    src: url(../../font/NixieOne-Regular.otf);
+}
+
+body {
+    font-size: 12px;
+/*    font-family: 'NixieOne-regular';*/
+}
+
+.form-control {
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+
+.customtab .nav-item {
+    width: 20%;
+    text-align: center;
+}
+.customtab li a.nav-link {
+  border: 0px;
+  padding: 10px 20px;
+    font-size: 12px;
+  color: #e80602; 
+}
+.customtab .nav-item .nav-link.active{
+    color: #e80602;
+    border-bottom: 2px solid #e80602;
+}
+.customtab .nav-item .nav-link:hover{
+    color: #e80602;
+}
+
+.customtab_2 .nav-item {
+    width: 25%;
+    text-align: center;
+    background-color: #ccc;
+    border-radius: 0;
+}
+.customtab_2 li a.nav-link {
+    border: 0px;
+    padding: 10px 20px;
+    font-size: 12px;
+    color: #e80602;
+    border-radius: 0;
+
+}
+.customtab_2 .nav-item .nav-link.active{
+    color: #fff;
+    background-color: #e80602;
+    border-radius: 0;
+}
+.customtab_2 .nav-item .nav-link:hover{
+    color: #fff;
+    background-color: #e80602;
+    border-radius: 0;
+}
+
+
+/* carousel */
+.carousel-inner{
+    width: 93%;
+}
+
+.carousel .carousel-control-next{
+    width: 7%;
+    background-color: transparent;
+}
+
+
+/* buttond */
+button {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+button:active,
+button:focus,
+button.active {
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.dropify-message > p {
+    color: #ccc;
+    text-align: center;
+}

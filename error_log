@@ -1,0 +1,7 @@
+[13-Sep-2017 04:20:26 America/Chicago] PHP Deprecated:  Automatically populating $HTTP_RAW_POST_DATA is deprecated and will be removed in a future version. To avoid this warning set 'always_populate_raw_post_data' to '-1' in php.ini and use the php://input stream instead. in Unknown on line 0
+[18-Nov-2017 14:34:30 UTC] PHP Fatal error:  Class 'App\Http\Controllers\Media' not found in /home1/coupongo/public_html/couponcam/app/Http/Controllers/HomeController.php on line 33
+[18-Nov-2017 14:35:17 UTC] PHP Fatal error:  Class 'App\Http\Controllers\Media' not found in /home1/coupongo/public_html/couponcam/app/Http/Controllers/HomeController.php on line 33
+[18-Nov-2017 14:41:50 UTC] PHP Fatal error:  Class 'App\Http\Controllers\Image' not found in /home1/coupongo/public_html/couponcam/app/Http/Controllers/HomeController.php on line 65
+[22-Dec-2017 07:02:33 UTC] PHP Fatal error:  Class 'App\Http\Controllers\Api\Controller' not found in /home1/coupongo/public_html/couponcam/app/Http/Controllers/Api/ApiController.php on line 13
+[22-Dec-2017 08:07:02 UTC] PHP Fatal error:  Class 'App\Http\Controllers\Api\Coupon' not found in /home1/coupongo/public_html/couponcam/app/Http/Controllers/Api/ApiController.php on line 102
+[22-Dec-2017 08:07:02 UTC] PHP Fatal error:  Class 'App\Http\Controllers\Api\Coupon' not found in /home1/coupongo/public_html/couponcam/app/Http/Controllers/Api/ApiController.php on line 102
