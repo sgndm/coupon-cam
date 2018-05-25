@@ -145,10 +145,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rowsPre = $execPre->rowCount();
     $prePromos = $execPre->fetchAll(PDO::FETCH_OBJ);
 
-    $red_promo_id = $prePromos[0]->promo_id;
-
-    if($is_main_ready == 1) {
+    if($rowsPre > 0){
+        $red_promo_id = $prePromos[0]->promo_id;
         $apiResponse['response_data']['red_friday_promo'] = $prePromos;
+
         // check saved for this divice and red promo
         $checkSVD = "SELECT * FROM `user_coupons` WHERE `device_id`='" . $device_id ."' AND `red_promo_id`=" . $red_promo_id . " AND `is_red_friday` = 1";
         $exec_chksvd = $dbh->query($checkSVD);
@@ -157,9 +157,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         if($totalSaved > 0) {
             $apiResponse['response_data']['has_saved_red_promo'] = 1;
         }
+
     }
     else {
+        $apiResponse['response_data']['red_friday_promo'] = [];
+    }
 
+
+    if($is_main_ready == 0) {
         $apiResponse['response_data']['red_friday_promo'] = [];
     }
 

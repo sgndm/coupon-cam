@@ -73,7 +73,16 @@ class Converter {
         return($server_time);
         
     }
-    
+
+    public static function get_server_new_time($store_time, $store_offset, $server_offset) {
+        $time_in_sec = strtotime($store_time);
+
+        $temp_server_time = (($time_in_sec - $store_offset) + $server_offset);
+
+        $server_time = date('Y-m-d H:i:s', $temp_server_time);
+
+        return $server_time;
+    }
     
     public static function get_server_location(){
         

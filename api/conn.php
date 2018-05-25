@@ -4,7 +4,7 @@
      $hostname = 'localhost';
      $username = 'dinesh_visni';
      $password = 'dv@cc#010318#';
-     $database = 'coupon_cam_db';
+     $database = 'cc_new';
 
 // DATABASE CONNECTION | Local server
 //   $hostname = 'localhost';
