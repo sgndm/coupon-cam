@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0abb61c-39f4-4d98-8a55-6d3dc9a1c70c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/OldWinner.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/q55ogXcCyatSlEc2eprc47E3GUh7hxAX1fk5oRfz" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/get_qr_code_by_id.php" afterPath="$PROJECT_DIR$/api/get_qr_code_by_id.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/redeem_coupon.php" afterPath="$PROJECT_DIR$/api/redeem_coupon.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Classes/ExtraFunctions.php" afterPath="$PROJECT_DIR$/app/Classes/ExtraFunctions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Commands/selectWinner.php" afterPath="$PROJECT_DIR$/app/Console/Commands/selectWinner.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/user/coupons/coupon.blade.php" afterPath="$PROJECT_DIR$/resources/views/user/coupons/coupon.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/9e2d26d07d3675261cec6a613f67a3a272036750.php" afterPath="$PROJECT_DIR$/storage/framework/views/9e2d26d07d3675261cec6a613f67a3a272036750.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -79,33 +72,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="coupon.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/user/coupons/coupon.blade.php">
+      <file leaf-file-name="redeem_coupon.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/redeem_coupon.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30991">
-              <caret line="1841" column="0" lean-forward="false" selection-start-line="1841" selection-start-column="0" selection-end-line="1841" selection-end-column="0" />
-              <caret line="1823" column="0" lean-forward="false" selection-start-line="1823" selection-start-column="0" selection-end-line="1823" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="323">
+              <caret line="137" column="27" lean-forward="true" selection-start-line="137" selection-start-column="27" selection-end-line="137" selection-end-column="27" />
+              <folding>
+                <marker date="1527486798639" expanded="true" signature="373:482" ph="SELECT * FRO... user_coupons" />
+                <marker date="1527486798639" expanded="true" signature="891:931" ph="SELECT * FRO... places" />
+                <marker date="1527486798639" expanded="true" signature="1213:1275" ph="SELECT * FRO... coupons" />
+                <marker date="1527486798639" expanded="true" signature="4234:4282" ph="SELECT `qr_c... places" />
+                <marker date="1527486798639" expanded="true" signature="4234:4295" ph="SELECT `qr_c... places" />
+                <marker date="1527486798639" expanded="true" signature="5747:6151" ph="UPDATE `user... " />
+                <marker date="1527486798639" expanded="true" signature="6476:6580" ph="UPDATE `coup... " />
+                <marker date="1527486798639" expanded="true" signature="6844:7037" ph="INSERT INTO `promo_stats`... " />
+                <marker date="1527486798639" expanded="true" signature="8664:9094" ph="UPDATE `user... " />
+                <marker date="1527486798639" expanded="true" signature="9420:9524" ph="UPDATE `coup... " />
+                <marker date="1527486798639" expanded="true" signature="9849:10042" ph="INSERT INTO `promo_stats`... " />
+                <marker date="1527486798639" expanded="true" signature="11770:12200" ph="UPDATE `user... " />
+                <marker date="1527486798639" expanded="true" signature="12502:12606" ph="UPDATE `coup... " />
+                <marker date="1527486798639" expanded="true" signature="12907:13100" ph="INSERT INTO `promo_stats`... " />
+                <marker date="1527486798639" expanded="true" signature="14818:15261" ph="UPDATE `user... " />
+                <marker date="1527486798639" expanded="true" signature="15563:15667" ph="UPDATE `coup... " />
+                <marker date="1527486798639" expanded="true" signature="15968:16161" ph="INSERT INTO `promo_stats`... " />
+                <marker date="1527486798639" expanded="true" signature="17891:18262" ph="UPDATE `user... " />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="conn.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/conn.php">
+      <file leaf-file-name="get_qr_code_by_id.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/api/get_qr_code_by_id.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="6" column="24" lean-forward="false" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".env" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.env">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="17" lean-forward="true" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="272">
+              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding>
+                <marker date="1527486855858" expanded="true" signature="306:354" ph="SELECT `qr_c... places" />
+                <marker date="1527486855858" expanded="true" signature="306:367" ph="SELECT `qr_c... places" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -206,11 +210,11 @@
         <option value="$PROJECT_DIR$/app/OldWinner.php" />
         <option value="$PROJECT_DIR$/app/Classes/ExtraFunctions.php" />
         <option value="$PROJECT_DIR$/app/Console/Commands/selectWinner.php" />
-        <option value="$PROJECT_DIR$/api/redeem_coupon.php" />
-        <option value="$PROJECT_DIR$/api/get_qr_code_by_id.php" />
         <option value="$PROJECT_DIR$/resources/views/user/coupons/coupon.blade.php" />
         <option value="$PROJECT_DIR$/api/conn.php" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/api/redeem_coupon.php" />
+        <option value="$PROJECT_DIR$/api/get_qr_code_by_id.php" />
       </list>
     </option>
   </component>
@@ -511,12 +515,12 @@
       <workItem from="1527337428786" duration="3364000" />
       <workItem from="1527420418059" duration="53000" />
       <workItem from="1527426805808" duration="525000" />
-      <workItem from="1527484392185" duration="864000" />
+      <workItem from="1527484392185" duration="1231000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="185153000" />
+    <option name="totallyTimeSpent" value="185520000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -529,6 +533,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15960665" sideWeight="0.49346405" order="0" side_tool="false" content_ui="combo" />
@@ -539,7 +544,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12405446" sideWeight="0.50653595" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.49346405" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49346405" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1042,20 +1047,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/get_qr_code_by_id.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/redeem_coupon.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="149" column="49" lean-forward="true" selection-start-line="149" selection-start-column="49" selection-end-line="149" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/user/coupons/coupon.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30991">
@@ -1078,6 +1069,44 @@
         <state relative-caret-position="238">
           <caret line="14" column="17" lean-forward="true" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/redeem_coupon.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="137" column="27" lean-forward="true" selection-start-line="137" selection-start-column="27" selection-end-line="137" selection-end-column="27" />
+          <folding>
+            <marker date="1527486798639" expanded="true" signature="373:482" ph="SELECT * FRO... user_coupons" />
+            <marker date="1527486798639" expanded="true" signature="891:931" ph="SELECT * FRO... places" />
+            <marker date="1527486798639" expanded="true" signature="1213:1275" ph="SELECT * FRO... coupons" />
+            <marker date="1527486798639" expanded="true" signature="4234:4282" ph="SELECT `qr_c... places" />
+            <marker date="1527486798639" expanded="true" signature="4234:4295" ph="SELECT `qr_c... places" />
+            <marker date="1527486798639" expanded="true" signature="5747:6151" ph="UPDATE `user... " />
+            <marker date="1527486798639" expanded="true" signature="6476:6580" ph="UPDATE `coup... " />
+            <marker date="1527486798639" expanded="true" signature="6844:7037" ph="INSERT INTO `promo_stats`... " />
+            <marker date="1527486798639" expanded="true" signature="8664:9094" ph="UPDATE `user... " />
+            <marker date="1527486798639" expanded="true" signature="9420:9524" ph="UPDATE `coup... " />
+            <marker date="1527486798639" expanded="true" signature="9849:10042" ph="INSERT INTO `promo_stats`... " />
+            <marker date="1527486798639" expanded="true" signature="11770:12200" ph="UPDATE `user... " />
+            <marker date="1527486798639" expanded="true" signature="12502:12606" ph="UPDATE `coup... " />
+            <marker date="1527486798639" expanded="true" signature="12907:13100" ph="INSERT INTO `promo_stats`... " />
+            <marker date="1527486798639" expanded="true" signature="14818:15261" ph="UPDATE `user... " />
+            <marker date="1527486798639" expanded="true" signature="15563:15667" ph="UPDATE `coup... " />
+            <marker date="1527486798639" expanded="true" signature="15968:16161" ph="INSERT INTO `promo_stats`... " />
+            <marker date="1527486798639" expanded="true" signature="17891:18262" ph="UPDATE `user... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/get_qr_code_by_id.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <marker date="1527486855858" expanded="true" signature="306:354" ph="SELECT `qr_c... places" />
+            <marker date="1527486855858" expanded="true" signature="306:367" ph="SELECT `qr_c... places" />
+          </folding>
         </state>
       </provider>
     </entry>
