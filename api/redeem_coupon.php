@@ -27,8 +27,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
 
-
-
     // get store id
     $store_id = $saved_coupons[0]->place_id;
 

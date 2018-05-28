@@ -17,11 +17,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	if($rows > 0) {
 		$apiResponse['response_code'] = 200;
-		$apiResponse['response_data'] = array('qr_code' => $qr_code, 'promo_id' => $promo_id);
+		$apiResponse['response_data'] = array('qr_code' => $qr_code, 'place_id' => $place_id);
 		$apiResponse['response_msg'] = "Qr Code";
 	} else {
 		$apiResponse['response_code'] = 200;
-		$apiResponse['response_data'] = array('qr_code' => '', 'promo_id' => $promo_id);
+		$apiResponse['response_data'] = array('qr_code' => '', 'place_id' => $place_id);
 		$apiResponse['response_msg'] = "Qr Code not found";
 	}
 
