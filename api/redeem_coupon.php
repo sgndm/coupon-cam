@@ -27,6 +27,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
 
+
+
     // get store id
     $store_id = $saved_coupons[0]->place_id;
 
@@ -129,7 +131,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $new_total_used_times = 0;
 
         // | get Qr code
-        $getQr = "SELECT `qr_code` FROM `places` WHERE `place_id`=" . $store_id;
+        $getQr = "SELECT `qr_code` FROM `places` WHERE `place_id`='" . $store_id . "'";
         $excGetQR = $dbh->query($getQr);
         $qrDetails = $excGetQR->fetchall(PDO::FETCH_OBJ);
 
