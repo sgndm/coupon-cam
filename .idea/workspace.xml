@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b0abb61c-39f4-4d98-8a55-6d3dc9a1c70c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/get_clues.php" afterPath="$PROJECT_DIR$/api/get_clues.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -85,11 +84,11 @@
       <file leaf-file-name="get_clues.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api/get_clues.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="60" column="36" lean-forward="true" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
+            <state relative-caret-position="102">
+              <caret line="57" column="8" lean-forward="false" selection-start-line="57" selection-start-column="8" selection-end-line="57" selection-end-column="8" />
               <folding>
-                <marker date="1527494419680" expanded="true" signature="286:1053" ph="SELECT `plac... places" />
-                <marker date="1527494419680" expanded="true" signature="1223:1303" ph="SELECT `plac... pre_luanch_saved" />
+                <marker date="1527494678694" expanded="true" signature="286:1053" ph="SELECT `plac... places" />
+                <marker date="1527494678694" expanded="true" signature="1223:1303" ph="SELECT `plac... pre_luanch_saved" />
               </folding>
             </state>
           </provider>
@@ -506,12 +505,12 @@
       <workItem from="1527337428786" duration="3364000" />
       <workItem from="1527420418059" duration="53000" />
       <workItem from="1527426805808" duration="525000" />
-      <workItem from="1527484392185" duration="5781000" />
+      <workItem from="1527484392185" duration="6034000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="190070000" />
+    <option name="totallyTimeSpent" value="190323000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1096,11 +1095,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/get_clues.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="60" column="36" lean-forward="true" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
+        <state relative-caret-position="102">
+          <caret line="57" column="8" lean-forward="false" selection-start-line="57" selection-start-column="8" selection-end-line="57" selection-end-column="8" />
           <folding>
-            <marker date="1527494419680" expanded="true" signature="286:1053" ph="SELECT `plac... places" />
-            <marker date="1527494419680" expanded="true" signature="1223:1303" ph="SELECT `plac... pre_luanch_saved" />
+            <marker date="1527494678694" expanded="true" signature="286:1053" ph="SELECT `plac... places" />
+            <marker date="1527494678694" expanded="true" signature="1223:1303" ph="SELECT `plac... pre_luanch_saved" />
           </folding>
         </state>
       </provider>

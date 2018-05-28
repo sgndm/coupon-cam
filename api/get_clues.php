@@ -56,8 +56,6 @@ foreach($save_stores as $svStore){
             $address = $st_add;
         }
 
-
-		$address =
 		$storeID = $store->store_id;
 
 
