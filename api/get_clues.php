@@ -6,6 +6,7 @@
 include('conn.php');
 
 $api_info = [];
+$api_info['promo_info'] = [];
 
 
 $latitude   = trim($_POST['latitude']);
