@@ -75,18 +75,8 @@
       <file leaf-file-name="conn.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/conn.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".env" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.env">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+            <state relative-caret-position="289">
+              <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -95,12 +85,22 @@
       <file leaf-file-name="get_clues.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api/get_clues.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+            <state relative-caret-position="255">
+              <caret line="60" column="36" lean-forward="true" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
               <folding>
-                <marker date="1527490143929" expanded="true" signature="286:1053" ph="SELECT `plac... places" />
-                <marker date="1527490143929" expanded="true" signature="1223:1303" ph="SELECT `plac... pre_luanch_saved" />
+                <marker date="1527494419680" expanded="true" signature="286:1053" ph="SELECT `plac... places" />
+                <marker date="1527494419680" expanded="true" signature="1223:1303" ph="SELECT `plac... pre_luanch_saved" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".env" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.env">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="18" lean-forward="false" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -203,8 +203,8 @@
         <option value="$PROJECT_DIR$/resources/views/user/coupons/coupon.blade.php" />
         <option value="$PROJECT_DIR$/api/redeem_coupon.php" />
         <option value="$PROJECT_DIR$/api/get_qr_code_by_id.php" />
-        <option value="$PROJECT_DIR$/api/conn.php" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/api/conn.php" />
         <option value="$PROJECT_DIR$/api/get_clues.php" />
       </list>
     </option>
@@ -506,12 +506,12 @@
       <workItem from="1527337428786" duration="3364000" />
       <workItem from="1527420418059" duration="53000" />
       <workItem from="1527426805808" duration="525000" />
-      <workItem from="1527484392185" duration="4076000" />
+      <workItem from="1527484392185" duration="5781000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="188365000" />
+    <option name="totallyTimeSpent" value="190070000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1078,29 +1078,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/conn.php">
+    <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+        <state relative-caret-position="153">
+          <caret line="9" column="18" lean-forward="false" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
+    <entry file="file://$PROJECT_DIR$/api/conn.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+        <state relative-caret-position="289">
+          <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/get_clues.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+        <state relative-caret-position="255">
+          <caret line="60" column="36" lean-forward="true" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
           <folding>
-            <marker date="1527490143929" expanded="true" signature="286:1053" ph="SELECT `plac... places" />
-            <marker date="1527490143929" expanded="true" signature="1223:1303" ph="SELECT `plac... pre_luanch_saved" />
+            <marker date="1527494419680" expanded="true" signature="286:1053" ph="SELECT `plac... places" />
+            <marker date="1527494419680" expanded="true" signature="1223:1303" ph="SELECT `plac... pre_luanch_saved" />
           </folding>
         </state>
       </provider>

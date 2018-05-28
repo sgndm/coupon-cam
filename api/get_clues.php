@@ -45,7 +45,19 @@ foreach($save_stores as $svStore){
 
 	foreach($nearbyStores as $store){
 
-		$address = $store->street_number . ',' . $store->street_address;
+        $st_num = $store->street_number;
+        $st_add = $store->street_address;
+
+        $address = '';
+
+        if(strlen($st_num) > 0) {
+            $address = $st_num . "," . $st_add;
+        } else {
+            $address = $st_add;
+        }
+
+
+		$address =
 		$storeID = $store->store_id;
 
 
