@@ -697,6 +697,8 @@
                 var longitude = marker.getPosition().lng();
                 var full_address = place.formatted_address;
 
+//                console.log(full_address);
+
                 for(var k = 0; k < address.length; k++){
                     if(address[k]['types'].includes('street_number')){
                         street_num = address[k]['long_name'];
