@@ -1180,12 +1180,15 @@
             $.get("<?php echo e(url('user/get_categories')); ?>/"+parseInt(type_id),function(data){
                 $('#category_table_' + id).html('');
 
+                console.log(categories);
+
                 var html_t = [];
 
                 if(data.length > 0) {
                     for(var i = 0; i < data.length; i++) {
+                        console.log(data[i]['id']);
 
-                        if($.inArray(data[i]['id'], categories)){
+                        if($.inArray(data[i]['id'].toString(), categories) != -1){
                             var row = "<tr>" +
                                 "<td style='width:5%;'>&nbsp;</td>"+
                                 "<td style='width:93%;'>" + data[i]['category'] + "</td>"+
