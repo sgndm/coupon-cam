@@ -136,7 +136,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // out put saved
-    $apiResponse['response_data']['saved_coupons'] = $out_saved;
+//    $apiResponse['response_data']['saved_coupons'] = $out_saved;
+    $apiResponse['response_data'] = $out_saved;
 
     // end of saved coupons
 

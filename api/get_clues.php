@@ -6,6 +6,7 @@
 include('conn.php');
 
 $api_info = [];
+$api_info['promo_info'] = [];
 
 
 $latitude   = trim($_POST['latitude']);
@@ -15,7 +16,7 @@ $radius = 1; // | 1000m
 
 // | get nearby stores (all)
 $sql2 = "SELECT
-            `places`.`contact_name`,`places`.`place_id` as store_id,`places`.`store_description`, `places`.`street_number`, `places`.`street_address`,`places`.`is_verified`, `places`.`verified_count`,`places`.`store_photo`,`places`.`store_ar`,`places`.`is_give_away`, `places`.`time_zone`,
+            `places`.`contact_name`,`places`.`place_id` as store_id,`places`.`store_description`, `places`.`street_number`, `places`.`street_address`,`places`.`is_verified`, `places`.`verified_count`,`places`.`store_photo`,`places`.`store_ar`,`places`.`store_marker`,`places`.`is_give_away`, `places`.`time_zone`,
              places.latitude as latitude, places.longitude as longitude,
             (((acos(sin(($latitude*pi()/180)) * sin((places.latitude*pi()/180))
             + cos(($latitude*pi()/180)) * cos((places.latitude*pi()/180))
@@ -44,7 +45,17 @@ foreach($save_stores as $svStore){
 
 	foreach($nearbyStores as $store){
 
-		$address = $store->street_number . ',' . $store->street_address;
+        $st_num = $store->street_number;
+        $st_add = $store->street_address;
+
+        $address = '';
+
+        if(strlen($st_num) > 0) {
+            $address = $st_num . "," . $st_add;
+        } else {
+            $address = $st_add;
+        }
+
 		$storeID = $store->store_id;
 
 
@@ -69,7 +80,8 @@ foreach($save_stores as $svStore){
 			'distance' => $store->distance,
 			'pref_coupon' => $store,
 			'all_coupon' => array(),
-			'time_remaining' => 0
+			'time_remaining' => 0,
+            'store_marker' => $store->store_marker
 		];
 
     if($store->is_give_away == 0) {

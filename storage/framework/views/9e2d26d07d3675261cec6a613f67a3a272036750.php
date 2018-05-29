@@ -1796,8 +1796,6 @@
             //$('#loyalty_coupon_c_1').prop('checked', true);
         });
 
-
-
         function showHideLoyaltyCount(id, page){
             var checked = $('#loyalty_coupon_'+page+'_'+id).is(':checked');
 
@@ -1843,6 +1841,8 @@
                 };
 
                 reader.readAsDataURL(input.files[0]);
+
+                console.log(input.files[0]);
             }
         }
 
