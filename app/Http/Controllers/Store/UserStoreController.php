@@ -145,7 +145,7 @@ class UserStoreController extends Controller
         $is_give_away = 0;
 
         $store_id = Store::insertGetId([
-            'under_category' => json_encode($request->category),
+            'under_category' => json_encode($request->category_1),
             'contact_name' => trim($request->store_name),
             'street_number' =>  trim($request->street_num),
             'street_address' => trim($request->street_name),
@@ -297,7 +297,7 @@ class UserStoreController extends Controller
 
             $store_id = Store::where('place_id', $request->formid)
                 ->update([
-                    'under_category' => json_encode($request->category),
+                    'under_category' => json_encode($request->category_2),
                     'contact_name' => trim($request->store_name),
                     'street_number' =>  trim($request->street_num),
                     'street_address' => trim($request->street_name),

@@ -55,7 +55,7 @@
                 <?php if($is_member == 0): ?>
                 <div class="tab-pane active p-20" id="tab-pane-1" role="tabpanel">
 
-                    <form role="form" method="POST" enctype="multipart/form-data" action="<?php echo e(url('/user/stores/create_store')); ?>" id="create_store_form">
+                    <form role="form" method="POST" enctype="multipart/form-data" action="<?php echo e(url('/user/stores/create_store')); ?>" id="store_form_1">
                         <?php echo e(csrf_field()); ?>
 
                         <div class="row">
@@ -67,22 +67,23 @@
 
                                         <div class="form-group">
                                             <label class="control-label">Store Name</label>
-                                            <input type="text" id="store_name_1" name="store_name" class="form-control" placeholder="Enter Name" required onblur="validate_store_name(1);">
-                                            <small class="form-control-feedback text-danger" id="store_name_error_1"> </small>
+                                            <input type="text" id="store_name_1" name="store_name" class="form-control" placeholder="Enter Name" required oninput="error_hide('store_name_error_1');" >
+                                            <h6 class="form-control-feedback text-danger" id="store_name_error_1"> </h6>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="control-label">Store Address</label>
-                                            <input type="text" id="store_address_1" name="store_address" class="form-control" placeholder="Start Typing Full Address..." required onblur="validate_address(id);">
-                                            <small class="form-control-feedback text-danger" id="store_address_error_1"> </small>
+                                            <input type="text" id="store_address_1" name="store_address" class="form-control" placeholder="Start Typing Full Address..." required oninput="error_hide('store_address_error_1');">
+                                            <h6 class="form-control-feedback text-danger" id="store_address_error_1"> </h6>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="control-label">Cant Find Address?</label>
                                             <label class="btn-container"> Input Manually
-                                                <input type="checkbox" name="manually" onchange="ChangeAutofill(1)" value="0" id="check_add_manually_1">
+                                                <input type="checkbox" name="manually" onchange="ChangeAutofill(1)" value="0" id="check_add_manually_1" onclick="error_hide('input_manual_error_1');">
                                                 <span class="checkmark"></span>
                                             </label>
+                                            <h6 class="form-control-feedback text-danger" id="input_manual_error_1"> </h6>
                                         </div>
 
                                     </div>
@@ -100,6 +101,14 @@
                                             <input type="hidden" id="store_lng_1" name="store_lng" required>
                                             <input type="hidden" id="country_short_1" name="country_short" required>
                                         </div>
+                                        <h6 class="form-control-feedback text-danger" id="street_error_1"> </h6>
+                                        <h6 class="form-control-feedback text-danger" id="town_error_1"> </h6>
+                                        <h6 class="form-control-feedback text-danger" id="state_error_1"> </h6>
+                                        <h6 class="form-control-feedback text-danger" id="zip_code_error_1"> </h6>
+                                        <h6 class="form-control-feedback text-danger" id="country_error_1"> </h6>
+                                        <h6 class="form-control-feedback text-danger" id="store_lat_error_1"> </h6>
+                                        <h6 class="form-control-feedback text-danger" id="store_lng_error_1"> </h6>
+                                        <h6 class="form-control-feedback text-danger" id="country_short_error_1"> </h6>
                                     </div>
 
                                 </div>
@@ -109,14 +118,16 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Store Photo/Logo</label>
-                                            <input type="file" id="store_image_1" name="store_image" class="dropify" data-height="100" required/>
+                                            <input type="file" id="store_image_1" name="store_image" class="dropify" data-height="100" required onchange="error_hide('store_image_error_1');" accept=".png,.jpg,.jpeg">
+                                            <h6 class="form-control-feedback text-danger" id="store_image_error_1"> </h6>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Store AR Image</label>
-                                            <input type="file" id="store_ar_1" name="store_ar" class="dropify" data-height="100"  required/>
-                                            <small class="form-control-feedback text-center">Please upload only pngs </small>
+                                            <input type="file" id="store_ar_1" name="store_ar" class="dropify" data-height="100"  required onchange="error_hide('store_ar_error_1');" accept=".png">
+                                            <small class="form-control-feedback text-center">Please upload only pngs </small><br>
+                                            <h6 class="form-control-feedback text-danger" id="store_ar_error_1"> </h6>
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +137,8 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Store Description</label>
-                                            <textarea id="store_description_1" name="store_description" class="form-control" required ></textarea>
+                                            <textarea id="store_description_1" name="store_description" class="form-control" required oninput="error_hide('store_description_error_1');"  ></textarea>
+                                            <h6 class="form-control-feedback text-danger" id="store_description_error_1"> </h6>
                                         </div>
                                     </div>
 
@@ -136,8 +148,9 @@
                                         <input type="hidden" name="promo_qr_code" id="promo_qr_code_1" >
                                         <input type="hidden" name="promo_qr_image" id="promo_qr_image_1" >
 
+                                        <h6 class="form-control-feedback text-danger" id="qr_code_error_1"> </h6>
                                         <div class="row justify-content-center">
-                                            <button type="button" class="custom_btn crt_qr_code col-md-8" style="margin:2px;" onclick="generate_qr_code(1);" id="crt_qr_1"></button>
+                                            <button type="button" class="custom_btn crt_qr_code col-md-8" style="margin:2px;" onclick="generate_qr_code(1);error_hide('qr_code_error_1');" id="crt_qr_1"></button>
 
                                         <!-- <a class="" style="margin:2px;" target="_blank" href="" id="print_code_1" >
                                           <img src="<?php echo e(url('resources/assets/custom/images/eedit_qr_code.png')); ?>" style="width:140px; height: 40px; cursor:pointer;" alt="">
@@ -145,7 +158,7 @@
 
                                             <button type="button" class="custom_btn view_qr_code col-md-8" style="margin:2px;" onclick="view_qr_code(1);" id="print_code_1"></button>
 
-                                            <button type="button" class="custom_btn refresh_qr_code col-md-8" style="margin:2px;" onclick="refresh_qr(1);" id="refresh_qr_1"></button>
+                                            <button type="button" class="custom_btn refresh_qr_code col-md-8" style="margin:2px;" onclick="refresh_qr(1);error_hide('qr_code_error_1');" id="refresh_qr_1"></button>
                                             
                                         </div>
                                     </div>
@@ -164,33 +177,36 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Select A Business Type</label>
+
                                             <?php if(sizeof($business_types) > 0): ?>
                                                 <?php $__currentLoopData = $business_types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                                                     <label class="btn-container"><?php echo e($type->business); ?>
 
-                                                        <input type="radio" name="radio" onclick="get_categories(<?php echo e($type->id); ?>, 1)">
+                                                        <input type="radio" name="radio_1" onclick="get_categories(<?php echo e($type->id); ?>, 1);error_hide('business_type_error_1');">
                                                         <span class="checkRadio"></span>
                                                     </label>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                                             <?php endif; ?>
+                                            <h6 class="form-control-feedback text-danger" id="business_type_error_1"> </h6>
                                         </div>
                                     </div>
 
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
-                                            <label class="control-label">Select Relevent Category</label>
+                                            <label class="control-label">Select Relevant Category</label>
                                             <div class="col-sm-12 col-md-8 col-lg-8 category_container left_scroll" >
                                                 <table class="category_table" id="category_table_1">
 
 
                                                     
                                                 </table>
-                                            </div>
 
+                                            </div>
+                                            <h6 class="form-control-feedback text-danger" id="category_error_1"> </h6>
                                         </div>
 
                                         <div class="form-group">
-                                            <button type="submit" class="col-md-8 custom_btn save_c" onclick="validate_crt()"></button>
+                                            <button type="button" class="col-md-8 custom_btn save_c" onclick="validate_crt(1)"></button>
                                         </div>
                                     </div>
 
@@ -211,7 +227,7 @@
                 <div class="tab-pane active p-20" id="tab-pane-2" role="tabpanel">
                 <?php endif; ?>
 
-                    <form role="form" method="POST" enctype="multipart/form-data" action="<?php echo e(url('/user/stores/update_store')); ?>">
+                    <form role="form" method="POST" enctype="multipart/form-data" action="<?php echo e(url('/user/stores/update_store')); ?>" id="store_form_2">
                         <?php echo e(csrf_field()); ?>
 
                         <div class="row">
@@ -238,8 +254,10 @@
                                                             </td>
                                                         </tr>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+
                                                 </table>
                                             </div>
+                                            <h6 class="form-control-feedback text-danger" id="store_name_error_2"> </h6>
                                         </div>
 
                                     </div>
@@ -261,6 +279,16 @@
                                             <input type="hidden" id="store_image_hidden_2" name="store_image_hidden" required>
                                             <input type="hidden" id="store_ar_hidden_2" name="store_ar_hidden" required>
                                             <input type="hidden" id="store_marker_hidden_2" name="store_marker_hidden" required>
+
+
+                                            <h6 class="form-control-feedback text-danger" id="street_error_2"> </h6>
+                                            <h6 class="form-control-feedback text-danger" id="town_error_2"> </h6>
+                                            <h6 class="form-control-feedback text-danger" id="state_error_2"> </h6>
+                                            <h6 class="form-control-feedback text-danger" id="zip_code_error_2"> </h6>
+                                            <h6 class="form-control-feedback text-danger" id="country_error_2"> </h6>
+                                            <h6 class="form-control-feedback text-danger" id="store_lat_error_2"> </h6>
+                                            <h6 class="form-control-feedback text-danger" id="store_lng_error_2"> </h6>
+                                            <h6 class="form-control-feedback text-danger" id="country_short_error_2"> </h6>
                                         </div>
                                     </div>
 
@@ -271,7 +299,8 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Store Photo/Logo</label>
-                                            <input type="file" id="store_image_2" name="store_image" class="dropify" data-height="100" />
+                                            <input type="file" id="store_image_2" name="store_image" class="dropify" data-height="100" onchange="error_hide('store_image_error_2');" accept=".png,.jpg,.jpeg">
+                                            <h6 class="form-control-feedback text-danger" id="store_image_error_2"> </h6>
                                         </div>
                                         <div class="form-group">
                                             <img id="store_img_prev_2" style="width: 100%; max-height: 150px;">
@@ -280,8 +309,9 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Store AR Image</label>
-                                            <input type="file" id="store_ar_2" name="store_ar" class="dropify" data-height="100"  />
-                                            <small class="form-control-feedback text-center">Please upload only pngs </small>
+                                            <input type="file" id="store_ar_2" name="store_ar" class="dropify" data-height="100" onchange="error_hide('store_ar_error_2');" accept=".png">
+                                            <small class="form-control-feedback text-center">Please upload only pngs </small><br>
+                                            <h6 class="form-control-feedback text-danger" id="store_ar_error_2"> </h6>
                                         </div>
                                         <div class="form-group">
                                             <img id="store_ar_prev_2" style="width: 100%; max-height: 150px;">
@@ -294,7 +324,8 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Store Description</label>
-                                            <textarea id="store_description_2" name="store_description" class="form-control" required ></textarea>
+                                            <textarea id="store_description_2" name="store_description" class="form-control" required oninput="error_hide('store_description_error_2');" ></textarea>
+                                            <h6 class="form-control-feedback text-danger" id="store_description_error_2"> </h6>
                                         </div>
                                     </div>
 
@@ -304,12 +335,13 @@
                                         <input type="hidden" name="promo_qr_code" id="promo_qr_code_2" >
                                         <input type="hidden" name="promo_qr_image" id="promo_qr_image_2" >
 
+                                        <h6 class="form-control-feedback text-danger" id="qr_code_error_2"> </h6>
                                         <div class="row justify-content-center">
-                                            <button type="button" class="custom_btn crt_qr_code col-md-8" style="margin:2px;" onclick="generate_qr_code(2);" id="crt_qr_2"></button>
+                                            <button type="button" class="custom_btn crt_qr_code col-md-8" style="margin:2px;" onclick="generate_qr_code(2);error_hide('qr_code_error_2');" id="crt_qr_2"></button>
 
                                             <button type="button" class="custom_btn view_qr_code col-md-8" style="margin:2px;" onclick="view_qr_code(2);" id="print_code_2"></button>
 
-                                            <button type="button" class="custom_btn refresh_qr_code col-md-8" style="margin:2px;" onclick="refresh_qr(2);" id="refresh_qr_2"></button>
+                                            <button type="button" class="custom_btn refresh_qr_code col-md-8" style="margin:2px;" onclick="refresh_qr(2);error_hide('qr_code_error_2');" id="refresh_qr_2"></button>
 
                                         </div>
                                     </div>
@@ -331,28 +363,28 @@
                                                 <?php $__currentLoopData = $business_types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                                                     <label class="btn-container"><?php echo e($type->business); ?>
 
-                                                        <input type="radio" name="radio" onclick="get_categories(<?php echo e($type->id); ?>, 2)" id="business_type_2_<?php echo e($type->id); ?>" >
+                                                        <input type="radio" name="radio_2" onclick="get_categories(<?php echo e($type->id); ?>, 2);error_hide('business_type_error_2');" id="business_type_2_<?php echo e($type->id); ?>" >
                                                         <span class="checkRadio"></span>
                                                     </label>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                                             <?php endif; ?>
-
+                                            <h6 class="form-control-feedback text-danger" id="business_type_error_2"> </h6>
                                         </div>
                                     </div>
 
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
-                                            <label class="control-label">Select Relevent Category</label>
+                                            <label class="control-label">Select Relevant Category</label>
                                             <div class="col-sm-12 col-md-8 col-lg-8 category_container left_scroll" >
                                                 <table class="category_table" id="category_table_2">
                                                     
                                                 </table>
                                             </div>
-
+                                            <h6 class="form-control-feedback text-danger" id="category_error_2"> </h6>
                                         </div>
 
                                         <div class="form-group">
-                                            <button type="submit" name="update_store" class="col-md-8 custom_btn up_store"></button>
+                                            <button type="button" name="update_store" class="col-md-8 custom_btn up_store" onclick="validate_crt(2);"></button>
                                             <button type="submit" name="close_store" class="col-md-8 custom_btn cls_store"></button>
                                         </div>
                                     </div>
@@ -446,7 +478,7 @@
 
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
-                                            <label class="control-label">Select Relevent Category</label>
+                                            <label class="control-label">Select Relevant Category</label>
                                             <div class="col-sm-12 col-md-8 col-lg-8 category_container left_scroll">
                                                 <table class="category_table" id="category_table_3">
                                                     
@@ -807,6 +839,12 @@
                             $('#store_img_prev_'+id).attr('src',"<?php echo e(url('resources/assets/stores/store_photo')); ?>/"+store[0]['store_photo']);
                         }
 
+                        var store_img_prev = "<?php echo e(url('resources/assets/stores/store_photo')); ?>/"+store[0]['store_photo'];
+                        $("#store_image_" + id).attr("data-default-file","http://localhost/couponcam/CC_new/resources/assets/stores/store_photo/s20180529105304344621.jpg");
+//                            $('#store_image_' + id).dropify({
+//                            defaultFile: store_img_prev
+//                        });
+
                         if((store[0]['store_ar']).length > 0) {
                             $('#store_ar_prev_'+id).attr('src',"<?php echo e(url('resources/assets/stores/store_ar')); ?>/"+store[0]['store_ar']);
                         }
@@ -843,14 +881,16 @@
 
                     $('#category_2_1').prop('checked', true);*/
 
+                    input_validate_custom(id);
+
                 }else {
                     alert('unable to find store please refresh and try again');
                 }
 
 
-
-
             });
+
+
         }
 
         function get_active_stores(){
@@ -1161,7 +1201,7 @@
                             "<td style='width:93%;'>" + data[i]['category'] + "</td>"+
                             "<td style='width:2%;'>"+
                             "<label class='btn-container'>"+
-                            "<input type='checkbox' value='" + data[i]['id'] + "' id='category_" + id + "_" + data[i]['id'] + "' name='category[]'>"+
+                            "<input type='checkbox' value='" + data[i]['id'] + "' id='category_" + id + "_" + data[i]['id'] + "' name='category_" + id +"[]' onclick=\"error_hide('category_error_" + id + "');\">"+
                             "<span class='checkmark'></span>"+
                             "</label>"+
                             "</td>"+
@@ -1194,7 +1234,7 @@
                                 "<td style='width:93%;'>" + data[i]['category'] + "</td>"+
                                 "<td style='width:2%;'>"+
                                 "<label class='btn-container'>"+
-                                "<input type='checkbox' value='" + data[i]['id'] + "' id='category_" + id + "_" + data[i]['id'] + "' name='category[]' checked='checked' > "+
+                                "<input type='checkbox' value='" + data[i]['id'] + "' id='category_" + id + "_" + data[i]['id'] + "' name='category_" + id +"[]' checked='checked' onclick=\"error_hide('category_error_" + id + "');\" > "+
                                 "<span class='checkmark'></span>"+
                                 "</label>"+
                                 "</td>"+
@@ -1208,7 +1248,7 @@
                                 "<td style='width:93%;'>" + data[i]['category'] + "</td>"+
                                 "<td style='width:2%;'>"+
                                 "<label class='btn-container'>"+
-                                "<input type='checkbox' value='" + data[i]['id'] + "' id='category_" + id + "_" + data[i]['id'] + "' name='category[]'>"+
+                                "<input type='checkbox' value='" + data[i]['id'] + "' id='category_" + id + "_" + data[i]['id'] + "' name='category_" + id +"[]' onclick=\"error_hide('category_error_" + id + "');\">"+
                                 "<span class='checkmark'></span>"+
                                 "</label>"+
                                 "</td>"+
@@ -1226,24 +1266,223 @@
 
     </script>
     <script>
-        // validate
-        function validate_store_name(id){
-//            var val = $('#store_name_' + id).val();
-//            if(val.length == 0 ) {
-//                $('#store_name_error_' + id).html('This field is a required field');
-//            } else {
-//                $('#store_name_error_' + id).html('');
-//            }
+        // validate store
+        function input_validate_custom(id){
+            var err_1 = "This field is required";
+//            var chars = /[&\/\\#,+()$~%.'":*?<>{}]/;
+
+//            var newRegExp = new RegExp(chars, 'g');
+            
+
+//            var xx = string.replace(newRegExp, '_');
+//            alert(xx);
+
+            var st_name = $('#store_name_' + id).val();
+            if(st_name.length > 0) {
+                $('#store_name_error_' + id).html('');
+            } else {
+                $('#store_name_error_' + id).html(err_1);
+            }
+
+            var street_name = $('#street_name_' + id).val();
+            if(street_name.length > 0) {
+                $('#street_error_' + id).html('');
+                $('#input_manual_error_' + id).html('');
+            } else {
+//                $('#street_error_' + id).html("Please Fill all fields..");
+                $('#input_manual_error_' + id).html("Click 'Input Manually' to fill the address manually");
+            }
+
+            var town = $('#city_' + id).val();
+            if(town.length > 0) {
+                $('#town_error_' + id).html('');
+            } else {
+//                $('#street_error_' + id).html("Please Fill all fields..");
+                $('#input_manual_error_' + id).html("Click 'Input Manually' to fill the address manually");
+            }
+            var state = $('#state_' + id).val();
+            if(state.length > 0) {
+                $('#state_error_' + id).html('');
+            } else {
+//                $('#street_error_' + id).html("Please Fill all fields..");
+                $('#input_manual_error_' + id).html("Click 'Input Manually' to fill the address manually");
+            }
+            var zipcode = $('#postal_code_' + id).val();
+            if(zipcode.length > 0) {
+                $('#zip_code_error_' + id).html('');
+            } else {
+//                $('#street_error_' + id).html("Please Fill all fields..");
+                $('#input_manual_error_' + id).html("Click 'Input Manually' to fill the address manually");
+            }
+            var country = $('#country_' + id).val();
+            if(country.length > 0) {
+                $('#country_error_' + id).html('');
+            } else {
+//                $('#street_error_' + id).html("Please Fill all fields..");
+                $('#input_manual_error_' + id).html("Click 'Input Manually' to fill the address manually");
+            }
+
+            var st_lat = $('#store_lat_' + id).val();
+            if(st_lat.length > 0) {
+                $('#store_lat_error_' + id).html('');
+            } else {
+//                $('#store_lat_error_' + id).html("Error in store location.. please re-enter store address");
+            }
+            var st_lng = $('#store_lng_' + id).val();
+            if(st_lng.length > 0) {
+                $('#store_lng_error_' + id).html('');
+            } else {
+//                $('#store_lng_error_' + id).html("Error in store location.. please re-enter store address");
+            }
+            var country_short = $('#country_short_' + id).val();
+            if(country_short.length > 0) {
+                $('#country_short_error_' + id).html('');
+            } else {
+//                $('#country_short_error_' + id).html("Error in store location.. please re-enter store address");
+            }
+            var st_desc = $('#store_description_' + id).val();
+            if(st_desc.length > 0) {
+                $('#store_description_error_' + id).html('');
+            } else {
+                $('#store_description_error_' + id).html(err_1);
+            }
+            var qr_code = $('#promo_qr_code_' + id).val();
+            if(qr_code.length > 0) {
+                $('#qr_code_error_' + id).html('');
+            } else {
+                $('#qr_code_error_' + id).html(err_1);
+            }
+            var qr_img = $('#promo_qr_image_' + id).val();
+            if(qr_img.length > 0) {
+                $('#qr_code_error_' + id).html('');
+            } else {
+                $('#qr_code_error_' + id).html(err_1);
+            }
+
+            var business = 0;
+            if(id == 1) {
+                if ($("input[name='radio_1']").is(':checked')) {
+                    business = 1;
+                }
+            } else if(id == 2) {
+                if ($("input[name='radio_2']").is(':checked')) {
+                    business = 1;
+                }
+            }
+
+            if(business == 1) {
+                $('#business_type_error_' + id).html('');
+            } else {
+                $('#business_type_error_' + id).html(err_1);
+            }
+
+            var category = 0;
+            if(id == 1) {
+                if ($('input[name="category_1[]"]').is(':checked')) {
+                    category = 1;
+                }
+            }  else if(id == 2) {
+                if ($('input[name="category_2[]"]').is(':checked')) {
+
+                    category = 1;
+                }
+            }
+
+            if(category == 1) {
+                $('#category_error_' + id).html('');
+            } else {
+                $('#category_error_' + id).html(err_1);
+            }
+
+            // images
+            var c_st_img = 0;
+            if(id == 1) {
+                var store_img = $('#store_image_' + id).val();
+
+                if (store_img) {
+                    $('#store_image_error_' + id).html('');
+                    switch (store_img.substring(store_img.lastIndexOf('.') + 1).toLowerCase()) {
+                        case 'jpg':
+                        case 'png':
+                            $('#store_image_error_' + id).html('');
+                            c_st_img = 1;
+                            break;
+                        default:
+                            $('#store_image_error_' + id).html("Please select a png or jpg");
+                            break;
+
+                    }
+                } else {
+                    $('#store_image_error_' + id).html(err_1);
+                }
+            } else if (id == 2) {
+                var pre_img = $('#store_image_hidden_' + id).val();
+
+                if(pre_img.length > 0) {
+                    c_st_img = 1;
+                    $('#store_image_error_' + id).html('');
+                } else {
+                    $('#store_image_error_' + id).html("Please select a image");
+                }
+            }
+
+
+            var c_st_ar = 0;
+
+            if(id == 1) {
+                var store_ar = $('#store_ar_' + id).val();
+
+                if (store_ar) {
+                    $('#store_ar_error_' + id).html('');
+                    switch (store_ar.substring(store_ar.lastIndexOf('.') + 1).toLowerCase()) {
+                        case 'png':
+                            $('#store_ar_error_' + id).html('');
+                            c_st_ar = 1;
+                            break;
+                        default:
+                            $('#store_ar_error_' + id).html("Please select a png ");
+                            break;
+
+                    }
+                } else {
+                    $('#store_ar_error_' + id).html(err_1);
+                }
+            } else if (id == 2) {
+                var pre_ar = $('#store_ar_hidden_' + id).val();
+
+                if(pre_ar.length > 0) {
+                    c_st_ar = 1;
+                    $('#store_ar_error_' + id).html('');
+                } else {
+                    $('#store_ar_error_' + id).html("Please select a png");
+                }
+            }
+
+
+            if( (st_name.length > 0) && (street_name.length > 0) && (town.length > 0) && (state.length > 0) && (zipcode.length > 0) && (country.length > 0) && (st_desc.length > 0) && (qr_code.length > 0) && (qr_img.length > 0) && (st_lat.length > 0) && (st_lng.length > 0) && (country_short.length > 0) && (business == 1) && (category == 1) &&(c_st_img == 1) && (c_st_ar == 1) ) {
+                return 1;
+            } else {
+                return 0;
+            }
+
+
+
         }
 
-        function validate_address(id) {
-//            var val = $('#store_address_' + id).val();
-//            if(val.length == 0 ) {
-//                $('#store_address_error_' + id).html('This field is a required field');
-//            } else {
-//                $('#store_address_error_' + id).html('');
-//            }
+        function validate_crt(id) {
+            var validator = input_validate_custom(id);
+
+            if(validator == 1) {
+                $('#store_form_' + id).submit();
+            } else {
+                alert("Error");
+            }
         }
+
+        function error_hide(field_id) {
+            $('#'+ field_id).html('');
+        }
+
 
     </script>
 
