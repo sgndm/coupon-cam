@@ -165,39 +165,14 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Select A Business Type</label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-
+                                            @if(sizeof($business_types) > 0)
+                                                @foreach($business_types as $type)
+                                                    <label class="btn-container">{{ $type->business }}
+                                                        <input type="radio" name="radio" onclick="get_categories({{$type->id}}, 1)">
+                                                        <span class="checkRadio"></span>
+                                                    </label>
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
 
@@ -205,8 +180,10 @@
                                         <div class="form-group">
                                             <label class="control-label">Select Relevent Category</label>
                                             <div class="col-sm-12 col-md-8 col-lg-8 category_container left_scroll" >
-                                                <table class="category_table">
-                                                    @foreach($categories as $key => $category)
+                                                <table class="category_table" id="category_table_1">
+
+
+                                                    {{--@foreach($categories as $key => $category)
 
                                                         <tr>
                                                             <td style="width:5%;">&nbsp;</td>
@@ -218,7 +195,7 @@
                                                                 </label>
                                                             </td>
                                                         </tr>
-                                                    @endforeach
+                                                    @endforeach--}}
                                                 </table>
                                             </div>
 
@@ -361,38 +338,14 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Select A Business Type</label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
+                                            @if(sizeof($business_types) > 0)
+                                                @foreach($business_types as $type)
+                                                    <label class="btn-container">{{ $type->business }}
+                                                        <input type="radio" name="radio" onclick="get_categories({{$type->id}}, 2)" id="business_type_2_{{$type->id}}" >
+                                                        <span class="checkRadio"></span>
+                                                    </label>
+                                                @endforeach
+                                            @endif
 
                                         </div>
                                     </div>
@@ -401,8 +354,8 @@
                                         <div class="form-group">
                                             <label class="control-label">Select Relevent Category</label>
                                             <div class="col-sm-12 col-md-8 col-lg-8 category_container left_scroll" >
-                                                <table class="category_table">
-                                                    @foreach($categories as $category)
+                                                <table class="category_table" id="category_table_2">
+                                                    {{--@foreach($categories as $category)
 
                                                         <tr>
                                                             <td style="width:5%;">&nbsp;</td>
@@ -414,7 +367,7 @@
                                                                 </label>
                                                             </td>
                                                         </tr>
-                                                    @endforeach
+                                                    @endforeach--}}
                                                 </table>
                                             </div>
 
@@ -499,38 +452,14 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Select A Business Type</label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
-                                            <label class="btn-container">Business
-                                                <input type="radio" name="radio">
-                                                <span class="checkRadio"></span>
-                                            </label>
+                                            @if(sizeof($business_types) > 0)
+                                                @foreach($business_types as $type)
+                                                    <label class="btn-container">{{ $type->business }}
+                                                        <input type="radio" name="radio" onclick="get_categories({{$type->id}}, 3)" id="business_type_3_{{$type->id}}" >
+                                                        <span class="checkRadio"></span>
+                                                    </label>
+                                                @endforeach
+                                            @endif
 
                                         </div>
                                     </div>
@@ -539,8 +468,8 @@
                                         <div class="form-group">
                                             <label class="control-label">Select Relevent Category</label>
                                             <div class="col-sm-12 col-md-8 col-lg-8 category_container left_scroll">
-                                                <table class="category_table">
-                                                    @foreach($categories as $category)
+                                                <table class="category_table" id="category_table_3">
+                                                    {{--@foreach($categories as $category)
 
                                                         <tr>
                                                             <td style="width:5%;">&nbsp;</td>
@@ -552,7 +481,7 @@
                                                                 </label>
                                                             </td>
                                                         </tr>
-                                                    @endforeach
+                                                    @endforeach--}}
                                                 </table>
                                             </div>
 
@@ -829,6 +758,7 @@
                 if(data['status'] == 1){
                     var store = data['details'];
                     var categories = data['categories'];
+                    var business = data['business'];
 
                     // empty form
                     $('#formid_'+id).val('');
@@ -853,6 +783,8 @@
                     $('#promo_qr_code_'+id).val('');
                     $('#promo_qr_image_'+id).val('');
 
+                    $('#category_table_' + id).html('');
+
                     // if($('#give_away_'+id).prop('checked', true)){
                     //     $('#give_away_'+id).parent().find(".switchery").trigger("click");
                     // }
@@ -863,6 +795,11 @@
 
                     // uncheck all checkbox
                     $('.cat_check').prop('checked',false);
+//                    $('.checkRadio').prop('checked',false);
+
+                    $("input:radio[name='radio']").each(function(i) {
+                        this.checked = false;
+                    });
 
                     // show marker
                     for(var i = 0; i < Markers.length; i++){
@@ -888,6 +825,8 @@
                     $('#store_image_hidden_'+id).val(store[0]['store_photo']);
                     $('#store_ar_hidden_'+id).val(store[0]['store_ar']);
                     $('#store_description_'+id).val(store[0]['store_description']);
+
+
 
                     if(id == 2) {
                         $('#store_marker_hidden_'+id).val(store[0]['store_marker']);
@@ -924,15 +863,20 @@
                     //     $('#give_away_'+id).parent().find(".switchery").trigger("click");
                     // }
 
+                    var business_id = business[0]['id'];
+//                    alert(business_id);
+                    $('#business_type_' + id + "_" + business_id).prop('checked', true);
+                    get_categories_select(business_id, id, categories);
 
-
-
-                    for(var j = 0; j < categories.length; j++){
-                        $('#category_'+id+categories[j]).prop('checked', true);
+//                    console.log(categories);
+/*                    for(var j = 0; j < categories.length; j++){
+                        $('#category_'+id+'_'+categories[j]).prop('checked', true);
                     }
 
+                    $('#category_2_1').prop('checked', true);*/
+
                 }else {
-                    alert('unable to find store please refress and try again');
+                    alert('unable to find store please refresh and try again');
                 }
 
 
@@ -1232,6 +1176,81 @@
             var src = $('#qr_code_prev_' + id).attr('src');
             window.open(src);
             // alert(src);
+        }
+
+        function get_categories(type_id, id){
+            $.get("{{ url('user/get_categories') }}/"+parseInt(type_id),function(data){
+                console.log(data);
+                // empty category list
+                $('#category_table_' + id).html('');
+
+                var html_t = [];
+
+                if(data.length > 0) {
+                    for(var i = 0; i < data.length; i++) {
+                        var row = "<tr>" +
+                            "<td style='width:5%;'>&nbsp;</td>"+
+                            "<td style='width:93%;'>" + data[i]['category'] + "</td>"+
+                            "<td style='width:2%;'>"+
+                            "<label class='btn-container'>"+
+                            "<input type='checkbox' value='" + data[i]['id'] + "' id='category_" + id + "_" + data[i]['id'] + "' name='category[]'>"+
+                            "<span class='checkmark'></span>"+
+                            "</label>"+
+                            "</td>"+
+                            "</tr>";
+
+                        html_t.push(row);
+                    }
+                }
+
+                $('#category_table_' + id).html(html_t);
+
+            });
+        }
+
+        function get_categories_select(type_id, id, categories){
+            $.get("{{ url('user/get_categories') }}/"+parseInt(type_id),function(data){
+                $('#category_table_' + id).html('');
+
+                var html_t = [];
+
+                if(data.length > 0) {
+                    for(var i = 0; i < data.length; i++) {
+
+                        if($.inArray(data[i]['id'], categories)){
+                            var row = "<tr>" +
+                                "<td style='width:5%;'>&nbsp;</td>"+
+                                "<td style='width:93%;'>" + data[i]['category'] + "</td>"+
+                                "<td style='width:2%;'>"+
+                                "<label class='btn-container'>"+
+                                "<input type='checkbox' value='" + data[i]['id'] + "' id='category_" + id + "_" + data[i]['id'] + "' name='category[]' checked='checked' > "+
+                                "<span class='checkmark'></span>"+
+                                "</label>"+
+                                "</td>"+
+                                "</tr>";
+
+                            html_t.push(row);
+                        }
+                        else {
+                            var row = "<tr>" +
+                                "<td style='width:5%;'>&nbsp;</td>"+
+                                "<td style='width:93%;'>" + data[i]['category'] + "</td>"+
+                                "<td style='width:2%;'>"+
+                                "<label class='btn-container'>"+
+                                "<input type='checkbox' value='" + data[i]['id'] + "' id='category_" + id + "_" + data[i]['id'] + "' name='category[]'>"+
+                                "<span class='checkmark'></span>"+
+                                "</label>"+
+                                "</td>"+
+                                "</tr>";
+
+                            html_t.push(row);
+                        }
+
+                    }
+                }
+
+                $('#category_table_' + id).html(html_t);
+            });
         }
 
     </script>

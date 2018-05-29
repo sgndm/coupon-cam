@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Store;
 
+use App\BusinessTypes;
 use App\PromoLocations;
 use Illuminate\Http\Request;
 use Auth;
@@ -36,6 +37,7 @@ class UserStoreController extends Controller
         $view = view('user.stores.store');
         $view->title = 'CouponCam::Stores';
         $view->categories = StoreCategory::where(['status' => '1'])->get();
+        $view->business_types = BusinessTypes::get();
 
         $view->openStores = Store::join('store_user', 'store_user.place_id', '=', 'places.place_id')
             ->where(['store_user.user_id' => Auth::id(), 'places.status' => 1])
@@ -382,6 +384,11 @@ class UserStoreController extends Controller
         $list = trim(str_replace($remove_char,"",$categoris));
         $categories = explode(",", $list);
 
+        // get business types
+        $get_business = BusinessTypes::join('place_categories','place_categories.type_id','=','business_types.id')->where(['place_categories.id' => $categories[0]])->select('business_types.id')->get();
+
+
+
 
         if(sizeof($store_details) > 0) {
             foreach($store_details as $store) {
@@ -389,6 +396,7 @@ class UserStoreController extends Controller
                 $response['status'] = 1;
                 $response['details'] = $store_details;
                 $response['categories'] = $categories;
+                $response['business'] = $get_business;
 
             }
         } else {
@@ -414,6 +422,11 @@ class UserStoreController extends Controller
             ->get();
 
         return($stores);
+    }
+
+    public function get_category_by_type($type_id) {
+        $get_cat = StoreCategory::where(['type_id' => $type_id, 'status' => 1])->get();
+        return ($get_cat);
     }
 
 }

@@ -320,6 +320,8 @@ echo json_encode([
                 });
 
 
+                $('#busines_type_tbl').DataTable();
+
                 $('.time-picker').timepicker({
                     timeFormat: 'h:mm p',
                     interval: 15,
