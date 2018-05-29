@@ -1475,7 +1475,7 @@
             if(validator == 1) {
                 $('#store_form_' + id).submit();
             } else {
-                alert("Error");
+                alert("Please Fill the missing data..");
             }
         }
 

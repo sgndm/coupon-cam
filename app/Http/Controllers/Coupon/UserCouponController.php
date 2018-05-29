@@ -135,10 +135,12 @@ class UserCouponController extends Controller
 
         }
 
+        $submit_form = $request->get('submit_type');
 
-        if(isset($_POST['save_active'])) {
+        if($submit_form == 1) {
             $id = Promo::where("promo_id",$request->get('promo_id_1'))->update(['used' => '1', 'status' => 1,"updated_at" => date('Y-m-d h:i:s')]);
-        } else {
+        }
+        else {
             $id = Promo::where("promo_id",$request->get('promo_id_1'))->update(['used' => '1', 'status' => 0,"updated_at" => date('Y-m-d h:i:s')]);
         }
 

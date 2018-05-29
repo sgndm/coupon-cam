@@ -93,7 +93,7 @@ class UserPromoController extends Controller
         $server_offset = Converter::get_time_zone($server_lat,$server_lng);
 
         // get stores
-        $getstores = json_encode($request->store_ids);
+        $getstores = json_encode($request->store_ids_1);
 
         $removeChar = array("[","]","\"");
         $stmst = trim(str_replace($removeChar, "", $getstores));
@@ -125,13 +125,13 @@ class UserPromoController extends Controller
             $advance_warn = 1;
         }
 
-        $promo_repete = $request->repeat_promo;
+        $promo_repete = $request->repeat_promo_1;
         $promo_repeate_val = "";
 
 
         if($promo_repete == 'Days'){
 
-            $promo_repeate_val = json_encode($request->days);
+            $promo_repeate_val = json_encode($request->days_1);
 
         }elseif($promo_repete == 'Date'){
 
@@ -153,7 +153,7 @@ class UserPromoController extends Controller
             'promo_repeat' => $promo_repete,
             'promo_repeat_values' => $promo_repeate_val,
             'internal_promo'  => 1,
-            'place_id' => json_encode($request->store_ids),
+            'place_id' => json_encode($request->store_ids_1),
 //            'qr_code' => $request->promo_qr_code,
 //            'qr_image' => $request->promo_qr_image,
             'add_date' => date('Y-m-d H:i:s'),
@@ -165,7 +165,7 @@ class UserPromoController extends Controller
 
             $store_locations = [];
 
-            $stores = json_encode($request->store_ids);
+            $stores = json_encode($request->store_ids_1);
 
             $remove = array("[","]","\"");
             $stm = trim(str_replace($remove, " ", $stores));
@@ -257,13 +257,13 @@ class UserPromoController extends Controller
                 $advance_warn = 1;
             }
 
-            $promo_repete = $request->repeat_promo;
+            $promo_repete = $request->repeat_promo_2;
             $promo_repeate_val = "";
 
 
             if($promo_repete == 'Days'){
 
-                $promo_repeate_val = json_encode($request->days);
+                $promo_repeate_val = json_encode($request->days_2);
 
             }elseif($promo_repete == 'Date'){
 

@@ -66,7 +66,7 @@ class UserStoreController extends Controller
             ->select('places.*')
             ->distinct()
             ->where(['store_user.user_id' => Auth::id(), 'places.status' => 1])
-            ->orderBY('updated_at', 'DESC')
+            ->orderBY('places.updated_at', 'DESC')
             ->get();
 
         return($store_details);
@@ -76,7 +76,7 @@ class UserStoreController extends Controller
     public function get_closed_stores() {
         $store_details = Store::join('store_user', 'store_user.place_id', '=', 'places.place_id')
             ->where(['store_user.user_id' => Auth::id(), 'places.status' => 0])
-            ->orderBY('updated_at', 'DESC')
+            ->orderBY('places.updated_at', 'DESC')
             ->get();
 
         return($store_details);

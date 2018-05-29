@@ -30,7 +30,7 @@
             <div class="tab-content">
                 <div class="tab-pane active p-20" id="tab-pane-1" role="tabpanel">
 
-                    <form role="form" method="POST" action="<?php echo e(url('user/team/create')); ?>">
+                    <form role="form" method="POST" action="<?php echo e(url('user/team/create')); ?>" id="member_form">
                         <?php echo e(csrf_field()); ?>
 
 
@@ -41,24 +41,29 @@
 
                             <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                 <label class="control-label">Member Name</label>
-                                <input type="text" id="member_name" name="member_name" class="form-control" placeholder="" value="" required>
+                                <input type="text" id="member_name" name="member_name" class="form-control" placeholder="" value="" required oninput="error_hide('member_name_error');">
+                                <h6 class="form-control-feedback text-danger" id="member_name_error"> </h6>
                             </div>
                             <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                 <label class="control-label">Member Position</label>
-                                <input type="text" id="position" name="position" class="form-control" placeholder="" required>
+                                <input type="text" id="position" name="position" class="form-control" placeholder="" required oninput="error_hide('member_pos_error');">
+                                <h6 class="form-control-feedback text-danger" id="member_pos_error"> </h6>
                             </div>
                             <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                 <label class="control-label">Member Email</label>
-                                <input type="email" id="email" name="email" class="form-control" placeholder="" value="" required>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="" value="" required oninput="error_hide('member_email_error');">
+                                <h6 class="form-control-feedback text-danger" id="member_email_error"> </h6>
                             </div>
                             <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                 <label class="control-label">Member Password</label>
-                                <input type="password" id="password" name="password" class="form-control" placeholder="" value="" required>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="" value="" required oninput="error_hide('member_pass_error');">
+                                <h6 class="form-control-feedback text-danger" id="member_pass_error"> </h6>
                             </div>
 
                             <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                 <label class="control-label">Member Phone Number</label>
-                                <input type="text" id="phone_number" name="phone_number" class="form-control" placeholder="" value="" required>
+                                <input type="text" id="phone_number" name="phone_number" class="form-control" placeholder="" value="" required oninput="error_hide('member_phone_error');">
+                                <h6 class="form-control-feedback text-danger" id="member_phone_error"> </h6>
                             </div>
 
                             <div class="form-group">
@@ -72,7 +77,7 @@
                                                 <td style="width:93%;"><?php echo e($store->contact_name . " - " . $store->city); ?></td>
                                                 <td style="width:2%;">
                                                     <label class="btn-container">
-                                                        <input type="checkbox" value="<?php echo e($store->place_id); ?>" id="store<?php echo e($store->place_id); ?>" name="store_ids[]" onclick="get_store_details(<?php echo e($store->place_id); ?>);">
+                                                        <input type="checkbox" value="<?php echo e($store->place_id); ?>" id="store<?php echo e($store->place_id); ?>" name="store_ids[]" onclick="get_store_details(<?php echo e($store->place_id); ?>);error_hide('member_store_error');">
                                                         <span class="checkmark"></span>
 
                                                     </label>
@@ -81,12 +86,13 @@
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                                     </table>
                                 </div>
+                                <h6 class="form-control-feedback text-danger" id="member_store_error"> </h6>
 
                             </div>
 
 
                             <div class="form-group">
-                                <button type="submit" class="col-md-8 custom_btn save_c"></button>
+                                <button type="button" class="col-md-8 custom_btn save_c" onclick="validate();"></button>
                             </div>
 
 
@@ -169,21 +175,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <?php $__env->stopSection(); ?>
@@ -280,6 +271,73 @@
                 }
 
             });
+        }
+
+        function error_hide(field_id) {
+            $('#'+ field_id).html('');
+        }
+
+        function validate() {
+            var err_1 = "Required Field";
+
+            var name = $('#member_name').val();
+
+            if(name.length > 0) {
+                $('#member_name_error').html('');
+            } else {
+                $('#member_name_error').html(err_1);
+            }
+
+            var position = $('#position').val();
+
+            if(position.length > 0) {
+                $('#member_pos_error').html('');
+            } else {
+                $('#member_pos_error').html(err_1);
+            }
+
+            var email = $('#email').val();
+
+            if(email.length > 0) {
+                $('#member_email_error').html('');
+            } else {
+                $('#member_email_error').html(err_1);
+            }
+
+            var pass = $('#password').val();
+
+            if(pass.length > 0) {
+                $('#member_pass_error').html('');
+            } else {
+                $('#member_pass_error').html(err_1);
+            }
+
+            var phone = $('#phone_number').val();
+
+            if(phone.length > 0) {
+                $('#member_phone_error').html('');
+            } else {
+                $('#member_phone_error').html(err_1);
+            }
+
+            var stores = 0;
+
+            if ($("input[name='store_ids[]']").is(':checked')) {
+                stores = 1;
+            }
+
+            if(stores == 1) {
+                $('#member_store_error').html('');
+            } else {
+                $('#member_store_error').html(err_1);
+            }
+
+            if( (name.length > 0) && (position.length > 0) && (email.length > 0) && (pass.length > 0) && (phone.length > 0) && (stores == 1) ) {
+                $('#member_form').submit();
+            } else {
+                alert("Please Fill the missing data..");
+            }
+
         }
 
     </script>
