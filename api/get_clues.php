@@ -16,7 +16,7 @@ $radius = 1; // | 1000m
 
 // | get nearby stores (all)
 $sql2 = "SELECT
-            `places`.`contact_name`,`places`.`place_id` as store_id,`places`.`store_description`, `places`.`street_number`, `places`.`street_address`,`places`.`is_verified`, `places`.`verified_count`,`places`.`store_photo`,`places`.`store_ar`,`places`.`store_marker`,`places`.`is_give_away`, `places`.`time_zone`,
+            `places`.`contact_name`,`places`.`store_promo`,`places`.`place_id` as store_id,`places`.`store_description`, `places`.`street_number`, `places`.`street_address`,`places`.`is_verified`, `places`.`verified_count`,`places`.`store_photo`,`places`.`store_ar`,`places`.`store_marker`,`places`.`is_give_away`, `places`.`time_zone`,
              places.latitude as latitude, places.longitude as longitude,
             (((acos(sin(($latitude*pi()/180)) * sin((places.latitude*pi()/180))
             + cos(($latitude*pi()/180)) * cos((places.latitude*pi()/180))
@@ -73,6 +73,7 @@ foreach($save_stores as $svStore){
 			'is_verified' => $store->is_verified,
 			'verified_count' => $store->verified_count,
 			'contact_name' => $store->contact_name,
+            'store_promo' => $store->store_promo,
 			'address' => $address,
 			'store_description' => $store->store_description,
 			'latitude' => $store->latitude,
