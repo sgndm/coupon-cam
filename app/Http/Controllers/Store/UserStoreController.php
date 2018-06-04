@@ -147,6 +147,7 @@ class UserStoreController extends Controller
         $store_id = Store::insertGetId([
             'under_category' => json_encode($request->category_1),
             'contact_name' => trim($request->store_name),
+            'store_promo' => trim($request->store_promo),
             'street_number' =>  trim($request->street_num),
             'street_address' => trim($request->street_name),
             'city' => trim($request->city),
@@ -299,6 +300,7 @@ class UserStoreController extends Controller
                 ->update([
                     'under_category' => json_encode($request->category_2),
                     'contact_name' => trim($request->store_name),
+                    'store_promo' => trim($request->store_promo),
                     'street_number' =>  trim($request->street_num),
                     'street_address' => trim($request->street_name),
                     'city' => trim($request->city),
