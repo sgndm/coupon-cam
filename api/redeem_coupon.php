@@ -10,6 +10,27 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $device_id = trim($_POST['device_id']);
     $coupon_id = trim($_POST['coupon_id']);
     $qr_code = trim($_POST['qr_code']);
+    $is_prelaunched = trim($_POST['is_prelaunched']);
+
+    if($is_prelaunched == 1){
+        $place_id = trim($_POST['place_id']);
+        $sqlR1 = "UPDATE `pre_luanch_saved` SET `is_redeemed`=1 WHERE `device_id`='" . $device_id . "' AND `place_id`='" . $place_id . "'";
+
+        $resR1 = $dbh->query($sqlR1);
+        $rowsR1 = $resR1->rowCount();
+
+        if ($rowsR1 > 0) {
+            $apiResponse['response_code'] = 200;
+            $apiResponse['response_data'] = array('place_id' => $place_id, 'device_id' => $device_id);
+            $apiResponse['response_msg'] = "Pre-launch redeemed status updated successfully!";
+        }else{
+            $apiResponse['response_code'] = 200;
+            $apiResponse['response_data'] = array('place_id' => $place_id, 'device_id' => $device_id);
+            $apiResponse['response_msg'] = "Pre-launch redeemed status update failed!";
+
+        }
+    }
+    else{
 
     // | Check user coupons | //
     $sql = "SELECT * FROM `user_coupons` WHERE `device_id`='" . $device_id . "' AND `scan_coupon_id`='" . $coupon_id . "'";
@@ -20,13 +41,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     // get coupon status
     $saved_status = $saved_coupons[0]->scan_coupon_status;
 
-    if($saved_status == 4) {
+    if ($saved_status == 4) {
         $is_saved = 1;
     } else {
         $is_saved = 0;
     }
-
-
 
 
     // get store id
@@ -40,7 +59,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     // country
     $st_country = $stDetails[0]->country_short;
 
-    if($rows > 0) {
+    if ($rows > 0) {
 
         // | If coupon available | //
         // | Get Coupon Details
@@ -60,7 +79,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $val_UK = 0;
 
         // convert values
-        if($st_country == "GB"){
+        if ($st_country == "GB") {
 
             $base_C = 'GBP';
 
@@ -70,8 +89,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $val_AUD = Converter::currencyConverter($base_C, 'AUD', $value);
             $val_UK = $value;
 
-        }
-        elseif($st_country == "NZ"){
+        } elseif ($st_country == "NZ") {
 
             $base_C = 'NZD';
 
@@ -81,8 +99,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $val_AUD = Converter::currencyConverter($base_C, 'AUD', $value);
             $val_UK = Converter::currencyConverter($base_C, 'GBP', $value);
 
-        }
-        elseif($st_country == "CA"){
+        } elseif ($st_country == "CA") {
 
             $base_C = 'CAD';
 
@@ -92,8 +109,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $val_AUD = Converter::currencyConverter($base_C, 'AUD', $value);
             $val_UK = Converter::currencyConverter($base_C, 'GBP', $value);
 
-        }
-        elseif($st_country == "AU"){
+        } elseif ($st_country == "AU") {
 
             $base_C = 'AUD';
 
@@ -103,8 +119,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $val_AUD = $value;
             $val_UK = Converter::currencyConverter($base_C, 'GBP', $value);
 
-        }
-        else{
+        } else {
 
             $base_C = 'USD';
 
@@ -138,10 +153,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $qr_code_promo = $qrDetails[0]->qr_code;
 
         // | check qr codes
-        if($qr_code == $qr_code_promo){
+        if ($qr_code == $qr_code_promo) {
             // if qr code matches
 
-            if($is_loyalty == 1) {
+            if ($is_loyalty == 1) {
                 // | if is loyalty coupon | //
                 $loyalty_count = $coupon_details[0]->loyalty_count;
 
@@ -161,18 +176,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
                 // | check used coupon count | //
-                if($used_count == 0) {
+                if ($used_count == 0) {
                     $is_bonus = $saved_coupons[0]->is_bonus;
 
-                    if($is_bonus == 1) {
+                    if ($is_bonus == 1) {
                         $new_total_used_times = $total_used_counts + 1;
                         // | update user coupon table | //
-                        $sql3 = "UPDATE `user_coupons` SET `scan_coupon_status`=2,`redeem_date`='" . date("Y-m-d H:i:s") . "',`is_bonus`=0,`total_used_times`=" . $new_total_used_times . ",`val_usd` = " . $new_val_usd .", `val_cad` = " . $new_val_cad . ", `val_aud` = " . $new_val_aud . ", `val_nzd` = " . $new_val_nzd . ", `val_pound` = " . $new_val_uk . " WHERE `device_id`='" . $device_id . "' AND `scan_coupon_id`='" . $coupon_id . "'";
+                        $sql3 = "UPDATE `user_coupons` SET `scan_coupon_status`=2,`redeem_date`='" . date("Y-m-d H:i:s") . "',`is_bonus`=0,`total_used_times`=" . $new_total_used_times . ",`val_usd` = " . $new_val_usd . ", `val_cad` = " . $new_val_cad . ", `val_aud` = " . $new_val_aud . ", `val_nzd` = " . $new_val_nzd . ", `val_pound` = " . $new_val_uk . " WHERE `device_id`='" . $device_id . "' AND `scan_coupon_id`='" . $coupon_id . "'";
 
                         $res3 = $dbh->query($sql3);
                         $rows3 = $res3->rowCount();
 
-                        if($rows3 > 0) {
+                        if ($rows3 > 0) {
                             // | update count coupon occupied | //
                             $new_count_occupied = $count_occupied + 1;
                             $sql4 = "UPDATE `coupons` SET `count_occupied`=" . $new_count_occupied . " WHERE `coupon_id`='" . $coupon_id . "'";
@@ -180,7 +195,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $res4 = $dbh->query($sql4);
                             $rows4 = $res4->rowCount();
 
-                            if($rows4 > 0) {
+                            if ($rows4 > 0) {
 
                                 // add record for stats
                                 $add_stat = "INSERT INTO `promo_stats`(`place_id`,`promo_id`,`coupon_id`,`device_id`,`created_at`) VALUES(" . $store_id . "," . $promo_id . "," . $coupon_id . ",'" . $device_id . "','" . date('Y-m-d') . "')";
@@ -188,20 +203,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 $stRows = $exec->rowCount();
 
                                 $apiResponse['response_code'] = 200;
-                                $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $new_used_count);
+                                $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $new_used_count);
                                 $apiResponse['response_msg'] = "Coupon redeemed successfully!";
                             } else {
                                 $apiResponse['response_code'] = 200;
-                                $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
+                                $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
                                 $apiResponse['response_msg'] = "Redeem coupon failed!";
                             }
 
 
-                        }
-                        else {
+                        } else {
 
                             $apiResponse['response_code'] = 200;
-                            $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
+                            $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
                             $apiResponse['response_msg'] = "Redeem coupon failed!";
 
                         }
@@ -209,12 +223,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $new_used_count = $used_count + 1;
                         $new_total_used_times = $total_used_counts + 1;
                         // | update user coupon table | //
-                        $sql3 = "UPDATE `user_coupons` SET `scan_coupon_status`=2,`redeem_date`='" . date("Y-m-d H:i:s") . "',`used_times`='" . $new_used_count . "',`total_used_times`=" . $new_total_used_times . ",`val_usd` = " . $new_val_usd .", `val_cad` = " . $new_val_cad . ", `val_aud` = " . $new_val_aud . ", `val_nzd` = " . $new_val_nzd . ", `val_pound` = " . $new_val_uk . " WHERE `device_id`='" . $device_id . "' AND `scan_coupon_id`='" . $coupon_id . "'";
+                        $sql3 = "UPDATE `user_coupons` SET `scan_coupon_status`=2,`redeem_date`='" . date("Y-m-d H:i:s") . "',`used_times`='" . $new_used_count . "',`total_used_times`=" . $new_total_used_times . ",`val_usd` = " . $new_val_usd . ", `val_cad` = " . $new_val_cad . ", `val_aud` = " . $new_val_aud . ", `val_nzd` = " . $new_val_nzd . ", `val_pound` = " . $new_val_uk . " WHERE `device_id`='" . $device_id . "' AND `scan_coupon_id`='" . $coupon_id . "'";
 
                         $res3 = $dbh->query($sql3);
                         $rows3 = $res3->rowCount();
 
-                        if($rows3 > 0) {
+                        if ($rows3 > 0) {
 
                             // | update count coupon occupied | //
                             $new_count_occupied = $count_occupied + 1;
@@ -223,9 +237,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $res4 = $dbh->query($sql4);
                             $rows4 = $res4->rowCount();
 
-                            if($rows4 > 0) {
+                            if ($rows4 > 0) {
 
-                                if($is_saved == 0) {
+                                if ($is_saved == 0) {
                                     // add record for stats
                                     $add_stat = "INSERT INTO `promo_stats`(`place_id`,`promo_id`,`coupon_id`,`device_id`,`created_at`) VALUES(" . $store_id . "," . $promo_id . "," . $coupon_id . ",'" . $device_id . "','" . date('Y-m-d') . "')";
                                     $exec = $dbh->query($add_stat);
@@ -233,37 +247,34 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 }
 
 
-
                                 $apiResponse['response_code'] = 200;
-                                $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $new_used_count);
+                                $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $new_used_count);
                                 $apiResponse['response_msg'] = "Coupon redeemed successfully!";
                             } else {
                                 $apiResponse['response_code'] = 200;
-                                $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
+                                $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
                                 $apiResponse['response_msg'] = "Redeem coupon failed!";
                             }
 
 
-                        }
-                        else {
+                        } else {
 
                             $apiResponse['response_code'] = 200;
-                            $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
+                            $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
                             $apiResponse['response_msg'] = "Redeem coupon failed!";
 
                         }
                     }
-                }
-                else if($used_count < ($loyalty_count - 1)) {
+                } else if ($used_count < ($loyalty_count - 1)) {
                     $new_used_count = $used_count + 1;
                     $new_total_used_times = $total_used_counts + 1;
                     // | update user coupon table | //
-                    $sql3 = "UPDATE `user_coupons` SET `scan_coupon_status`=2,`redeem_date`='" . date("Y-m-d H:i:s") . "',`used_times`='" . $new_used_count . "',`total_used_times`=" . $new_total_used_times . ",`val_usd` = " . $new_val_usd .", `val_cad` = " . $new_val_cad . ", `val_aud` = " . $new_val_aud . ", `val_nzd` = " . $new_val_nzd . ", `val_pound` = " . $new_val_uk . " WHERE `device_id`='" . $device_id . "' AND `scan_coupon_id`='" . $coupon_id . "'";
+                    $sql3 = "UPDATE `user_coupons` SET `scan_coupon_status`=2,`redeem_date`='" . date("Y-m-d H:i:s") . "',`used_times`='" . $new_used_count . "',`total_used_times`=" . $new_total_used_times . ",`val_usd` = " . $new_val_usd . ", `val_cad` = " . $new_val_cad . ", `val_aud` = " . $new_val_aud . ", `val_nzd` = " . $new_val_nzd . ", `val_pound` = " . $new_val_uk . " WHERE `device_id`='" . $device_id . "' AND `scan_coupon_id`='" . $coupon_id . "'";
 
                     $res3 = $dbh->query($sql3);
                     $rows3 = $res3->rowCount();
 
-                    if($rows3 > 0) {
+                    if ($rows3 > 0) {
 
                         // | update count coupon occupied | //
                         $new_count_occupied = $count_occupied + 1;
@@ -272,9 +283,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $res4 = $dbh->query($sql4);
                         $rows4 = $res4->rowCount();
 
-                        if($rows4 > 0) {
+                        if ($rows4 > 0) {
 
-                            if($is_saved == 0) {
+                            if ($is_saved == 0) {
                                 // add record for stats
                                 $add_stat = "INSERT INTO `promo_stats`(`place_id`,`promo_id`,`coupon_id`,`device_id`,`created_at`) VALUES(" . $store_id . "," . $promo_id . "," . $coupon_id . ",'" . $device_id . "','" . date('Y-m-d') . "')";
                                 $exec = $dbh->query($add_stat);
@@ -282,38 +293,36 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                             }
 
 
-
                             $apiResponse['response_code'] = 200;
-                            $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $new_used_count);
+                            $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $new_used_count);
                             $apiResponse['response_msg'] = "Coupon redeemed successfully!";
                         } else {
                             $apiResponse['response_code'] = 200;
-                            $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
+                            $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
                             $apiResponse['response_msg'] = "Redeem coupon failed!";
                         }
 
 
-                    }
-                    else {
+                    } else {
 
                         $apiResponse['response_code'] = 200;
-                        $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
+                        $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
                         $apiResponse['response_msg'] = "Redeem coupon failed!";
 
                     }
 
-                } else if($used_count == ($loyalty_count - 1)) {
+                } else if ($used_count == ($loyalty_count - 1)) {
                     // | if loyalty count == used count | //
                     // | reset used count | //
                     $new_used_count = 0;
                     $new_total_used_times = $total_used_counts + 1;
                     // | update user coupon table | //
-                    $sql5 = "UPDATE `user_coupons` SET `scan_coupon_status`=2,`redeem_date`='" . date("Y-m-d H:i:s") . "',`used_times`='" . $new_used_count . "',`is_bonus`=1,`total_used_times`=" . $new_total_used_times . ",`val_usd` = " . $new_val_usd .", `val_cad` = " . $new_val_cad . ", `val_aud` = " . $new_val_aud . ", `val_nzd` = " . $new_val_nzd . ", `val_pound` = " . $new_val_uk . " WHERE `device_id`='" . $device_id . "' AND `scan_coupon_id`='" . $coupon_id . "'";
+                    $sql5 = "UPDATE `user_coupons` SET `scan_coupon_status`=2,`redeem_date`='" . date("Y-m-d H:i:s") . "',`used_times`='" . $new_used_count . "',`is_bonus`=1,`total_used_times`=" . $new_total_used_times . ",`val_usd` = " . $new_val_usd . ", `val_cad` = " . $new_val_cad . ", `val_aud` = " . $new_val_aud . ", `val_nzd` = " . $new_val_nzd . ", `val_pound` = " . $new_val_uk . " WHERE `device_id`='" . $device_id . "' AND `scan_coupon_id`='" . $coupon_id . "'";
 
                     $res5 = $dbh->query($sql5);
                     $rows5 = $res5->rowCount();
 
-                    if($rows5 > 0) {
+                    if ($rows5 > 0) {
 
                         // | update count coupon occupied | //
                         $new_count_occupied = $count_occupied + 1;
@@ -322,9 +331,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $res4 = $dbh->query($sql4);
                         $rows4 = $res4->rowCount();
 
-                        if($rows4 > 0) {
+                        if ($rows4 > 0) {
 
-                            if($is_saved == 0) {
+                            if ($is_saved == 0) {
                                 // add record for stats
                                 $add_stat = "INSERT INTO `promo_stats`(`place_id`,`promo_id`,`coupon_id`,`device_id`,`created_at`) VALUES(" . $store_id . "," . $promo_id . "," . $coupon_id . ",'" . $device_id . "','" . date('Y-m-d') . "')";
                                 $exec = $dbh->query($add_stat);
@@ -332,57 +341,53 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                             }
 
 
-
                             $apiResponse['response_code'] = 200;
-                            $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => ($used_count + 1) );
+                            $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => ($used_count + 1));
                             $apiResponse['response_msg'] = "Coupon redeemed successfully!";
                         } else {
                             $apiResponse['response_code'] = 200;
-                            $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
+                            $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
                             $apiResponse['response_msg'] = "Redeem coupon failed!";
                         }
 
 
-                    }
-                    else {
+                    } else {
 
                         $apiResponse['response_code'] = 200;
-                        $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
+                        $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 1, 'loyalty_count' => $loyalty_count, 'used_count' => $used_count);
                         $apiResponse['response_msg'] = "Redeem coupon failed!";
 
                     }
                 }
 
-            }
-            else {
+            } else {
                 $coupon_status = $saved_coupons[0]->scan_coupon_status;
 
-                if($coupon_status == 4) {
+                if ($coupon_status == 4) {
                     //$new_used_count = $used_count + 1;
                     $new_total_used_times = $total_used_counts + 1;
                     // | update user coupon table | //
-                    $sql3 = "UPDATE `user_coupons` SET `scan_coupon_status`=2,`redeem_date`='" . date("Y-m-d H:i:s") . "',`total_used_times`=" . $new_total_used_times . ",`val_usd` = " . $val_USD .", `val_cad` = " . $val_CAD . ", `val_aud` = " . $val_AUD . ", `val_nzd` = " . $val_NZD . ", `val_pound` = " . $val_UK . " WHERE `device_id`='" . $device_id . "' AND `scan_coupon_id`='" . $coupon_id . "'";
+                    $sql3 = "UPDATE `user_coupons` SET `scan_coupon_status`=2,`redeem_date`='" . date("Y-m-d H:i:s") . "',`total_used_times`=" . $new_total_used_times . ",`val_usd` = " . $val_USD . ", `val_cad` = " . $val_CAD . ", `val_aud` = " . $val_AUD . ", `val_nzd` = " . $val_NZD . ", `val_pound` = " . $val_UK . " WHERE `device_id`='" . $device_id . "' AND `scan_coupon_id`='" . $coupon_id . "'";
 
                     $res3 = $dbh->query($sql3);
                     $rows3 = $res3->rowCount();
 
-                    if($rows3 > 0) {
+                    if ($rows3 > 0) {
                         $apiResponse['response_code'] = 200;
-                        $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0);
+                        $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0);
                         $apiResponse['response_msg'] = "Coupon redeemed successfully!";
                     } else {
                         $apiResponse['response_code'] = 200;
-                        $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0);
+                        $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0);
                         $apiResponse['response_msg'] = "Redeem coupon failed!";
                     }
                 } else {
                     $apiResponse['response_code'] = 200;
-                    $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0);
+                    $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0);
                     $apiResponse['response_msg'] = "Redeem coupon failed!";
                 }
 
             }
-
 
 
         } else {
@@ -392,13 +397,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $apiResponse['response_msg'] = "Invalid qr code";
         }
 
-    }
-    else {
+    } else {
         // | If coupon not available | //
         $apiResponse['response_code'] = 200;
-        $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id,'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0);
+        $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0);
         $apiResponse['response_msg'] = "Invalid coupon id or device id";
     }
+
+}
 
 }
 
