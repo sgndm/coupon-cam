@@ -73,6 +73,12 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label class="control-label">Store Promo</label>
+                                            <input type="text" id="store_promo_1" name="store_promo" class="form-control" placeholder="Enter Promo" required oninput="error_hide('store_promo_error_1');" >
+                                            <h6 class="form-control-feedback text-danger" id="store_promo_error_1"> </h6>
+                                        </div>
+
+                                        <div class="form-group">
                                             <label class="control-label">Store Address</label>
                                             <input type="text" id="store_address_1" name="store_address" class="form-control" placeholder="Start Typing Full Address..." required oninput="error_hide('store_address_error_1');">
                                             <h6 class="form-control-feedback text-danger" id="store_address_error_1"> </h6>
@@ -331,6 +337,16 @@
                                 </div>
 
                                 <hr>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Store Promo</label>
+                                            <textarea id="store_promo_2" name="store_promo" class="form-control" required oninput="error_hide('store_promo_error_2');" ></textarea>
+                                            <h6 class="form-control-feedback text-danger" id="store_promo_error_2"> </h6>
+                                        </div>
+                                    </div>
+
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
@@ -795,6 +811,7 @@
                     // empty form
                     $('#formid_'+id).val('');
                     $('#store_name_'+id).val('');
+                    $('#store_promo_'+id).val('');
                     $('#street_num_'+id).val('');
                     $('#street_name_'+id).val('');
                     $('#city_'+id).val('');
@@ -845,6 +862,7 @@
                     //console.log(store);
                     $('#formid_'+id).val(store[0]['place_id']);
                     $('#store_name_'+id).val(store[0]['contact_name']);
+                    $('#store_promo_'+id).val(store[0]['store_promo']);
                     $('#street_num_'+id).val(store[0]['street_number']);
                     $('#street_name_'+id).val(store[0]['street_address']);
                     $('#city_'+id).val(store[0]['city']);
@@ -1186,7 +1204,7 @@
 
         }
 
-        function generate_qr_code(id) {
+        function    generate_qr_code(id) {
 
             $('#crt_qr_'+id).hide();
 
