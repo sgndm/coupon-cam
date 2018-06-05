@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 //            'store_details' => $saved_details[0]
 //        ];
 
-        $apiResponse['response_data'][] = $saved_details[0];
+        $apiResponse['response_data'][] = $saved_details;
     }
 
 	if($rows > 0){
