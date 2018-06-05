@@ -49,12 +49,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $saved_details[0]->is_redeemed=$is_redeemed;
         $saved_details[0]->is_referral=$is_referral;
         //$saved_details[0]->count = $saved_count;
-        $temp = [
-           'store_id' => $store_id,
-            'store_details' => $saved_details[0]
-        ];
+        /*$temp = [
 
-        $items[] = $temp;
+            'store_details' => $saved_details[0]
+        ];*/
+
+        $items[] = $saved_details[0];
     }
 
 	if($rows > 0){
