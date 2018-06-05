@@ -14,10 +14,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if($is_prelaunched == 1){
         $place_id = trim($_POST['place_id']);
-        $sqlR1 = "UPDATE `pre_luanch_saved` SET `is_redeemed`=1 WHERE `device_id`='" . $device_id . "' AND `place_id`='" . $place_id . "'";
+        $is_redeemed=1;
+        $is_referral=0;
+        $is_shared=0;
+        /*$sqlR1 = "UPDATE `pre_luanch_saved` SET `is_redeemed`=1 WHERE `device_id`='" . $device_id . "' AND `place_id`='" . $place_id . "'";
 
         $resR1 = $dbh->query($sqlR1);
+        $rowsR1 = $resR1->rowCount();*/
+
+        // Do an insert instead of an update
+
+        $sqlR1 = "INSERT INTO `pre_luanch_saved`(`device_id`, `place_id`,`saved_date`,`is_shared`,`is_referral`, `is_redeemed`) VALUES ('" . $device_id . "'," . $place_id . ",'" . date('Y-m-d'). "'," . $is_shared . "," . $is_referral . "," . $is_redeemed . ")";
+        $resR1 = $dbh->query($sqlR1);
         $rowsR1 = $resR1->rowCount();
+
 
         if ($rowsR1 > 0) {
             $apiResponse['response_code'] = 200;
