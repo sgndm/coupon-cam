@@ -43,14 +43,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         }
 
+        $saved_details[0]->count =$saved_count;
+        $saved_details[0]->is_shared=$is_shared;
+
+        $saved_details[0]->is_redeemed=$is_redeemed;
+        $saved_details[0]->is_referral=$is_referral;
         //$saved_details[0]->count = $saved_count;
         $temp = [
            'store_id' => $store_id,
-           'saved_count' => $saved_count,
-            'is_shared' => $is_shared,
-            'is_redeemed' => $is_redeemed,
-            'is_referral' => $is_referral,
-            'store_details' => $saved_details
+            'store_details' => $saved_details[0]
         ];
 
         $items[] = $temp;
