@@ -24,12 +24,33 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $rows2 = $res2->rowCount();
         $saved_details = $res2->fetchall(PDO::FETCH_OBJ);
 
+        $is_referral =0;
+        $is_shared=0;
+        $is_redeemed=0;
+
+        foreach($saved_details as $storeObj) {
+            if($storeObj->is_shared ==1){
+                $is_shared=$storeObj->is_shared;
+            }
+
+            if($storeObj->is_redeemed ==1){
+                $is_redeemed=$storeObj->is_redeemed;
+            }
+
+            if($storeObj->is_referral ==1){
+                $is_referral=$storeObj->is_referral;
+            }
+
+        }
 
         //$saved_details[0]->count = $saved_count;
         $temp = [
            'store_id' => $store_id,
            'saved_count' => $saved_count,
-            'store_details' => $saved_details
+            'is_shared' => $is_shared,
+            'is_redeemed' => $is_redeemed,
+            'is_referral' => $is_referral,
+            'store_details' => $saved_details[0]
         ];
 
         $items[] = $temp;
@@ -37,7 +58,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	if($rows > 0){
 		$apiResponse['response_code'] = 200;
-		$apiResponse['response_data'] = $items;
+		//$apiResponse['response_data'] = $items;
 		$apiResponse['response_msg'] = "saved coupons";
 	} else {
 		$apiResponse['response_code'] = 200;
