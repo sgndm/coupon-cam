@@ -29,15 +29,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $is_redeemed=0;
 
         foreach($saved_details as $storeObj) {
-            if($storeObj->is_shared ==1){
+            if($storeObj->is_shared == 1){
                 $is_shared=$storeObj->is_shared;
             }
 
-            if($storeObj->is_redeemed ==1){
+            if($storeObj->is_redeemed == 1){
                 $is_redeemed=$storeObj->is_redeemed;
             }
 
-            if($storeObj->is_referral ==1){
+            if($storeObj->is_referral == 1){
                 $is_referral=$storeObj->is_referral;
             }
 
@@ -50,7 +50,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             'is_shared' => $is_shared,
             'is_redeemed' => $is_redeemed,
             'is_referral' => $is_referral,
-            'store_details' => $saved_details[0]
+            'store_details' => $saved_details
         ];
 
         $items[] = $temp;
@@ -58,7 +58,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	if($rows > 0){
 		$apiResponse['response_code'] = 200;
-		//$apiResponse['response_data'] = $items;
+		$apiResponse['response_data'] = $items;
 		$apiResponse['response_msg'] = "saved coupons";
 	} else {
 		$apiResponse['response_code'] = 200;
