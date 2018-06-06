@@ -50,6 +50,7 @@ Route::get('user/select_winner','User\UserPanelController@select_winner' );
 Route::get('admin/app_settings', 'User\UserPanelController@app_settings');
 Route::post('/change_settings', 'User\UserPanelController@change_app_settings');
 Route::post('/change_app_version', 'User\UserPanelController@change_app_version');
+Route::post('/add_wordings', 'User\UserPanelController@add_wordings');
 
 Route::post('/update_extend_values', 'User\UserPanelController@update_extend_values');
 Route::post('/update_save_limit', 'User\UserPanelController@update_save_limit');
