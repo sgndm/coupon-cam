@@ -319,7 +319,11 @@ class PromoController extends Controller
     }
 
     public function storesbyuser($company){
-        $stores = Store::where(['user_id' => $company,'status' => 1])->select('place_id','contact_name','latitude','longitude')->get();
+
+        $stores = Store::join('store_user', 'store_user.place_id', '=', 'places.place_id')
+            ->where(['store_user.user_id' => $company, 'status' => 1])
+            ->select('places.place_id','places.contact_name','places.latitude','places.longitude')
+            ->get();
 
         $html = '';
 
