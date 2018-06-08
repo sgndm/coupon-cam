@@ -23,6 +23,13 @@ use App\Classes\Converter;
 
 use Illuminate\Support\Facades\Storage;
 
+use Treinetic\ImageArtist\lib\Overlays\Overlay;
+use Treinetic\ImageArtist\lib\Text\Color;
+use Treinetic\ImageArtist\lib\Shapes\PolygonShape;
+use Treinetic\ImageArtist\lib\Commons\Node;
+use Treinetic\ImageArtist\lib\Image;
+use Treinetic\ImageArtist\lib\Shapes\Square;
+
 ///     date_default_timezone_set('Europe/London');
 
 class UserPromoController extends Controller
@@ -66,12 +73,74 @@ class UserPromoController extends Controller
     }
 
     public function generate_new_qr(){
-        // new qr for new promo
+
         $save_path = 'resources/assets/qr_codes/';
         $file_name = 'qr'.date('YmdHis').rand(0, 10000).".png";
         $content = rand(0, 100000000).date('YmdHis');
 
-        QrCode::format('png')->size(500)->color(232,6,2)->merge('resources/assets/custom/images/logo-min.png', .3, true)->errorCorrection('H')->generate($content, $save_path.$file_name);
+        $service_url = 'https://qrcode-monkey.p.mashape.com/qr/custom';
+
+        $curl = curl_init($service_url);
+        $curl_post_data = array(
+            'data' => $content,
+            'config' => array(
+                "body" => "circle",
+                "eye" => "frame12",
+                "eyeBall" => "ball14",
+                "erf1" => [],
+                "erf2" => [],
+                "erf3" => [],
+                "brf1" => [],
+                "brf2" => [],
+                "brf3" => [],
+                "bodyColor" => "#e80602",
+                "bgColor" => "#fff",
+                "eye1Color" => "#e80602",
+                "eye2Color" => "#e80602",
+                "eye3Color" => "#e80602",
+                "eyeBall1Color" => "#e80602",
+                "eyeBall2Color" => "#e80602",
+                "eyeBall3Color" => "#e80602",
+                "gradientColor1" => "",
+                "gradientColor2" => "",
+                "gradientType" => "linear",
+                "gradientOnEyes" => "false",
+                "logo" => "http://login.couponcam.com/resources/assets/custom/images/logo-min.png"
+            ),
+            'size' => 300,
+            'download' => 'false',
+            'file' => 'png',
+        );
+
+        $post_data = json_encode($curl_post_data);
+
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'X-Mashape-Key: yxBNWNKhItmshiOORWMsvumwIm8tp1AMo56jsnzJ7zEWZ1F3y9',
+            'Content-Type: application/json',
+            'Accept: application/json'
+        ));
+
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
+
+        $curl_response = curl_exec($curl);
+
+
+        $decoded = base64_encode($curl_response);
+
+        $image_qr = new Image('data:image/png;base64,'.$decoded);
+        $image_qr->save($save_path.$file_name,IMAGETYPE_PNG);
+
+
+
+
+
+
+        // new qr for new promo
+
+
+//        QrCode::format('png')->size(500)->color(232,6,2)->merge('resources/assets/custom/images/logo-min.png', .3, true)->errorCorrection('H')->generate($content, $save_path.$file_name);
 
         $return = array('qr_content' => $content,'qr_image' => $file_name);
 
