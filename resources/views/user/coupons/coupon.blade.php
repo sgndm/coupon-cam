@@ -120,7 +120,19 @@
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_c_1" name="coupon_photo_1" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_1');"/>
+
+                                                            <div class="uploader" onclick="$('#filePhoto').click()">
+                                                                Drag & Drop or Click here to upload..
+                                                                <input type="file" name="userprofile_picture" class="filePhoto"  id="coupon_photo_c_1" />
+                                                            </div>
+
+                                                            <div class="col-md-12 text-center" style="left: -55px;">
+                                                                <div id="crop_view_1" style="width:250px"></div>
+                                                            </div>
+                                                            <button id="crop_btn" class="btn btn-danger col-sm-12 pull-right" type="button">Crop & Save</button>
+                                                            
+
+                                                            <!-- <input type="file" id="coupon_photo_c_1" name="coupon_photo_1" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_1');"/> -->
 
                                                         </div>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_1"> </h6>
@@ -1830,10 +1842,12 @@
 
 <!-- | Custom css for this page only | -->
 @section('custom_css')
+    <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/croppie.css">
 @endsection
 
 <!-- | Custom js for this page only | -->
 @section('custom_js')
+    <script src="http://demo.itsolutionstuff.com/plugin/croppie.js"></script>
     <script>
         $(document).ready(function(){
             $('.dropify').dropify();
@@ -1897,9 +1911,59 @@
             $('a[aria-controls="'+next_tab+'"]').trigger("click");
         }
 
-        $('#coupon_photo_c_1').on('change', function(){
-            readURL(this,1,'c');
+        // crop view
+        $crop_v_1 = $('#crop_view_1').croppie({
+
+            enableExif: true,
+            viewport: {
+                width: 250,
+                height: 60,
+                type: 'square'
+            },
+            boundary: {
+                width: 270,
+                height: 80
+            }
+
         });
+
+        $('#coupon_photo_c_1').on('change', function () { 
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                $crop_v_1.croppie('bind', {   
+
+                    url: e.target.result
+
+                }).then(function(){
+
+                    console.log('jQuery bind complete');
+
+                });
+
+            }
+
+            reader.readAsDataURL(this.files[0]);
+            
+        });
+
+        $('#crop_btn').on('click', function (ev) {
+
+            $crop_v_1.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function (resp) {
+                $('#image_c_1').attr('src', resp);
+            }); 
+
+        });
+
+
+        // $('#coupon_photo_c_1').on('change', function(){
+        //     readURL(this,1,'c');
+        // });
         $('#coupon_photo_c_2').on('change', function(){
             readURL(this,2,'c');
         });
@@ -1988,7 +2052,7 @@
             $('a[aria-controls="tab-pane-4"]').trigger("click");
 
             $.get("{{ url('user/get_coupon_details') }}/"+parseInt(promo_id),function(data){
-//                var y =5;
+
 
                 for(var x = 0; x < data.length; x++) {
 
