@@ -121,7 +121,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
 
-                                                            <div class="uploader" onclick="$('#filePhoto').click()">
+                                                            <div class="uploader" onclick="$('#filePhoto').click()" id="uploader_c_1">
                                                                 Drag & Drop or Click here to upload..
                                                                 <input type="file" name="userprofile_picture" class="filePhoto"  id="coupon_photo_c_1" />
                                                             </div>
@@ -1853,6 +1853,10 @@
             $('.dropify').dropify();
 
             //$('#loyalty_coupon_c_1').prop('checked', true);
+            $('#crop_view_1').hide();
+            $('#crop_btn').hide();
+            
+
         });
 
         function showHideLoyaltyCount(id, page){
@@ -1946,6 +1950,10 @@
             }
 
             reader.readAsDataURL(this.files[0]);
+
+            $('#uploader_c_1').hide();
+            $('#crop_view_1').show();
+            $('#crop_btn').show();
             
         });
 
