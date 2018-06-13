@@ -110,21 +110,21 @@ foreach($nearbyPromos as $promo){
 		$pref_coupon = $coops2->fetch(PDO::FETCH_OBJ);
 	}
 
-	$curr = "USD";
+	$curr = "$";
 	if($country_short == "GB") {
-		$curr = "GBP";
+		$curr = "£";
 	} 
 	else if($country_short == "NZ") {
-		$curr = "NZD";
+		$curr = "$";
 	}
 	else if($country_short == "CA") {
-		$curr = "CAD";
+		$curr = "C$";
 	}
 	else if($country_short == "AU") {
-		$curr = "AUD";
+		$curr = "A$";
 	}
 	else {
-		$curr = "USD";
+		$curr = "$";
 	}
 
 	$pref_coupon->currency = $curr;
