@@ -116,21 +116,21 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-sm-12 col-md-6 col-lg-4">
+                                                <div class="col-sm-12 col-md-6 col-lg-4" id="c_p_f_c_1">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        <div class="form-group row justify-content-center">
-                                                            <label class="control-label">Coupon Photo</label>
+                                                        <div class="form-group row-justify-content-center" >
+                                                            <label class="control-label col-xs-12 col-sm-12">Coupon Photo</label>
 
                                                             <div class="uploader" onclick="$('#filePhoto').click()" id="uploader_c_1">
                                                                 Drag & Drop or Click here to upload..
                                                                 <input type="file" name="coupon_photo_1" class="filePhoto"  id="coupon_photo_c_1" />
                                                             </div>
 
-                                                            <div class="col-md-12 text-center" style="left: -55px;">
+                                                            <div class="col-md-12 text-center cropper_cont">
                                                                 <div id="crop_view_1" style="width:250px"></div>
                                                             </div>
-                                                            <button id="crop_btn" class="btn btn-danger col-sm-6" type="button">Crop & Save</button> &nbsp;
-                                                            <button id="rem" class="btn btn-danger col-sm-5" type="button">Remove</button>
+                                                            <button id="crop_btn" class="btn btn-danger col-sm-12" type="button">Crop & Save</button> &nbsp;
+                                                            <button id="rem" class="btn btn-danger col-sm-12" type="button">Remove</button>
 
                                                             <!-- <input type="file" id="coupon_photo_c_1" name="coupon_photo_1" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_1');"/> -->
 
@@ -1849,7 +1849,21 @@
 @section('custom_js')
     <script src="http://demo.itsolutionstuff.com/plugin/croppie.js"></script>
     <script>
+
+        var xwidth;
+        $(window).resize(function(){
+            var ww = $('#c_p_f_c_1').width();
+            xwidth = ww;
+            // alert(xwidth);
+            console.log(xwidth);
+        });
+
         $(document).ready(function(){
+
+            var ww = $('#c_p_f_c_1').width();
+            xwidth = ww;
+            
+
             $('.dropify').dropify();
 
             //$('#loyalty_coupon_c_1').prop('checked', true);
@@ -1857,8 +1871,10 @@
             $('#crop_btn').hide();
             $('#rem').hide();
             
-
+            // $('#uploader_c_1').prop('width', xwidth);
         });
+
+        
 
         function showHideLoyaltyCount(id, page){
             var checked = $('#loyalty_coupon_'+page+'_'+id).is(':checked');
@@ -1921,19 +1937,20 @@
 
             enableExif: true,
             viewport: {
-                width: 250,
+                width: 180,
                 height: 60,
                 type: 'square'
             },
             boundary: {
-                width: 300,
-                height: 150
-            }
+                width: 200,
+                height: 100
+            },
+            enableOrientation: true
 
         });
 
         $('#coupon_photo_c_1').on('change', function () { 
-
+            // alert(xwidth);
             var reader = new FileReader();
 
             reader.onload = function (e) {
