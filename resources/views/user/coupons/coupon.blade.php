@@ -91,7 +91,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane active p-20" id="cpn_l_1" role="tabpanel">
                                             <div class="row">
-                                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                                <div class="col-sm-12 col-md-6 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Promo</label>
                                                         <select class="form-control custom-select" name="promo_id_1" id="promo_id_c_1" onchange="get_curr_lable('c',1);error_hide('promo_id_error_c_1')">
@@ -116,21 +116,21 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                                <div class="col-sm-12 col-md-6 col-lg-4">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        <div class="form-group">
+                                                        <div class="form-group row justify-content-center">
                                                             <label class="control-label">Coupon Photo</label>
 
                                                             <div class="uploader" onclick="$('#filePhoto').click()" id="uploader_c_1">
                                                                 Drag & Drop or Click here to upload..
-                                                                <input type="file" name="userprofile_picture" class="filePhoto"  id="coupon_photo_c_1" />
+                                                                <input type="file" name="coupon_photo_1" class="filePhoto"  id="coupon_photo_c_1" />
                                                             </div>
 
                                                             <div class="col-md-12 text-center" style="left: -55px;">
                                                                 <div id="crop_view_1" style="width:250px"></div>
                                                             </div>
-                                                            <button id="crop_btn" class="btn btn-danger col-sm-12 pull-right" type="button">Crop & Save</button>
-                                                            
+                                                            <button id="crop_btn" class="btn btn-danger col-sm-6" type="button">Crop & Save</button> &nbsp;
+                                                            <button id="rem" class="btn btn-danger col-sm-5" type="button">Remove</button>
 
                                                             <!-- <input type="file" id="coupon_photo_c_1" name="coupon_photo_1" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_1');"/> -->
 
@@ -1855,6 +1855,7 @@
             //$('#loyalty_coupon_c_1').prop('checked', true);
             $('#crop_view_1').hide();
             $('#crop_btn').hide();
+            $('#rem').hide();
             
 
         });
@@ -1954,6 +1955,7 @@
             $('#uploader_c_1').hide();
             $('#crop_view_1').show();
             $('#crop_btn').show();
+            $('#rem').show();
             
         });
 
@@ -1966,6 +1968,14 @@
                 $('#image_c_1').attr('src', resp);
             }); 
 
+        });
+
+        $('#rem').on('click', function()  {
+            $('#image_c_1').attr('src', "{{ asset('resources/assets/user/images/imageplaceholder.png') }}");
+            $('#uploader_c_1').show();
+            $('#crop_view_1').hide();
+            $('#crop_btn').hide();
+            $('#rem').hide();
         });
 
 
