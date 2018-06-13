@@ -577,7 +577,9 @@ class PromoController extends Controller
             'longitude' => trim($request->promo_lng),
             'created_at' => date('Y-m-d'),
             'is_pre_launch' => $is_pre_launch,
-            'country_short' => trim($request->promo_country)
+            'country_short' => trim($request->promo_country),
+            'store_address' => $request->store_address,
+            'description' => $request->promo_description
         ]);
 
         if($insert) {

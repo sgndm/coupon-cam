@@ -38,6 +38,10 @@
               @endfor
           </select>
       </div>
+      <div class="form-group col-sm-12">
+          <label for="name">Promo Description</label>
+          <textarea class="form-control" id="promo_description" name="promo_description" value="" placeholder="Enter Name" required> </textarea>
+      </div>
 
       <div class="form-group col-sm-12">
         <label for="red_photo">Promo Photo</label>

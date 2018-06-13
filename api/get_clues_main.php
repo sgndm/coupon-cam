@@ -433,6 +433,7 @@ foreach($nearbyPromos as $promo){
 
 }
 
+// ************************************************************************************************** //
 // | get red friday fromos
 $getRed = "SELECT * FROM `red_friday_promos` WHERE `status`=1";
 $redExec = $dbh->query($getRed);
