@@ -216,11 +216,11 @@
     position:relative; 
     overflow:hidden; 
     width:250px; 
-    height:60px; 
+    height:150px; 
     background:#f3f3f3; 
     border:4px dashed #8f8e8e;
     text-align: center;
-    padding: 15px;
+    padding: 35px;
 }
 
 .filePhoto{

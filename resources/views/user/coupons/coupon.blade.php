@@ -1925,8 +1925,8 @@
                 type: 'square'
             },
             boundary: {
-                width: 270,
-                height: 80
+                width: 300,
+                height: 150
             }
 
         });
