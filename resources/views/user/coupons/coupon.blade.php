@@ -121,21 +121,26 @@
                                                         <div class="form-group row-justify-content-center" >
                                                             <label class="control-label col-xs-12 col-sm-12">Coupon Photo</label>
 
-                                                            <div class="uploader" onclick="$('#filePhoto').click()" id="uploader_c_1">
-                                                                <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
-                                                                <b>Drag and drop a file here or click</b>
-                                                                <input type="file" name="coupon_photo_1" class="filePhoto"  id="coupon_photo_c_1" onchange="error_hide('coupon_photo_error_c_1');" />
+
+                                                            <div id="img_cropper_c_1">
+                                                                <div class="uploader" id="uploader_c_1">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_1" id="coupon_photo_c_1" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_c_1');" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_c_1"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_c_1"/>
+                                                                
+
+                                                                <button id="crop_btn_c_1" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_c_1" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_1" id="cp_img_name_c_1">
                                                             </div>
 
-                                                            <div class="col-md-12 text-center cropper_cont">
-                                                                <div id="crop_view_c_1" class="crop_prev"></div>
-                                                            </div>
-                                                            <button id="crop_btn_c_1" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
-                                                            <button id="rem_c_1" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
-
-                                                            <input type="hidden" id="cp_img_name_c_1" name="cp_img_name_1">
-
-                                                            <!-- <input type="file" id="coupon_photo_c_1" name="coupon_photo_1" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_1');"/> -->
 
                                                         </div>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_1"> </h6>
@@ -254,21 +259,24 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
 
-                                                            <div class="uploader" onclick="$('#filePhoto').click()" id="uploader_c_2">
-                                                                <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
-                                                                <b>Drag and drop a file here or click</b>
-                                                                <input type="file" name="coupon_photo_2" class="filePhoto"  id="coupon_photo_c_2" onchange="error_hide('coupon_photo_error_c_2');" />
+                                                            <div id="img_cropper_c_2">
+                                                                <div class="uploader" id="uploader_c_2">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_2" id="coupon_photo_c_2" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_c_2');" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_c_2"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_c_2"/>
+                                                                
+
+                                                                <button id="crop_btn_c_2" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_c_2" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_2" id="cp_img_name_c_2">
                                                             </div>
-
-                                                            <div class="col-md-12 text-center cropper_cont">
-                                                                <div id="crop_view_c_2" class="crop_prev"></div>
-                                                            </div>
-                                                            <button id="crop_btn_c_2" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
-                                                            <button id="rem_c_2" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
-
-                                                            <input type="hidden" id="cp_img_name_c_2"  name="cp_img_name_2">
-
-                                                            {{--<input type="file" id="coupon_photo_c_2" name="coupon_photo_2" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_2');" />--}}
                                                             <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_2"> </h6>
                                                         </div>
                                                     </div>
@@ -384,22 +392,24 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
 
-                                                            <div class="uploader" onclick="$('#filePhoto').click()" id="uploader_c_3">
-                                                                <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
-                                                                <b>Drag and drop a file here or click</b>
-                                                                <input type="file" name="coupon_photo_3" class="filePhoto"  id="coupon_photo_c_3" onchange="error_hide('coupon_photo_error_c_3');" />
+                                                            <div id="img_cropper_c_3">
+                                                                <div class="uploader" id="uploader_c_3">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_3" id="coupon_photo_c_3" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_c_3');" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_c_3"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_c_3"/>
+                                                                
+
+                                                                <button id="crop_btn_c_3" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_c_3" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_3" id="cp_img_name_c_3">
                                                             </div>
-
-                                                            <div class="col-md-12 text-center cropper_cont">
-                                                                <div id="crop_view_c_3" class="crop_prev"></div>
-                                                            </div>
-                                                            <button id="crop_btn_c_3" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
-                                                            <button id="rem_c_3" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
-
-                                                            <input type="hidden" id="cp_img_name_c_3"  name="cp_img_name_3">
-
-
-                                                            {{--<input type="file" id="coupon_photo_c_3" name="coupon_photo_3" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_3');" />--}}
                                                             <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_3"> </h6>
 
                                                         </div>
@@ -516,22 +526,24 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
 
-                                                            <div class="uploader" onclick="$('#filePhoto').click()" id="uploader_c_4">
-                                                                <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
-                                                                <b>Drag and drop a file here or click</b>
-                                                                <input type="file" name="coupon_photo_4" class="filePhoto"  id="coupon_photo_c_4" onchange="error_hide('coupon_photo_error_c_4');" />
+                                                            <div id="img_cropper_c_4">
+                                                                <div class="uploader" id="uploader_c_4">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_4" id="coupon_photo_c_4" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_c_4');" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_c_4"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_c_4"/>
+                                                                
+
+                                                                <button id="crop_btn_c_4" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_c_4" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_4" id="cp_img_name_c_4">
                                                             </div>
-
-                                                            <div class="col-md-12 text-center cropper_cont">
-                                                                <div id="crop_view_c_4" class="crop_prev"></div>
-                                                            </div>
-                                                            <button id="crop_btn_c_4" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
-                                                            <button id="rem_c_4" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
-
-                                                            <input type="hidden" id="cp_img_name_c_4"  name="cp_img_name_4">
-
-
-                                                            {{--<input type="file" id="coupon_photo_c_4" name="coupon_photo_4" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_4');" />--}}
                                                             <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_4"> </h6>
                                                         </div>
                                                     </div>
@@ -1400,23 +1412,24 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
 
-                                                            <div class="uploader" onclick="$('#filePhoto').click()" id="uploader_e_1">
-                                                                <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
-                                                                <b>Drag and drop a file here or click</b>
-                                                                <input type="file" name="coupon_photo_1" class="filePhoto"  id="coupon_photo_e_1" onchange="error_hide('coupon_photo_error_e_1');" />
+                                                            <div id="img_cropper_e_1">
+                                                                <div class="uploader" id="uploader_e_1">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_1" id="coupon_photo_e_1" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_e_1');" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_e_1"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_e_1"/>
+                                                                
+
+                                                                <button id="crop_btn_e_1" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_e_1" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_1" id="cp_img_name_e_1">
                                                             </div>
-
-                                                            <div class="col-md-12 text-center cropper_cont">
-                                                                <div id="crop_view_e_1" class="crop_prev"></div>
-                                                            </div>
-                                                            <button id="crop_btn_e_1" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
-                                                            <button id="rem_e_1" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
-
-                                                            <input type="hidden" id="cp_img_name_e_1"  name="cp_img_name_1">
-
-
-                                                            {{--<input type="file" id="coupon_photo_e_1" name="coupon_photo_1" class="dropify" data-height="100" onchange="error_hide('coupon_photo_error_e_1');"/>--}}
-
                                                         </div>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_photo_error_e_1"> </h6>
                                                     </div>
@@ -1533,21 +1546,24 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
 
-                                                            <div class="uploader" onclick="$('#filePhoto').click()" id="uploader_e_2">
-                                                                <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
-                                                                <b>Drag and drop a file here or click</b>
-                                                                <input type="file" name="coupon_photo_2" class="filePhoto"  id="coupon_photo_e_2" onchange="error_hide('coupon_photo_error_e_2');" />
+                                                            <div id="img_cropper_e_2">
+                                                                <div class="uploader" id="uploader_e_2">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_2" id="coupon_photo_e_2" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_e_2');" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_e_2"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_e_2"/>
+                                                                
+
+                                                                <button id="crop_btn_e_2" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_e_2" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_2" id="cp_img_name_e_2">
                                                             </div>
-
-                                                            <div class="col-md-12 text-center cropper_cont">
-                                                                <div id="crop_view_e_2" class="crop_prev"></div>
-                                                            </div>
-                                                            <button id="crop_btn_e_2" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
-                                                            <button id="rem_e_2" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
-
-                                                            <input type="hidden" id="cp_img_name_e_2"  name="cp_img_name_2">
-
-                                                            {{--<input type="file" id="coupon_photo_e_2" name="coupon_photo_2" class="dropify" data-height="100" onchange="error_hide('coupon_photo_error_e_2');" />--}}
 
                                                         </div>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_photo_error_e_2"> </h6>
@@ -1662,22 +1678,24 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
 
-                                                            <div class="uploader" onclick="$('#filePhoto').click()" id="uploader_e_3">
-                                                                <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
-                                                                <b>Drag and drop a file here or click</b>
-                                                                <input type="file" name="coupon_photo_3" class="filePhoto"  id="coupon_photo_e_3" onchange="error_hide('coupon_photo_error_e_3');" />
+                                                            <div id="img_cropper_e_3">
+                                                                <div class="uploader" id="uploader_e_3">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_3" id="coupon_photo_e_3" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_e_3');" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_e_3"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_e_3"/>
+                                                                
+
+                                                                <button id="crop_btn_e_3" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_e_3" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_3" id="cp_img_name_e_3">
                                                             </div>
-
-                                                            <div class="col-md-12 text-center cropper_cont">
-                                                                <div id="crop_view_e_3" class="crop_prev"></div>
-                                                            </div>
-                                                            <button id="crop_btn_e_3" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
-                                                            <button id="rem_e_3" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
-
-                                                            <input type="hidden" id="cp_img_name_e_3"  name="cp_img_name_3">
-
-
-                                                            {{--<input type="file" id="coupon_photo_e_3" name="coupon_photo_3" class="dropify" data-height="100" onchange="error_hide('coupon_photo_error_e_3');" />--}}
                                                         </div>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_photo_error_e_3"> </h6>
                                                     </div>
@@ -1793,22 +1811,24 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
 
-                                                            <div class="uploader" onclick="$('#filePhoto').click()" id="uploader_e_4">
-                                                                <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
-                                                                <b>Drag and drop a file here or click</b>
-                                                                <input type="file" name="coupon_photo_4" class="filePhoto"  id="coupon_photo_e_4" onchange="error_hide('coupon_photo_error_e_4');" />
+                                                            <div id="img_cropper_e_4">
+                                                                <div class="uploader" id="uploader_e_4">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_4" id="coupon_photo_e_4" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_e_4');" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_e_4"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_e_4"/>
+                                                                
+
+                                                                <button id="crop_btn_e_4" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_e_4" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_4" id="cp_img_name_e_4">
                                                             </div>
-
-                                                            <div class="col-md-12 text-center cropper_cont">
-                                                                <div id="crop_view_e_4" class="crop_prev"></div>
-                                                            </div>
-                                                            <button id="crop_btn_e_4" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
-                                                            <button id="rem_e_4" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
-
-                                                            <input type="hidden" id="cp_img_name_e_4"  name="cp_img_name_4">
-
-
-                                                            {{--<input type="file" id="coupon_photo_e_4" name="coupon_photo_4" class="dropify" data-height="100" onchange="error_hide('coupon_photo_error_e_4');" />--}}
                                                         </div>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_photo_error_e_4"> </h6>
                                                     </div>
@@ -1954,23 +1974,157 @@
 
 <!-- | Custom css for this page only | -->
 @section('custom_css')
-    <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/croppie.css">
 @endsection
 
 <!-- | Custom js for this page only | -->
 @section('custom_js')
-    <script src="http://demo.itsolutionstuff.com/plugin/croppie.js"></script>
     <script>
 
-
         $(document).ready(function(){
-            $('.dropify').dropify();
+            // $('.dropify').dropify();
 
-            $('.crop_prev').hide();
+            $('.cropit-preview').hide();
             $('.crop_btn').hide();
             $('.res_btn').hide();
+            $('.cropit-image-zoom-input').hide();
 
         });
+
+        function crop_image(page, id) {
+
+            var imageData = $('#img_cropper_' + page + '_' + id).cropit('export');
+            $('#cp_img_name_' + page + '_' + id).val(imageData);
+            $('#image_' + page + '_' + id).attr('src', imageData);
+
+        }
+
+        function activate_cropper(page, id) {
+            $('#uploader_' + page + '_' + id).hide();
+            $('#cropper_prev_' + page + '_' + id).show();
+            $('#ranger_' + page + '_' + id).show();
+            $('#crop_btn_' + page + '_' + id).show();
+            $('#rem_' + page + '_' + id).show();
+        }
+
+        function clear_cropper(page, id) {
+            $('#uploader_' + page + '_' + id).show();
+            $('#cropper_prev_' + page + '_' + id).hide();
+            $('#ranger_' + page + '_' + id).hide();
+            $('#crop_btn_' + page + '_' + id).hide();
+            $('#rem_' + page + '_' + id).hide();
+
+            $('#cp_img_name_' + page + '_' + id).val('');
+            $('#image_' + page + '_' + id).attr('src',"{{ asset('resources/assets/user/images/imageplaceholder.png') }}" );
+        }
+
+        $('#img_cropper_c_1').cropit();
+        $('#img_cropper_c_2').cropit();
+        $('#img_cropper_c_3').cropit();
+        $('#img_cropper_c_4').cropit();
+        $('#img_cropper_e_1').cropit();
+        $('#img_cropper_e_2').cropit();
+        $('#img_cropper_e_3').cropit();
+        $('#img_cropper_e_4').cropit();
+
+        $('#coupon_photo_c_1').on('change', function() {
+            activate_cropper('c', 1);
+        });
+
+        $('#crop_btn_c_1').on('click',function () {
+            crop_image('c', 1);
+        });
+
+        $('#rem_c_1').on('click', function() {
+            clear_cropper('c', 1);
+        });
+
+        $('#coupon_photo_c_2').on('change', function() {
+            activate_cropper('c', 2);
+        });
+
+        $('#crop_btn_c_2').on('click',function () {
+            crop_image('c', 2);
+        });
+
+        $('#rem_c_2').on('click', function() {
+            clear_cropper('c', 2);
+        });
+
+
+        $('#coupon_photo_c_3').on('change', function() {
+            activate_cropper('c', 3);
+        });
+
+        $('#crop_btn_c_3').on('click',function () {
+            crop_image('c', 3);
+        });
+
+        $('#rem_c_3').on('click', function() {
+            clear_cropper('c', 3);
+        });
+
+        $('#coupon_photo_c_4').on('change', function() {
+            activate_cropper('c', 4);
+        });
+
+        $('#crop_btn_c_4').on('click',function () {
+            crop_image('c', 4);
+        });
+
+        $('#rem_c_4').on('click', function() {
+            clear_cropper('c', 4);
+        });
+
+
+        $('#coupon_photo_e_1').on('change', function() {
+            activate_cropper('e', 1);
+        });
+
+        $('#crop_btn_e_1').on('click',function () {
+            crop_image('e', 1);
+        });
+
+        $('#rem_e_1').on('click', function() {
+            clear_cropper('e', 1);
+        });
+
+
+        $('#coupon_photo_e_2').on('change', function() {
+            activate_cropper('e', 2);
+        });
+
+        $('#crop_btn_e_2').on('click',function () {
+            crop_image('e', 2);
+        });
+
+        $('#rem_e_2').on('click', function() {
+            clear_cropper('e', 2);
+        });
+        
+        $('#coupon_photo_e_3').on('change', function() {
+            activate_cropper('e', 3);
+        });
+
+        $('#crop_btn_e_3').on('click',function () {
+            crop_image('e', 3);
+        });
+
+        $('#rem_e_3').on('click', function() {
+            clear_cropper('e', 3);
+        });
+
+        $('#coupon_photo_e_4').on('change', function() {
+            activate_cropper('e', 4);
+        });
+
+        $('#crop_btn_e_4').on('click',function () {
+            crop_image('e', 4);
+        });
+
+        $('#rem_e_4').on('click', function() {
+            clear_cropper('e', 4);
+        });
+        
 
         function showHideLoyaltyCount(id, page){
             var checked = $('#loyalty_coupon_'+page+'_'+id).is(':checked');
@@ -2028,446 +2182,21 @@
             $('a[aria-controls="'+next_tab+'"]').trigger("click");
         }
 
-        // crop view
-        $crop_v_1 = $('#crop_view_c_1').croppie({
-
-            enableExif: true,
-            viewport: {
-                width: 180,
-                height: 60,
-                type: 'square'
-            },
-            boundary: {
-                width: 200,
-                height: 100
-            },
-            enableOrientation: true
-
-        });
-        $crop_v_2 = $('#crop_view_c_2').croppie({
-
-            enableExif: true,
-            viewport: {
-                width: 180,
-                height: 60,
-                type: 'square'
-            },
-            boundary: {
-                width: 200,
-                height: 100
-            },
-            enableOrientation: true
-
-        });
-        $crop_v_3 = $('#crop_view_c_3').croppie({
-
-            enableExif: true,
-            viewport: {
-                width: 180,
-                height: 60,
-                type: 'square'
-            },
-            boundary: {
-                width: 200,
-                height: 100
-            },
-            enableOrientation: true
-        });
-        $crop_v_4 = $('#crop_view_c_4').croppie({
-
-            enableExif: true,
-            viewport: {
-                width: 180,
-                height: 60,
-                type: 'square'
-            },
-            boundary: {
-                width: 200,
-                height: 100
-            },
-            enableOrientation: true
-        });
-        $crop_v_5 = $('#crop_view_e_1').croppie({
-
-            enableExif: true,
-            viewport: {
-                width: 180,
-                height: 60,
-                type: 'square'
-            },
-            boundary: {
-                width: 200,
-                height: 100
-            },
-            enableOrientation: true
-        });
-        $crop_v_6 = $('#crop_view_e_2').croppie({
-
-            enableExif: true,
-            viewport: {
-                width: 180,
-                height: 60,
-                type: 'square'
-            },
-            boundary: {
-                width: 200,
-                height: 100
-            },
-            enableOrientation: true
-        });
-        $crop_v_7 = $('#crop_view_e_3').croppie({
-
-            enableExif: true,
-            viewport: {
-                width: 180,
-                height: 60,
-                type: 'square'
-            },
-            boundary: {
-                width: 200,
-                height: 100
-            },
-            enableOrientation: true
-        })
-        $crop_v_8 = $('#crop_view_e_4').croppie({
-
-            enableExif: true,
-            viewport: {
-                width: 180,
-                height: 60,
-                type: 'square'
-            },
-            boundary: {
-                width: 200,
-                height: 100
-            },
-            enableOrientation: true
-        });
-
-        function show_cropper(page, id) {
-            $('#uploader_' + page + '_' + id).hide();
-            $('#crop_view_' + page + '_' + id).show();
-            $('#crop_btn_' + page + '_' + id).show();
-            $('#rem_' + page + '_' + id).show();
-        }
-
-        function upload_ajax(data, page, id) {
-            var fd = new FormData();
-            fd.append('file', data);
-
-            $.ajax({
-                url: "{{ url('coupons/upload_image') }}",
-                headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'POST',
-                data: fd,
-                contentType: false,
-                cache: false,
-                processData: false,
-                success : function (data) {
-                    console.log(data);
-                    // alert(data);
-                    $('#image_' + page + '_' + id).attr('src', "{{url('resources/assets/coupons/full')}}/"+data);
-                    $('#cp_img_name_' + page + '_' + id).val(data);
-                },
-                error: function (xmlHttpRequest, textStatus, errorThrown) {
-                     alert(errorThrown);
-                }
-            });
-        }
-
-        function clear_uploader(page, id) {
-            $('#image_' + page + '_' + id).attr('src', "{{ asset('resources/assets/user/images/imageplaceholder.png') }}");
-            $('#uploader_' + page + '_' + id).show();
-            $('#crop_view_' + page + '_' + id).hide();
-            $('#crop_btn_' + page + '_' + id).hide();
-            $('#rem_' + page + '_' + id).hide();
-        }
-
-        $('#coupon_photo_c_1').on('change', function () {
-            // alert(xwidth);
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $crop_v_1.croppie('bind', {
-                    url: e.target.result
-                }).then(function(){
-                    console.log('jQuery bind complete');
-                });
-            }
-
-            reader.readAsDataURL(this.files[0]);
-
-            show_cropper('c', 1);
-
-        });
-
-        $('#crop_btn_c_1').on('click', function (ev) {
-
-            $crop_v_1.croppie('result', {
-                type: 'canvas',
-                size: 'viewport'
-            }).then(function (resp) {
-                upload_ajax(resp, 'c', 1);
-            });
-
-        });
-
-        $('#rem_c_1').on('click', function()  {
-            clear_uploader('c', 1);
-        });
-
-
-        $('#coupon_photo_c_2').on('change', function () {
-            // alert(xwidth);
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $crop_v_2.croppie('bind', {
-                    url: e.target.result
-                }).then(function(){
-                    console.log('jQuery bind complete');
-                });
-            }
-
-            reader.readAsDataURL(this.files[0]);
-
-            show_cropper('c', 2);
-
-        });
-
-        $('#crop_btn_c_2').on('click', function (ev) {
-
-            $crop_v_2.croppie('result', {
-                type: 'canvas',
-                size: 'viewport'
-            }).then(function (resp) {
-                upload_ajax(resp, 'c', 2);
-            });
-
-        });
-
-        $('#rem_c_2').on('click', function()  {
-            clear_uploader('c', 2);
-        });
-
-
-        $('#coupon_photo_c_3').on('change', function () {
-            // alert(xwidth);
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $crop_v_3.croppie('bind', {
-                    url: e.target.result
-                }).then(function(){
-                    console.log('jQuery bind complete');
-                });
-            }
-
-            reader.readAsDataURL(this.files[0]);
-
-            show_cropper('c', 3);
-
-        });
-
-        $('#crop_btn_c_3').on('click', function (ev) {
-
-            $crop_v_3.croppie('result', {
-                type: 'canvas',
-                size: 'viewport'
-            }).then(function (resp) {
-                upload_ajax(resp, 'c', 3);
-            });
-
-        });
-
-        $('#rem_c_3').on('click', function()  {
-            clear_uploader('c', 3);
-        });
-
-
-        $('#coupon_photo_c_4').on('change', function () {
-            // alert(xwidth);
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $crop_v_4.croppie('bind', {
-                    url: e.target.result
-                }).then(function(){
-                    console.log('jQuery bind complete');
-                });
-            }
-
-            reader.readAsDataURL(this.files[0]);
-
-            show_cropper('c', 4);
-
-        });
-
-        $('#crop_btn_c_4').on('click', function (ev) {
-
-            $crop_v_4.croppie('result', {
-                type: 'canvas',
-                size: 'viewport'
-            }).then(function (resp) {
-                upload_ajax(resp, 'c', 4);
-            });
-
-        });
-
-        $('#rem_c_4').on('click', function()  {
-            clear_uploader('c', 4);
-        });
-
-
-        $('#coupon_photo_e_1').on('change', function () {
-            // alert(xwidth);
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $crop_v_5.croppie('bind', {
-                    url: e.target.result
-                }).then(function(){
-                    console.log('jQuery bind complete');
-                });
-            }
-
-            reader.readAsDataURL(this.files[0]);
-
-            show_cropper('e', 1);
-
-        });
-
-        $('#crop_btn_e_1').on('click', function (ev) {
-
-            $crop_v_5.croppie('result', {
-                type: 'canvas',
-                size: 'viewport'
-            }).then(function (resp) {
-                upload_ajax(resp, 'e', 1);
-            });
-
-        });
-
-        $('#rem_e_1').on('click', function()  {
-            clear_uploader('e', 1);
-        });
-
-        $('#coupon_photo_e_2').on('change', function () {
-            // alert(xwidth);
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $crop_v_6.croppie('bind', {
-                    url: e.target.result
-                }).then(function(){
-                    console.log('jQuery bind complete');
-                });
-            }
-
-            reader.readAsDataURL(this.files[0]);
-
-            show_cropper('e', 2);
-
-        });
-
-        $('#crop_btn_e_2').on('click', function (ev) {
-
-            $crop_v_6.croppie('result', {
-                type: 'canvas',
-                size: 'viewport'
-            }).then(function (resp) {
-                upload_ajax(resp, 'e', 2);
-            });
-
-        });
-
-        $('#rem_e_2').on('click', function()  {
-            clear_uploader('e', 2);
-        });
-
-
-        $('#coupon_photo_e_3').on('change', function () {
-            // alert(xwidth);
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $crop_v_7.croppie('bind', {
-                    url: e.target.result
-                }).then(function(){
-                    console.log('jQuery bind complete');
-                });
-            }
-
-            reader.readAsDataURL(this.files[0]);
-
-            show_cropper('e', 3);
-
-        });
-
-        $('#crop_btn_e_3').on('click', function (ev) {
-
-            $crop_v_7.croppie('result', {
-                type: 'canvas',
-                size: 'viewport'
-            }).then(function (resp) {
-                upload_ajax(resp, 'e', 3);
-            });
-
-        });
-
-        $('#rem_e_3').on('click', function()  {
-            clear_uploader('e', 3);
-        });
-
-
-        $('#coupon_photo_e_4').on('change', function () {
-            // alert(xwidth);
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $crop_v_8.croppie('bind', {
-                    url: e.target.result
-                }).then(function(){
-                    console.log('jQuery bind complete');
-                });
-            }
-
-            reader.readAsDataURL(this.files[0]);
-
-            show_cropper('e', 4);
-
-        });
-
-        $('#crop_btn_e_4').on('click', function (ev) {
-
-            $crop_v_8.croppie('result', {
-                type: 'canvas',
-                size: 'viewport'
-            }).then(function (resp) {
-                upload_ajax(resp, 'e', 4);
-            });
-
-        });
-
-        $('#rem_e_4').on('click', function()  {
-            clear_uploader('e', 4);
-        });
+        
 
 
         // $('#coupon_photo_c_1').on('change', function(){
         //     readURL(this,1,'c');
         // });
-//        $('#coupon_photo_c_2').on('change', function(){
-//            readURL(this,2,'c');
-////        });
-//        $('#coupon_photo_c_3').on('change', function(){
-//            readURL(this,3,'c');
-//        });
-//        $('#coupon_photo_c_4').on('change', function(){
-//            readURL(this,4,'c');
-//        });
+    //    $('#coupon_photo_c_2').on('change', function(){
+    //        readURL(this,2,'c');
+    //    });
+    //    $('#coupon_photo_c_3').on('change', function(){
+    //        readURL(this,3,'c');
+    //    });
+    //    $('#coupon_photo_c_4').on('change', function(){
+    //        readURL(this,4,'c');
+    //    });
 
         $('#coupon_name_c_1').on('input', function(){
             var coupon_name = $('#coupon_name_c_1').val();
@@ -2486,18 +2215,18 @@
             $('#heading_c_4').html(coupon_name);
         });
 
-//        $('#coupon_photo_e_1').on('change', function(){
-//            readURL(this,1,'e');
-//        });
-//        $('#coupon_photo_e_2').on('change', function(){
-//            readURL(this,2,'e');
-//        });
-//        $('#coupon_photo_e_3').on('change', function(){
-//            readURL(this,3,'e');
-//        });
-//        $('#coupon_photo_e_4').on('change', function(){
-//            readURL(this,4,'e');
-//        });
+    //    $('#coupon_photo_e_1').on('change', function(){
+    //        readURL(this,1,'e');
+    //    });
+    //    $('#coupon_photo_e_2').on('change', function(){
+    //        readURL(this,2,'e');
+    //    });
+    //    $('#coupon_photo_e_3').on('change', function(){
+    //        readURL(this,3,'e');
+    //    });
+    //    $('#coupon_photo_e_4').on('change', function(){
+    //        readURL(this,4,'e');
+    //    });
 
         $('#coupon_name_e_1').on('input', function(){
             var coupon_name = $('#coupon_name_c_4').val();

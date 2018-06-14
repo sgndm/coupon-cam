@@ -215,19 +215,14 @@
 .uploader {
     position:relative; 
     overflow:hidden; 
-    width:200px; 
-    height:100px; 
     background:#fff; 
     border:2px solid #e4e4e4;
     text-align: center;
-    padding-top: 15px;
     color: #d2d2d2;
 }
 
 .filePhoto{
     position:absolute;
-    width:320px;
-    height:400px;
     top:-50px;
     left:0;
     z-index:2;
@@ -240,15 +235,6 @@
     height: 40px;
 }
 
-.cropper_cont{
-    position: relative;
-    left: -40px; 
-    top: -35px;
-}
-
-.crop_prev {
-    width:280px;
-}
 
 .crop_btn, .res_btn{
     border-radius: 0;
@@ -264,3 +250,109 @@
     border-radius: 0;
     background-color: #e80602;
 }
+
+
+@media (min-width: 576px) { 
+    .uploader {
+        width:250px; 
+        height:120px; 
+        padding-top: 15px;
+    }
+    
+    .filePhoto{
+        width:320px;
+        height:400px;
+    }
+    
+    .up-icon{
+        width: 50px;
+        height: 40px;
+    }
+
+    .cropit-preview {
+        width: 250px;
+        height: 120px;
+        border: 1px solid gray;
+        margin-bottom: 5px;
+    }  
+ }
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .uploader {
+        width:250px; 
+        height:120px; 
+        padding-top: 15px;
+    }
+    
+    .filePhoto{
+        width:320px;
+        height:400px;
+    }
+    
+    .up-icon{
+        width: 50px;
+        height: 40px;
+    }
+
+    .cropit-preview {
+        width: 250px;
+        height: 120px;
+        border: 1px solid gray;
+        margin-bottom: 5px;
+    }  
+ }
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+    .uploader {
+        width:250px; 
+        height:120px; 
+        padding-top: 15px;
+    }
+    
+    .filePhoto{
+        width:320px;
+        height:400px;
+    }
+    
+    .up-icon{
+        width: 50px;
+        height: 40px;
+    }
+
+
+    .cropit-preview {
+        width: 250px;
+        height: 120px;
+        border: 1px solid gray;
+        margin-bottom: 5px;
+    }  
+ }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+    .uploader {
+        width:250px; 
+        height:120px; 
+        padding-top: 15px;
+    }
+    
+    .filePhoto{
+        width:320px;
+        height:400px;
+    }
+    
+    .up-icon{
+        width: 50px;
+        height: 40px;
+    }
+
+    
+    .cropit-preview {
+        width: 250px;
+        height: 82px;
+        border: 1px solid gray;
+        margin-bottom: 5px;
+    }  
+ }

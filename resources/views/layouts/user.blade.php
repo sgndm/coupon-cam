@@ -320,7 +320,9 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="{{ asset('resources/assets/template/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- <script src="{{ asset('resources/assets/template/plugins/jquery/jquery.min.js') }}"></script> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
     
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{ asset('resources/assets/template/plugins/bootstrap/js/popper.min.js') }}"></script>
@@ -353,6 +355,8 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <!--script src="{{ asset('resources/assets/template/plugins/styleswitcher/jQuery.style.switcher.js') }}"></script -->
+
+    <script src="{{ asset('resources/assets/custom/js/cropit/jquery.cropit.js') }}"></script>
     
     @yield('custom_js')
     
