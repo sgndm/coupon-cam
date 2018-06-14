@@ -116,20 +116,20 @@ class UserCouponController extends Controller
 
             // upload coupon photo
             $coupon_photo = '';
-            if($request->hasFile('coupon_photo_'.$x)) {
-
-                $random = rand(0,1000000);
-                $coup_img = $request->file('coupon_photo_'.$x);
-                $coup_extention = $coup_img->getClientOriginalExtension();
-
-                $coup_img_name = 'c'.date('Ymdhis').$random.".".$coup_extention;
-
-                //Move Uploaded File
-                $coup_img_path = 'resources/assets/coupons/full/';
-                $coup_img->move($coup_img_path,$coup_img_name);
-
-                $coupon_photo = $coup_img_name;
-            }
+//            if($request->hasFile('coupon_photo_'.$x)) {
+//
+//                $random = rand(0,1000000);
+//                $coup_img = $request->file('coupon_photo_'.$x);
+//                $coup_extention = $coup_img->getClientOriginalExtension();
+//
+//                $coup_img_name = 'c'.date('Ymdhis').$random.".".$coup_extention;
+//
+//                //Move Uploaded File
+//                $coup_img_path = 'resources/assets/coupons/full/';
+//                $coup_img->move($coup_img_path,$coup_img_name);
+//
+//                $coupon_photo = $coup_img_name;
+//            }
 
             // check loyalty coupons
             $is_loyalty = 0;
@@ -150,7 +150,7 @@ class UserCouponController extends Controller
             $new_coup->coupon_information = trim($request->get('coupon_info_'.$x));
             $new_coup->promo_id = trim($request->get('promo_id_1'));
 //            $new_coup->user_id = Auth::id();
-            $new_coup->coupon_photo = $coupon_photo;
+            $new_coup->coupon_photo = trim($request->get('cp_img_name_'.$x));
             $new_coup->coupon_model = trim($request->get('ar_coupon_name_'.$x));
             $new_coup->coupon_marker = trim($request->get('ar_marker_name_'.$x));
             $new_coup->is_loyalty = $is_loyalty;
@@ -185,20 +185,22 @@ class UserCouponController extends Controller
         for($x = 1; $x < 5; $x++){
 
             // upload coupon photo
+            $cp_name = trim($request->get('cp_img_name_'.$x));
             $coupon_photo = '';
-            if($request->hasFile('coupon_photo_'.$x)) {
+            if(strlen($cp_name) > 0) {
 
-                $random = rand(0,1000000);
-                $coup_img = $request->file('coupon_photo_'.$x);
-                $coup_extention = $coup_img->getClientOriginalExtension();
+//                $random = rand(0,1000000);
+//                $coup_img = $request->file('coupon_photo_'.$x);
+//                $coup_extention = $coup_img->getClientOriginalExtension();
+//
+//                $coup_img_name = 'c'.date('Ymdhis').$random.".".$coup_extention;
+//
+//                //Move Uploaded File
+//                $coup_img_path = 'resources/assets/coupons/full/';
+//                $coup_img->move($coup_img_path,$coup_img_name);
+//
+                $coupon_photo = $cp_name;
 
-                $coup_img_name = 'c'.date('Ymdhis').$random.".".$coup_extention;
-
-                //Move Uploaded File
-                $coup_img_path = 'resources/assets/coupons/full/';
-                $coup_img->move($coup_img_path,$coup_img_name);
-
-                $coupon_photo = $coup_img_name;
             } else {
                 $coupon_photo = $request->get('coup_img_'.$x);
             }
