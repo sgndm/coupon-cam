@@ -122,8 +122,9 @@
                                                             <label class="control-label col-xs-12 col-sm-12">Coupon Photo</label>
 
                                                             <div class="uploader" onclick="$('#filePhoto').click()" id="uploader_c_1">
-                                                                Drag & Drop or Click here to upload..
-                                                                <input type="file" name="coupon_photo_1" class="filePhoto"  id="coupon_photo_c_1" />
+                                                                <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                               <b>Drag and drop a file here or click</b> 
+                                                                <input type="file" name="coupon_photo_1" class="filePhoto"  id="coupon_photo_c_1" onchange="error_hide('coupon_photo_error_c_1');" />
                                                             </div>
 
                                                             <div class="col-md-12 text-center cropper_cont">
@@ -1850,21 +1851,22 @@
     <script src="http://demo.itsolutionstuff.com/plugin/croppie.js"></script>
     <script>
 
-        var xwidth;
-        $(window).resize(function(){
-            var ww = $('#c_p_f_c_1').width();
-            xwidth = ww;
-            // alert(xwidth);
-            console.log(xwidth);
-        });
+        // var xwidth;
+        // $(window).resize(function(){
+        //     var ww = $('#c_p_f_c_1').width();
+        //     xwidth = ww;
+        //     // alert(xwidth);
+        //     console.log(xwidth);
+        // });
 
         $(document).ready(function(){
 
-            var ww = $('#c_p_f_c_1').width();
-            xwidth = ww;
+            // var ww = $('#c_p_f_c_1').width();
+            // xwidth = ww;
             
 
-            $('.dropify').dropify();
+            // $('.dropify').dropify();
+            // $('#coupon_photo_c_1').dropify();
 
             //$('#loyalty_coupon_c_1').prop('checked', true);
             $('#crop_view_1').hide();
@@ -1973,7 +1975,7 @@
             $('#crop_view_1').show();
             $('#crop_btn').show();
             $('#rem').show();
-            
+
         });
 
         $('#crop_btn').on('click', function (ev) {
@@ -1993,6 +1995,7 @@
             $('#crop_view_1').hide();
             $('#crop_btn').hide();
             $('#rem').hide();
+
         });
 
 
