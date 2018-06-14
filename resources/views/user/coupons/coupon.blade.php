@@ -124,14 +124,16 @@
                                                             <div class="uploader" onclick="$('#filePhoto').click()" id="uploader_c_1">
                                                                 <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
                                                                <b>Drag and drop a file here or click</b> 
-                                                                <input type="file" name="coupon_photo_1" class="filePhoto"  id="coupon_photo_c_1" onchange="error_hide('coupon_photo_error_c_1');" />
+                                                               <input type="file" name="coupon_photo_1" class="filePhoto"  id="coupon_photo_c_1" onchange="error_hide('coupon_photo_error_c_1');" />
                                                             </div>
 
                                                             <div class="col-md-12 text-center cropper_cont">
-                                                                <div id="crop_view_1" style="width:250px"></div>
+                                                                <div id="crop_view_1" class="crop_prev"></div>
                                                             </div>
-                                                            <button id="crop_btn" class="btn btn-danger col-sm-12" type="button">Crop & Save</button> &nbsp;
-                                                            <button id="rem" class="btn btn-danger col-sm-12" type="button">Remove</button>
+                                                            <button id="crop_btn_c_1" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                            <button id="rem_c_1" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                            <input type="hidden" id="cp_img_name_c_1">
 
                                                             <!-- <input type="file" id="coupon_photo_c_1" name="coupon_photo_1" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_1');"/> -->
 
@@ -1851,29 +1853,14 @@
     <script src="http://demo.itsolutionstuff.com/plugin/croppie.js"></script>
     <script>
 
-        // var xwidth;
-        // $(window).resize(function(){
-        //     var ww = $('#c_p_f_c_1').width();
-        //     xwidth = ww;
-        //     // alert(xwidth);
-        //     console.log(xwidth);
-        // });
 
         $(document).ready(function(){
+            $('.dropify').dropify();
 
-            // var ww = $('#c_p_f_c_1').width();
-            // xwidth = ww;
+            $('.crop_prev').hide();
+            $('.crop_btn').hide();
+            $('.res_btn').hide();
             
-
-            // $('.dropify').dropify();
-            // $('#coupon_photo_c_1').dropify();
-
-            //$('#loyalty_coupon_c_1').prop('checked', true);
-            $('#crop_view_1').hide();
-            $('#crop_btn').hide();
-            $('#rem').hide();
-            
-            // $('#uploader_c_1').prop('width', xwidth);
         });
 
         
@@ -1973,28 +1960,52 @@
 
             $('#uploader_c_1').hide();
             $('#crop_view_1').show();
-            $('#crop_btn').show();
-            $('#rem').show();
+            $('#crop_btn_c_1').show();
+            $('#rem_c_1').show();
 
         });
 
-        $('#crop_btn').on('click', function (ev) {
+        $('#crop_btn_c_1').on('click', function (ev) {
 
             $crop_v_1.croppie('result', {
                 type: 'canvas',
                 size: 'viewport'
             }).then(function (resp) {
-                $('#image_c_1').attr('src', resp);
+
+                var fd = new FormData();
+                fd.append('file', resp);
+
+                $.ajax({
+                    url: "{{ url('coupons/upload_image') }}",
+                    headers: {
+                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'POST',
+                    data: fd,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success : function (data) {
+                        // alert(data);
+                        $('#image_c_1').attr('src', "{{url('resources/assets/coupons/full')}}/"+data);
+                        $('#cp_img_name_c_1').val(data);
+                    },
+                    error: function (xmlHttpRequest, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+
+               // $('#image_c_1').attr('src', resp);
             }); 
 
         });
 
-        $('#rem').on('click', function()  {
+        $('#rem_c_1').on('click', function()  {
             $('#image_c_1').attr('src', "{{ asset('resources/assets/user/images/imageplaceholder.png') }}");
             $('#uploader_c_1').show();
             $('#crop_view_1').hide();
-            $('#crop_btn').hide();
-            $('#rem').hide();
+            $('#crop_btn_c_1').hide();
+            $('#rem_c_1').hide();
 
         });
 

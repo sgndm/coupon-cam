@@ -24,6 +24,15 @@ use App\Http\Controllers\Controller;
 
 use App\Classes\ExtraFunctions;
 
+
+// image manipulations
+// use Treinetic\ImageArtist\lib\Overlays\Overlay;
+// use Treinetic\ImageArtist\lib\Text\Color;
+// use Treinetic\ImageArtist\lib\Shapes\PolygonShape;
+// use Treinetic\ImageArtist\lib\Commons\Node;
+// use Treinetic\ImageArtist\lib\Image;
+// use Treinetic\ImageArtist\lib\Shapes\Square;
+
 class UserCouponController extends Controller
 {
     public function __construct() {
@@ -79,6 +88,26 @@ class UserCouponController extends Controller
 
 
         return $view;
+    }
+
+    public function upload_image(Request $request) {
+        $data = $_POST['file'];
+
+        $random = rand(0, 1000000);
+
+        list($type, $data) = explode(';', $data);
+        list(, $data)      = explode(',', $data);
+
+        $data = base64_decode($data);
+
+        $cp_image_path = 'resources/assets/coupons/full/';
+        $image_name = 's'.date('Ymdhis').$random.".png";
+
+        file_put_contents($cp_image_path.$image_name, $data);
+        
+
+        return $image_name;
+
     }
 
     public function create(CouponRequest $request){

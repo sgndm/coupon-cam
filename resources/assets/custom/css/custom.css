@@ -245,3 +245,22 @@
     left: -40px; 
     top: -35px;
 }
+
+.crop_prev {
+    width:280px;
+}
+
+.crop_btn, .res_btn{
+    border-radius: 0;
+    background-color: #e80602;
+}
+
+.crop_btn:hover, .res_btn:hover{
+    border-radius: 0;
+    background-color: #e80602;
+}
+
+.crop_btn:focus, .res_btn:focus{
+    border-radius: 0;
+    background-color: #e80602;
+}
