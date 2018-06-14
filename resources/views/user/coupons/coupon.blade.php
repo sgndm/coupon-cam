@@ -339,7 +339,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group" style="display:none;">
                                                         <label class="control-label">Loyalty Coupon ?</label><br>
                                                         <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="loyalty_coupon_2" id="loyalty_coupon_c_2" onchange="showHideLoyaltyCount(2, 'c');" />
                                                     </div>
@@ -471,7 +471,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group" style="display:none;">
                                                         <label class="control-label">Loyalty Coupon ?</label><br>
                                                         <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="loyalty_coupon_3" id="loyalty_coupon_c_3" onchange="showHideLoyaltyCount(3, 'c');" />
                                                     </div>
@@ -597,7 +597,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group" style="display:none;">
                                                         <label class="control-label">Loyalty Coupon ?</label><br>
                                                         <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="loyalty_coupon_4" id="loyalty_coupon_c_4" onchange="showHideLoyaltyCount(4, 'c');" />
                                                     </div>
@@ -1619,7 +1619,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group" style="display:none;">
                                                         <label class="control-label">Loyalty Coupon ?</label><br>
                                                         <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="loyalty_coupon_2" id="loyalty_coupon_e_2" onchange="showHideLoyaltyCount(2, 'e');" />
                                                     </div>
@@ -1748,7 +1748,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group" style="display:none;">
                                                         <label class="control-label">Loyalty Coupon ?</label><br>
                                                         <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="loyalty_coupon_3" id="loyalty_coupon_e_3" onchange="showHideLoyaltyCount(3, 'e');" />
                                                     </div>
@@ -1874,7 +1874,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group" style="display:none;">
                                                         <label class="control-label">Loyalty Coupon ?</label><br>
                                                         <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="loyalty_coupon_4" id="loyalty_coupon_e_4" onchange="showHideLoyaltyCount(4, 'e');" />
                                                     </div>
