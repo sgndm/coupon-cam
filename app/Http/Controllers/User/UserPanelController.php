@@ -16,6 +16,7 @@ use App\Store;
 use App\StoreUser;
 use App\UserTeam;
 use App\Winner;
+use App\Wording;
 use App\StoreCategory;
 use App\SavedCoupons;
 use App\DeviceInfo;
@@ -1554,6 +1555,8 @@ class UserPanelController extends Controller
 
         }
 
+        $wordings = Wording::get();
+
 
         $view->pre_launch = $is_pre_launch;
         $view->saving_limit = $saving_limit;
@@ -1563,6 +1566,7 @@ class UserPanelController extends Controller
         $view->e_ca = $ca;
         $view->e_au = $au;
         $view->e_nz = $nz;
+        $view->wordings_list = $wordings;
 
 
 
@@ -1593,36 +1597,27 @@ class UserPanelController extends Controller
 
         else {
 
-            $update = AppSettings::where('id',1)->update([
-                'setting' => 0
-            ]);
+            // get all users
+            $get_users = DeviceInfo::get();
 
-            if($update) {
+            // player ids
+            $player_ids_arr = [];
 
-                $upd = AppSettings::where('setting_name','is_main_ready')->update([
-                    'setting' => 1
-                ]);
+            foreach ($get_users as $user) {
+                // player id
+                $t_player = $user->player_id;
 
-                // send a push
-                // get all users
-                $get_users = DeviceInfo::get();
-
-                // player ids
-                $player_ids_arr = [];
-
-                foreach ($get_users as $user) {
-                    // player id
-                    $t_player = $user->player_id;
-
-                    if(strlen($t_player) > 0) {
-                        array_push($player_ids_arr, $t_player);
-                    }
+                if(strlen($t_player) > 0) {
+                    array_push($player_ids_arr, $t_player);
                 }
+            }
 
-                $get_st = Store::join('promo_locations', 'promo_locations.store_id', '=', 'places.place_id')
-                    ->join('promos', 'promos.promo_id', '=', 'promo_locations.promo_id')
-                    ->where(['promos.status' => 3, 'promos.used' => '1'])
-                    ->get();
+            $get_st = Store::join('promo_locations', 'promo_locations.store_id', '=', 'places.place_id')
+                ->join('promos', 'promos.promo_id', '=', 'promo_locations.promo_id')
+                ->where(['promos.status' => 3, 'promos.used' => '1'])
+                ->get();
+
+            if(sizeof($get_st) > 0 ){
 
                 $st_name = $get_st[0]->contact_name;
                 $st_add = $get_st[0]->address;
@@ -1630,17 +1625,30 @@ class UserPanelController extends Controller
                 $player_ids_str = implode(",", $player_ids_arr);
                 $player_ids = explode(',', $player_ids_str);
 
+                $update = AppSettings::where('id',1)->update([
+                    'setting' => 0
+                ]);
+                $upd = AppSettings::where('setting_name','is_main_ready')->update([
+                    'setting' => 1
+                ]);
 
-                $notification = "RedFriday Event Is Imminent! Get to " . $st_add . "!";
-                $data = [];
-                $devices = $player_ids;
-                PushNotification::create_notification($notification, $data, $devices);
+                if($update && $upd) {
+                    // send a push
+                    $notification = "RedFriday Event Is Imminent! Get to " . $st_add . "!";
+                    $data = [];
+                    $devices = $player_ids;
+                    PushNotification::create_notification($notification, $data, $devices);
 
-                return redirect('admin/app_settings')->with(['success' => "Main Launch Activated Successfully!!"]);
+                    return redirect('admin/app_settings')->with(['success' => "Main Launch Activated Successfully!!"]);
+                }
+                else {
+                    return back()->with(['error' => 'Unable to activate Main Launch!!']);
+                }
+            } else {
+                return back()->with(['error' => 'Please create a give away promo first!!']);
             }
-            else {
-                return back()->with(['error' => 'Unable to activate Main Launch!!']);
-            }
+
+
         }
 
     }
@@ -2005,5 +2013,19 @@ class UserPanelController extends Controller
         ];
 
         return $return;
+    }
+
+    public function add_wordings(Request $request) {
+        $id = Wording::insert([
+            'wording' => trim($request->wording_new),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        if($id) {
+            return redirect('admin/app_settings')->with(['success' => "Successfully add a wording!!"]);
+        } else {
+            return back()->with(['error' => 'Unable to add wording!!']);
+        }
     }
 }

@@ -86,16 +86,16 @@
 
                                 </ul>
 
-                                <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/coupons/create') }}">
+                                <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/coupons/create') }}" id="coupon_form_1">
                                     {{ csrf_field() }}
                                     <div class="tab-content">
                                         <div class="tab-pane active p-20" id="cpn_l_1" role="tabpanel">
                                             <div class="row">
-                                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                                <div class="col-sm-12 col-md-6 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Promo</label>
-                                                        <select class="form-control custom-select" name="promo_id_1" id="promo_id_c_1" onchange="get_curr_lable('c',1);">
-                                                            <option>Select Promo</option>
+                                                        <select class="form-control custom-select" name="promo_id_1" id="promo_id_c_1" onchange="get_curr_lable('c',1);error_hide('promo_id_error_c_1')">
+                                                            <option value="0">Select Promo</option>
                                                             @if(sizeof($inactivePromos) > 0)
                                                                 @foreach($inactivePromos as $promo)
 
@@ -106,6 +106,7 @@
                                                                 <option>-- No Promos Available.. Please create a Promo..</option>
                                                             @endif
                                                         </select>
+                                                        <h6 class="form-control-feedback text-danger" id="promo_id_error_c_1"> </h6>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Not Sure What To Offer?</label>
@@ -115,12 +116,27 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                                <div class="col-sm-12 col-md-6 col-lg-4" id="c_p_f_c_1">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_c_1" name="coupon_photo_1" class="dropify" data-height="100"  required />
+                                                        <div class="form-group row-justify-content-center" >
+                                                            <label class="control-label col-xs-12 col-sm-12">Coupon Photo</label>
+
+                                                            <div class="uploader" onclick="$('#filePhoto').click()" id="uploader_c_1">
+                                                                <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                               <b>Drag and drop a file here or click</b> 
+                                                                <input type="file" name="coupon_photo_1" class="filePhoto"  id="coupon_photo_c_1" onchange="error_hide('coupon_photo_error_c_1');" />
+                                                            </div>
+
+                                                            <div class="col-md-12 text-center cropper_cont">
+                                                                <div id="crop_view_1" style="width:250px"></div>
+                                                            </div>
+                                                            <button id="crop_btn" class="btn btn-danger col-sm-12" type="button">Crop & Save</button> &nbsp;
+                                                            <button id="rem" class="btn btn-danger col-sm-12" type="button">Remove</button>
+
+                                                            <!-- <input type="file" id="coupon_photo_c_1" name="coupon_photo_1" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_1');"/> -->
+
                                                         </div>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_1"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -143,6 +159,7 @@
                                                             <input type="hidden" name="ar_coupon_name_1" id="ar_coupon_name_c_1">
                                                             <input type="hidden" name="ar_marker_name_1" id="ar_marker_name_c_1">
                                                         </div>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_ar_error_c_1"> </h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,11 +168,13 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_c_1" name="coupon_name_1" class="form-control" placeholder="Enter Name" required>
+                                                        <input type="text" id="coupon_name_c_1" name="coupon_name_1" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_1');">
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_name_error_c_1"> </h6>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Info & Basic Conditions</label>
-                                                        <textarea id="coupon_info_c_1" name="coupon_info_1" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_info_c_1" name="coupon_info_1" class="form-control" placeholder="" required oninput="error_hide('coupon_info_error_c_1');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_info_error_c_1"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -170,7 +189,8 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_c_1" name="coupon_condition_1" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_condition_c_1" name="coupon_condition_1" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_c_1');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_desc_error_c_1"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -182,8 +202,9 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="curr_lbl_c_1">$</span>
                                                             </div>
-                                                            <input type="number" id="coupon_value_c_1" name="coupon_value_1" class="form-control" placeholder="" required >
+                                                            <input type="number" id="coupon_value_c_1" name="coupon_value_1" class="form-control" placeholder="" required oninput="error_hide('coupon_value_error_c_1');" value="1" min="0" >
                                                         </div>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_value_error_c_1"> </h6>
 
                                                     </div>
                                                     <div class="form-group">
@@ -192,10 +213,10 @@
                                                     </div>
                                                     <div class="form-group" id="lc_cont_c_1" style="display: none;">
                                                         <label class="control-label">Loyalty Count</label>
-                                                        <input type="number" min="0" max="10" value="0" id="coupon_count_c_1" name="coupon_count_1" class="form-control" placeholder="" >
+                                                        <input type="number" min="1" max="10" value="1" id="coupon_count_c_1" name="coupon_count_1" class="form-control" placeholder="" >
                                                     </div>
                                                     <div class="form-group">
-                                                        <button type="button" class="col-md-12 custom_btn save_c_c" onclick="nextTab('cpn_l_2');" ></button>
+                                                        <button type="button" class="col-md-12 custom_btn save_c_c" onclick="validate_coupon_1('c',1,'cpn_l_2');" ></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -230,7 +251,8 @@
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_c_2" name="coupon_photo_2" class="dropify" data-height="100"  required />
+                                                            <input type="file" id="coupon_photo_c_2" name="coupon_photo_2" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_2');" />
+                                                            <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_2"> </h6>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -250,10 +272,11 @@
                                                             <div class="col-sm-12 col-md-6 col-lg-6">
                                                                 <div class="ar_search_res" id="ar_search_result_c_2"></div>
                                                             </div>
-                                                            <img src="{{url('resources/assets/custom/images/no-image.png')}}" class="col-sm-12 col-md-6 col-lg-6 pull-right" id="ar_prev_c_2" >
+                                                            <img src="{{url('resources/assets/custom/images/no-image.png')}}" class="col-sm-12 col-md-6 col-lg-6 pull-right" id="ar_prev_c_2" onchange="error_hide('coupon_ar_error_c_2');">
                                                             <input type="hidden" name="ar_coupon_name_2" id="ar_coupon_name_c_2">
                                                             <input type="hidden" name="ar_marker_name_2" id="ar_marker_name_c_2">
                                                         </div>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_ar_error_c_2"> </h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -262,11 +285,13 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_c_2" name="coupon_name_2" class="form-control" placeholder="Enter Name" required>
+                                                        <input type="text" id="coupon_name_c_2" name="coupon_name_2" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_2');">
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_name_error_c_2"> </h6>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Info & Basic Conditions</label>
-                                                        <textarea id="coupon_info_c_2" name="coupon_info_2" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_info_c_2" name="coupon_info_2" class="form-control" placeholder="" required oninput="error_hide('coupon_info_error_c_2');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_info_error_c_2"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -281,7 +306,8 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_c_2" name="coupon_condition_2" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_condition_c_2" name="coupon_condition_2" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_c_2');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_desc_error_c_2"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -292,7 +318,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="curr_lbl_c_2">$</span>
                                                             </div>
-                                                            <input type="number" id="coupon_value_c_2" name="coupon_value_2" class="form-control" placeholder="" required>
+                                                            <input type="number" id="coupon_value_c_2" name="coupon_value_2" class="form-control" placeholder="" required min="0" value="1">
                                                         </div>
 
                                                     </div>
@@ -302,10 +328,10 @@
                                                     </div>
                                                     <div class="form-group" id="lc_cont_c_2" style="display: none;">
                                                         <label class="control-label">Loyalty Count</label>
-                                                        <input type="number" min="0" max="10" value="0" id="coupon_count_c_2" name="coupon_count_2" class="form-control" placeholder="" >
+                                                        <input type="number" min="1" max="10" value="1" id="coupon_count_c_2" name="coupon_count_2" class="form-control" placeholder="" >
                                                     </div>
                                                     <div class="form-group">
-                                                        <button type="button" class="col-md-12 custom_btn save_c_c" onclick="nextTab('cpn_l_3');" ></button>
+                                                        <button type="button" class="col-md-12 custom_btn save_c_c" onclick="validate_coupon_1('c',2,'cpn_l_3');" ></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -340,7 +366,9 @@
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_c_3" name="coupon_photo_3" class="dropify" data-height="100"  required />
+                                                            <input type="file" id="coupon_photo_c_3" name="coupon_photo_3" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_3');" />
+                                                            <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_3"> </h6>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -364,6 +392,7 @@
                                                             <input type="hidden" name="ar_coupon_name_3" id="ar_coupon_name_c_3">
                                                             <input type="hidden" name="ar_marker_name_3" id="ar_marker_name_c_3">
                                                         </div>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_ar_error_c_3"> </h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -372,11 +401,13 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_c_3" name="coupon_name_3" class="form-control" placeholder="Enter Name" required>
+                                                        <input type="text" id="coupon_name_c_3" name="coupon_name_3" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_3');">
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_name_error_c_3"> </h6>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Info & Basic Conditions</label>
-                                                        <textarea id="coupon_info_c_3" name="coupon_info_3" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_info_c_3" name="coupon_info_3" class="form-control" placeholder="" required oninput="error_hide('coupon_info_error_c_3');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_info_error_c_3"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -391,7 +422,8 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_c_3" name="coupon_condition_3" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_condition_c_3" name="coupon_condition_3" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_c_3');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_desc_error_c_3"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -402,7 +434,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="curr_lbl_c_3">$</span>
                                                             </div>
-                                                            <input type="number" id="coupon_value_c_3" name="coupon_value_3" class="form-control" placeholder="" required>
+                                                            <input type="number" id="coupon_value_c_3" name="coupon_value_3" class="form-control" placeholder="" required min="0" value="1">
                                                         </div>
 
                                                     </div>
@@ -412,10 +444,10 @@
                                                     </div>
                                                     <div class="form-group" id="lc_cont_c_3" style="display: none;">
                                                         <label class="control-label">Loyalty Count</label>
-                                                        <input type="number" min="0" max="10" value="0" id="coupon_count_c_3" name="coupon_count_3" class="form-control" placeholder="" >
+                                                        <input type="number" min="1" max="10" value="1" id="coupon_count_c_3" name="coupon_count_3" class="form-control" placeholder="" >
                                                     </div>
                                                     <div class="form-group">
-                                                        <button type="button" class="col-md-12 custom_btn save_c_c" onclick="nextTab('cpn_l_4');" ></button>
+                                                        <button type="button" class="col-md-12 custom_btn save_c_c" onclick="validate_coupon_1('c',3,'cpn_l_4');" ></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -450,7 +482,8 @@
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_c_4" name="coupon_photo_4" class="dropify" data-height="100"  required />
+                                                            <input type="file" id="coupon_photo_c_4" name="coupon_photo_4" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_4');" />
+                                                            <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_4"> </h6>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -474,6 +507,7 @@
                                                             <input type="hidden" name="ar_coupon_name_4" id="ar_coupon_name_c_4">
                                                             <input type="hidden" name="ar_marker_name_4" id="ar_marker_name_c_4">
                                                         </div>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_ar_error_c_4"> </h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -482,11 +516,13 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_c_4" name="coupon_name_4" class="form-control" placeholder="Enter Name" required>
+                                                        <input type="text" id="coupon_name_c_4" name="coupon_name_4" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_4');">
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_name_error_c_4"> </h6>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Info & Basic Conditions</label>
-                                                        <textarea id="coupon_info_c_4" name="coupon_info_4" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_info_c_4" name="coupon_info_4" class="form-control" placeholder="" required oninput="error_hide('coupon_info_error_c_4');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_info_error_c_4"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -496,7 +532,8 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_c_4" name="coupon_condition_4" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_condition_c_4" name="coupon_condition_4" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_c_4');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_desc_error_c_4"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -507,7 +544,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="curr_lbl_c_4">$</span>
                                                             </div>
-                                                            <input type="number" id="coupon_value_c_4" name="coupon_value_4" class="form-control" placeholder="" required>
+                                                            <input type="number" id="coupon_value_c_4" name="coupon_value_4" class="form-control" placeholder="" required min="0" value="1">
                                                         </div>
 
                                                     </div>
@@ -517,10 +554,10 @@
                                                     </div>
                                                     <div class="form-group" id="lc_cont_c_4" style="display: none;">
                                                         <label class="control-label">Loyalty Count</label>
-                                                        <input type="number" min="0" max="10" value="0" id="coupon_count_c_4" name="coupon_count_4" class="form-control" placeholder="" >
+                                                        <input type="number" min="1" max="10" value="1" id="coupon_count_c_4" name="coupon_count_4" class="form-control" placeholder="" >
                                                     </div>
                                                     <div class="form-group">
-                                                        <button type="button" class="col-md-12 custom_btn save_c_c" onclick="nextTab('cpn_l_5');" ></button>
+                                                        <button type="button" class="col-md-12 custom_btn save_c_c" onclick="validate_coupon_1('c',4,'cpn_l_5');" ></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -529,14 +566,15 @@
 
                                             <div class="row justify-content-center">
                                                 <p class="col-sm-12 col-md-12 col-lg-12 text-danger text-center"><br><br><b>OK you are all set!</b> <br><br></p>
+                                                <input type="hidden" name="submit_type" id="submit_type_c" value="" />
                                                 <div class="col-sm-12 col-md-12 col-lg-12 text-center">
                                                     {{--<button type="submit" class="col-md-6 custom_btn save_c_c" ></button>--}}
-                                                    <button type="submit" name="save_active" class="custom_btn col-md-4 save_c_c"></button>
+                                                    <button type="button" name="save_active" class="custom_btn col-md-4 save_c_c" onclick="validate_coupon_form('c',1, 1);"></button>
 
                                                 </div>
                                                 <div class="col-sm-12 col-md-12 col-lg-12 text-center">
                                                     {{--<button type="submit" class="col-md-6 custom_btn save_c_c" ></button>--}}
-                                                    <button type="submit" name="save_later" class="custom_btn col-md-4 save_c_c"></button>
+                                                    <button type="button" name="save_later" class="custom_btn col-md-4 " onclick="validate_coupon_form('c',1,0);" >active_later</button>
                                                 </div>
                                             </div>
 
@@ -1272,7 +1310,7 @@
 
                                 </ul>
 
-                                <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/coupons/update') }}">
+                                <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/coupons/update') }}" id="coupon_form_2">
                                     {{ csrf_field() }}
                                     <div class="tab-content">
 
@@ -1313,8 +1351,10 @@
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_e_1" name="coupon_photo_1" class="dropify" data-height="100" />
+                                                            <input type="file" id="coupon_photo_e_1" name="coupon_photo_1" class="dropify" data-height="100" onchange="error_hide('coupon_photo_error_e_1');"/>
+
                                                         </div>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_photo_error_e_1"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -1337,6 +1377,7 @@
                                                             <input type="hidden" name="ar_coupon_name_1" id="ar_coupon_name_e_1">
                                                             <input type="hidden" name="ar_marker_name_1" id="ar_marker_name_e_1">
                                                         </div>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_ar_error_e_1"> </h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1345,11 +1386,13 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_e_1" name="coupon_name_1" class="form-control" placeholder="Enter Name" required>
+                                                        <input type="text" id="coupon_name_e_1" name="coupon_name_1" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_1');">
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_name_error_e_1"> </h6>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Info & Basic Conditions</label>
-                                                        <textarea id="coupon_info_e_1" name="coupon_info_1" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_info_e_1" name="coupon_info_1" class="form-control" placeholder="" required oninput="error_hide('coupon_info_error_e_1');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_info_error_e_1"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -1364,7 +1407,8 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_e_1" name="coupon_condition_1" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_condition_e_1" name="coupon_condition_1" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_e_1');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_desc_error_e_1"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -1375,7 +1419,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="curr_lbl_e_1">$</span>
                                                             </div>
-                                                            <input type="number" id="coupon_value_e_1" name="coupon_value_1" class="form-control" placeholder="" required>
+                                                            <input type="number" id="coupon_value_e_1" name="coupon_value_1" class="form-control" placeholder="" required min="0" value="1">
                                                         </div>
 
                                                     </div>
@@ -1386,10 +1430,10 @@
                                                     </div>
                                                     <div class="form-group" id="lc_cont_e_1" style="display: none;">
                                                         <label class="control-label">Loyalty Count</label>
-                                                        <input type="number" min="0" max="10" value="0" id="coupon_count_e_1" name="coupon_count_1" class="form-control" placeholder="" >
+                                                        <input type="number" min="1" max="10" value="1" id="coupon_count_e_1" name="coupon_count_1" class="form-control" placeholder="" >
                                                     </div>
                                                     <div class="form-group">
-                                                        <button type="button" class="col-md-12 custom_btn save_e_c" onclick="nextTab('cpn_e_2');" ></button>
+                                                        <button type="button" class="col-md-12 custom_btn save_e_c" onclick="validate_coupon_1('e',1,'cpn_e_2');" ></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1424,8 +1468,10 @@
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_e_2" name="coupon_photo_2" class="dropify" data-height="100" />
+                                                            <input type="file" id="coupon_photo_e_2" name="coupon_photo_2" class="dropify" data-height="100" onchange="error_hide('coupon_photo_error_e_2');" />
+
                                                         </div>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_photo_error_e_2"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -1448,6 +1494,7 @@
                                                             <input type="hidden" name="ar_coupon_name_2" id="ar_coupon_name_e_2">
                                                             <input type="hidden" name="ar_marker_name_2" id="ar_marker_name_e_2">
                                                         </div>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_ar_error_e_2"> </h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1456,11 +1503,13 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_e_2" name="coupon_name_2" class="form-control" placeholder="Enter Name" required>
+                                                        <input type="text" id="coupon_name_e_2" name="coupon_name_2" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_2');">
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_name_error_e_2"> </h6>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Info & Basic Conditions</label>
-                                                        <textarea id="coupon_info_e_2" name="coupon_info_2" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_info_e_2" name="coupon_info_2" class="form-control" placeholder="" required oninput="error_hide('coupon_info_error_e_2');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_info_error_e_2"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -1475,7 +1524,8 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_e_2" name="coupon_condition_2" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_condition_e_2" name="coupon_condition_2" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_e_2');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_desc_error_e_2"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -1486,7 +1536,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="curr_lbl_e_2">$</span>
                                                             </div>
-                                                            <input type="number" id="coupon_value_e_2" name="coupon_value_2" class="form-control" placeholder="" required>
+                                                            <input type="number" id="coupon_value_e_2" name="coupon_value_2" class="form-control" placeholder="" required min="0" value="1">
                                                         </div>
 
                                                     </div>
@@ -1496,10 +1546,10 @@
                                                     </div>
                                                     <div class="form-group" id="lc_cont_e_2" style="display: none;">
                                                         <label class="control-label">Loyalty Count</label>
-                                                        <input type="number" min="0" max="10" value="0" id="coupon_count_e_2" name="coupon_count_2" class="form-control" placeholder="" >
+                                                        <input type="number" min="1" max="10" value="1" id="coupon_count_e_2" name="coupon_count_2" class="form-control" placeholder="" >
                                                     </div>
                                                     <div class="form-group">
-                                                        <button type="button" class="col-md-12 custom_btn save_e_c" onclick="nextTab('cpn_e_3');" ></button>
+                                                        <button type="button" class="col-md-12 custom_btn save_e_c" onclick="validate_coupon_1('e',2,'cpn_e_3');" ></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1532,8 +1582,9 @@
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_e_3" name="coupon_photo_3" class="dropify" data-height="100" />
+                                                            <input type="file" id="coupon_photo_e_3" name="coupon_photo_3" class="dropify" data-height="100" onchange="error_hide('coupon_photo_error_e_3');" />
                                                         </div>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_photo_error_e_3"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -1556,6 +1607,7 @@
                                                             <input type="hidden" name="ar_coupon_name_3" id="ar_coupon_name_e_3">
                                                             <input type="hidden" name="ar_marker_name_3" id="ar_marker_name_e_3">
                                                         </div>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_ar_error_e_3"> </h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1564,17 +1616,19 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_e_3" name="coupon_name_3" class="form-control" placeholder="Enter Name" required>
+                                                        <input type="text" id="coupon_name_e_3" name="coupon_name_3" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_3');">
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_name_error_e_3"> </h6>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Info & Basic Conditions</label>
-                                                        <textarea id="coupon_info_e_3" name="coupon_info_3" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_info_e_3" name="coupon_info_3" class="form-control" placeholder="" required oninput="error_hide('coupon_info_error_e_3');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_info_error_e_3"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Availability</label>
-                                                        <select id="coupon_availability_e_3" name="coupon_availability_1" class="form-control custom-select" required>
+                                                        <select id="coupon_availability_e_3" name="coupon_availability_3" class="form-control custom-select" required>
                                                             @for($x = 1; $x <= 100; $x++)
                                                                 <option value="{{ $x }}"> {{ $x }} </option>
                                                             @endfor
@@ -1583,7 +1637,8 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_e_3" name="coupon_condition_3" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_condition_e_3" name="coupon_condition_3" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_e_3');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_desc_error_e_3"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -1594,7 +1649,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="curr_lbl_e_3">$</span>
                                                             </div>
-                                                            <input type="number" id="coupon_value_e_3" name="coupon_value_3" class="form-control" placeholder="" required>
+                                                            <input type="number" id="coupon_value_e_3" name="coupon_value_3" class="form-control" placeholder="" required min="0" value="1">
                                                         </div>
 
                                                     </div>
@@ -1604,10 +1659,10 @@
                                                     </div>
                                                     <div class="form-group" id="lc_cont_e_3" style="display: none;">
                                                         <label class="control-label">Loyalty Count</label>
-                                                        <input type="number" min="0" max="10" value="0" id="coupon_count_e_3" name="coupon_count_3" class="form-control" placeholder="" >
+                                                        <input type="number" min="1" max="10" value="1" id="coupon_count_e_3" name="coupon_count_3" class="form-control" placeholder="" >
                                                     </div>
                                                     <div class="form-group">
-                                                        <button type="button" class="col-md-12 custom_btn save_e_c" onclick="nextTab('cpn_e_4');" ></button>
+                                                        <button type="button" class="col-md-12 custom_btn save_e_c" onclick="validate_coupon_1('e',3,'cpn_e_4');"></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1642,8 +1697,9 @@
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_e_4" name="coupon_photo_4" class="dropify" data-height="100" />
+                                                            <input type="file" id="coupon_photo_e_4" name="coupon_photo_4" class="dropify" data-height="100" onchange="error_hide('coupon_photo_error_e_4');" />
                                                         </div>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_photo_error_e_4"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -1666,6 +1722,7 @@
                                                             <input type="hidden" name="ar_coupon_name_4" id="ar_coupon_name_e_4">
                                                             <input type="hidden" name="ar_marker_name_4" id="ar_marker_name_e_4">
                                                         </div>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_ar_error_e_4"> </h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1674,11 +1731,13 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_e_4" name="coupon_name_4" class="form-control" placeholder="Enter Name" required>
+                                                        <input type="text" id="coupon_name_e_4" name="coupon_name_4" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_4');">
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_name_error_e_4"> </h6>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Info & Basic Conditions</label>
-                                                        <textarea id="coupon_info_e_4" name="coupon_info_4" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_info_e_4" name="coupon_info_4" class="form-control" placeholder="" required oninput="error_hide('coupon_info_error_e_4');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_info_error_e_4"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -1688,7 +1747,8 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_e_4" name="coupon_condition_4" class="form-control" placeholder="" required></textarea>
+                                                        <textarea id="coupon_condition_e_4" name="coupon_condition_4" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_e_4');"></textarea>
+                                                        <h6 class="form-control-feedback text-danger" id="coupon_desc_error_e_4"> </h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
@@ -1699,7 +1759,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="curr_lbl_e_4">$</span>
                                                             </div>
-                                                            <input type="number" id="coupon_value_e_4" name="coupon_value_4" class="form-control" placeholder="" required>
+                                                            <input type="number" id="coupon_value_e_4" name="coupon_value_4" class="form-control" placeholder="" required min="0" value="1">
                                                         </div>
 
                                                     </div>
@@ -1709,10 +1769,10 @@
                                                     </div>
                                                     <div class="form-group" id="lc_cont_e_4" style="display: none;">
                                                         <label class="control-label">Loyalty Count</label>
-                                                        <input type="number" min="0" max="10" value="0" id="coupon_count_e_4" name="coupon_count_4" class="form-control" placeholder="" >
+                                                        <input type="number" min="1" max="10" value="1" id="coupon_count_e_4" name="coupon_count_4" class="form-control" placeholder="" >
                                                     </div>
                                                     <div class="form-group">
-                                                        <button type="button" class="col-md-12 custom_btn save_e_c" onclick="nextTab('cpn_e_5');" ></button>
+                                                        <button type="button" class="col-md-12 custom_btn save_e_c" onclick="validate_coupon_1('e',4,'cpn_e_5');" ></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1722,7 +1782,7 @@
                                             <div class="form-group  row justify-content-md-center">
                                                 <p class="col-sm-12 col-md-12 col-lg-12 text-danger text-center"><br><br>Save and Continue to Update Coupons<br><br></p>
                                                 <div class="col-sm-12 col-md-6 col-lg-6 text-center">
-                                                    <button type="submit" class="col-md-6 custom_btn save_c_c" ></button>
+                                                    <button type="button" class="col-md-6 custom_btn save_c_c" onclick="validate_coupon_form('e',2,0);" ></button>
                                                 </div>
                                             </div>
 
@@ -1783,16 +1843,40 @@
 
 <!-- | Custom css for this page only | -->
 @section('custom_css')
+    <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/croppie.css">
 @endsection
 
 <!-- | Custom js for this page only | -->
 @section('custom_js')
+    <script src="http://demo.itsolutionstuff.com/plugin/croppie.js"></script>
     <script>
+
+        // var xwidth;
+        // $(window).resize(function(){
+        //     var ww = $('#c_p_f_c_1').width();
+        //     xwidth = ww;
+        //     // alert(xwidth);
+        //     console.log(xwidth);
+        // });
+
         $(document).ready(function(){
-            $('.dropify').dropify();
+
+            // var ww = $('#c_p_f_c_1').width();
+            // xwidth = ww;
+            
+
+            // $('.dropify').dropify();
+            // $('#coupon_photo_c_1').dropify();
 
             //$('#loyalty_coupon_c_1').prop('checked', true);
+            $('#crop_view_1').hide();
+            $('#crop_btn').hide();
+            $('#rem').hide();
+            
+            // $('#uploader_c_1').prop('width', xwidth);
         });
+
+        
 
         function showHideLoyaltyCount(id, page){
             var checked = $('#loyalty_coupon_'+page+'_'+id).is(':checked');
@@ -1823,6 +1907,9 @@
         }
 
         function showInPrev(id, page, ar_image, ar_marker){
+
+            error_hide('coupon_ar_error_'+ page+'_'+id);
+
             $('#ar_prev_'+page+'_'+id).attr('src', "{{url('resources/assets/media')}}/"+ar_image);
             $('#ar_coupon_name_'+page+'_'+id).val(ar_image);
             $('#ar_marker_name_'+page+'_'+id).val(ar_marker);
@@ -1847,9 +1934,74 @@
             $('a[aria-controls="'+next_tab+'"]').trigger("click");
         }
 
-        $('#coupon_photo_c_1').on('change', function(){
-            readURL(this,1,'c');
+        // crop view
+        $crop_v_1 = $('#crop_view_1').croppie({
+
+            enableExif: true,
+            viewport: {
+                width: 180,
+                height: 60,
+                type: 'square'
+            },
+            boundary: {
+                width: 200,
+                height: 100
+            },
+            enableOrientation: true
+
         });
+
+        $('#coupon_photo_c_1').on('change', function () { 
+            // alert(xwidth);
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                $crop_v_1.croppie('bind', {   
+
+                    url: e.target.result
+
+                }).then(function(){
+
+                    console.log('jQuery bind complete');
+
+                });
+
+            }
+
+            reader.readAsDataURL(this.files[0]);
+
+            $('#uploader_c_1').hide();
+            $('#crop_view_1').show();
+            $('#crop_btn').show();
+            $('#rem').show();
+
+        });
+
+        $('#crop_btn').on('click', function (ev) {
+
+            $crop_v_1.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function (resp) {
+                $('#image_c_1').attr('src', resp);
+            }); 
+
+        });
+
+        $('#rem').on('click', function()  {
+            $('#image_c_1').attr('src', "{{ asset('resources/assets/user/images/imageplaceholder.png') }}");
+            $('#uploader_c_1').show();
+            $('#crop_view_1').hide();
+            $('#crop_btn').hide();
+            $('#rem').hide();
+
+        });
+
+
+        // $('#coupon_photo_c_1').on('change', function(){
+        //     readURL(this,1,'c');
+        // });
         $('#coupon_photo_c_2').on('change', function(){
             readURL(this,2,'c');
         });
@@ -1938,7 +2090,7 @@
             $('a[aria-controls="tab-pane-4"]').trigger("click");
 
             $.get("{{ url('user/get_coupon_details') }}/"+parseInt(promo_id),function(data){
-//                var y =5;
+
 
                 for(var x = 0; x < data.length; x++) {
 
@@ -1991,6 +2143,132 @@
 
         }
 
+    </script>
+    <script>
+
+        function validate_input(page, id){
+
+            var err_1 = "This Field is required";
+
+            var promo_selected = 0;
+            if(id == 1) {
+                var promo = $('#promo_id_' + page + '_' + id).val();
+
+                if(promo > 0 ) {
+                    promo_selected = 1;
+                    $('#promo_id_error_' + page + '_' + id).html('');
+                } else {
+                    $('#promo_id_error_' + page + '_' + id).html(err_1);
+                }
+            } else {
+                promo_selected = 1;
+            }
+
+            var coup_img_selected = 0;
+            if(page == 'c') {
+                var coupon_img = $('#coupon_photo_' + page + '_' + id).val();
+
+                if (coupon_img) {
+                    $('#store_image_error_' + id).html('');
+                    switch (coupon_img.substring(coupon_img.lastIndexOf('.') + 1).toLowerCase()) {
+                        case 'jpg':
+                        case 'png':
+                            $('#coupon_photo_error_' + page + '_' + id).html('');
+                            coup_img_selected = 1;
+                            break;
+                        default:
+                            $('#coupon_photo_error_' + page + '_' + id).html("Please select a png or jpg");
+                            break;
+
+                    }
+                } else {
+                    $('#coupon_photo_error_' + page + '_' + id).html(err_1);
+                }
+            } else if(page == 'e') {
+                var coupon_img = $('#coup_img_'+ page + '_' + id).val();
+
+                if(coupon_img.length > 0) {
+                    coup_img_selected = 1;
+                }
+            }
+
+
+            var coupon_name = $('#coupon_name_' + page + '_' + id).val();
+
+            if(coupon_name.length > 0 ) {
+                $('#coupon_name_error_' + page + '_' + id).html('');
+            } else {
+                $('#coupon_name_error_' + page + '_' + id).html(err_1);
+            }
+
+            var coupon_info = $('#coupon_info_' + page + '_' + id).val();
+
+            if(coupon_info.length > 0 ) {
+                $('#coupon_info_error_' + page + '_' + id).html('');
+            } else {
+                $('#coupon_info_error_' + page + '_' + id).html(err_1);
+            }
+
+            var coupon_desc = $('#coupon_condition_' + page + '_' + id).val();
+
+            if(coupon_desc.length > 0 ) {
+                $('#coupon_desc_error_' + page + '_' + id).html('');
+            } else {
+                $('#coupon_desc_error_' + page + '_' + id).html(err_1);
+            }
+
+            var coupon_ar = $('#ar_coupon_name_' + page + '_' + id).val();
+
+            if(coupon_ar.length > 0 ) {
+                $('#coupon_ar_error_' + page + '_' + id).html('');
+            } else {
+                $('#coupon_ar_error_' + page + '_' + id).html(err_1);
+            }
+
+            if( (promo_selected == 1) && (coup_img_selected == 1) && (coupon_name.length > 0 ) && (coupon_info.length > 0 ) && (coupon_desc.length > 0 ) && (coupon_ar.length > 0 ) ) {
+                return 1;
+            } else {
+                return 0;
+            }
+
+
+        }
+
+        function validate_coupon_1(page, id, next_tab) {
+            var valid = validate_input(page, id);
+
+            if(valid == 1) {
+                nextTab(next_tab);
+            } else {
+                alert("Please Fill the missing data..");
+            }
+        }
+
+        function validate_coupon_form(page, id, btn) {
+            if(page == 'c') {
+                if(btn == 1){
+                    $('#submit_type_' + page).val(1);
+                }else {
+                    $('#submit_type_' + page).val(0);
+                }
+
+            }
+
+            var c_1 = validate_input(page, 1);
+            var c_2 = validate_input(page, 2);
+            var c_3 = validate_input(page, 3);
+            var c_4 = validate_input(page, 4);
+
+            if( (c_1 == 1) && (c_2 == 1) && (c_3 == 1) && (c_4 == 1) ) {
+                $('#coupon_form_' + id).submit();
+            } else {
+                alert("Please Fill the missing data..");
+            }
+        }
+
+        function error_hide(field_id) {
+            $('#'+ field_id).html('');
+        }
     </script>
 
 @endsection

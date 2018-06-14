@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Store;
 use App\User;
 use App\StoreCategory;
+use App\BusinessTypes;
 use App\Http\Requests\StoreRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,8 @@ class StoreCategoryController extends Controller
     public function index() {
         $view = view('admin.stores.store_category_create_list');
         $view->title = 'List of stores category';
-        $view->categories = StoreCategory::where(['status' => '1'])->get();
+        $view->categories = StoreCategory::join('business_types', 'business_types.id','=','place_categories.type_id')->where(['place_categories.status' => '1'])->get();
+        $view->business_types = BusinessTypes::get();
         return $view;       
     }
     
@@ -41,9 +43,10 @@ class StoreCategoryController extends Controller
     public function save(StoreRequest $request) {
         $x = new StoreCategory();
         $x->category = trim($request->name);
+        $x->type_id = trim($request->type);
         $x->status  = '1';
         if($x->save()){
-            return redirect('admin/stores/category/edit/'.$x->id)->with(['success' => 'Store Category Created successfully']);
+            return redirect('admin/stores/category')->with(['success' => 'Store Category Created successfully']);
         }  else {
             return back()->with(['error' => 'Store Category failed to create']);
         }
@@ -87,6 +90,7 @@ class StoreCategoryController extends Controller
             return back()->with(['error' => 'User failed to restore']);
         }
     }
+
     public function trash() {
         $view = view('admin.stores.store_trash');
         $view->title = 'Trash';
@@ -104,6 +108,20 @@ class StoreCategoryController extends Controller
         elseif ($request->name == '' && $request->usrtype != 3):  // for specific users by unspecified email or name
         elseif ($request->name == '' && $request->usrtype != 3):  // for specific users by unspecified email or name
         endif;
+    }
+
+    public function new_business_type(Request $request) {
+        $id = BusinessTypes::insert([
+            'business' => $request->business,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        if($id) {
+            return redirect('admin/stores/category')->with(['success' => 'Business Type Created successfully']);
+        }  else {
+            return back()->with(['error' => 'UUnable to create Business Type']);
+        }
     }
     
     

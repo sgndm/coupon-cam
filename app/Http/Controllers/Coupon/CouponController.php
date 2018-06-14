@@ -422,7 +422,7 @@ class CouponController extends Controller
          'terms_conditions' => trim($request->get('coupon_details')),
          'coupon_information' => trim($request->get('coupon_info')),
          'promo_id' => trim($request->get('promo_name')),
-         'user_id' => trim($request->get('company_name')),
+//         'user_id' => trim($request->get('company_name')),
          'coupon_photo' => $coupon_image,
          'coupon_model' => $coupon_ar,
          'coupon_marker' => $coupon_marker,

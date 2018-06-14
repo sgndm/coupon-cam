@@ -41,6 +41,10 @@ Route::post('/user/stores/category/filter', 'Store\UserStoreCategoryController@f
 
 Route::get('/user/stores/new_category', 'Store\UserStoreCategoryController@new_category');
 
+Route::post('/admin/stores/category/business/save', 'Store\StoreCategoryController@new_business_type');
+
+Route::get('user/get_categories/{type_id}', 'Store\UserStoreController@get_category_by_type');
+
 
 
 
@@ -56,3 +60,4 @@ Route::get('/user/get_store_details/{id}', 'Store\UserStoreController@get_user_d
 Route::post('/user/stores/create_store', 'Store\UserStoreController@create_store');
 Route::post('/user/stores/update_store', 'Store\UserStoreController@update_store');
 Route::post('/user/stores/delete_store', 'Store\UserStoreController@delete_store');
+

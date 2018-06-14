@@ -64,7 +64,7 @@
     width: 100%;
 }
 .category_table tr {
-    
+    width: 100%;
 }
 
 .category_table tr td  {
@@ -209,4 +209,39 @@
     max-height: 200px;
     overflow-y: auto;
     background-color: #ccc;
+}
+
+
+.uploader {
+    position:relative; 
+    overflow:hidden; 
+    width:200px; 
+    height:100px; 
+    background:#fff; 
+    border:2px solid #e4e4e4;
+    text-align: center;
+    padding-top: 15px;
+    color: #d2d2d2;
+}
+
+.filePhoto{
+    position:absolute;
+    width:320px;
+    height:400px;
+    top:-50px;
+    left:0;
+    z-index:2;
+    opacity:0;
+    cursor:pointer;
+}
+
+.up-icon{
+    width: 50px;
+    height: 40px;
+}
+
+.cropper_cont{
+    position: relative;
+    left: -40px; 
+    top: -35px;
 }

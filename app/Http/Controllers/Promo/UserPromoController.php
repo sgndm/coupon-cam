@@ -23,6 +23,13 @@ use App\Classes\Converter;
 
 use Illuminate\Support\Facades\Storage;
 
+use Treinetic\ImageArtist\lib\Overlays\Overlay;
+use Treinetic\ImageArtist\lib\Text\Color;
+use Treinetic\ImageArtist\lib\Shapes\PolygonShape;
+use Treinetic\ImageArtist\lib\Commons\Node;
+use Treinetic\ImageArtist\lib\Image;
+use Treinetic\ImageArtist\lib\Shapes\Square;
+
 ///     date_default_timezone_set('Europe/London');
 
 class UserPromoController extends Controller
@@ -46,18 +53,24 @@ class UserPromoController extends Controller
         $view->activePromos = Promo::join('promo_locations', 'promo_locations.promo_id','=','promos.promo_id')
             ->join('store_user', 'store_user.place_id','=','promo_locations.store_id')
             ->where(['store_user.user_id' => Auth::id(), 'promo_locations.status' => 1, 'promos.status' => 1, 'promos.used' => '1'])
+            ->select('promos.*')
+            ->distinct()
             ->orderBY('promos.updated_at', 'DESC')
             ->get();
 
         $view->puasedPromos = Promo::join('promo_locations', 'promo_locations.promo_id','=','promos.promo_id')
             ->join('store_user', 'store_user.place_id','=','promo_locations.store_id')
             ->where(['store_user.user_id' => Auth::id(), 'promo_locations.status' => 1, 'promos.status' => 0, 'promos.used' => '1'])
+            ->select('promos.*')
+            ->distinct()
             ->orderBY('promos.updated_at', 'DESC')
             ->get();
 
         $view->finishedPromos = Promo::join('promo_locations', 'promo_locations.promo_id','=','promos.promo_id')
             ->join('store_user', 'store_user.place_id','=','promo_locations.store_id')
             ->where(['store_user.user_id' => Auth::id(), 'promo_locations.status' => 1, 'promos.status' => 2, 'promos.used' => '1'])
+            ->select('promos.*')
+            ->distinct()
             ->orderBY('promos.updated_at', 'DESC')
             ->get();
 
@@ -66,12 +79,74 @@ class UserPromoController extends Controller
     }
 
     public function generate_new_qr(){
-        // new qr for new promo
+
         $save_path = 'resources/assets/qr_codes/';
         $file_name = 'qr'.date('YmdHis').rand(0, 10000).".png";
         $content = rand(0, 100000000).date('YmdHis');
 
-        QrCode::format('png')->size(500)->color(232,6,2)->merge('resources/assets/custom/images/logo-min.png', .3, true)->errorCorrection('H')->generate($content, $save_path.$file_name);
+        $service_url = 'https://qrcode-monkey.p.mashape.com/qr/custom';
+
+        $curl = curl_init($service_url);
+        $curl_post_data = array(
+            'data' => $content,
+            'config' => array(
+                "body" => "circle",
+                "eye" => "frame12",
+                "eyeBall" => "ball14",
+                "erf1" => [],
+                "erf2" => [],
+                "erf3" => [],
+                "brf1" => [],
+                "brf2" => [],
+                "brf3" => [],
+                "bodyColor" => "#e80602",
+                "bgColor" => "#fff",
+                "eye1Color" => "#e80602",
+                "eye2Color" => "#e80602",
+                "eye3Color" => "#e80602",
+                "eyeBall1Color" => "#e80602",
+                "eyeBall2Color" => "#e80602",
+                "eyeBall3Color" => "#e80602",
+                "gradientColor1" => "",
+                "gradientColor2" => "",
+                "gradientType" => "linear",
+                "gradientOnEyes" => "false",
+                "logo" => "http://login.couponcam.com/resources/assets/custom/images/logo-min.png"
+            ),
+            'size' => 300,
+            'download' => 'false',
+            'file' => 'png',
+        );
+
+        $post_data = json_encode($curl_post_data);
+
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'X-Mashape-Key: yxBNWNKhItmshiOORWMsvumwIm8tp1AMo56jsnzJ7zEWZ1F3y9',
+            'Content-Type: application/json',
+            'Accept: application/json'
+        ));
+
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
+
+        $curl_response = curl_exec($curl);
+
+
+        $decoded = base64_encode($curl_response);
+
+        $image_qr = new Image('data:image/png;base64,'.$decoded);
+        $image_qr->save($save_path.$file_name,IMAGETYPE_PNG);
+
+
+
+
+
+
+        // new qr for new promo
+
+
+//        QrCode::format('png')->size(500)->color(232,6,2)->merge('resources/assets/custom/images/logo-min.png', .3, true)->errorCorrection('H')->generate($content, $save_path.$file_name);
 
         $return = array('qr_content' => $content,'qr_image' => $file_name);
 
@@ -93,7 +168,7 @@ class UserPromoController extends Controller
         $server_offset = Converter::get_time_zone($server_lat,$server_lng);
 
         // get stores
-        $getstores = json_encode($request->store_ids);
+        $getstores = json_encode($request->store_ids_1);
 
         $removeChar = array("[","]","\"");
         $stmst = trim(str_replace($removeChar, "", $getstores));
@@ -125,13 +200,13 @@ class UserPromoController extends Controller
             $advance_warn = 1;
         }
 
-        $promo_repete = $request->repeat_promo;
+        $promo_repete = $request->repeat_promo_1;
         $promo_repeate_val = "";
 
 
         if($promo_repete == 'Days'){
 
-            $promo_repeate_val = json_encode($request->days);
+            $promo_repeate_val = json_encode($request->days_1);
 
         }elseif($promo_repete == 'Date'){
 
@@ -153,7 +228,7 @@ class UserPromoController extends Controller
             'promo_repeat' => $promo_repete,
             'promo_repeat_values' => $promo_repeate_val,
             'internal_promo'  => 1,
-            'place_id' => json_encode($request->store_ids),
+            'place_id' => json_encode($request->store_ids_1),
 //            'qr_code' => $request->promo_qr_code,
 //            'qr_image' => $request->promo_qr_image,
             'add_date' => date('Y-m-d H:i:s'),
@@ -165,7 +240,7 @@ class UserPromoController extends Controller
 
             $store_locations = [];
 
-            $stores = json_encode($request->store_ids);
+            $stores = json_encode($request->store_ids_1);
 
             $remove = array("[","]","\"");
             $stm = trim(str_replace($remove, " ", $stores));
@@ -257,13 +332,13 @@ class UserPromoController extends Controller
                 $advance_warn = 1;
             }
 
-            $promo_repete = $request->repeat_promo;
+            $promo_repete = $request->repeat_promo_2;
             $promo_repeate_val = "";
 
 
             if($promo_repete == 'Days'){
 
-                $promo_repeate_val = json_encode($request->days);
+                $promo_repeate_val = json_encode($request->days_2);
 
             }elseif($promo_repete == 'Date'){
 

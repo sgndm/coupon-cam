@@ -318,6 +318,15 @@ echo json_encode([
                 });
 
 
+                $('#busines_type_tbl').DataTable();
+                $('#wordings_table').DataTable({
+                    "bPaginate": true,
+                    "bLengthChange": false,
+                    "bFilter": true,
+                    "bInfo": true,
+                    "bAutoWidth": true
+                });
+
                 $('.time-picker').timepicker({
                     timeFormat: 'h:mm p',
                     interval: 15,

@@ -14,6 +14,8 @@ include('conn.php');
 
 $api_info = [];
 $api_info['promo_info'] = [];
+$remove_chars = ["[", "]", "\""];
+
 
 $latitude   = trim($_POST['latitude']);
 $longitude  = trim($_POST['longitude']);
@@ -74,6 +76,22 @@ foreach($nearbyPromos as $promo){
 	// | get details
 	$promo_id = $promo->promo_id;
 
+	// get place id 
+	$place_ids = $promo->place_id;
+	$repstmt = trim(str_replace($remove_chars, ' ', $place_ids));
+	$list_ids = explode(",", $repstmt);
+
+	$st_id = $list_ids[0];
+
+	// get store details
+	$get_st = "SELECT * FROM `places` WHERE `place_id`=" . $st_id;
+	$exceSt = $dbh->query($get_st);
+	$st_det = $exceSt->fetchAll(PDO::FETCH_OBJ);
+
+	$country_short = $st_det[0]->country_short;
+
+	// set curency lable
+
 	// | get pref coupon
 	$sql3 = "SELECT * FROM coupons "
 				. "WHERE promo_id =".$promo_id."  AND "
@@ -91,6 +109,25 @@ foreach($nearbyPromos as $promo){
 		$coops2 = $dbh->query($sql4);
 		$pref_coupon = $coops2->fetch(PDO::FETCH_OBJ);
 	}
+
+	$curr = "$";
+	if($country_short == "GB") {
+		$curr = "£";
+	} 
+	else if($country_short == "NZ") {
+		$curr = "$";
+	}
+	else if($country_short == "CA") {
+		$curr = "C$";
+	}
+	else if($country_short == "AU") {
+		$curr = "A$";
+	}
+	else {
+		$curr = "$";
+	}
+
+	$pref_coupon->currency = $curr;
 
 	// | Get All Coupons
 	$sql5 = "SELECT * FROM coupons "
@@ -187,7 +224,7 @@ foreach($nearbyPromos as $promo){
 				$day_count = '7';
 			}
 
-			$remove_chars = ["[", "]", "\""];
+			
 			$stm = trim(str_replace($remove_chars, "", $promo_repeate_value));
 			$list = explode(",", $stm);
 
@@ -396,6 +433,7 @@ foreach($nearbyPromos as $promo){
 
 }
 
+// ************************************************************************************************** //
 // | get red friday fromos
 $getRed = "SELECT * FROM `red_friday_promos` WHERE `status`=1";
 $redExec = $dbh->query($getRed);

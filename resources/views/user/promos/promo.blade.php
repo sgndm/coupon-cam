@@ -47,7 +47,7 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane active p-20" id="tab-pane-1" role="tabpanel">
-                    <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/promos/create_promo') }}">
+                    <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/promos/create_promo') }}" id="promo_form_1">
                         {{ csrf_field() }}
                         <div class="row">
 
@@ -66,7 +66,7 @@
                                                             <td style="width:93%;">{{ $store->contact_name . " - " . $store->city }}</td>
                                                             <td style="width:2%;">
                                                                 <label class="btn-container">
-                                                                    <input type="checkbox" value="{{ $store->place_id }}" id="store{{ $store->place_id }}" name="store_ids[]" onclick="get_store_details({{ $store->place_id }});">
+                                                                    <input type="checkbox" value="{{ $store->place_id }}" id="store{{ $store->place_id }}" name="store_ids_1[]" onclick="get_store_details({{ $store->place_id }});error_hide('promo_store_error_1');">
                                                                     <span class="checkmark"></span>
                                                                     <input type="hidden" value="{{$store->latitude}}" id="store_lat_{{ $store->place_id  }}" name="store_lat_{{ $store->place_id }}">
                                                                     <input type="hidden" value="{{$store->longitude}}" id="store_lng_{{ $store->place_id  }}" name="store_lng_{{ $store->place_id }}">
@@ -77,6 +77,7 @@
                                                     @endforeach
                                                 </table>
                                             </div>
+                                            <h6 class="form-control-feedback text-danger" id="promo_store_error_1"> </h6>
 
                                         </div>
                                     </div>
@@ -106,81 +107,85 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Promo Name</label>
-                                            <input type="text" id="promo_name_1" name="promo_name" class="form-control" placeholder="Enter Name" required>
+                                            <input type="text" id="promo_name_1" name="promo_name" class="form-control" placeholder="Enter Name" required oninput="error_hide('promo_name_error_1');">
+                                            <h6 class="form-control-feedback text-danger" id="promo_name_error_1"> </h6>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Promo Description</label>
-                                            <textarea id="promo_description_1" name="promo_description" class="form-control" placeholder="Describe Your Promo" required></textarea>
+                                            <textarea id="promo_description_1" name="promo_description" class="form-control" placeholder="Describe Your Promo" required oninput="error_hide('promo_desc_error_1');"></textarea>
+                                            <h6 class="form-control-feedback text-danger" id="promo_desc_error_1"> </h6>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="control-label">Promo Frequency</label>
                                             <label class="btn-container">Daily
-                                                <input type="radio" name="repeat_promo" id="Daily_1" value="Daily" checked onclick="showHideRepeat('Daily',1)">
+                                                <input type="radio" name="repeat_promo_1" id="Daily_1" value="Daily" checked onclick="showHideRepeat('Daily',1);error_hide('promo_repeat_error_1');">
                                                 <span class="checkRadio"></span>
                                             </label>
                                             <label class="btn-container">Monday - Friday
-                                                <input type="radio" name="repeat_promo" id="Week_1" value="Week" onclick="showHideRepeat('Week',1)">
+                                                <input type="radio" name="repeat_promo_1" id="Week_1" value="Week" onclick="showHideRepeat('Week',1);error_hide('promo_repeat_error_1');">
                                                 <span class="checkRadio"></span>
                                             </label>
                                             <label class="btn-container">Saturday - Sunday
-                                                <input type="radio" name="repeat_promo" id="Weekend_1" value="Weekend" onclick="showHideRepeat('Weekend',1)">
+                                                <input type="radio" name="repeat_promo_1" id="Weekend_1" value="Weekend" onclick="showHideRepeat('Weekend',1);error_hide('promo_repeat_error_1');">
                                                 <span class="checkRadio"></span>
                                             </label>
                                             <label class="btn-container">One Time Offer
-                                                <input type="radio" name="repeat_promo" id="Date_1" value="Date" onclick="showHideRepeat('Date',1)">
+                                                <input type="radio" name="repeat_promo_1" id="Date_1" value="Date" onclick="showHideRepeat('Date',1);error_hide('promo_repeat_error_1');">
                                                 <span class="checkRadio"></span>
                                             </label>
                                             <label class="btn-container">Custom
-                                                <input type="radio" name="repeat_promo" id="Days_1" value="Days" onclick="showHideRepeat('Days',1)">
+                                                <input type="radio" name="repeat_promo_1" id="Days_1" value="Days" onclick="showHideRepeat('Days',1);error_hide('promo_repeat_error_1');">
                                                 <span class="checkRadio"></span>
                                             </label>
-
+                                            <h6 class="form-control-feedback text-danger" id="promo_repeat_error_1"> </h6>
                                         </div>
 
                                         <div class="form-group repeat-me" style="margin-bottom:0px; clear:right;">
                                             <div class="fordate_1" style="display: none;">
                                                 <label for="repeat_promo">Select Date</label><div class="clearfix"></div>
-                                                <input type="date" name="promo_date" id="promo_date_1" class="form-control date-picker"/>
+                                                <input type="date" name="promo_date" id="promo_date_1" class="form-control date-picker" oninput="error_hide('promo_repeat_date_error_1');"/>
+                                                <h6 class="form-control-feedback text-danger" id="promo_repeat_date_error_1"> </h6>
                                             </div>
                                             <div class="fordays_1" style="display: none;">
                                                 <label for="repeat_promo">Select Days</label>
                                                 <div class="clearfix"></div>
                                                 <div class="form-group">
                                                     <label class="col-md-6 btn-container"  >Monday
-                                                        <input type="checkbox" value="1" name="days[]" id="mon_1">
+                                                        <input type="checkbox" value="1" name="days_1[]" id="mon_1" onclick="error_hide('promo_repeat_days_error_1');">
                                                         <span class="checkmark"></span>
                                                     </label>
 
                                                     <label class="col-md-6 btn-container"  >Tuesday
-                                                        <input type="checkbox" value="2" name="days[]" id="tue_1">
+                                                        <input type="checkbox" value="2" name="days_1[]" id="tue_1" onclick="error_hide('promo_repeat_days_error_1');">
                                                         <span class="checkmark"></span>
                                                     </label>
 
                                                     <label class="col-md-6 btn-container"  >Wednesday
-                                                        <input type="checkbox" value="3" name="days[]" id="wed_1">
+                                                        <input type="checkbox" value="3" name="days_1[]" id="wed_1" onclick="error_hide('promo_repeat_days_error_1');">
                                                         <span class="checkmark"></span>
                                                     </label>
 
                                                     <label class="col-md-6 btn-container"  >Thursday
-                                                        <input type="checkbox" value="4" name="days[]" id="thu_1">
+                                                        <input type="checkbox" value="4" name="days_1[]" id="thu_1" onclick="error_hide('promo_repeat_days_error_1');">
                                                         <span class="checkmark"></span>
                                                     </label>
 
                                                     <label class="col-md-6 btn-container"  >Friday
-                                                        <input type="checkbox" value="5" name="days[]" id="fri_1">
+                                                        <input type="checkbox" value="5" name="days_1[]" id="fri_1" onclick="error_hide('promo_repeat_days_error_1');">
                                                         <span class="checkmark"></span>
                                                     </label>
 
                                                     <label class="col-md-6 btn-container"  >Saturday
-                                                        <input type="checkbox" value="6" name="days[]" id="sat_1">
+                                                        <input type="checkbox" value="6" name="days_1[]" id="sat_1" onclick="error_hide('promo_repeat_days_error_1');">
                                                         <span class="checkmark"></span>
                                                     </label>
 
                                                     <label class="col-md-6 btn-container"  >Sunday
-                                                        <input type="checkbox" value="7" name="days[]" id="sun_1">
+                                                        <input type="checkbox" value="7" name="days_1[]" id="sun_1" onclick="error_hide('promo_repeat_days_error_1');">
                                                         <span class="checkmark"></span>
                                                     </label>
+                                                    <h6 class="form-control-feedback text-danger" id="promo_repeat_days_error_1"> </h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -191,8 +196,10 @@
                                         <div class="form-group">
                                             <label class="control-label">Start Time </label>
                                             <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                <input type="time" class="form-control" value="" name="promo_start" id="promo_start_1">
+                                                <input type="time" class="form-control" value="" name="promo_start" id="promo_start_1"  onclick="error_hide('promo_start_error_1');">
+
                                             </div>
+                                            <h6 class="form-control-feedback text-danger" id="promo_start_error_1"> </h6>
 
                                         </div>
 
@@ -230,7 +237,7 @@
                                         {{--</div>--}}
 
                                         <div class="form-group">
-                                            <button type="submit" class="custom_btn save_c col-md-8"></button>
+                                            <button type="button" class="custom_btn save_c col-md-8" onclick="validate_form(1);"></button>
                                         </div>
 
 
@@ -248,7 +255,7 @@
                     </form>
                 </div>
                 <div class="tab-pane p-20" id="tab-pane-2" role="tabpanel">
-                    <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/promos/update_promo') }}">
+                    <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/promos/update_promo') }}" id="promo_form_2">
                         {{ csrf_field() }}
                         <div class="row">
 
@@ -267,7 +274,7 @@
                                                             <td style="width:93%;">{{ $promo->promo_name }}</td>
                                                             <td style="width:2%;">
                                                                 <label class="btn-container">
-                                                                    <input type="checkbox"  value="{{ $promo->promo_id }}" id="store{{ $promo->promo_id }}" name="promos[]" onclick="get_promo_details({{ $promo->promo_id }},2);" class="radio">
+                                                                    <input type="checkbox"  value="{{ $promo->promo_id }}" id="store{{ $promo->promo_id }}" name="promos[]" onclick="get_promo_details({{ $promo->promo_id }},2);error_hide('promo_store_error_2');" class="radio">
                                                                     <span class="checkmark"></span>
                                                                 </label>
                                                             </td>
@@ -275,7 +282,7 @@
                                                     @endforeach
                                                 </table>
                                             </div>
-
+                                            <h6 class="form-control-feedback text-danger" id="promo_store_error_2"> </h6>
                                         </div>
                                     </div>
 
@@ -304,81 +311,85 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Promo Name</label>
-                                            <input type="text" id="promo_name_2" name="promo_name" class="form-control" placeholder="Enter Name" required>
+                                            <input type="text" id="promo_name_2" name="promo_name" class="form-control" placeholder="Enter Name" required oninput="error_hide('promo_name_error_2');">
+                                            <h6 class="form-control-feedback text-danger" id="promo_name_error_2"> </h6>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Promo Description</label>
-                                            <textarea id="promo_description_2" name="promo_description" class="form-control" placeholder="Describe Your Promo" required></textarea>
+                                            <textarea id="promo_description_2" name="promo_description" class="form-control" placeholder="Describe Your Promo" required oninput="error_hide('promo_desc_error_2');"></textarea>
+                                            <h6 class="form-control-feedback text-danger" id="promo_desc_error_2"> </h6>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="control-label">Promo Frequency</label>
                                             <label class="btn-container">Daily
-                                                <input type="radio" name="repeat_promo" id="Daily_2" value="Daily" checked onclick="showHideRepeat('Daily',2)">
+                                                <input type="radio" name="repeat_promo_2" id="Daily_2" value="Daily" checked onclick="showHideRepeat('Daily',2);error_hide('promo_repeat_error_2');">
                                                 <span class="checkRadio"></span>
                                             </label>
                                             <label class="btn-container">Monday - Friday
-                                                <input type="radio" name="repeat_promo" id="Week_2" value="Week" onclick="showHideRepeat('Week',2)">
+                                                <input type="radio" name="repeat_promo_2" id="Week_2" value="Week" onclick="showHideRepeat('Week',2);error_hide('promo_repeat_error_2');">
                                                 <span class="checkRadio"></span>
                                             </label>
                                             <label class="btn-container">Saturday - Sunday
-                                                <input type="radio" name="repeat_promo" id="Weekend_2" value="Weekend" onclick="showHideRepeat('Weekend',2)">
+                                                <input type="radio" name="repeat_promo_2" id="Weekend_2" value="Weekend" onclick="showHideRepeat('Weekend',2);error_hide('promo_repeat_error_2');">
                                                 <span class="checkRadio"></span>
                                             </label>
                                             <label class="btn-container">One Time Offer
-                                                <input type="radio" name="repeat_promo" id="Date_2" value="Date" onclick="showHideRepeat('Date',2)">
+                                                <input type="radio" name="repeat_promo_2" id="Date_2" value="Date" onclick="showHideRepeat('Date',2);error_hide('promo_repeat_error_2');">
                                                 <span class="checkRadio"></span>
                                             </label>
                                             <label class="btn-container">Custom
-                                                <input type="radio" name="repeat_promo" id="Days_2" value="Days" onclick="showHideRepeat('Days',2)">
+                                                <input type="radio" name="repeat_promo_2" id="Days_2" value="Days" onclick="showHideRepeat('Days',2);error_hide('promo_repeat_error_2');">
                                                 <span class="checkRadio"></span>
                                             </label>
-
+                                            <h6 class="form-control-feedback text-danger" id="promo_repeat_error_2"> </h6>
                                         </div>
 
                                         <div class="form-group repeat-me" style="margin-bottom:0px; clear:right;">
                                             <div class="fordate_2" style="display: none;">
                                                 <label for="repeat_promo">Select Date</label><div class="clearfix"></div>
-                                                <input type="date" name="promo_date" id="promo_date_2" class="form-control date-picker"/>
+                                                <input type="date" name="promo_date" id="promo_date_2" class="form-control date-picker" oninput="error_hide('promo_repeat_date_error_2');"/>
+                                                <h6 class="form-control-feedback text-danger" id="promo_repeat_date_error_2"> </h6>
                                             </div>
                                             <div class="fordays_2" style="display: none;">
                                                 <label for="repeat_promo">Select Days</label>
                                                 <div class="clearfix"></div>
                                                 <div class="form-group">
                                                     <label class="col-md-6 btn-container"  >Monday
-                                                        <input type="checkbox" value="1" name="days[]" id="a1">
+                                                        <input type="checkbox" value="1" name="days_2[]" id="a1" onclick="error_hide('promo_repeat_days_error_2');">
                                                         <span class="checkmark"></span>
                                                     </label>
 
                                                     <label class="col-md-6 btn-container"  >Tuesday
-                                                        <input type="checkbox" value="2" name="days[]" id="a2">
+                                                        <input type="checkbox" value="2" name="days_2[]" id="a2" onclick="error_hide('promo_repeat_days_error_2');">
                                                         <span class="checkmark"></span>
                                                     </label>
 
                                                     <label class="col-md-6 btn-container"  >Wednesday
-                                                        <input type="checkbox" value="3" name="days[]" id="a3">
+                                                        <input type="checkbox" value="3" name="days_2[]" id="a3" onclick="error_hide('promo_repeat_days_error_2');">
                                                         <span class="checkmark"></span>
                                                     </label>
 
                                                     <label class="col-md-6 btn-container"  >Thursday
-                                                        <input type="checkbox" value="4" name="days[]" id="a4">
+                                                        <input type="checkbox" value="4" name="days_2[]" id="a4" onclick="error_hide('promo_repeat_days_error_2');">
                                                         <span class="checkmark"></span>
                                                     </label>
 
                                                     <label class="col-md-6 btn-container"  >Friday
-                                                        <input type="checkbox" value="5" name="days[]" id="a5">
+                                                        <input type="checkbox" value="5" name="days_2[]" id="a5" onclick="error_hide('promo_repeat_days_error_2');">
                                                         <span class="checkmark"></span>
                                                     </label>
 
                                                     <label class="col-md-6 btn-container"  >Saturday
-                                                        <input type="checkbox" value="6" name="days[]" id="a6">
+                                                        <input type="checkbox" value="6" name="days[]" id="a6" onclick="error_hide('promo_repeat_days_error_2');">
                                                         <span class="checkmark"></span>
                                                     </label>
 
                                                     <label class="col-md-6 btn-container"  >Sunday
-                                                        <input type="checkbox" value="7" name="days[]" id="a7">
+                                                        <input type="checkbox" value="7" name="days_2[]" id="a7" onclick="error_hide('promo_repeat_days_error_2');">
                                                         <span class="checkmark"></span>
                                                     </label>
+                                                    <h6 class="form-control-feedback text-danger" id="promo_repeat_days_error_2"> </h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -389,8 +400,9 @@
                                         <div class="form-group">
                                             <label class="control-label">Start Time </label>
                                             <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                <input type="time" class="form-control" value="" name="promo_start" id="promo_start_2">
+                                                <input type="time" class="form-control" value="" name="promo_start" id="promo_start_2" oninput="error_hide('promo_start_error_2')">
                                             </div>
+                                            <h6 class="form-control-feedback text-danger" id="promo_start_error_2"> </h6>
 
                                         </div>
 
@@ -427,7 +439,7 @@
                                         {{--</div>--}}
 
                                         <div class="form-group">
-                                            <button type="submit" name="update_promo" class="col-md-8 custom_btn up_promo"></button>
+                                            <button type="button" name="update_promo" class="col-md-8 custom_btn up_promo" onclick="validate_form(2);"></button>
                                             <button type="submit" name="pause_promo" class="col-md-8 custom_btn paus_promo"></button>
                                         </div>
 
@@ -996,6 +1008,7 @@
                 }
 
 
+                bind_data_location(store_id,latitude,longitude,1);
                 //bind_data_address(1,street_num,street_name,city,state,postal_code,country,latitude,longitude,full_address,country_short);
 
                 infowindow.setContent(place.formatted_address);
@@ -1047,7 +1060,7 @@
                                 }
                             }
 
-                            bind_data_location(store_id,latitude,longitude,1);
+//                            bind_data_location(store_id,latitude,longitude,1);
                             // bind_data_address(1,street_num,street_name,city,state,postal_code,country,latitude,longitude,full_address, country_short);
                             //alert(street_num + "-" +street_name);
                             infowindow.setContent(results[0].formatted_address);
@@ -1323,6 +1336,8 @@
 
                     }
 
+                    input_validate_custom(id);
+
                 } else {
 
                 }
@@ -1342,7 +1357,6 @@
                 });
             }
         }
-
 
         function generate_qr_code(id) {
 
@@ -1401,12 +1415,231 @@
 
         });
 
-
         function view_qr_code(id) {
             var src = $('#qr_code_prev_' + id).attr('src');
             window.open(src);
             // alert(src);
         }
 
+
+
+    </script>
+
+    <script>
+
+        function input_validate_custom(id){
+            var err_1 = "This field is required";
+
+            if(id == 1) {
+                var stores = 0;
+                if ($('input[name="store_ids_1[]"]').is(':checked')) {
+                    stores = 1;
+                }
+
+                if(stores == 1) {
+                    $('#promo_store_error_' + id).html('');
+                } else {
+                    $('#promo_store_error_' + id).html(err_1);
+                }
+            } else if(id ==2) {
+                var stores = 0;
+                if ($('input[name="promos[]"]').is(':checked')) {
+                    stores = 1;
+                }
+
+                if(stores == 1) {
+                    $('#promo_store_error_' + id).html('');
+                } else {
+                    $('#promo_store_error_' + id).html(err_1);
+                }
+            }
+
+
+            var promo_name = $('#promo_name_' + id).val();
+            if(promo_name.length > 0) {
+                $('#promo_name_error_' + id).html('');
+            } else {
+                $('#promo_name_error_' + id).html(err_1);
+            }
+
+            var promo_start = $('#promo_start_' + id).val();
+            if(promo_start.length > 0) {
+                $('#promo_start_error_' + id).html('');
+            } else {
+                $('#promo_start_error_' + id).html(err_1);
+            }
+
+            var promo_desc = $('#promo_description_' + id).val();
+            if(promo_desc.length > 0) {
+                $('#promo_desc_error_' + id).html('');
+            } else {
+                $('#promo_desc_error_' + id).html(err_1);
+            }
+
+            var promo_repeat = 0;
+            if(id == 1) {
+                if ($('input[name="repeat_promo_1"]').is(':checked')) {
+                    promo_repeat = 1;
+                }
+
+                if(promo_repeat == 1) {
+                    $('#promo_repeat_error_' + id).html('');
+                } else {
+                    $('#promo_repeat_error_' + id).html(err_1);
+                }
+            } else if(id ==2) {
+                if ($('input[name="repeat_promo_2"]').is(':checked')) {
+                    promo_repeat = 1;
+                }
+
+                if(promo_repeat == 1) {
+                    $('#promo_repeat_error_' + id).html('');
+                } else {
+                    $('#promo_repeat_error_' + id).html(err_1);
+                }
+            }
+
+
+            $('#Date_' + id).on('click', function (){
+                var date = $('#promo_date_' + id).val();
+                if(date.length > 0) {
+                    $('#promo_repeat_date_error_' + id).html('');
+                } else {
+                    $('#promo_repeat_date_error_' + id).html(err_1);
+                }
+
+            });
+
+            var date_checked = 0;
+            var date_set = 0;
+            if ($('#Date_' + id).is(':checked')) {
+                date_checked = 1;
+
+                var date_t = $('#promo_date_' + id).val();
+                if(date_t.length > 0) {
+                    date_set = 1;
+                    $('#promo_repeat_date_error_' + id).html('');
+                } else {
+                    $('#promo_repeat_date_error_' + id).html(err_1);
+                }
+            }
+
+            if(id == 1) {
+
+                $('#Days_' + id).on('click', function (){
+                    var days = 0;
+                    if ($('input[name="days_1[]"]').is(':checked')) {
+                        days = 1;
+                    }
+
+                    if(days == 1) {
+                        $('#promo_repeat_days_error_' + id).html('');
+                    } else {
+                        $('#promo_repeat_days_error_' + id).html(err_1);
+                    }
+
+                });
+
+                var days_checked = 0;
+                var days_set = 0;
+                if ($('#Days_' + id).is(':checked')) {
+                    days_checked = 1;
+
+                    var days_t = 0;
+                    if ($('input[name="days_1[]"]').is(':checked')) {
+                        days_t = 1;
+                        days_set = 1;
+                    }
+
+                    if(days_t == 1) {
+                        $('#promo_repeat_days_error_' + id).html('');
+                    } else {
+                        $('#promo_repeat_days_error_' + id).html(err_1);
+                    }
+                }
+            }
+            else if(id == 2) {
+
+                $('#Days_' + id).on('click', function (){
+                    var days = 0;
+                    if ($('input[name="days_2[]"]').is(':checked')) {
+                        days = 1;
+                    }
+
+
+                    if(days == 1) {
+                        $('#promo_repeat_days_error_' + id).html('');
+                    } else {
+                        $('#promo_repeat_days_error_' + id).html(err_1);
+                    }
+
+                });
+
+
+                var days_checked = 0;
+                var days_set = 0;
+                if ($('#Days_' + id).is(':checked')) {
+                    days_checked = 1;
+
+                    var days_t = 0;
+                    if ($('input[name="days_2[]"]').is(':checked')) {
+                        days_t = 1;
+                        days_set = 1;
+                    }
+
+                    if(days_t == 1) {
+                        $('#promo_repeat_days_error_' + id).html('');
+                    } else {
+                        $('#promo_repeat_days_error_' + id).html(err_1);
+                    }
+                }
+            }
+
+
+
+
+
+
+            if( (stores == 1) && (promo_name.length > 0) && (promo_start.length > 0) && (promo_start.length > 0) && (promo_desc.length > 0) && (promo_repeat == 1) ) {
+
+                if(date_checked == 1) {
+
+                    if(date_set == 1) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+
+                } else if(days_checked == 1){
+                    if(days_set == 1) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                } else {
+                    return 1;
+                }
+
+            } else {
+                return 0;
+            }
+
+
+
+        }
+
+        function validate_form(id){
+            var valid = input_validate_custom(id);
+
+            if(valid == 1) {
+                $('#promo_form_' + id).submit();
+            } else {
+                alert("Please Fill the missing data..")
+            }
+        }
+
+        function error_hide(field_id) {
+            $('#'+ field_id).html('');
+        }
     </script>
 @endsection
