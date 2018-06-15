@@ -211,8 +211,8 @@
                                                 @endfor
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Adwanceed Warning</label><br>
+                                        <div class="form-group" style="display: none;">
+                                            <label class="control-label">Advanced Warning</label><br>
                                             <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="advance_warning" id="advance_warning_1" />
                                         </div>
 
@@ -414,8 +414,8 @@
                                                 @endfor
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Adwanceed Warning</label><br>
+                                        <div class="form-group" style="display: none;">
+                                            <label class="control-label">Advanced Warning</label><br>
                                             <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="advance_warning" id="advance_warning_2" />
                                         </div>
 
@@ -615,8 +615,8 @@
                                         </div>
 
 
-                                        <div class="form-group">
-                                            <label class="control-label">Adwanceed Warning</label><br>
+                                        <div class="form-group" style="display: none;">
+                                            <label class="control-label">Advanced Warning</label><br>
                                             <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="advance_warning" id="advance_warning_3" />
                                         </div>
 
@@ -802,8 +802,8 @@
                                     </div>
 
 
-                                    <div class="form-group">
-                                        <label class="control-label">Adwanceed Warning</label><br>
+                                    <div class="form-group" style="display: none;">
+                                        <label class="control-label">Advanced Warning</label><br>
                                         <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="advance_warning" id="advance_warning_4" />
                                     </div>
 

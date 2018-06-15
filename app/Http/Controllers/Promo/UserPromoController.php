@@ -195,10 +195,10 @@ class UserPromoController extends Controller
         $start_time = Converter::get_server_time_by_local_time($get_start_time, $get_offset, $server_offset);
         $end_time = Converter::get_server_time_by_local_time($get_end_time, $get_offset, $server_offset);
 
-
-        if(isset($request->advance_warning)){
-            $advance_warn = 1;
-        }
+        $advance_warn = 1;
+        // if(isset($request->advance_warning)){
+        //     $advance_warn = 1;
+        // }
 
         $promo_repete = $request->repeat_promo_1;
         $promo_repeate_val = "";
@@ -328,9 +328,10 @@ class UserPromoController extends Controller
             $end_time = Converter::get_server_time_by_local_time($get_end_time, $get_offset, $server_offset);
 
 
-            if(isset($request->advance_warning)){
-                $advance_warn = 1;
-            }
+            $advance_warn = 1;
+            // if(isset($request->advance_warning)){
+            //     $advance_warn = 1;
+            // }
 
             $promo_repete = $request->repeat_promo_2;
             $promo_repeate_val = "";
