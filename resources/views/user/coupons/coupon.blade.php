@@ -1998,6 +1998,7 @@
 
 <!-- | Custom js for this page only | -->
 @section('custom_js')
+
     <script>
 
         $(document).ready(function(){
@@ -2295,26 +2296,7 @@
         function edit_active_coupons(promo_id){
             $('a[aria-controls="tab-pane-4"]').trigger("click");
 
-            // for(var x = 1; x < 5; x++) {
-            //     $('#promo_id_e_'+x).val('');
-            //     $('#promo_id_e_'+x).attr('readonly', true);
-            //     $('#coupon_id_e_'+x).val('');
-            //     $('#coupon_name_e_'+x).val('');
-            //     $('#coupon_info_e_'+x).val('');
-            //     $('#coupon_availability_e_'+x).val('');
-            //     $('#coupon_condition_e_'+x).val('');
-            //     $('#coupon_value_e_'+x).val('');
-            //     $('#ar_coupon_name_e_'+x).val('');
-
-            //     $('#ar_prev_e_'+x).attr('src', "{{url('resources/assets/custom/images/no-image.png')}}");
-            //     $('#image_e_'+x).attr('src', "{{url('resources/assets//user/images/imageplaceholder.png')}}");
-            //     $('#coup_img_e_'+x).val('');
-
-            //     $('#loyalty_coupon_e_'+x).parent().find(".switchery").swtich.setPosition(false);
-            // }
-
             $.get("{{ url('user/get_coupon_details') }}/"+parseInt(promo_id),function(data){
-
 
                 for(var x = 0; x < data.length; x++) {
 
@@ -2338,13 +2320,21 @@
                     var min_spend = data[x]['min_spend'];
 
                     if(is_loyalty == 1){
-                        $('#loyalty_coupon_e_'+y).parent().find(".switchery").trigger("click");
+
+                        if($('#loyalty_coupon_e_'+y).is(":checked")){
+                            // $('#loyalty_coupon_e_1').parent().find(".switchery").trigger("click");
+                        } else {
+                            $('#loyalty_coupon_e_'+y).parent().find(".switchery").trigger("click");
+                        }
+
                         $('#coupon_count_e_'+y).val(loyalty_count);
                         $('#lc_cont_e_'+y).show();
 
                         $('#min_spent_e_'+y).val(min_spend);
                     } else {
-                        $('#loyalty_coupon_e_'+x).parent().find(".switchery").swtich.setPosition(false);
+                        if($('#loyalty_coupon_e_'+y).is(":checked")){
+                            $('#loyalty_coupon_e_1').parent().find(".switchery").trigger("click");
+                        }
                     }
 
                     $('#min_lbl_e_1').html(data[x]['cur_lable']);

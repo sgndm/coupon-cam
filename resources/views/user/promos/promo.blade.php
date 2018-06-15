@@ -1250,7 +1250,7 @@
 //                        $('#promo_qr_image_'+id).val('');
 //                    }
 
-                    $('#advance_warning_'+id).prop('checked', false);
+                    // $('#advance_warning_'+id).prop('checked', false);
 
                     $("[name='repeat_promo']").prop('checked', false);
 
@@ -1316,7 +1316,15 @@
                     var advance_warning = promo['advance_warning'];
 
                     if(advance_warning == '1'){
-                        $('#advance_warning_'+id).parent().find(".switchery").trigger("click");
+                        if($('#advance_warning_'+id).is(":checked")){
+                            
+                        } else {
+                            $('#advance_warning_'+id).parent().find(".switchery").trigger("click");
+                        }
+                    } else {
+                        if($('#advance_warning_'+id).is(":checked")){
+                            $('#advance_warning_'+id).parent().find(".switchery").trigger("click");
+                        }
                     }
 
 

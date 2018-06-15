@@ -118,7 +118,7 @@
     text-align: center;
     overflow: hidden;
     padding-top: 0px;
-    font-size: 15px;
+    font-size: 14px;
 }
 .imagecontainer .contentc{
     height: 58px;
@@ -141,7 +141,7 @@
     position: absolute;
 }
 
-#heading_c_1,#heading_e_1{ top: -4px; }
+#heading_c_1,#heading_e_1{ top: 0px; }
 #heading_c_2,#heading_e_2{ top: -3px; }
 #heading_c_3,#heading_e_3{ top: -3px; }
 #heading_c_4,#heading_e_4{ top: -3px; }
