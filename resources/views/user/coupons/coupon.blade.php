@@ -221,6 +221,17 @@
                                                     <div class="form-group" id="lc_cont_c_1" style="display: none;">
                                                         <label class="control-label">Loyalty Count</label>
                                                         <input type="number" min="1" max="10" value="1" id="coupon_count_c_1" name="coupon_count_1" class="form-control" placeholder="" >
+
+                                                        <br>
+                                                        <br>
+                                                        <label class="control-label">Minimunm Spend</label>
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="min_lbl_c_1">$</span>
+                                                            </div>
+                                                            <input type="number" min="1" value="1" step="0.1" id="min_spent_c_1" name="min_spent_1" class="form-control" placeholder="" >
+                                                            </div>
+
                                                     </div>
                                                     <div class="form-group">
                                                         <button type="button" class="col-md-12 custom_btn save_c_c" onclick="validate_coupon_1('c',1,'cpn_l_2');" ></button>
@@ -1508,6 +1519,15 @@
                                                     <div class="form-group" id="lc_cont_e_1" style="display: none;">
                                                         <label class="control-label">Loyalty Count</label>
                                                         <input type="number" min="1" max="10" value="1" id="coupon_count_e_1" name="coupon_count_1" class="form-control" placeholder="" >
+                                                        <br>
+                                                        <br>
+                                                        <label class="control-label">Minimunm Spend</label>
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="min_lbl_e_1">$</span>
+                                                            </div>
+                                                            <input type="number" min="1" value="1" step="0.1" id="min_spent_e_1" name="min_spent_1" class="form-control" placeholder="" >
+                                                            </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <button type="button" class="col-md-12 custom_btn save_e_c" onclick="validate_coupon_1('e',1,'cpn_e_2');" ></button>
@@ -2275,6 +2295,24 @@
         function edit_active_coupons(promo_id){
             $('a[aria-controls="tab-pane-4"]').trigger("click");
 
+            // for(var x = 1; x < 5; x++) {
+            //     $('#promo_id_e_'+x).val('');
+            //     $('#promo_id_e_'+x).attr('readonly', true);
+            //     $('#coupon_id_e_'+x).val('');
+            //     $('#coupon_name_e_'+x).val('');
+            //     $('#coupon_info_e_'+x).val('');
+            //     $('#coupon_availability_e_'+x).val('');
+            //     $('#coupon_condition_e_'+x).val('');
+            //     $('#coupon_value_e_'+x).val('');
+            //     $('#ar_coupon_name_e_'+x).val('');
+
+            //     $('#ar_prev_e_'+x).attr('src', "{{url('resources/assets/custom/images/no-image.png')}}");
+            //     $('#image_e_'+x).attr('src', "{{url('resources/assets//user/images/imageplaceholder.png')}}");
+            //     $('#coup_img_e_'+x).val('');
+
+            //     $('#loyalty_coupon_e_'+x).parent().find(".switchery").swtich.setPosition(false);
+            // }
+
             $.get("{{ url('user/get_coupon_details') }}/"+parseInt(promo_id),function(data){
 
 
@@ -2297,12 +2335,23 @@
                     $('#coup_img_e_'+y).val(data[x]['coupon_photo']);
                     var is_loyalty = data[x]['is_loyalty'];
                     var loyalty_count = data[x]['loyalty_count'];
+                    var min_spend = data[x]['min_spend'];
 
                     if(is_loyalty == 1){
                         $('#loyalty_coupon_e_'+y).parent().find(".switchery").trigger("click");
                         $('#coupon_count_e_'+y).val(loyalty_count);
                         $('#lc_cont_e_'+y).show();
+
+                        $('#min_spent_e_'+y).val(min_spend);
+                    } else {
+                        $('#loyalty_coupon_e_'+x).parent().find(".switchery").swtich.setPosition(false);
                     }
+
+                    $('#min_lbl_e_1').html(data[x]['cur_lable']);
+                    $('#curr_lbl_e_1').html(data[x]['cur_lable']);
+                    $('#curr_lbl_e_2').html(data[x]['cur_lable']);
+                    $('#curr_lbl_e_3').html(data[x]['cur_lable']);
+                    $('#curr_lbl_e_4').html(data[x]['cur_lable']);
 
 
                 }
@@ -2323,6 +2372,8 @@
                     $('#curr_lbl_'+page+'_2').html(data);
                     $('#curr_lbl_'+page+'_3').html(data);
                     $('#curr_lbl_'+page+'_4').html(data);
+
+                    $('#min_lbl_'+page+'_1').html(data);
                 }
 //                alert(data);
             });

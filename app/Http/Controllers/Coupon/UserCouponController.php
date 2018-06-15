@@ -142,6 +142,12 @@ class UserCouponController extends Controller
                 $loyalty_count = $request->get('coupon_count_'.$x);
             }
 
+            //get min spend 
+            $min_spend = 0;
+
+            if($x == 1) {
+                $min_spend = $request->get('min_spent_1');
+            }
 
            // insert data
             $new_coup = new Coupon();
@@ -162,6 +168,7 @@ class UserCouponController extends Controller
             $new_coup->add_date = date('Y-m-d h:i:s');
             $new_coup->created_at = date('Y-m-d h:i:s');
             $new_coup->updated_at = date('Y-m-d h:i:s');
+            $new_coup->min_spend = $min_spend;
 
             $new_coup->save();
 
@@ -303,7 +310,7 @@ class UserCouponController extends Controller
     }
 
     public function get_coupon_details($id){
-        $coupons  = Coupon::where(['promo_id' => $id,'status' => '1'])->get();
+        $coupons  = Coupon::where(['promo_id' => $id])->get();
 
         // get store details
         $get_curr = Store::join('promo_locations', 'promo_locations.store_id', '=', 'places.place_id')
@@ -318,6 +325,10 @@ class UserCouponController extends Controller
 
         if($country == "GB") {
             $curr_lbl = "£";
+        }
+
+        foreach($coupons as $coupon) {
+            $coupon->cur_lable = $curr_lbl;
         }
 
         return($coupons);
