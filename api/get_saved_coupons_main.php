@@ -114,6 +114,33 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $rows2 = $res2->rowCount();
                 $lat_lng = $res2->fetchAll(PDO::FETCH_OBJ);
 
+                // get store country 
+                $sql3 = "SELECT * FROM `places` WHERE `place_id`=" . $store_id;
+                $res3 = $dbh->query($sql3);
+                $rows3 = $res3->rowCount();
+                $get_country = $res3->fetchAll(PDO::FETCH_OBJ);
+
+                $country = $get_country[0]->country_short;
+
+                $curr = "$";
+                if($country_short == "GB") {
+                    $curr = "£";
+                } 
+                else if($country_short == "NZ") {
+                    $curr = "$";
+                }
+                else if($country_short == "CA") {
+                    $curr = "C$";
+                }
+                else if($country_short == "AU") {
+                    $curr = "A$";
+                }
+                else {
+                    $curr = "$";
+                }
+
+                $coupons->currency = $curr;
+
                 // store lat long
                 $lat = $lat_lng[0]->lat_code;
                 $lng = $lat_lng[0]->lng_code;

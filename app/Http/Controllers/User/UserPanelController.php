@@ -402,16 +402,16 @@ class UserPanelController extends Controller
                  $promo_id = $ga_promo->promo_id;
 
                  // get stats for most recent day
-                 $stat_p_y = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0 ];
+                 $stat_p_y = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0, 'ret_c' => 0, 'loy_c' => 0, 'revenue' => 0 ];
 
                  // get stats for last week
-                 $stat_p_w = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0 ];
+                 $stat_p_w = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0, 'ret_c' => 0, 'loy_c' => 0, 'revenue' => 0 ];
 
                  // get stats for last month
-                 $stat_p_m = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0 ];
+                 $stat_p_m = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0, 'ret_c' => 0, 'loy_c' => 0, 'revenue' => 0 ];
 
                  // get stats for all time
-                 $stat_p_a = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0 ];
+                 $stat_p_a = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0, 'ret_c' => 0, 'loy_c' => 0, 'revenue' => 0 ];
 
                  // stats for yesterday
                  // get coupon count
