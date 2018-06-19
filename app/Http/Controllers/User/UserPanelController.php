@@ -158,17 +158,20 @@ class UserPanelController extends Controller
 
                             // get coupon level
                             $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                            $temp_cp_level = $get_cp_level[0]->coupon_level;
+                            if(sizeof($get_cp_level) > 0 ) {
+                                $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                            if($temp_cp_level == 1) {
-                                $stat_y['cp_1'] += $temp_cp_count;
-                            } else if($temp_cp_level == 2) {
-                                $stat_y['cp_2'] += $temp_cp_count;
-                            } else if($temp_cp_level == 3) {
-                                $stat_y['cp_3'] += $temp_cp_count;
-                            } else if($temp_cp_level == 4) {
-                                $stat_y['cp_4'] += $temp_cp_count;
+                                if($temp_cp_level == 1) {
+                                    $stat_y['cp_1'] += $temp_cp_count;
+                                } else if($temp_cp_level == 2) {
+                                    $stat_y['cp_2'] += $temp_cp_count;
+                                } else if($temp_cp_level == 3) {
+                                    $stat_y['cp_3'] += $temp_cp_count;
+                                } else if($temp_cp_level == 4) {
+                                    $stat_y['cp_4'] += $temp_cp_count;
+                                }
                             }
+                            
                         }
                     }
 
@@ -222,17 +225,20 @@ class UserPanelController extends Controller
 
                             // get coupon level
                             $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                            $temp_cp_level = $get_cp_level[0]->coupon_level;
+                            if(sizeof($get_cp_level) > 0) {
+                                $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                            if($temp_cp_level == 1) {
-                                $stat_w['cp_1'] += $temp_cp_count;
-                            } else if($temp_cp_level == 2) {
-                                $stat_w['cp_2'] += $temp_cp_count;
-                            } else if($temp_cp_level == 3) {
-                                $stat_w['cp_3'] += $temp_cp_count;
-                            } else if($temp_cp_level == 4) {
-                                $stat_w['cp_4'] += $temp_cp_count;
+                                if($temp_cp_level == 1) {
+                                    $stat_w['cp_1'] += $temp_cp_count;
+                                } else if($temp_cp_level == 2) {
+                                    $stat_w['cp_2'] += $temp_cp_count;
+                                } else if($temp_cp_level == 3) {
+                                    $stat_w['cp_3'] += $temp_cp_count;
+                                } else if($temp_cp_level == 4) {
+                                    $stat_w['cp_4'] += $temp_cp_count;
+                                }
                             }
+                            
                         }
                     }
 
@@ -289,17 +295,20 @@ class UserPanelController extends Controller
 
                             // get coupon level
                             $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                            $temp_cp_level = $get_cp_level[0]->coupon_level;
+                            if(sizeof($get_cp_level) > 0) {
+                                $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                            if($temp_cp_level == 1) {
-                                $stat_m['cp_1'] += $temp_cp_count;
-                            } else if($temp_cp_level == 2) {
-                                $stat_m['cp_2'] += $temp_cp_count;
-                            } else if($temp_cp_level == 3) {
-                                $stat_m['cp_3'] += $temp_cp_count;
-                            } else if($temp_cp_level == 4) {
-                                $stat_m['cp_4'] += $temp_cp_count;
+                                if($temp_cp_level == 1) {
+                                    $stat_m['cp_1'] += $temp_cp_count;
+                                } else if($temp_cp_level == 2) {
+                                    $stat_m['cp_2'] += $temp_cp_count;
+                                } else if($temp_cp_level == 3) {
+                                    $stat_m['cp_3'] += $temp_cp_count;
+                                } else if($temp_cp_level == 4) {
+                                    $stat_m['cp_4'] += $temp_cp_count;
+                                }
                             }
+                            
                         }
                     }
 
@@ -355,17 +364,20 @@ class UserPanelController extends Controller
 
                             // get coupon level
                             $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                            $temp_cp_level = $get_cp_level[0]->coupon_level;
+                            if(sizeof($get_cp_level) > 0) {
+                                $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                            if($temp_cp_level == 1) {
-                                $stat_a['cp_1'] += $temp_cp_count;
-                            } else if($temp_cp_level == 2) {
-                                $stat_a['cp_2'] += $temp_cp_count;
-                            } else if($temp_cp_level == 3) {
-                                $stat_a['cp_3'] += $temp_cp_count;
-                            } else if($temp_cp_level == 4) {
-                                $stat_a['cp_4'] += $temp_cp_count;
+                                if($temp_cp_level == 1) {
+                                    $stat_a['cp_1'] += $temp_cp_count;
+                                } else if($temp_cp_level == 2) {
+                                    $stat_a['cp_2'] += $temp_cp_count;
+                                } else if($temp_cp_level == 3) {
+                                    $stat_a['cp_3'] += $temp_cp_count;
+                                } else if($temp_cp_level == 4) {
+                                    $stat_a['cp_4'] += $temp_cp_count;
+                                }
                             }
+                            
                         }
                     }
 
@@ -682,17 +694,20 @@ class UserPanelController extends Controller
 
                     // get coupon level
                     $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                    $temp_cp_level = $get_cp_level[0]->coupon_level;
+                    if(sizeof($get_cp_level) > 0) {
+                        $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                    if($temp_cp_level == 1) {
-                        $stat_a_y['cp_1'] += $temp_cp_count;
-                    } else if($temp_cp_level == 2) {
-                        $stat_a_y['cp_2'] += $temp_cp_count;
-                    } else if($temp_cp_level == 3) {
-                        $stat_a_y['cp_3'] += $temp_cp_count;
-                    } else if($temp_cp_level == 4) {
-                        $stat_a_y['cp_4'] += $temp_cp_count;
+                        if($temp_cp_level == 1) {
+                            $stat_a_y['cp_1'] += $temp_cp_count;
+                        } else if($temp_cp_level == 2) {
+                            $stat_a_y['cp_2'] += $temp_cp_count;
+                        } else if($temp_cp_level == 3) {
+                            $stat_a_y['cp_3'] += $temp_cp_count;
+                        } else if($temp_cp_level == 4) {
+                            $stat_a_y['cp_4'] += $temp_cp_count;
+                        }
                     }
+                    
                 }
             }
 
@@ -740,17 +755,20 @@ class UserPanelController extends Controller
 
                     // get coupon level
                     $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                    $temp_cp_level = $get_cp_level[0]->coupon_level;
+                    if(sizeof($get_cp_level) > 0) {
+                        $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                    if($temp_cp_level == 1) {
-                        $stat_a_w['cp_1'] += $temp_cp_count;
-                    } else if($temp_cp_level == 2) {
-                        $stat_a_w['cp_2'] += $temp_cp_count;
-                    } else if($temp_cp_level == 3) {
-                        $stat_a_w['cp_3'] += $temp_cp_count;
-                    } else if($temp_cp_level == 4) {
-                        $stat_a_w['cp_4'] += $temp_cp_count;
+                        if($temp_cp_level == 1) {
+                            $stat_a_w['cp_1'] += $temp_cp_count;
+                        } else if($temp_cp_level == 2) {
+                            $stat_a_w['cp_2'] += $temp_cp_count;
+                        } else if($temp_cp_level == 3) {
+                            $stat_a_w['cp_3'] += $temp_cp_count;
+                        } else if($temp_cp_level == 4) {
+                            $stat_a_w['cp_4'] += $temp_cp_count;
+                        }
                     }
+                    
                 }
             }
 
@@ -799,17 +817,21 @@ class UserPanelController extends Controller
 
                     // get coupon level
                     $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                    $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                    if($temp_cp_level == 1) {
-                        $stat_a_m['cp_1'] += $temp_cp_count;
-                    } else if($temp_cp_level == 2) {
-                        $stat_a_m['cp_2'] += $temp_cp_count;
-                    } else if($temp_cp_level == 3) {
-                        $stat_a_m['cp_3'] += $temp_cp_count;
-                    } else if($temp_cp_level == 4) {
-                        $stat_a_m['cp_4'] += $temp_cp_count;
+                    if(sizeof($get_cp_level) > 0) {
+                        $temp_cp_level = $get_cp_level[0]->coupon_level;
+
+                        if($temp_cp_level == 1) {
+                            $stat_a_m['cp_1'] += $temp_cp_count;
+                        } else if($temp_cp_level == 2) {
+                            $stat_a_m['cp_2'] += $temp_cp_count;
+                        } else if($temp_cp_level == 3) {
+                            $stat_a_m['cp_3'] += $temp_cp_count;
+                        } else if($temp_cp_level == 4) {
+                            $stat_a_m['cp_4'] += $temp_cp_count;
+                        }
                     }
+                    
                 }
             }
 
@@ -857,17 +879,21 @@ class UserPanelController extends Controller
 
                     // get coupon level
                     $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                    $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                    if($temp_cp_level == 1) {
-                        $stat_a_a['cp_1'] += $temp_cp_count;
-                    } else if($temp_cp_level == 2) {
-                        $stat_a_a['cp_2'] += $temp_cp_count;
-                    } else if($temp_cp_level == 3) {
-                        $stat_a_a['cp_3'] += $temp_cp_count;
-                    } else if($temp_cp_level == 4) {
-                        $stat_a_a['cp_4'] += $temp_cp_count;
+                    if(sizeof($get_cp_level) > 0) {
+                        $temp_cp_level = $get_cp_level[0]->coupon_level;
+
+                        if($temp_cp_level == 1) {
+                            $stat_a_a['cp_1'] += $temp_cp_count;
+                        } else if($temp_cp_level == 2) {
+                            $stat_a_a['cp_2'] += $temp_cp_count;
+                        } else if($temp_cp_level == 3) {
+                            $stat_a_a['cp_3'] += $temp_cp_count;
+                        } else if($temp_cp_level == 4) {
+                            $stat_a_a['cp_4'] += $temp_cp_count;
+                        }
                     }
+                   
                 }
             }
 
