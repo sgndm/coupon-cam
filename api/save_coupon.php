@@ -160,27 +160,27 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                   // check if limit has exceded
 								//	$apiResponse['response_data']['saved_amount'] = $saved_amount;
-                  if ($saved_amount >= $app_save_limit) {
-                    $apiResponse['response_code']		= '200';
-                    $apiResponse['response_data'] 	= array(
-                        'promo_id' => $promo_id,
-                        'coupon_id' => $coupon_id,
-                        'place_id' => $place_id,
-                        'is_verified' => $is_verified
-                    );
-                    $apiResponse['response_msg'] = 'Oops You have exceded your savings limit';
-                  }
-									else if( ($saved_amount + $val_USD) > $app_save_limit) {
-										$apiResponse['response_code']		= '200';
-                    $apiResponse['response_data'] 	= array(
-                        'promo_id' => $promo_id,
-                        'coupon_id' => $coupon_id,
-                        'place_id' => $place_id,
-                        'is_verified' => $is_verified
-                    );
-                    $apiResponse['response_msg'] = 'Oops You have exceded your savings limit';
-									}
-                  else {
+                //   if ($saved_amount >= $app_save_limit) {
+                //     $apiResponse['response_code']		= '200';
+                //     $apiResponse['response_data'] 	= array(
+                //         'promo_id' => $promo_id,
+                //         'coupon_id' => $coupon_id,
+                //         'place_id' => $place_id,
+                //         'is_verified' => $is_verified
+                //     );
+                //     $apiResponse['response_msg'] = 'Oops You have exceded your savings limit';
+                //   }
+				// 					else if( ($saved_amount + $val_USD) > $app_save_limit) {
+				// 						$apiResponse['response_code']		= '200';
+                //     $apiResponse['response_data'] 	= array(
+                //         'promo_id' => $promo_id,
+                //         'coupon_id' => $coupon_id,
+                //         'place_id' => $place_id,
+                //         'is_verified' => $is_verified
+                //     );
+                //     $apiResponse['response_msg'] = 'Oops You have exceded your savings limit';
+				// 					}
+                //  else {
                     // if user hassent saved any coupons this month
                     $insert = "INSERT INTO `user_coupons`(`scan_promo_id`,`scan_coupon_id`,`device_id`,`scan_coupon_status`,`scan_date`,`val_usd`,`val_cad`,`val_nzd`,`val_aud`,`val_pound`,`place_id`) VALUES(" . $promo_id ."," . $coupon_id . ",'" . $device_id . "',4,'" . date('Y-m-d') . "', " . $val_USD . "," . $val_CAD . "," . $val_NZD . "," . $val_AUD . ", " . $val_UK . "," . $place_id . ")";
 
@@ -230,7 +230,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                      }
 
-                  }
+               //   }
 
                 }
                 else {
