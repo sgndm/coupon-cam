@@ -8,7 +8,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
   // get device id
   $device_id = trim($_POST['device_id']);
 
-  $sql = " SELECT `user_coupons`.*,`user_coupons`.`place_id` AS store_id,`places`.*,`coupons`.* FROM `user_coupons` LEFT JOIN `promos` ON `places`.`place_id`=`user_coupons`.`place_id` LEFT JOIN `coupons`ON `coupons`.`coupon_id`=`user_coupons`.`scan_coupon_id` WHERE `user_coupons`.`device_id`='".$device_id."' AND `user_coupons`.`scan_coupon_status`=3";
+  $sql = " SELECT `user_coupons`.*,`user_coupons`.`place_id` AS store_id,`promos`.*,`coupons`.* FROM `user_coupons` LEFT JOIN `promos` ON `promos`.`promo_id`=`user_coupons`.`scan_promo_id` LEFT JOIN `coupons`ON `coupons`.`coupon_id`=`user_coupons`.`scan_coupon_id` WHERE `user_coupons`.`device_id`='".$device_id."' AND `user_coupons`.`scan_coupon_status`=3";
 
 	$res = $dbh->query($sql);
 	$rows = $res->rowCount();
@@ -20,7 +20,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     // get store details
     $getSt = "SELECT * FROM `places` WHERE `place_id`=" . $store_id;
     $excute = $dbh->query($getSt);
-  	$store_details = $excute->fetchall(PDO::FETCH_OBJ);
+    $store_details = $excute->fetchall(PDO::FETCH_OBJ);
+    
+    /// store name 
+    $store_name = $store_details[0]->contact_name;
+    $saved->store_name = $store_name;
 
     // get country
     $country = $store_details[0]->country_short;
