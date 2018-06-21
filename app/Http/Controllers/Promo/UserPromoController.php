@@ -82,7 +82,7 @@ class UserPromoController extends Controller
 
         $save_path = 'resources/assets/qr_codes/';
         $file_name = 'qr'.date('YmdHis').rand(0, 10000).".png";
-        $content = rand(0, 100000000).date('YmdHis');
+        $content = 'qr_code_' . rand(0, 100000000).date('YmdHis');
 
         $service_url = 'https://qrcode-monkey.p.mashape.com/qr/custom';
 
