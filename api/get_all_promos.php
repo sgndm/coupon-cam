@@ -50,6 +50,7 @@ foreach($nearbyPromos as $promo){
 }
 
 $api_info['response_code'] = 200;
+$api_info['response_msg'] = "all_promos";
 
 
 header('Content-Type: application/json');
