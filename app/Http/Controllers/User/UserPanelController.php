@@ -1818,20 +1818,35 @@ class UserPanelController extends Controller
             // insert a coupon
             // validate images
             $coupon_photo = '';
-            if($request->hasFile('coupon_photo')) {
+            $get_file = $request->get('cp_img_name_1');
+            $random = rand(0,1000000);
+            $coup_img_name = 'c'.date('Ymdhis').$random.".png";
+            $coup_img_path = 'resources/assets/coupons/full/';
 
-                $random = rand(0,1000000);
-                $coup_img = $request->file('coupon_photo');
-                $coup_extention = $coup_img->getClientOriginalExtension();
+            list($type, $get_file) = explode(';', $get_file);
+            list(, $get_file)      = explode(',', $get_file);
+            
+            $get_file = base64_decode($get_file);
+            
+            // upload image
+            file_put_contents($coup_img_path.$coup_img_name, $get_file);
 
-                $coup_img_name = 'c'.date('Ymdhis').$random.".".$coup_extention;
+            $coupon_photo = $coup_img_name;
 
-                //Move Uploaded File
-                $coup_img_path = 'resources/assets/coupons/full/';
-                $coup_img->move($coup_img_path,$coup_img_name);
+            // if($request->hasFile('coupon_photo')) {
 
-                $coupon_photo = $coup_img_name;
-            }
+            //     $random = rand(0,1000000);
+            //     $coup_img = $request->file('coupon_photo');
+            //     $coup_extention = $coup_img->getClientOriginalExtension();
+
+            //     $coup_img_name = 'c'.date('Ymdhis').$random.".".$coup_extention;
+
+            //     //Move Uploaded File
+            //     $coup_img_path = 'resources/assets/coupons/full/';
+            //     $coup_img->move($coup_img_path,$coup_img_name);
+
+            //     $coupon_photo = $coup_img_name;
+            // }
 
             $geo_campaign = 0;
             $status = 0;
@@ -1847,8 +1862,8 @@ class UserPanelController extends Controller
                 'coupon_info' => $request->coupon_info,
                 'coupon_details' => $request->coupon_condition,
                 'coupon_photo' => $coupon_photo,
-                'coupon_ar' => $request->ar_coupon_name,
-                'coupon_marker' => $request->ar_marker_name,
+                'coupon_ar' => '',
+                'coupon_marker' => '',
                 'geo_campaign' => $geo_campaign,
                 'status' => $status,
                 'created_at' => date('Y-m-d H:i:s'),

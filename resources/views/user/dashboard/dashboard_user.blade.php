@@ -905,19 +905,35 @@
                                                 <label class="control-label">Estimated Value</label>
                                                 <input type="number" id="coupon_value_1" name="coupon_value" class="form-control" placeholder="" required min="0" step="0.1">
                                             </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Coupon Info & Basic Conditions</label>
-                                                <textarea id="coupon_info_1" name="coupon_info" class="form-control" placeholder="" required></textarea>
-                                            </div>
+                                            
 
                                         </div>
                                         <div class="col-sm-12 col-md-12 col-lg-6">
 
                                             <div class="form-group">
                                                 <label class="control-label">Coupon Photo</label>
-                                                <input type="file" id="coupon_photo_1" name="coupon_photo" class="dropify" data-height="100"  required />
+                                                <div id="img_cropper_c_1">
+                                                    <div class="uploader" id="uploader_c_1">
+
+                                                        <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                        <b>Drag and drop a file here or click</b>
+
+                                                        <input type="file" name="coupon_photo" id="coupon_photo_c_1" class="filePhoto cropit-image-input" >
+                                                    </div>
+                                                        
+                                                    <div class="cropit-preview" id="cropper_prev_c_1"></div>
+                                                    <input type="range" class="cropit-image-zoom-input" id="ranger_c_1"/>
+                                                    
+
+                                                    <button id="crop_btn_c_1" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                    <button id="rem_c_1" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                    <input type="hidden" name="cp_img_name_1" id="cp_img_name_c_1">
+                                                </div>
+
+                                                <!-- <input type="file" id="coupon_photo_1" name="coupon_photo" class="dropify" data-height="100"  required /> -->
                                             </div>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label class="control-label">Choose Or Upload AR Coupon</label>
                                                 <table id="searc_ar_model">
                                                     <tr>
@@ -936,6 +952,10 @@
                                                     <input type="hidden" name="ar_coupon_name" id="ar_coupon_name_1">
                                                     <input type="hidden" name="ar_marker_name" id="ar_marker_name_1">
                                                 </div>
+                                            </div> -->
+                                            <div class="form-group">
+                                                <label class="control-label">Coupon Info & Basic Conditions</label>
+                                                <textarea id="coupon_info_1" name="coupon_info" class="form-control" placeholder="" required></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label">Detailed Terms & Conditions</label>
@@ -1288,11 +1308,56 @@ VE
             $('.dropify').dropify();
 
             //$('#loyalty_coupon_c_1').prop('checked', true);
+            $('.cropit-preview').hide();
+            $('.crop_btn').hide();
+            $('.res_btn').hide();
+            $('.cropit-image-zoom-input').hide();
         });
 
         function cloased_tab(){
 //      set_stat_tile();
         }
+
+        $('#img_cropper_c_1').cropit();
+
+        function crop_image(page, id) {
+
+            var imageData = $('#img_cropper_' + page + '_' + id).cropit('export');
+            $('#cp_img_name_' + page + '_' + id).val(imageData);
+            // $('#image_' + page + '_' + id).attr('src', imageData);
+
+        }
+
+        function activate_cropper(page, id) {
+            $('#uploader_' + page + '_' + id).hide();
+            $('#cropper_prev_' + page + '_' + id).show();
+            $('#ranger_' + page + '_' + id).show();
+            $('#crop_btn_' + page + '_' + id).show();
+            $('#rem_' + page + '_' + id).show();
+        }
+
+        function clear_cropper(page, id) {
+            $('#uploader_' + page + '_' + id).show();
+            $('#cropper_prev_' + page + '_' + id).hide();
+            $('#ranger_' + page + '_' + id).hide();
+            $('#crop_btn_' + page + '_' + id).hide();
+            $('#rem_' + page + '_' + id).hide();
+
+            $('#cp_img_name_' + page + '_' + id).val('');
+            // $('#image_' + page + '_' + id).attr('src',"{{ asset('resources/assets/user/images/imageplaceholder.png') }}" );
+        }
+
+        $('#coupon_photo_c_1').on('change', function() {
+            activate_cropper('c', 1);
+        });
+
+        $('#crop_btn_c_1').on('click',function () {
+            crop_image('c', 1);
+        });
+
+        $('#rem_c_1').on('click', function() {
+            clear_cropper('c', 1);
+        });
 
         $(".radio").change(function() {
             $(".radio").prop('checked', false);
