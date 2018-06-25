@@ -58,10 +58,10 @@
     <!-- ============================================================== -->
     <div class="preloader">
         <div class="loader">
-            <div class="loader__figure">
-                <!--img src="{{ asset('resources/assets/template/images/favicon.png') }}" -->
+            <div class="cus-loader-figure">
+                <!-- <img src="{{ asset('resources/assets/template/images/favicon.png') }}" style="width:16px; height: 16px;" > -->
             </div>
-            <p class="loader__label">CouponCam</p>
+            <p class="loader__label">Loading..</p>
         </div>
     </div>
     <!-- ============================================================== -->
