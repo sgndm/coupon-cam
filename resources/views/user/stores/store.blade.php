@@ -72,11 +72,11 @@
                                             <h6 class="form-control-feedback text-danger" id="store_name_error_1"> </h6>
                                         </div>
 
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label class="control-label">Store Promo</label>
                                             <input type="text" id="store_promo_1" name="store_promo" class="form-control" placeholder="Enter Promo" required oninput="error_hide('store_promo_error_1');" >
                                             <h6 class="form-control-feedback text-danger" id="store_promo_error_1"> </h6>
-                                        </div>
+                                        </div> -->
 
                                         <div class="form-group">
                                             <label class="control-label">Store Address</label>
@@ -120,8 +120,8 @@
 
                                 </div>
 
-                                <hr>
-                                <div class="row">
+                                <!-- <hr> -->
+                                <!-- <div class="row">
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Store Photo/Logo</label>
@@ -137,7 +137,7 @@
                                             <h6 class="form-control-feedback text-danger" id="store_ar_error_1"> </h6>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <hr>
                                 <div class="row">
@@ -312,7 +312,7 @@
                                 </div>
 
                                 <hr>
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Store Photo/Logo</label>
@@ -336,15 +336,15 @@
                                     </div>
                                 </div>
 
-                                <hr>
+                                <hr> -->
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <!-- <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Store Promo</label>
                                             <textarea id="store_promo_2" name="store_promo" class="form-control" required oninput="error_hide('store_promo_error_2');" ></textarea>
                                             <h6 class="form-control-feedback text-danger" id="store_promo_error_2"> </h6>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                 </div>
                                 <div class="row">
@@ -821,8 +821,8 @@
                     $('#store_lat_'+id).val('');
                     $('#store_lng_'+id).val('');
                     $('#country_short_'+id).val('');
-                    $('#store_image_hidden_'+id).val('');
-                    $('#store_ar_hidden_'+id).val('');
+                    // $('#store_image_hidden_'+id).val('');
+                    // $('#store_ar_hidden_'+id).val('');
                     $('#store_description_'+id).val('');
                     if(id == 2) {
                         $('#store_marker_hidden_2').val('');
@@ -839,8 +839,8 @@
                     // }
 
                     // unset images
-                    $('#store_img_prev_'+id).attr('src',"{{url('resources/assets/custom/images/no-image.png')}}");
-                    $('#store_ar_prev_'+id).attr('src',"{{url('resources/assets/custom/images/no-image.png')}}");
+                    // $('#store_img_prev_'+id).attr('src',"{{url('resources/assets/custom/images/no-image.png')}}");
+                    // $('#store_ar_prev_'+id).attr('src',"{{url('resources/assets/custom/images/no-image.png')}}");
 
                     // uncheck all checkbox
                     $('.cat_check').prop('checked',false);
@@ -872,32 +872,32 @@
                     $('#store_lat_'+id).val(store[0]['latitude']);
                     $('#store_lng_'+id).val(store[0]['longitude']);
                     $('#country_short_'+id).val(store[0]['country_short']);
-                    $('#store_image_hidden_'+id).val(store[0]['store_photo']);
-                    $('#store_ar_hidden_'+id).val(store[0]['store_ar']);
+                    // $('#store_image_hidden_'+id).val(store[0]['store_photo']);
+                    // $('#store_ar_hidden_'+id).val(store[0]['store_ar']);
                     $('#store_description_'+id).val(store[0]['store_description']);
 
 
 
                     if(id == 2) {
-                        $('#store_marker_hidden_'+id).val(store[0]['store_marker']);
+                        // $('#store_marker_hidden_'+id).val(store[0]['store_marker']);
                         $('#promo_qr_code_'+id).val(store[0]['qr_code']);
                         $('#promo_qr_image_'+id).val(store[0]['qr_image']);
 
 
                         // set images
-                        if((store[0]['store_photo']).length > 0) {
-                            $('#store_img_prev_'+id).attr('src',"{{url('resources/assets/stores/store_photo')}}/"+store[0]['store_photo']);
-                        }
+                        // if((store[0]['store_photo']).length > 0) {
+                        //     $('#store_img_prev_'+id).attr('src',"{{url('resources/assets/stores/store_photo')}}/"+store[0]['store_photo']);
+                        // }
 
-                        var store_img_prev = "{{url('resources/assets/stores/store_photo')}}/"+store[0]['store_photo'];
-                        $("#store_image_" + id).attr("data-default-file","http://localhost/couponcam/CC_new/resources/assets/stores/store_photo/s20180529105304344621.jpg");
+                        // var store_img_prev = "{{url('resources/assets/stores/store_photo')}}/"+store[0]['store_photo'];
+                        // $("#store_image_" + id).attr("data-default-file","http://localhost/couponcam/CC_new/resources/assets/stores/store_photo/s20180529105304344621.jpg");
 //                            $('#store_image_' + id).dropify({
 //                            defaultFile: store_img_prev
 //                        });
 
-                        if((store[0]['store_ar']).length > 0) {
-                            $('#store_ar_prev_'+id).attr('src',"{{url('resources/assets/stores/store_ar')}}/"+store[0]['store_ar']);
-                        }
+                        // if((store[0]['store_ar']).length > 0) {
+                        //     $('#store_ar_prev_'+id).attr('src',"{{url('resources/assets/stores/store_ar')}}/"+store[0]['store_ar']);
+                        // }
 
                         if((store[0]['qr_image']).length > 0) {
                             $('#qr_code_prev_'+id).attr('src',"{{url('resources/assets/qr_codes')}}/"+store[0]['qr_image']);
@@ -1204,7 +1204,7 @@
 
         }
 
-        function    generate_qr_code(id) {
+        function generate_qr_code(id) {
 
             $('#crt_qr_'+id).hide();
 
@@ -1445,68 +1445,68 @@
             }
 
             // images
-            var c_st_img = 0;
-            if(id == 1) {
-                var store_img = $('#store_image_' + id).val();
+            var c_st_img = 1;
+            // if(id == 1) {
+            //     var store_img = $('#store_image_' + id).val();
 
-                if (store_img) {
-                    $('#store_image_error_' + id).html('');
-                    switch (store_img.substring(store_img.lastIndexOf('.') + 1).toLowerCase()) {
-                        case 'jpg':
-                        case 'png':
-                            $('#store_image_error_' + id).html('');
-                            c_st_img = 1;
-                            break;
-                        default:
-                            $('#store_image_error_' + id).html("Please select a png or jpg");
-                            break;
+            //     if (store_img) {
+            //         $('#store_image_error_' + id).html('');
+            //         switch (store_img.substring(store_img.lastIndexOf('.') + 1).toLowerCase()) {
+            //             case 'jpg':
+            //             case 'png':
+            //                 $('#store_image_error_' + id).html('');
+            //                 c_st_img = 1;
+            //                 break;
+            //             default:
+            //                 $('#store_image_error_' + id).html("Please select a png or jpg");
+            //                 break;
 
-                    }
-                } else {
-                    $('#store_image_error_' + id).html(err_1);
-                }
-            } else if (id == 2) {
-                var pre_img = $('#store_image_hidden_' + id).val();
+            //         }
+            //     } else {
+            //         $('#store_image_error_' + id).html(err_1);
+            //     }
+            // } else if (id == 2) {
+            //     var pre_img = $('#store_image_hidden_' + id).val();
 
-                if(pre_img.length > 0) {
-                    c_st_img = 1;
-                    $('#store_image_error_' + id).html('');
-                } else {
-                    $('#store_image_error_' + id).html("Please select a image");
-                }
-            }
+            //     if(pre_img.length > 0) {
+            //         c_st_img = 1;
+            //         $('#store_image_error_' + id).html('');
+            //     } else {
+            //         $('#store_image_error_' + id).html("Please select a image");
+            //     }
+            // }
 
 
-            var c_st_ar = 0;
+            var c_st_ar = 1;
 
-            if(id == 1) {
-                var store_ar = $('#store_ar_' + id).val();
+            // if(id == 1) {
+            //     var store_ar = $('#store_ar_' + id).val();
 
-                if (store_ar) {
-                    $('#store_ar_error_' + id).html('');
-                    switch (store_ar.substring(store_ar.lastIndexOf('.') + 1).toLowerCase()) {
-                        case 'png':
-                            $('#store_ar_error_' + id).html('');
-                            c_st_ar = 1;
-                            break;
-                        default:
-                            $('#store_ar_error_' + id).html("Please select a png ");
-                            break;
+            //     if (store_ar) {
+            //         $('#store_ar_error_' + id).html('');
+            //         switch (store_ar.substring(store_ar.lastIndexOf('.') + 1).toLowerCase()) {
+            //             case 'png':
+            //                 $('#store_ar_error_' + id).html('');
+            //                 c_st_ar = 1;
+            //                 break;
+            //             default:
+            //                 $('#store_ar_error_' + id).html("Please select a png ");
+            //                 break;
 
-                    }
-                } else {
-                    $('#store_ar_error_' + id).html(err_1);
-                }
-            } else if (id == 2) {
-                var pre_ar = $('#store_ar_hidden_' + id).val();
+            //         }
+            //     } else {
+            //         $('#store_ar_error_' + id).html(err_1);
+            //     }
+            // } else if (id == 2) {
+            //     var pre_ar = $('#store_ar_hidden_' + id).val();
 
-                if(pre_ar.length > 0) {
-                    c_st_ar = 1;
-                    $('#store_ar_error_' + id).html('');
-                } else {
-                    $('#store_ar_error_' + id).html("Please select a png");
-                }
-            }
+            //     if(pre_ar.length > 0) {
+            //         c_st_ar = 1;
+            //         $('#store_ar_error_' + id).html('');
+            //     } else {
+            //         $('#store_ar_error_' + id).html("Please select a png");
+            //     }
+            // }
 
 
             if( (st_name.length > 0) && (street_name.length > 0) && (town.length > 0) && (state.length > 0) && (zipcode.length > 0) && (country.length > 0) && (st_desc.length > 0) && (qr_code.length > 0) && (qr_img.length > 0) && (st_lat.length > 0) && (st_lng.length > 0) && (country_short.length > 0) && (business == 1) && (category == 1) &&(c_st_img == 1) && (c_st_ar == 1) ) {

@@ -110,11 +110,11 @@
                                             <input type="text" id="promo_name_1" name="promo_name" class="form-control" placeholder="Enter Name" required oninput="error_hide('promo_name_error_1');">
                                             <h6 class="form-control-feedback text-danger" id="promo_name_error_1"> </h6>
                                         </div>
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label class="control-label">Promo Description</label>
                                             <textarea id="promo_description_1" name="promo_description" class="form-control" placeholder="Describe Your Promo" required oninput="error_hide('promo_desc_error_1');"></textarea>
                                             <h6 class="form-control-feedback text-danger" id="promo_desc_error_1"> </h6>
-                                        </div>
+                                        </div> -->
 
                                         <div class="form-group">
                                             <label class="control-label">Promo Frequency</label>
@@ -314,11 +314,11 @@
                                             <input type="text" id="promo_name_2" name="promo_name" class="form-control" placeholder="Enter Name" required oninput="error_hide('promo_name_error_2');">
                                             <h6 class="form-control-feedback text-danger" id="promo_name_error_2"> </h6>
                                         </div>
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label class="control-label">Promo Description</label>
                                             <textarea id="promo_description_2" name="promo_description" class="form-control" placeholder="Describe Your Promo" required oninput="error_hide('promo_desc_error_2');"></textarea>
                                             <h6 class="form-control-feedback text-danger" id="promo_desc_error_2"> </h6>
-                                        </div>
+                                        </div> -->
 
                                         <div class="form-group">
                                             <label class="control-label">Promo Frequency</label>
@@ -517,10 +517,10 @@
                                             <label class="control-label">Promo Name</label>
                                             <input type="text" id="promo_name_3" name="promo_name" class="form-control" placeholder="Enter Name" required>
                                         </div>
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label class="control-label">Promo Description</label>
                                             <textarea id="promo_description_3" name="promo_description" class="form-control" placeholder="Describe Your Promo" required></textarea>
-                                        </div>
+                                        </div> -->
 
                                         <div class="form-group">
                                             <label class="control-label">Promo Frequency</label>
@@ -704,10 +704,10 @@
                                         <label class="control-label">Promo Name</label>
                                         <input type="text" id="promo_name_4" name="promo_name" class="form-control" placeholder="Enter Name" required>
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label class="control-label">Promo Description</label>
                                         <textarea id="promo_description_4" name="promo_description" class="form-control" placeholder="Describe Your Promo" required></textarea>
-                                    </div>
+                                    </div> -->
 
                                     <div class="form-group">
                                         <label class="control-label">Promo Frequency</label>
@@ -1258,7 +1258,7 @@
                     // bind values to form
                     $('#formid_'+id).val(promo['promo_id']);
                     $('#promo_name_'+id).val(promo['promo_name']);
-                    $('#promo_description_'+id).val(promo['main_clue']);
+                    // $('#promo_description_'+id).val(promo['main_clue']);
                     $('#promo_start_'+id).val(promo['start_at_local']);
 
                     $('#promo_length_'+id).val(promo['promo_length']);
@@ -1477,12 +1477,12 @@
                 $('#promo_start_error_' + id).html(err_1);
             }
 
-            var promo_desc = $('#promo_description_' + id).val();
-            if(promo_desc.length > 0) {
-                $('#promo_desc_error_' + id).html('');
-            } else {
-                $('#promo_desc_error_' + id).html(err_1);
-            }
+            // var promo_desc = $('#promo_description_' + id).val();
+            // if(promo_desc.length > 0) {
+            //     $('#promo_desc_error_' + id).html('');
+            // } else {
+            //     $('#promo_desc_error_' + id).html(err_1);
+            // }
 
             var promo_repeat = 0;
             if(id == 1) {
@@ -1608,7 +1608,7 @@
 
 
 
-            if( (stores == 1) && (promo_name.length > 0) && (promo_start.length > 0) && (promo_start.length > 0) && (promo_desc.length > 0) && (promo_repeat == 1) ) {
+            if( (stores == 1) && (promo_name.length > 0) && (promo_start.length > 0) && (promo_start.length > 0) && (promo_repeat == 1) ) {
 
                 if(date_checked == 1) {
 

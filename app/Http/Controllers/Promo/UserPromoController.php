@@ -224,7 +224,7 @@ class UserPromoController extends Controller
             'end_at_local' => gmdate("H:i:s", strtotime($get_end_time)),
             'promo_length' => $promo_length,
             'advance_warning' => $advance_warn,
-            'main_clue' => $request->promo_description,
+            'main_clue' => '',
             'promo_repeat' => $promo_repete,
             'promo_repeat_values' => $promo_repeate_val,
             'internal_promo'  => 1,
