@@ -44,13 +44,6 @@ class UserCouponController extends Controller
         $view = view('user.coupons.coupon');
         $view->title = 'CouponCam::Coupons';
 
-        $promo_id = 0;
-        if(isset($request['promo'])) {
-            $promo_id = $request['promo'];
-        }
-
-        $view->new_promo_id = $promo_id;
-
         $view->inactivePromos = Promo::join('promo_locations', 'promo_locations.promo_id','=','promos.promo_id')
             ->join('store_user', 'store_user.place_id','=','promo_locations.store_id')
             ->select('promos.*')
@@ -74,6 +67,16 @@ class UserCouponController extends Controller
         if(sizeof($activePromos) > 0) {
             $has_coupons = 1;
         }
+
+        $promo_id = 0;
+        if(isset($request['promo'])) {
+            $promo_id = $request['promo'];
+        }
+
+        if($promo_id > 0) {
+            $has_coupons = 0;
+        }
+        $view->new_promo_id = $promo_id;
 
         $view->has_coupons = $has_coupons;
 
