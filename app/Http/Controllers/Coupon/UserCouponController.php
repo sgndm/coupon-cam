@@ -40,9 +40,16 @@ class UserCouponController extends Controller
         $this->middleware('user');
     }
 
-    public function index() {
+    public function index(Request $request) {
         $view = view('user.coupons.coupon');
         $view->title = 'CouponCam::Coupons';
+
+        $promo_id = 0;
+        if(isset($request['promo'])) {
+            $promo_id = $request['promo'];
+        }
+
+        $view->new_promo_id = $promo_id;
 
         $view->inactivePromos = Promo::join('promo_locations', 'promo_locations.promo_id','=','promos.promo_id')
             ->join('store_user', 'store_user.place_id','=','promo_locations.store_id')

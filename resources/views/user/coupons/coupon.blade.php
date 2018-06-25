@@ -125,9 +125,16 @@
                                                             <option value="0">Select Promo</option>
                                                             @if(sizeof($inactivePromos) > 0)
                                                                 @foreach($inactivePromos as $promo)
+                                                                    @if($new_promo_id > 0)
+                                                                        @if($new_promo_id == $promo->promo_id)
+                                                                        <option value="{{$promo->promo_id}}" selected>{{$promo->promo_name}}</option>
+                                                                        @else
+                                                                        <option value="{{$promo->promo_id}}">{{$promo->promo_name}}</option>
+                                                                        @endif
 
+                                                                    @else 
                                                                     <option value="{{$promo->promo_id}}">{{$promo->promo_name}}</option>
-
+                                                                    @endif
                                                                 @endforeach
                                                             @else
                                                                 <option>-- No Promos Available.. Please create a Promo..</option>
@@ -2294,11 +2301,13 @@
                 $('#ar_coupon_name_' + page + '_' + id).val(prev_ar);
                 $('#ar_marker_name_' + page + '_' + id).val(prev_marker);
                 $('#ar_prev_' + page + '_' + id).attr('src', "{{url('resources/assets/media')}}/"+prev_ar);
+                $('#coupon_ar_error_' + page + '_' + id).html('');
             } 
             else {
                 $('#ar_coupon_name_' + page + '_' + id).val('');
                 $('#ar_marker_name_' + page + '_' + id).val('');
                 $('#ar_prev_' + page + '_' + id).attr('src', "{{url('resources/assets/custom/images/no-image.png')}}");
+                $('#coupon_ar_error_' + page + '_' + id).html('This Field is required');
             }
         }
          

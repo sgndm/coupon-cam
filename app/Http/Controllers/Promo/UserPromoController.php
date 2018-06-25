@@ -288,7 +288,7 @@ class UserPromoController extends Controller
 
             PromoLocations::insert($store_locations);
 
-            return redirect('user/coupons')->with(['success' => 'Promo Created successfully']);
+            return redirect('user/coupons?promo='. $promo_id)->with(['success' => 'Promo Created successfully']);
         }  else {
             return back()->with(['error' => 'Promo failed to create']);
         }
