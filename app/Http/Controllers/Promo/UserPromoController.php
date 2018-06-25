@@ -50,13 +50,23 @@ class UserPromoController extends Controller
             ->orderBY('places.updated_at', 'DESC')
             ->get();
 
-        $view->activePromos = Promo::join('promo_locations', 'promo_locations.promo_id','=','promos.promo_id')
+        $activePromos = Promo::join('promo_locations', 'promo_locations.promo_id','=','promos.promo_id')
             ->join('store_user', 'store_user.place_id','=','promo_locations.store_id')
             ->where(['store_user.user_id' => Auth::id(), 'promo_locations.status' => 1, 'promos.status' => 1, 'promos.used' => '1'])
             ->select('promos.*')
             ->distinct()
             ->orderBY('promos.updated_at', 'DESC')
             ->get();
+
+        $view->activePromos = $activePromos;
+
+        $has_promos = 0;
+
+        if(sizeof($activePromos) > 0) {
+            $has_promos = 1;
+        }
+
+        $view->has_promos = $has_promos;
 
         $view->puasedPromos = Promo::join('promo_locations', 'promo_locations.promo_id','=','promos.promo_id')
             ->join('store_user', 'store_user.place_id','=','promo_locations.store_id')

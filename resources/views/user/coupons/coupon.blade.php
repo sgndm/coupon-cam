@@ -5,6 +5,7 @@
         <div class="card">
             <div class="card">
                 <ul class="nav nav-tabs customtab" role="tablist">
+                    @if($has_coupons == 0)
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#tab-pane-1" role="tab" >
                             <span class="hidden-sm-up"><i class="ti-user"></i></span>
@@ -23,6 +24,27 @@
                             <span class="hidden-xs-down">PAUSED COUPONS</span>
                         </a>
                     </li>
+                    @else 
+                    
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#tab-pane-2" role="tab" >
+                            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                            <span class="hidden-xs-down">ACTIVE COUPONS</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab-pane-3" role="tab">
+                            <span class="hidden-sm-up"><i class="ti-email"></i></span>
+                            <span class="hidden-xs-down">PAUSED COUPONS</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " data-toggle="tab" href="#tab-pane-1" role="tab" >
+                            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                            <span class="hidden-xs-down">CREATE COUPONS</span>
+                        </a>
+                    </li>
+                    @endif
                     <li class="nav-item" >
                         <a class="nav-link" data-toggle="tab" href="#tab-pane-4" aria-controls="tab-pane-4" role="tab" style="display: none;">
                             <span class="hidden-sm-up"><i class="ti-email"></i></span>
@@ -47,11 +69,16 @@
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
+                @if($has_coupons == 0)
                     <div class="tab-pane active p-20" id="tab-pane-1" role="tabpanel">
+                    @else 
+                    <div class="tab-pane p-20" id="tab-pane-1" role="tabpanel">
+                    @endif
 
                         <div class="row">
                             <div class="col-md-9">
 
+                                
                                 <ul class="nav nav-tabs customtab_2" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" data-toggle="tab" aria-controls="cpn_l_1" href="#cpn_l_1" role="tab" >
@@ -685,7 +712,11 @@
                         </div>
 
                     </div>
+                    @if($has_coupons == 0)
                     <div class="tab-pane p-20" id="tab-pane-2" role="tabpanel">
+                    @else
+                    <div class="tab-pane active p-20" id="tab-pane-2" role="tabpanel">
+                    @endif
                         <?php
                         $promoCount = sizeof($activePromos);
                         $itemCount = 0;

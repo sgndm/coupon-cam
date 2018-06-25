@@ -14,26 +14,50 @@
     <div class="col-md-12">
         <div class="card">
             <ul class="nav nav-tabs customtab" role="tablist">
-                @if($is_member == 0)
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#tab-pane-1" role="tab" onclick="create_tab();">
-                        <span class="hidden-sm-up"><i class="ti-user"></i></span>
-                        <span class="hidden-xs-down">CREATE STORE</span>
-                    </a>
-                </li>
+
+                @if($has_stores == 0) 
+                    @if($is_member == 0)
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#tab-pane-1" role="tab" onclick="create_tab();">
+                            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                            <span class="hidden-xs-down">CREATE STORE</span>
+                        </a>
+                    </li>
+                    @endif
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab-pane-2" role="tab" onclick="open_tab();">
+                            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                            <span class="hidden-xs-down">ACTIVE STORES</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab-pane-3" role="tab" onclick="cloased_tab();">
+                            <span class="hidden-sm-up"><i class="ti-email"></i></span>
+                            <span class="hidden-xs-down">INACTIVE STORES</span>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#tab-pane-2" role="tab" onclick="open_tab();">
+                            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                            <span class="hidden-xs-down">ACTIVE STORES</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab-pane-3" role="tab" onclick="cloased_tab();">
+                            <span class="hidden-sm-up"><i class="ti-email"></i></span>
+                            <span class="hidden-xs-down">INACTIVE STORES</span>
+                        </a>
+                    </li>
+                    @if($is_member == 0)
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab-pane-1" role="tab" onclick="create_tab();">
+                            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                            <span class="hidden-xs-down">CREATE STORE</span>
+                        </a>
+                    </li>
+                    @endif
                 @endif
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#tab-pane-2" role="tab" onclick="open_tab();">
-                        <span class="hidden-sm-up"><i class="ti-user"></i></span>
-                        <span class="hidden-xs-down">ACTIVE STORES</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#tab-pane-3" role="tab" onclick="cloased_tab();">
-                        <span class="hidden-sm-up"><i class="ti-email"></i></span>
-                        <span class="hidden-xs-down">INACTIVE STORES</span>
-                    </a>
-                </li>
                 <li class="nav-item">
                 </li>
                 <li class="nav-item">
@@ -55,7 +79,11 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 @if($is_member == 0)
+                @if($has_stores == 0) 
                 <div class="tab-pane active p-20" id="tab-pane-1" role="tabpanel">
+                @else 
+                <div class="tab-pane p-20" id="tab-pane-1" role="tabpanel">
+                @endif
 
                     <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/stores/create_store') }}" id="store_form_1">
                         {{ csrf_field() }}
@@ -240,7 +268,13 @@
                         </div>
                     </form>
                 </div>
+
+                @if($has_stores == 0) 
                 <div class="tab-pane p-20" id="tab-pane-2" role="tabpanel">
+                @else 
+                <div class="tab-pane active p-20" id="tab-pane-2" role="tabpanel">
+                @endif
+                
                 @else
                 <div class="tab-pane active p-20" id="tab-pane-2" role="tabpanel">
                 @endif

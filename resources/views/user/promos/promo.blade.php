@@ -4,6 +4,8 @@
     <div class="col-md-12">
         <div class="card">
             <ul class="nav nav-tabs customtab" role="tablist">
+
+                @if($has_promos == 0)
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#tab-pane-1" role="tab" onclick="create_tab();">
                         <span class="hidden-sm-up"><i class="ti-user"></i></span>
@@ -28,6 +30,33 @@
                         <span class="hidden-xs-down">FINISHED PROMOS</span>
                     </a>
                 </li>
+                @else 
+                
+                <li class="nav-item active">
+                    <a class="nav-link" data-toggle="tab" href="#tab-pane-2" role="tab" onclick="open_tab();">
+                        <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                        <span class="hidden-xs-down">ACTIVE PROMOS</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-pane-3" role="tab" onclick="cloased_tab();">
+                        <span class="hidden-sm-up"><i class="ti-email"></i></span>
+                        <span class="hidden-xs-down">PUASED PROMOS</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-pane-4" role="tab" onclick="finished_tab();">
+                        <span class="hidden-sm-up"><i class="ti-email"></i></span>
+                        <span class="hidden-xs-down">FINISHED PROMOS</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " data-toggle="tab" href="#tab-pane-1" role="tab" onclick="create_tab();">
+                        <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                        <span class="hidden-xs-down">CREATE PROMO</span>
+                    </a>
+                </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#tab-pane-5" role="tab">
                         <span class="hidden-sm-up"><i class="ti-email"></i></span>
@@ -46,7 +75,11 @@
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
+                @if($has_promos == 0)
                 <div class="tab-pane active p-20" id="tab-pane-1" role="tabpanel">
+                @else
+                <div class="tab-pane p-20" id="tab-pane-1" role="tabpanel">
+                @endif
                     <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/promos/create_promo') }}" id="promo_form_1">
                         {{ csrf_field() }}
                         <div class="row">
@@ -254,7 +287,11 @@
                         </div>
                     </form>
                 </div>
+                @if($has_promos == 0)
                 <div class="tab-pane p-20" id="tab-pane-2" role="tabpanel">
+                @else
+                <div class="tab-pane active p-20" id="tab-pane-2" role="tabpanel">
+                @endif
                     <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/promos/update_promo') }}" id="promo_form_2">
                         {{ csrf_field() }}
                         <div class="row">

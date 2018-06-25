@@ -39,12 +39,22 @@ class UserStoreController extends Controller
         $view->categories = StoreCategory::where(['status' => '1'])->get();
         $view->business_types = BusinessTypes::get();
 
-        $view->openStores = Store::join('store_user', 'store_user.place_id', '=', 'places.place_id')
+        $openStores = Store::join('store_user', 'store_user.place_id', '=', 'places.place_id')
             ->where(['store_user.user_id' => Auth::id(), 'places.status' => 1])
             ->select('places.*')
             ->distinct()
             ->orderBY('places.updated_at', 'DESC')
             ->get();
+
+            $view->openStores = $openStores;
+
+        $has_stores = 0;
+
+        if(sizeof($openStores) > 0) {
+            $has_stores = 1;
+        }
+
+        $view->has_stores = $has_stores;
 
         $view->closedStores = Store::join('store_user', 'store_user.place_id', '=', 'places.place_id')
             ->where(['store_user.user_id' => Auth::id(), 'places.status' => 0])
