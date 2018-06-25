@@ -368,19 +368,20 @@
                     </div>
 
                 </div>
-                <div class="tab-pane p-20" id="tab-pane-2" role="tabpanel">
+                <div class="tab-pane" id="tab-pane-2" role="tabpanel">
                     <div class="col-sm-12 col-lg-12">
                         <div class="card">
                             <div class="card-body">
                                 @if(sizeof($promos) > 0)
                                     <div id="promo_slider_store" class="carousel slide" data-ride="carousel">
-                                        <div class="carousel-inner" role="listbox">
+                                        <div class="carousel-inner" role="listbox" >
 
                                             <?PHP $promoCount = sizeof($promos); ?>
 
                                             <div class="carousel-item active">
 
                                                 <h3 class="text-center m-b-5 text-danger"> {{ strtoupper($promos[0]['promo_name']) }}</h3>
+                                                <h6 class="text-center m-b-20  text-white"><br></h6>
                                                 <div class="row">
 
                                                     <div class="col-sm-6 col-md-6 col-lg-3">
@@ -528,7 +529,8 @@
                                             @for($x = 1; $x < $promoCount; $x++)
                                                 <div class="carousel-item">
 
-                                                    <h3 class="text-center m-b-5 text-danger"> {{ strtoupper($promos[$x]['promo_name']) }}</h3>
+                                                    <h3 class="text-center m-b-5 text-danger stat-header-h3"> {{ strtoupper($promos[$x]['promo_name']) }}</h3>
+                                                    <h6 class="text-center m-b-20  text-white"><br></h6>
                                                     <div class="row">
 
                                                         <div class="col-sm-6 col-md-6 col-lg-3">
@@ -690,7 +692,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane p-20" id="tab-pane-3" role="tabpanel">
+                <div class="tab-pane " id="tab-pane-3" role="tabpanel">
                     <div class="col-sm-12 col-lg-12">
                         <div class="card">
                             <div class="card-body">
@@ -701,6 +703,7 @@
                                             <div class="carousel-item active">
 
                                                 <h3 class="text-center m-b-5 text-danger"> ALL STATS </h3>
+                                                <h6 class="text-center m-b-20  text-white"><br></h6>
                                                 <div class="row">
 
                                                     <div class="col-sm-6 col-md-6 col-lg-3">
@@ -860,7 +863,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane p-20" id="tab-pane-4" role="tabpanel">
+                <div class="tab-pane p-20 " id="tab-pane-4" role="tabpanel">
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="row">
 
@@ -1024,12 +1027,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane p-20" id="tab-pane-5" role="tabpanel">
+                <div class="tab-pane" id="tab-pane-5" role="tabpanel">
                     <div class="col-sm-12 col-lg-12">
                         <div class="card">
                             <div class="card-body">
                             @if(sizeof($promos) > 0)
-                                    <div id="promo_slider_store" class="carousel slide" data-ride="carousel">
+                                    <div id="loyalty_slider_store" class="carousel slide" data-ride="carousel">
                                         <div class="carousel-inner" role="listbox">
 
                                             <?PHP $promoCount = sizeof($promos); ?>
@@ -1037,6 +1040,7 @@
                                             <div class="carousel-item active">
 
                                                 <h3 class="text-center m-b-5 text-danger"> {{ strtoupper($promos[0]['promo_name']) }}</h3>
+                                                <h6 class="text-center m-b-20  text-white"><br></h6>
                                                 <div class="row">
 
                                                     <div class="col-sm-6 col-md-6 col-lg-3">
@@ -1145,6 +1149,7 @@
                                                 <div class="carousel-item">
 
                                                     <h3 class="text-center m-b-5 text-danger"> {{ strtoupper($promos[$x]['promo_name']) }}</h3>
+                                                <h6 class="text-center m-b-20  text-white"><br></h6>
                                                     <div class="row">
 
                                                         <div class="col-sm-6 col-md-6 col-lg-3">
@@ -1253,7 +1258,7 @@ VE
                                         </div>
 
 
-                                        <a class="carousel-control-next" href="#promo_slider_store" role="button" data-slide="next">
+                                        <a class="carousel-control-next" href="#loyalty_slider_store" role="button" data-slide="next">
                                             <span> <img src="{{asset('resources/assets/custom/images/arrow.png')}}" style="width: 70px;" > </span>
                                             <span class="sr-only">Next</span>
                                         </a>
