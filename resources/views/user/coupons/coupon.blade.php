@@ -168,7 +168,8 @@
                                                                 <input type="hidden" name="cp_img_name_1" id="cp_img_name_c_1">
                                                             </div>
 
-
+                                                            
+                                                          
                                                         </div>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_1"> </h6>
                                                     </div>
@@ -314,6 +315,13 @@
                                                                 <button id="rem_c_2" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
 
                                                                 <input type="hidden" name="cp_img_name_2" id="cp_img_name_c_2">
+
+
+                                                                <label class="btn-container"> Use Same Photo as Previous Coupon
+                                                                    <input type="checkbox" value="" id="use_prev_c_2" name="use_prev_c_2" onclick="use_prev_photo('c',2);">
+                                                                    <span class="checkmark"></span>
+                                                                </label>  
+
                                                             </div>
                                                             <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_2"> </h6>
                                                         </div>
@@ -329,6 +337,10 @@
                                                                 <td><br><br><img src="{{url('resources/assets/custom/images/search.png')}}" style="width: 20px;" ></td>
                                                             </tr>
                                                         </table>
+                                                        <label class="btn-container"> Use Same AR Coupon as Previous Coupon
+                                                                    <input type="checkbox" value="" id="use_prev_ar_c_2" name="use_prev_ar_c_2" onclick="use_prev_ar_model('c',2);">
+                                                                    <span class="checkmark"></span>
+                                                                </label> 
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group">
@@ -447,6 +459,14 @@
                                                                 <button id="rem_c_3" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
 
                                                                 <input type="hidden" name="cp_img_name_3" id="cp_img_name_c_3">
+
+
+                                                                <label class="btn-container"> Use Same Photo as Previous Coupon
+                                                                    <input type="checkbox" value="" id="use_prev_c_3" name="use_prev_c_3" onclick="use_prev_photo('c',3);">
+                                                                    <span class="checkmark"></span>
+                                                                </label>  
+
+
                                                             </div>
                                                             <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_3"> </h6>
 
@@ -463,6 +483,10 @@
                                                                 <td><br><br><img src="{{url('resources/assets/custom/images/search.png')}}" style="width: 20px;" ></td>
                                                             </tr>
                                                         </table>
+                                                        <label class="btn-container"> Use Same AR Coupon as Previous Coupon
+                                                                    <input type="checkbox" value="" id="use_prev_ar_c_3" name="use_prev_ar_c_3" onclick="use_prev_ar_model('c',3);">
+                                                                    <span class="checkmark"></span>
+                                                                </label> 
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group">
@@ -581,6 +605,12 @@
                                                                 <button id="rem_c_4" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
 
                                                                 <input type="hidden" name="cp_img_name_4" id="cp_img_name_c_4">
+                                                                
+                                                                <label class="btn-container"> Use Same Photo as Previous Coupon
+                                                                    <input type="checkbox" value="" id="use_prev_c_4" name="use_prev_c_4" onclick="use_prev_photo('c',4);">
+                                                                    <span class="checkmark"></span>
+                                                                </label>  
+
                                                             </div>
                                                             <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_4"> </h6>
                                                         </div>
@@ -596,6 +626,11 @@
                                                                 <td><br><br><img src="{{url('resources/assets/custom/images/search.png')}}" style="width: 20px;" ></td>
                                                             </tr>
                                                         </table>
+
+                                                        <label class="btn-container"> Use Same AR Coupon as Previous Coupon
+                                                                    <input type="checkbox" value="" id="use_prev_ar_c_4" name="use_prev_ar_c_4" onclick="use_prev_ar_model('c',4);">
+                                                                    <span class="checkmark"></span>
+                                                                </label>  
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group">
@@ -2234,7 +2269,39 @@
             $('a[aria-controls="'+next_tab+'"]').trigger("click");
         }
 
-        
+
+        function use_prev_photo(page, id) {
+
+            if($('#use_prev_'+page+'_'+id).is(':checked')) {
+                // get prev image 
+                var prev = $('#cp_img_name_' + page + '_' + (id - 1)).val();
+
+                $('#cp_img_name_' + page + '_' + id).val(prev);
+                $('#image_' + page + '_' + id).attr('src', prev);
+            }
+            else {
+                $('#cp_img_name_' + page + '_' + id).val('');
+                $('#image_' + page + '_' + id).attr('src',"{{ asset('resources/assets/user/images/imageplaceholder.png') }}" );
+            }
+        }
+
+        function use_prev_ar_model(page, id) {
+            if($('#use_prev_ar_'+page+'_'+id).is(':checked')) {
+                // get prev image 
+                var prev_ar = $('#ar_coupon_name_' + page + '_' + (id - 1)).val();
+                var prev_marker = $('#ar_marker_name_' + page + '_' + (id - 1)).val();
+
+                $('#ar_coupon_name_' + page + '_' + id).val(prev_ar);
+                $('#ar_marker_name_' + page + '_' + id).val(prev_marker);
+                $('#ar_prev_' + page + '_' + id).attr('src', "{{url('resources/assets/media')}}/"+prev_ar);
+            } 
+            else {
+                $('#ar_coupon_name_' + page + '_' + id).val('');
+                $('#ar_marker_name_' + page + '_' + id).val('');
+                $('#ar_prev_' + page + '_' + id).attr('src', "{{url('resources/assets/custom/images/no-image.png')}}");
+            }
+        }
+         
 
 
         // $('#coupon_photo_c_1').on('change', function(){
@@ -2435,24 +2502,37 @@
                     // $('#coupon_photo_error_' + page + '_' + id).html(err_1);
                 }
 
-                var coupon_img = $('#coupon_photo_' + page + '_' + id).val();
+                // var coupon_img = $('#coupon_photo_' + page + '_' + id).val();
+                // if ( $('input[name="use_prev_c_2"]').is(':checked') ) {
+                //     alert("checked");
+                // } else {
+                //     alert('not checked');
+                // }
 
-                if (coupon_img) {
-                    $('#store_image_error_' + id).html('');
-                    switch (coupon_img.substring(coupon_img.lastIndexOf('.') + 1).toLowerCase()) {
-                        case 'jpg':
-                        case 'png':
-                            $('#coupon_photo_error_' + page + '_' + id).html('');
-//                            coup_img_selected = 1;
-                            break;
-                        default:
-                            $('#coupon_photo_error_' + page + '_' + id).html("Please select a png or jpg");
-                            break;
+                if($('#use_prev_'+page+'_'+id).is(':checked')) {
+                    $('#coupon_photo_error_' + page + '_' + id).html('');
+                } 
+                else {
+                    if (coupon_img) {
+                        $('#store_image_error_' + id).html('');
+                        switch (coupon_img.substring(coupon_img.lastIndexOf('.') + 1).toLowerCase()) {
+                            case 'jpg':
+                            case 'png':
+                                $('#coupon_photo_error_' + page + '_' + id).html('');
+    //                            coup_img_selected = 1;
+                                break;
+                            default:
+                                $('#coupon_photo_error_' + page + '_' + id).html("Please select a png or jpg");
+                                break;
 
+                        }
+                    } else {
+                        $('#coupon_photo_error_' + page + '_' + id).html(err_1);
                     }
-                } else {
-                    $('#coupon_photo_error_' + page + '_' + id).html(err_1);
                 }
+
+                
+                
             } else if(page == 'e') {
 
                 var new_img = $('#cp_img_name_'+ page + '_' + id).val();
