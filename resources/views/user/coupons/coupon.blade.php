@@ -2399,7 +2399,9 @@
                 if(new_img.length > 0) {
                     coup_img_selected = 1;
                 } else {
-                    $('#coupon_photo_error_' + page + '_' + id).html(err_1);
+                    crop_image(page, id);
+                    coup_img_selected = 1;
+                    // $('#coupon_photo_error_' + page + '_' + id).html(err_1);
                 }
 
                 var coupon_img = $('#coupon_photo_' + page + '_' + id).val();
@@ -2427,6 +2429,10 @@
                 if(new_img.length > 0) {
                     coup_img_selected = 1;
                 } else {
+
+                    crop_image(page, id);
+                    coup_img_selected = 1;
+
                     var coupon_img = $('#coup_img_'+ page + '_' + id).val();
 
                     if(coupon_img.length > 0) {

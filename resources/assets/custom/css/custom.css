@@ -254,8 +254,8 @@
 
 @media (min-width: 576px) { 
     .uploader {
-        width:250px; 
-        height:120px; 
+        width: 250px;
+        height: 82px;
         padding-top: 15px;
     }
     
@@ -271,7 +271,7 @@
 
     .cropit-preview {
         width: 250px;
-        height: 120px;
+        height: 82px;
         border: 1px solid gray;
         margin-bottom: 5px;
     }  
@@ -280,8 +280,8 @@
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .uploader {
-        width:250px; 
-        height:120px; 
+        width: 250px;
+        height: 82px;
         padding-top: 15px;
     }
     
@@ -297,7 +297,7 @@
 
     .cropit-preview {
         width: 250px;
-        height: 120px;
+        height: 82px;
         border: 1px solid gray;
         margin-bottom: 5px;
     }  
@@ -306,8 +306,8 @@
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) { 
     .uploader {
-        width:250px; 
-        height:120px; 
+        width: 250px;
+        height: 82px;
         padding-top: 15px;
     }
     
@@ -324,7 +324,7 @@
 
     .cropit-preview {
         width: 250px;
-        height: 120px;
+        height: 82px;
         border: 1px solid gray;
         margin-bottom: 5px;
     }  
@@ -333,8 +333,8 @@
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { 
     .uploader {
-        width:250px; 
-        height:120px; 
+        width: 250px;
+        height: 82px;
         padding-top: 15px;
     }
     
