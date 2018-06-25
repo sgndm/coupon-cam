@@ -621,6 +621,7 @@
 
         $(document).ready(function(){
             load_map(1);
+            load_map(2);
             $('.dropify').dropify();
 
             $('#crt_qr_1').show();

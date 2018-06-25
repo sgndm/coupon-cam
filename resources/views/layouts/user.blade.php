@@ -35,6 +35,8 @@
         
         <!-- You can change the theme colors from here -->
         <link href="{{ asset('resources/assets/template-custom/css/colors/default-dark.css') }}" id="theme" rel="stylesheet">
+
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
         
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -351,6 +353,7 @@
     <!--Custom JavaScript -->
     <script src="{{ asset('resources/assets/template-custom/js/custom.js') }}"></script>
     
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->

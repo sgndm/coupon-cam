@@ -228,8 +228,8 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Start Time </label>
-                                            <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                <input type="time" class="form-control" value="" name="promo_start" id="promo_start_1"  onclick="error_hide('promo_start_error_1');">
+                                            <div class="input-group" >
+                                                <input type="text" class="form-control jq-time-picker" value="" name="promo_start" id="promo_start_1"  onclick="error_hide('promo_start_error_1');">
 
                                             </div>
                                             <h6 class="form-control-feedback text-danger" id="promo_start_error_1"> </h6>
@@ -436,8 +436,9 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Start Time </label>
-                                            <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                <input type="time" class="form-control" value="" name="promo_start" id="promo_start_2" oninput="error_hide('promo_start_error_2')">
+                                            <!-- <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true"> -->
+                                            <div class="input-group">
+                                                <input type="text" class="form-control jq-time-picker" value="" name="promo_start" id="promo_start_2" oninput="error_hide('promo_start_error_2')">
                                             </div>
                                             <h6 class="form-control-feedback text-danger" id="promo_start_error_2"> </h6>
 
@@ -636,8 +637,8 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Start Time </label>
-                                            <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                <input type="time" class="form-control" value="" name="promo_start" id="promo_start_3">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control jq-time-picker" value="" name="promo_start" id="promo_start_3">
                                             </div>
 
                                         </div>
@@ -823,8 +824,8 @@
                                 <div class="col-sm-12 col-md-12 col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label">Start Time </label>
-                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                            <input type="time" class="form-control" value="" name="promo_start" id="promo_start_4">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control jq-time-picker" value="" name="promo_start" id="promo_start_4">
                                         </div>
 
                                     </div>
@@ -915,7 +916,17 @@
         $(document).ready(function(){
             // set_stat_tile();
             load_map(1);
+            load_map(2);
             get_active_stores();
+
+            
+            $('.jq-time-picker').timepicker({
+                timeFormat: 'h:mm p',
+                interval: 15,
+                dynamic: true,
+                dropdown: true,
+                scrollbar: true
+            });
 
             $('#crt_qr_1').show();
             $('#print_code_1').hide();
