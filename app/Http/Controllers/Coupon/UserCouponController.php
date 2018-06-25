@@ -262,9 +262,9 @@ class UserCouponController extends Controller
           $id = Promo::where('promo_id',$request->get('promo_id_1'))->update(['used' => '1', 'status' => 1,'updated_at' => date('Y-m-d h:i:s') ]);
         }
         if($id) {
-            return redirect('user/coupons')->with(['success' => 'Coupon created successfully']);
+            return redirect('user/coupons')->with(['success' => 'Coupon Updated successfully']);
         } else {
-            return back()->with(['error' => 'Store failed to create']);
+            return back()->with(['error' => 'Coupon update Failed']);
         }
     }
 

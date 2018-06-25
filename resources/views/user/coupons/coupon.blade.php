@@ -175,7 +175,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_c_1" name="coupon_name_1" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_1');">
+                                                        <input type="text" id="coupon_name_c_1" name="coupon_name_1" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_1');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_c_1"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -242,7 +242,7 @@
                                         <div class="tab-pane p-20" id="cpn_l_2" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <label class="control-label">Promo</label>
                                                         <select class="form-control custom-select" name="promo_id_2" id="promo_id_c_2">
                                                             <option>Select Promo</option>
@@ -256,7 +256,7 @@
                                                                 <option>-- No Promos Available.. Please create a Promo..</option>
                                                             @endif
                                                         </select>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group">
                                                         <label class="control-label">Not Sure What To Offer?</label>
                                                         <select class="form-control custom-select" id="suggestion_1">
@@ -321,7 +321,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_c_2" name="coupon_name_2" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_2');">
+                                                        <input type="text" id="coupon_name_c_2" name="coupon_name_2" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_2');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_c_2"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -375,7 +375,7 @@
                                         <div class="tab-pane p-20" id="cpn_l_3" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <label class="control-label">Promo</label>
                                                         <select class="form-control custom-select" name="promo_id_3" id="promo_id_c_2">
                                                             <option>Select Promo</option>
@@ -389,7 +389,7 @@
                                                                 <option>-- No Promos Available.. Please create a Promo..</option>
                                                             @endif
                                                         </select>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group">
                                                         <label class="control-label">Not Sure What To Offer?</label>
                                                         <select class="form-control custom-select" id="suggestion_1">
@@ -455,7 +455,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_c_3" name="coupon_name_3" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_3');">
+                                                        <input type="text" id="coupon_name_c_3" name="coupon_name_3" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_3');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_c_3"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -509,7 +509,7 @@
                                         <div class="tab-pane p-20" id="cpn_l_4" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <label class="control-label">Promo</label>
                                                         <select class="form-control custom-select" name="promo_id_4" id="promo_id_c_2">
                                                             <option>Select Promo</option>
@@ -523,7 +523,7 @@
                                                                 <option>-- No Promos Available.. Please create a Promo..</option>
                                                             @endif
                                                         </select>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group">
                                                         <label class="control-label">Not Sure What To Offer?</label>
                                                         <select class="form-control custom-select" id="suggestion_1">
@@ -588,7 +588,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_c_4" name="coupon_name_4" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_4');">
+                                                        <input type="text" id="coupon_name_c_4" name="coupon_name_4" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_4');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_c_4"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -1474,7 +1474,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_e_1" name="coupon_name_1" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_1');">
+                                                        <input type="text" id="coupon_name_e_1" name="coupon_name_1" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_1');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_e_1"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -1538,7 +1538,7 @@
                                         <div class="tab-pane p-20" id="cpn_e_2" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <label class="control-label">Promo</label>
                                                         <select class="form-control custom-select" name="promo_id_2" id="promo_id_e_2" disabled>
                                                             <option>Select Promo</option>
@@ -1552,7 +1552,7 @@
                                                                 <option>-- No Promos Available.. Please create a Promo..</option>
                                                             @endif
                                                         </select>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group">
                                                         <label class="control-label">Not Sure What To Offer?</label>
                                                         <select class="form-control custom-select" id="suggestion_1">
@@ -1618,7 +1618,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_e_2" name="coupon_name_2" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_2');">
+                                                        <input type="text" id="coupon_name_e_2" name="coupon_name_2" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_2');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_e_2"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -1672,7 +1672,7 @@
                                         <div class="tab-pane p-20" id="cpn_e_3" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <label class="control-label">Promo</label>
                                                         <select class="form-control custom-select" name="promo_id_3" id="promo_id_e_2" disabled>
                                                             <option>Select Promo</option>
@@ -1684,7 +1684,7 @@
                                                                 @endforeach
                                                             @endif
                                                         </select>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group">
                                                         <label class="control-label">Not Sure What To Offer?</label>
                                                         <select class="form-control custom-select" id="suggestion_1">
@@ -1749,7 +1749,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_e_3" name="coupon_name_3" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_3');">
+                                                        <input type="text" id="coupon_name_e_3" name="coupon_name_3" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_3');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_e_3"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -1803,7 +1803,7 @@
                                         <div class="tab-pane p-20" id="cpn_e_4" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <label class="control-label">Promo</label>
                                                         <select class="form-control custom-select" name="promo_id_4" id="promo_id_e_2" disabled>
                                                             <option>Select Promo</option>
@@ -1817,7 +1817,7 @@
                                                                 <option>-- No Promos Available.. Please create a Promo..</option>
                                                             @endif
                                                         </select>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group">
                                                         <label class="control-label">Not Sure What To Offer?</label>
                                                         <select class="form-control custom-select" id="suggestion_1">
@@ -1882,7 +1882,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_e_4" name="coupon_name_4" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_4');">
+                                                        <input type="text" id="coupon_name_e_4" name="coupon_name_4" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_4');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_e_4"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -2490,7 +2490,17 @@
             var valid = validate_input(page, id);
 
             if(valid == 1) {
-                nextTab(next_tab);
+
+                if(next_tab == 'cpn_l_5' ) {
+                    validate_coupon_form('c',1,1);
+                } 
+                else if(next_tab == 'cpn_e_5') {
+                    validate_coupon_form('e',2,0);
+                }
+                else {
+                    nextTab(next_tab);
+                }
+                
             } else {
                 alert("Please Fill the missing data..");
             }
