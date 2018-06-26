@@ -158,6 +158,7 @@ foreach($nearbyPromos as $promo){
 
 		$promo_start = '';
 		$name = '';
+		$diff = [];
 
 		// | if one rime promo
 		if($promo_repeate == "Date"){
@@ -237,6 +238,7 @@ foreach($nearbyPromos as $promo){
 
 		}
 
+		$diff = [];
 
 		if(sizeof($diff) > 0 ) {
 
@@ -433,6 +435,75 @@ foreach($nearbyPromos as $promo){
 
 }
 
+// get all filterd nearby coupons
+$filtered_coupons = $api_info['promo_info'];
+
+$result = [];
+
+foreach ($filtered_coupons as $filtered_coupon) {
+    $t_coupon_id = $filtered_coupon['pref_coupon']->coupon_id;
+    $t_coup_lvl = $filtered_coupon['pref_coupon']->coupon_level;
+    $t_all_coups = $filtered_coupon['all_coupon'];
+
+    $new_prep_coup = [];
+
+    if($t_coup_lvl < 4) {
+
+        foreach ($t_all_coups as $all) {
+            if($all->coupon_level == ($t_coup_lvl + 1)) {
+                $new_prep_coup = $all;
+            }
+        }
+
+    }
+
+    // check if this coupon has excluded
+    $getExcluded = "SELECT * FROM `exclued_coupons` WHERE `device_id`='" . $device_id . "' AND `coupon_id`=" . $t_coupon_id . " ORDER BY `id` ASC";
+    $execute = $dbh->query($getExcluded);
+    $rowsEcl = $execute->rowCount();
+    $resExclude = $execute->fetchAll(PDO::FETCH_OBJ);
+
+    if($rowsEcl > 0) {
+        // get last exclude
+        $t_last_date  =  date($resExclude[$rowsEcl - 1]->created_at);
+
+        $last = date_create($t_last_date);
+
+        $now = date('Y-m-d H:i:s');
+        $today = date_create($now);
+
+        $timeDiff = date_diff($last, $today);
+
+        $time_difference = 0;
+
+        $api_info['diff'] = $timeDiff;
+        $api_info['now'] = $today;
+        $api_info['last'] = $last;
+
+
+        if(sizeof($timeDiff) > 0 ) {
+
+            if ($timeDiff->invert == 0) {
+                $time_difference = ((((($timeDiff->y * 365.25 + $timeDiff->m * 30 + $timeDiff->d) * 24 + $timeDiff->h) * 60 + $timeDiff->i) * 60 + $timeDiff->s) * 1000);
+            }
+        }
+
+
+        if(($time_difference > 0) && ($time_difference <= 86400000)) {
+            $filtered_coupon['pref_coupon'] = $new_prep_coup;
+            $result[] = $filtered_coupon;
+        } else {
+            $result[] = $filtered_coupon;
+        }
+
+
+    } else {
+        $result[] = $filtered_coupon;
+    }
+
+}
+
+$api_info['promo_info'] = $result;
 // ************************************************************************************************** //
 // | get red friday fromos
 $getRed = "SELECT * FROM `red_friday_promos` WHERE `status`=1";
