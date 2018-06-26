@@ -238,7 +238,7 @@ foreach($nearbyPromos as $promo){
 
 		}
 
-		$diff = [];
+//		$diff = [];
 
 		if(sizeof($diff) > 0 ) {
 
