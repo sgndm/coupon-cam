@@ -62,34 +62,34 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if($rowsUpd > 0) {
                             $apiResponse['response_code'] = 200;
                             $apiResponse['response_msg'] = 'coupon_redeemed_success';
-                            $apiResponse['response_data'] = [];
+                            $apiResponse['response_data'] = ['coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0];
                         }
                         else {
                             $apiResponse['response_code'] = 200;
                             $apiResponse['response_msg'] = 'unable_to_redeem_coupon';
-                            $apiResponse['response_data'] = [];
+                            $apiResponse['response_data'] = ['coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0];
                         }
 
                     } else {
                         $apiResponse['response_code'] = 200;
                         $apiResponse['response_msg'] = 'qr_code_mismatch';
-                        $apiResponse['response_data'] = [];
+                        $apiResponse['response_data'] = ['coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0];
                     }
                 }
                 else {
                     $apiResponse['response_code'] = 200;
                     $apiResponse['response_msg'] = 'unable_to_find_the_store';
-                    $apiResponse['response_data'] = [];
+                    $apiResponse['response_data'] = ['coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0];
                 }
             }
             else if( $c_status == 2) {
                 $apiResponse['response_code'] = 200;
                 $apiResponse['response_msg'] = 'already_redeemed';
-                $apiResponse['response_data'] = [];
+                $apiResponse['response_data'] = ['coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0];
             } else {
                 $apiResponse['response_code'] = 200;
                 $apiResponse['response_msg'] = 'not_available';
-                $apiResponse['response_data'] = [];
+                $apiResponse['response_data'] = ['coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0];
             }
 
 
@@ -98,7 +98,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         else {
             $apiResponse['response_code'] = 200;
             $apiResponse['response_msg'] = 'unable_to_find_coupon';
-            $apiResponse['response_data'] = [];
+            $apiResponse['response_data'] = ['coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0];
         }
 
     }
