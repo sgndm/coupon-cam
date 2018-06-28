@@ -32,8 +32,8 @@
                 </li>
                 @else 
                 
-                <li class="nav-item active">
-                    <a class="nav-link" data-toggle="tab" href="#tab-pane-2" role="tab" onclick="open_tab();">
+                <li class="nav-item ">
+                    <a class="nav-link active" data-toggle="tab" href="#tab-pane-2" role="tab" onclick="open_tab();">
                         <span class="hidden-sm-up"><i class="ti-user"></i></span>
                         <span class="hidden-xs-down">ACTIVE PROMOS</span>
                     </a>
