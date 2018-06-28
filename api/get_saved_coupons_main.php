@@ -63,7 +63,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             + cos(($latitude*pi()/180)) * cos((places.latitude*pi()/180))
             * cos((($longitude - places.longitude)*pi()/180))))
             * 180/pi())*60*1.1515*1.609344)
-            as distance, `retarget_coupons`.* FROM `retarget_saved` LEFT JOIN `places` ON `places`.`place_id`=`retarget_saved`.`place_id` LEFT JOIN `retarget_coupons` ON `retarget_coupons`.`coupon_id` = `retarget_saved`.`coupon_id` WHERE `retarget_saved`.`device_id`='".$device_id."' AND `retarget_saved`.`status`=4 ORDER BY distance ASC";
+            as distance, `retarget_coupons`.* FROM `retarget_saved` LEFT JOIN `places` ON `places`.`place_id`=`retarget_saved`.`place_id` LEFT JOIN `retarget_coupons` ON `retarget_coupons`.`coupon_id` = `retarget_saved`.`coupon_id` WHERE `retarget_saved`.`device_id`='".$device_id."' ORDER BY distance ASC";
 
     $exGetReSvd = $dbh->query($getReSaved);
     $retargetSaved = $exGetReSvd->fetchAll(PDO::FETCH_OBJ);
