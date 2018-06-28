@@ -53,7 +53,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     // return nearby geo coupons
-    $apiResponse['response_data']['geo_coupons'] = $geo_coupons;
+    // $apiResponse['response_data']['geo_coupons'] = $geo_coupons;
 
     // end of nearby geo coupons
 
@@ -162,8 +162,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     }
 
+   
+
+   foreach($retargetSaved as $coupon) {
+    $out_saved[] = $coupon;
+   }
+
     // out put saved
-//    $apiResponse['response_data']['saved_coupons'] = $out_saved;
     $apiResponse['response_data'] = $out_saved;
 
     // end of saved coupons
