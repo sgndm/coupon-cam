@@ -59,16 +59,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // geo coupons saved
     // get saved geo coupons | order by distance
-    $getReSaved = "SELECT `retarget_saved`.*,`retarget_saved`.`place_id` as store_id,`places`.`contact_name`,(((acos(sin(($latitude*pi()/180)) * sin((places.latitude*pi()/180))
+    $getReSaved = "SELECT `retarget_saved`.*,`retarget_saved`.`place_id` as store_id,`places`.* ,(((acos(sin(($latitude*pi()/180)) * sin((places.latitude*pi()/180))
             + cos(($latitude*pi()/180)) * cos((places.latitude*pi()/180))
             * cos((($longitude - places.longitude)*pi()/180))))
             * 180/pi())*60*1.1515*1.609344)
-            as distance, `retarget_coupons`.* FROM `retarget_saved` LEFT JOIN `places` ON `places`.`place_id`=`retarget_saved`.`place_id` LEFT JOIN `retarget_coupons` ON `retarget_coupons`.`coupon_id` = `retarget_saved`.`coupon_id` WHERE `retarget_saved`.`device_id`='".$device_id."' ORDER BY distance ASC";
+            as distance, `retarget_coupons`.* FROM `retarget_saved` LEFT JOIN `places` ON `places`.`place_id`=`retarget_saved`.`place_id` LEFT JOIN `retarget_coupons` ON `retarget_coupons`.`coupon_id` = `retarget_saved`.`coupon_id` WHERE `retarget_saved`.`device_id`='".$device_id."' AND `retarget_saved`.`status`=4 ORDER BY distance ASC";
 
     $exGetReSvd = $dbh->query($getReSaved);
     $retargetSaved = $exGetReSvd->fetchAll(PDO::FETCH_OBJ);
 
-    $apiResponse['response_data']['geo_coupon_saved'] = $retargetSaved;
+//    $apiResponse['response_data']['geo_coupon_saved'] = $retargetSaved;
     // end for geo coupons saved
 
     // output saved
@@ -120,7 +120,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $rows3 = $res3->rowCount();
                 $get_country = $res3->fetchAll(PDO::FETCH_OBJ);
 
-                $country = $get_country[0]->country_short;
+                $country_short = $get_country[0]->country_short;
 
                 $curr = "$";
                 if($country_short == "GB") {
@@ -153,6 +153,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $coupons->qr_code = $t_store_qr_code;
                 $coupons->qr_image = $t_store_qr_image;
                 $coupons->distance = $t_store_distance;
+                $coupons->is_retarget = 0;
 
                 $out_saved[] = $coupons;
 
@@ -165,6 +166,55 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
    
 
    foreach($retargetSaved as $coupon) {
+
+        $r_store_id = $coupon->store_id;
+
+       // get store country
+       $sql3 = "SELECT * FROM `places` WHERE `place_id`=" . $r_store_id;
+       $res3 = $dbh->query($sql3);
+       $rows3 = $res3->rowCount();
+       $get_country = $res3->fetchAll(PDO::FETCH_OBJ);
+
+       $r_country_short = $get_country[0]->country_short;
+
+       $r_curr = "$";
+       if($r_country_short == "GB") {
+           $r_curr = "£";
+       }
+       else if($r_country_short == "NZ") {
+           $r_curr = "$";
+       }
+       else if($r_country_short == "CA") {
+           $r_curr = "C$";
+       }
+       else if($r_country_short == "AU") {
+           $r_curr = "A$";
+       }
+       else {
+           $r_curr = "$";
+       }
+
+        $coupon->is_retarget = 1;
+        $coupon->scan_coupon_id = $coupon->coupon_id;
+        $coupon->scan_coupon_status = $coupon->status;
+        $coupon->is_bonus = 0;
+        $coupon->used_times = 0;
+        $coupon->total_used_times = 0;
+        $coupon->has_extended = 0;
+        $coupon->is_shared = 0;
+        $coupon->promo_name = "";
+        $coupon->coupon_title = $coupon->coupon_name;
+        $coupon->coupon_information = $coupon->coupon_info;
+        $coupon->terms_conditions = $coupon->coupon_details;
+        $coupon->coupon_model = "";
+        $coupon->coupon_marker = "";
+        $coupon->coupon_level = 1;
+        $coupon->is_loyalty = 0;
+        $coupon->loyalty_count = 0;
+        $coupon->currency = $r_curr;
+        $coupon->min_spend = 0;
+        $coupon->store_name = $coupon->contact_name;
+
     $out_saved[] = $coupon;
    }
 

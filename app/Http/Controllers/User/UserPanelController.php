@@ -1784,7 +1784,7 @@ class UserPanelController extends Controller
                             'place_id' => $store_id,
                             'coupon_id' => $t_coup_id,
                             'device_id' => $device->device_id,
-                            'status' => 5,
+                            'status' => 4,
                             'is_push' => 1,
                             'created_at' => date('Y-m-d H:i:s'),
                             'updated_at' => date('Y-m-d H:i:s')
@@ -1918,7 +1918,7 @@ class UserPanelController extends Controller
                     foreach ($devices as $device) {
 
                         // check for saved
-                        $saved_c = RetargetSaved::where(['place_id' => $store_id, 'device_id' => $device->device_id, 'coupon_id' => $inst])->count();
+                        $saved_c = RetargetSaved::where(['place_id' => $store_id, 'device_id' => $device->device_id, 'coupon_id' => $inst, 'status' => 4])->count();
 
 
                         if($saved_c == 0) {
@@ -1927,7 +1927,7 @@ class UserPanelController extends Controller
                                 'place_id' => $store_id,
                                 'coupon_id' => $t_coup_id,
                                 'device_id' => $device->device_id,
-                                'status' => 5,
+                                'status' => 4,
                                 'is_push' => 1,
                                 'created_at' => date('Y-m-d H:i:s'),
                                 'updated_at' => date('Y-m-d H:i:s')
