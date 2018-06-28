@@ -59,7 +59,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // geo coupons saved
     // get saved geo coupons | order by distance
-    $getReSaved = "SELECT `retarget_saved`.*,`retarget_saved`.`place_id` as store_id,`places`.* ,(((acos(sin(($latitude*pi()/180)) * sin((places.latitude*pi()/180))
+    $getReSaved = "SELECT `retarget_saved`.*, `retarget_saved`.`status` as scan_coupon_status,`retarget_saved`.`place_id` as store_id,`places`.* ,(((acos(sin(($latitude*pi()/180)) * sin((places.latitude*pi()/180))
             + cos(($latitude*pi()/180)) * cos((places.latitude*pi()/180))
             * cos((($longitude - places.longitude)*pi()/180))))
             * 180/pi())*60*1.1515*1.609344)
@@ -196,7 +196,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $coupon->is_retarget = 1;
         $coupon->scan_coupon_id = $coupon->coupon_id;
-        $coupon->scan_coupon_status = $coupon->status;
         $coupon->is_bonus = 0;
         $coupon->used_times = 0;
         $coupon->total_used_times = 0;
