@@ -174,7 +174,7 @@ class UserStoreController extends Controller
             'store_ar' => $store_ar,
             'store_marker' => $store_marker,
             'country_short' => trim($request->country_short),
-            'store_description' => trim($request->store_description),
+            'store_description' => '',
             'is_give_away' => $is_give_away,
             'qr_code' => trim($request->promo_qr_code),
             'qr_image' => trim($request->promo_qr_image)
@@ -327,7 +327,7 @@ class UserStoreController extends Controller
                     'store_ar' => $store_ar,
                     'store_marker' => $store_marker,
                     'country_short' => trim($request->country_short),
-                    'store_description' => trim($request->store_description),
+                    'store_description' => '',
                     'is_give_away' => $is_give_away,
                     'qr_code' => trim($request->promo_qr_code),
                     'qr_image' => trim($request->promo_qr_image)

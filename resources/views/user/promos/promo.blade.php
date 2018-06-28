@@ -925,7 +925,8 @@
                 interval: 15,
                 dynamic: true,
                 dropdown: true,
-                scrollbar: true
+                scrollbar: true,
+                startTime: '8.00 am'
             });
 
             $('#crt_qr_1').show();

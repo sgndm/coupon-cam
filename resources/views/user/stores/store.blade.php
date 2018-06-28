@@ -169,13 +169,13 @@
 
                                 <hr>
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Store Description</label>
-                                            <textarea id="store_description_1" name="store_description" class="form-control" required oninput="error_hide('store_description_error_1');"  ></textarea>
-                                            <h6 class="form-control-feedback text-danger" id="store_description_error_1"> </h6>
-                                        </div>
-                                    </div>
+                                    {{--<div class="col-sm-12 col-md-12 col-lg-6">--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--<label class="control-label">Store Description</label>--}}
+                                            {{--<textarea id="store_description_1" name="store_description" class="form-control" required oninput="error_hide('store_description_error_1');"  ></textarea>--}}
+                                            {{--<h6 class="form-control-feedback text-danger" id="store_description_error_1"> </h6>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
 
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <label class="control-label">Coupon Code</label>
@@ -382,13 +382,13 @@
 
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Store Description</label>
-                                            <textarea id="store_description_2" name="store_description" class="form-control" required oninput="error_hide('store_description_error_2');" ></textarea>
-                                            <h6 class="form-control-feedback text-danger" id="store_description_error_2"> </h6>
-                                        </div>
-                                    </div>
+                                    {{--<div class="col-sm-12 col-md-12 col-lg-6">--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--<label class="control-label">Store Description</label>--}}
+                                            {{--<textarea id="store_description_2" name="store_description" class="form-control" required oninput="error_hide('store_description_error_2');" ></textarea>--}}
+                                            {{--<h6 class="form-control-feedback text-danger" id="store_description_error_2"> </h6>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
 
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <label class="control-label">Coupon Code</label>
@@ -1425,12 +1425,12 @@
             } else {
 //                $('#country_short_error_' + id).html("Error in store location.. please re-enter store address");
             }
-            var st_desc = $('#store_description_' + id).val();
-            if(st_desc.length > 0) {
-                $('#store_description_error_' + id).html('');
-            } else {
-                $('#store_description_error_' + id).html(err_1);
-            }
+//            var st_desc = $('#store_description_' + id).val();
+//            if(st_desc.length > 0) {
+//                $('#store_description_error_' + id).html('');
+//            } else {
+//                $('#store_description_error_' + id).html(err_1);
+//            }
             var qr_code = $('#promo_qr_code_' + id).val();
             if(qr_code.length > 0) {
                 $('#qr_code_error_' + id).html('');
@@ -1544,7 +1544,7 @@
             // }
 
 
-            if( (st_name.length > 0) && (street_name.length > 0) && (town.length > 0) && (state.length > 0) && (zipcode.length > 0) && (country.length > 0) && (st_desc.length > 0) && (qr_code.length > 0) && (qr_img.length > 0) && (st_lat.length > 0) && (st_lng.length > 0) && (country_short.length > 0) && (business == 1) && (category == 1) &&(c_st_img == 1) && (c_st_ar == 1) ) {
+            if( (st_name.length > 0) && (street_name.length > 0) && (town.length > 0) && (state.length > 0) && (zipcode.length > 0) && (country.length > 0) && (qr_code.length > 0) && (qr_img.length > 0) && (st_lat.length > 0) && (st_lng.length > 0) && (country_short.length > 0) && (business == 1) && (category == 1) &&(c_st_img == 1) && (c_st_ar == 1) ) {
                 return 1;
             } else {
                 return 0;
