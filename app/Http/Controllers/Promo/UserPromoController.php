@@ -377,6 +377,56 @@ class UserPromoController extends Controller
                     'updated_at' => date('Y-m-d H:i:s')
                 ]);
 
+
+
+            // update promo locations
+
+            $store_locations = [];
+
+            $stores = json_encode($request->store_ids_2);
+
+            $remove = array("[","]","\"");
+            $stm = trim(str_replace($remove, " ", $stores));
+
+            $store_list = explode(',',$stm);
+
+            if(sizeof($store_list) > 0 ) {
+                // get promo locations old
+                $up_promo_id = $request->formid;
+
+                PromoLocations::where(['promo_id' => $up_promo_id])->delete();
+
+                for($n = 0; $n < sizeof($store_list); $n++){
+
+                    $stId = (int)$store_list[$n];
+
+                    $is_outside = $request->get('store_loc_'.$stId);
+                      echo $stId."-".$is_outside."<br>";
+
+                    if($is_outside == 1){
+                        $lat = $request->get('store_lat_'.$stId);
+                        $lng = $request->get('store_lng_'.$stId);
+                        $xxx  = '1';
+                    }else{
+                        $inst = Store::where("place_id",$stId)->first();
+                        $lat = $inst->latitude;
+                        $lng = $inst->longitude;
+                        $xxx  = '0';
+                    }
+
+                    $store_locations[] = [
+                        'promo_id' => $up_promo_id,
+                        'store_id' => $stId,
+                        'lat_code' => $lat,
+                        'lng_code' => $lng,
+                        'is_outside' => $xxx
+                    ];
+                }
+
+                PromoLocations::insert($store_locations);
+            }
+
+
             if($promo_id){
                 return redirect('user/promos')->with(['success' => 'Promo Updated successfully']);
             }  else {
@@ -446,6 +496,11 @@ class UserPromoController extends Controller
         $stores = explode(",", $list2);
 
         $promo_details[0]->place_id = $stores;
+
+        // get promo_locations
+        $pr_locs = PromoLocations::where(['promo_id' => $id])->get();
+
+        $promo_details[0]->locations = $pr_locs;
 
         if(sizeof($promo_details) > 0) {
 
@@ -552,6 +607,26 @@ class UserPromoController extends Controller
 
         return($promos);
     }
+
+    public function get_active_promos() {
+        $promos = Promo::join('promo_locations', 'promo_locations.promo_id', '=', 'promos.promo_id')
+            ->select('promos.promo_id','promos.promo_name', 'promo_locations.*')
+            ->where(['promos.status' => '1', 'promos.used' => '1'])
+            ->get();
+
+        return ($promos);
+    }
+
+     public function get_inactive_promos() {
+        $promos = Promo::join('promo_locations', 'promo_locations.promo_id', '=', 'promos.promo_id')
+            ->select('promos.promo_id','promos.promo_name', 'promo_locations.*')
+            ->where(['promos.status' => '0', 'promos.used' => '1'])
+            ->get();
+
+        return ($promos);
+    }
+
+
 
 
 }

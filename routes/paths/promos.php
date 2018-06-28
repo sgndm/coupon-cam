@@ -27,6 +27,9 @@ Route::get('user/delete_old_qr/{file}', 'Promo\UserPromoController@delete_old_qr
 Route::get('user/get_final_promo_stats/{id}', 'Promo\UserPromoController@get_promo_stats');
 Route::get('user/search_promos/{input}', 'Promo\UserPromoController@search_promos');
 
+Route::get('user/get_active_promos', 'Promo\UserPromoController@get_active_promos');
+Route::get('user/get_inactive_promos', 'Promo\UserPromoController@get_inactive_promos');
+
 Route::post('/user/promos/create_promo', 'Promo\UserPromoController@create_promo');
 Route::post('/user/promos/update_promo', 'Promo\UserPromoController@update_promo');
 Route::post('/user/promos/delete_promo', 'Promo\UserPromoController@delete_promo');

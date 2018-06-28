@@ -490,6 +490,7 @@
 @section('custom_js')
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQOQYd6y3PeucI2ajI2hXzcPTXVwlGfgs&libraries=places"></script>
     <script>
+        var has_stores = {{ $has_stores }};
         var map;
         var marker;
         var infowindow = new google.maps.InfoWindow();
@@ -497,7 +498,13 @@
 
         $(document).ready(function(){
 
-            load_map(2);
+            if(has_stores == 1) {
+                load_map(2);
+            } else {
+                load_map(1);
+            }
+
+
             get_active_stores();
 
             $('#crt_qr_2').hide();
