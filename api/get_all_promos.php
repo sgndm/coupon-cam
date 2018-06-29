@@ -36,6 +36,7 @@ foreach($nearbyPromos as $promo){
     $pref_coupon = $coops2->fetch(PDO::FETCH_OBJ);
     }
 
+    $promo->pref_coupon = $pref_coupon;
 
     // check if this promo has saved before
 	$checkSaved = "SELECT * FROM `user_coupons` WHERE `device_id`='" . $device_id . "' AND `scan_promo_id`=". $promo->promo_id;
