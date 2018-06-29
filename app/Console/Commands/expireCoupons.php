@@ -68,7 +68,7 @@ class expireCoupons extends Command
         $server_lng = $server_location['longitude'];
 
         $server_offset = Converter::get_time_zone($server_lat,$server_lng);
-         echo "server-offset : " . $server_offset . "\n\n";
+//        echo "server-offset : " . $server_offset . "\n\n";
 
 
         // push notification array
@@ -79,10 +79,11 @@ class expireCoupons extends Command
         //$logArray = [];
 
         // get re-target saved coupons
-        $get_re_saved = RetargetSaved::where(['status' => 5])->get();
+        $get_re_saved = RetargetSaved::where(['status' => 4])->get();
 
         foreach ($get_re_saved as $reSaved) {
             // check date
+//            echo "Retarget";
             $get_saved_date = date('Y-m-d H:i:s', strtotime($reSaved->created_at));
             $saved_date = date_create($get_saved_date);
 
@@ -93,8 +94,49 @@ class expireCoupons extends Command
 
             $total_in_seconds = ((((($get_diff->y * 365.25 + $get_diff->m * 30 + $get_diff->d) * 24 + $get_diff->h) * 60 + $get_diff->i)*60 + $get_diff->s));
 
+            if($reSaved->is_push == 1) {
+                if($total_in_seconds >= 2592000) {
+                    // after a month
+                    // details
+                    $t_store_id = $reSaved->place_id;
 
-            if($total_in_seconds >= 2592000) {
+                    // get store details
+                    // get store details by store id
+                    $store_details = ExtraFunctions::get_store_details($t_store_id);
+
+                    $country = $store_details['country'];
+                    $lat = $store_details['latitude'];
+                    $lng = $store_details['longitude'];
+
+                    //get time zone
+                    $get_offset = Converter::get_time_zone($lat,$lng);
+//                    echo "store-offset : " . $get_offset . "\n\n";
+
+                    $server_time = Converter::calculate_server_time($get_offset, $server_offset);
+                    // echo "server-time : " . $server_time . "\n";
+
+                    //  $server_time = date('08:24:00');
+                    // time now
+                    $time_now = date('H:i:s');
+
+//                    echo "server-time : " . $server_time . " -- time now : " . $time_now . "\n";
+                    if($time_now >= $server_time) {
+//                        echo "\n serve time matches \n";
+
+                        // expire coupon
+                        $update_re_svd = RetargetSaved::where('coupon_id', $reSaved->coupon_id)
+                            ->where('device_id', $reSaved->device_id)
+                            ->update([
+                                'status' => 2,
+                                'updated_at' => date('Y_m-d H:i:s')
+                            ]);
+                    }
+
+                }
+            }
+            else {
+                // expire within the day
+                // if($total_in_seconds >= 2592000) {
                 // after a month
                 // details
                 $t_store_id = $reSaved->place_id;
@@ -109,29 +151,33 @@ class expireCoupons extends Command
 
                 //get time zone
                 $get_offset = Converter::get_time_zone($lat,$lng);
-                echo "store-offset : " . $get_offset . "\n\n";
+//                    echo "store-offset : " . $get_offset . "\n\n";
 
                 $server_time = Converter::calculate_server_time($get_offset, $server_offset);
-//             echo "server-time : " . $server_time . "\n";
+                // echo "server-time : " . $server_time . "\n";
 
-//                $server_time = date('08:24:00');
+//                      $server_time = date('19:31:00');
                 // time now
-                $time_now = date('H:i:s');
+                $time_now = date('19:32:00');
+//                    $time_now = date('H:i:s');
 
-                echo "server-time : " . $server_time . " -- time now : " . $time_now . "\n";
+//                    echo "server-time : " . $server_time . " -- time now : " . $time_now . "\n";
                 if($time_now >= $server_time) {
-                    echo "\n serve time matches \n";
+//                        echo "\n serve time matches \n";
 
                     // expire coupon
                     $update_re_svd = RetargetSaved::where('coupon_id', $reSaved->coupon_id)
                         ->where('device_id', $reSaved->device_id)
                         ->update([
-                            'status' => 2,
+                            'status' => 3,
                             'updated_at' => date('Y_m-d H:i:s')
                         ]);
                 }
 
+                // }
             }
+
+
 
 
         }
@@ -168,15 +214,15 @@ class expireCoupons extends Command
 
             //get time zone
             $get_offset = Converter::get_time_zone($lat,$lng);
-             echo "store-offset : " . $get_offset . "\n\n";
+            echo "store-offset : " . $get_offset . "\n\n";
 
             $server_time = Converter::calculate_server_time($get_offset, $server_offset);
-//             echo "server-time : " . $server_time . "\n";
+            // echo "server-time : " . $server_time . "\n";
 
             // time now
             $time_now = date('H:i:s');
 
-             echo "server-time : " . $server_time . " -- time now : " . $time_now . "\n";
+            echo "server-time : " . $server_time . " -- time now : " . $time_now . "\n";
             if($time_now >= $server_time) {
 
                 //echo "server-time : " . $server_time . " -------  time-now : " . $time_now . "\n";
