@@ -40,6 +40,8 @@ use App\Classes\ExtraFunctions;
 use App\Classes\Converter;
 use App\Classes\PushNotification;
 
+use App\Jobs\SendPushReTarget;
+
 class UserPanelController extends Controller
 {
     public function __construct() {
@@ -1756,58 +1758,9 @@ class UserPanelController extends Controller
                     'created_at' => date('Y-m-d H:i:s')
                 ]);
 
-                // send a push to users
+                $this->dispatch(new SendPushReTarget($store_id,$store_name,$coupon_id));
 
-                // get coupon details
-                $get_details = RetargetCoupon::where(['coupon_id' => $coupon_id])->get();
-                $t_coup_id = $get_details[0]->coupon_id;
-
-                $push_data = [];
-
-                // get device ids from saved coupons
-                $devices = SavedCoupons::where(['place_id' => $store_id])
-                    ->select('device_id')
-                    ->distinct()
-                    ->get();
-
-                // for all device
-                foreach ($devices as $device) {
-
-                    // check for saved
-                    $saved_c = RetargetSaved::where(['place_id' => $store_id, 'device_id' => $device->device_id, 'coupon_id' => $t_coup_id])->count();
-
-
-                    if($saved_c == 0) {
-                        // user haven't got any coupon
-                        // add an entry to retarget saved table
-                        $inst_svd = RetargetSaved::insert([
-                            'place_id' => $store_id,
-                            'coupon_id' => $t_coup_id,
-                            'device_id' => $device->device_id,
-                            'status' => 4,
-                            'is_push' => 1,
-                            'created_at' => date('Y-m-d H:i:s'),
-                            'updated_at' => date('Y-m-d H:i:s')
-                        ]);
-
-                        if($inst_svd) {
-                            // get player id
-                            $get_player_id = DeviceInfo::where(['device_id' => $device->device_id])->select('player_id')->get();
-
-                            // player id
-                            $t_player_id = $get_player_id[0]->player_id;
-
-                            // send push
-                            $notification = "Hey there you have got a coupon from " . $store_name ;
-                            $data = $push_data;
-                            $devices = [$t_player_id];
-                            PushNotification::create_notification($notification, $data, $devices);
-                        }
-                    }
-
-
-
-                }
+                
 
                 return redirect('dashboard')->with(['success' => "Successfully sent a push coupon!!"]);
             }
@@ -1899,59 +1852,11 @@ class UserPanelController extends Controller
                     'created_at' => date('Y-m-d H:i:s')
                 ]);
 
+                $this->dispatch(new SendPushReTarget($store_id,$store_name,$inst));
 
                 // send a push
                 if($inst){
-                    // get coupon details
-                    $get_details = RetargetCoupon::where(['coupon_id' => $inst])->get();
-                    $t_coup_id = $get_details[0]->coupon_id;
-
-                    $push_data = [];
-
-                    // get device ids from saved coupons
-                    $devices = SavedCoupons::where(['place_id' => $store_id])
-                        ->select('device_id')
-                        ->distinct()
-                        ->get();
-
-                    // for all device
-                    foreach ($devices as $device) {
-
-                        // check for saved
-                        $saved_c = RetargetSaved::where(['place_id' => $store_id, 'device_id' => $device->device_id, 'coupon_id' => $inst, 'status' => 4])->count();
-
-
-                        if($saved_c == 0) {
-                            // add an entry to retarget saved table
-                            $inst_svd = RetargetSaved::insert([
-                                'place_id' => $store_id,
-                                'coupon_id' => $t_coup_id,
-                                'device_id' => $device->device_id,
-                                'status' => 4,
-                                'is_push' => 1,
-                                'created_at' => date('Y-m-d H:i:s'),
-                                'updated_at' => date('Y-m-d H:i:s')
-                            ]);
-
-                            if($inst_svd) {
-                                // get player id
-                                $get_player_id = DeviceInfo::where(['device_id' => $device->device_id])->select('player_id')->get();
-
-                                // player id
-                                $t_player_id = $get_player_id[0]->player_id;
-
-                                // send push
-                                $notification = "Hey there you have got a coupon from " . $store_name ;
-                                $data = $push_data;
-                                $devices = [$t_player_id];
-                                PushNotification::create_notification($notification, $data, $devices);
-                            }
-                        }
-
-
-                    }
-
-
+                    
                     return redirect('dashboard')->with(['success' => "Successfully Send a push coupon!!"]);
                 }
                 else {
