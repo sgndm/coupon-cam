@@ -143,13 +143,23 @@ echo json_encode([
 
                       <li class=" <?php if(in_array(url()->current(),[url('dashboard')]) == true): ?> active <?php endif; ?>"><a href="<?php echo e(url('dashboard')); ?>" class="waves-effect waves-button"><img src="<?php echo e(url('resources/assets/stats.png')); ?>" style="height: 20px;margin-bottom: 10px; width: auto;" /><p>Stats</p></a></li>
 
-                      <li class="droplink <?php if(in_array(url()->current(),[url('admin/red_promos/create'),url('admin/red_promos')]) == true): ?> active <?php endif; ?>"><a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-gift"></span><p>Red Friday Promos</p></a>
+                      <li class="droplink <?php if(in_array(url()->current(),[url('admin/red_promos/create'),url('admin/red_promos')]) == true): ?> active <?php endif; ?>"><a href="#" class="waves-effect waves-button"><img src="<?php echo e(url('resources/assets/promo.png')); ?>" style="height: 20px;margin-bottom: 10px; width: auto;" /><p>Red Friday Promos</p></a>
                           <ul class="sub-menu">
                               <li><a href="<?php echo e(url('admin/red_promos/create')); ?>">Create Promo</a></li>
                               <li><a href="<?php echo e(url('admin/red_promos/add_coupons')); ?>">Add Coupons</a></li>
                               <li><a href="<?php echo e(url('admin/red_promos')); ?>">List of Promos</a></li>
+                              <!-- <li><a href="<?php echo e(url('admin/red_promos/give_away')); ?>">Give Away Price</a></li> -->
                           </ul>
                       </li>
+
+                      <!-- <li class="droplink <?php if(in_array(url()->current(),[url('admin/give_away/stores'), url('admin/give_away/coupon'),url('admin/give_away/promos'),url('admin/give_away/coupon_list')]) == true): ?> active <?php endif; ?>"><a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-gift"></span><p>Give Away </p></a>
+                          <ul class="sub-menu">
+                              <li><a href="<?php echo e(url('admin/give_away/stores')); ?>">Create Store</a></li>
+                              <li><a href="<?php echo e(url('admin/give_away/promos')); ?>">Create Promos</a></li>
+                              <li><a href="<?php echo e(url('admin/give_away/coupon')); ?>">Create Coupons</a></li>
+                              <li><a href="<?php echo e(url('admin/give_away/coupon_list')); ?>">List of Coupons</a></li>
+                          </ul>
+                      </li> -->
 
                       <li class=" <?php if(in_array(url()->current(),[url('admin/app_settings')]) == true): ?> active <?php endif; ?>"><a href="<?php echo e(url('admin/app_settings')); ?>" class="waves-effect waves-button"><!--img src="<?php echo e(url('resources/assets/stats.png')); ?>" style="height: 20px;margin-bottom: 10px; width: auto;" /--> <i class="fa fa-gear"></i><p>Settings</p></a></li>
 
@@ -309,6 +319,15 @@ echo json_encode([
                     minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
                 });
 
+
+                $('#busines_type_tbl').DataTable();
+                $('#wordings_table').DataTable({
+                    "bPaginate": true,
+                    "bLengthChange": false,
+                    "bFilter": true,
+                    "bInfo": true,
+                    "bAutoWidth": true
+                });
 
                 $('.time-picker').timepicker({
                     timeFormat: 'h:mm p',
