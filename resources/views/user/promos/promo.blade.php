@@ -120,7 +120,7 @@
                                         <div class="form-group">
                                             <label class="control-label">AR Coupon Location</label>
                                             <label class="btn-container">Outside Store
-                                                <input type="radio" name="ar_placement" id="ar_inside" checked>
+                                                <input type="radio" name="ar_placement" id="ar_inside" checked onclick="set_inside_store(1);">
                                                 <span class="checkRadio"></span>
                                             </label>
                                             <label class="btn-container">Somewhere Else
@@ -275,7 +275,7 @@
                             <div class="col-sm-12 col-md-6 col-lg-6">
                                 <div class="row">
                                     <input type="hidden" name="formid" id="formid_2">
-                                    <div class="col-sm-12 col-md-12 col-lg-8">
+                                    <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Select Promo</label>
                                             <div class="col-sm-12 col-md-12 col-lg-12 store_p_container left_scroll" >
@@ -338,8 +338,8 @@
                                         <div class="form-group">
                                             <label class="control-label">AR Coupon Location</label>
                                             <label class="btn-container">Outside Store
-                                                <input type="radio" name="ar_placement" id="ar_inside_2" checked>
-                                                <span class="checkRadio"></span>
+                                                <input type="radio" name="ar_placement" id="ar_inside_2" checked  onclick="set_inside_store(2);">
+                                                <span class="checkRadio" ></span>
                                             </label>
                                             <label class="btn-container">Somewhere Else
                                                 <input type="radio" name="ar_placement" id="ar_elsewhere_2">
@@ -516,23 +516,23 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
+                                    <!-- <div class="col-sm-12 col-md-12 col-lg-6"> -->
+                                        <!-- <div class="form-group">
                                             <label class="control-label">AR Coupon Location</label>
                                             <label class="btn-container">Outside Store
-                                                <input type="radio" name="ar_placement" id="ar_inside" checked>
+                                                <input type="radio" name="ar_placement" id="ar_inside_3" checked>
                                                 <span class="checkRadio"></span>
                                             </label>
                                             <label class="btn-container">Somewhere Else
-                                                <input type="radio" name="ar_placement" id="ar_elsewhere">
+                                                <input type="radio" name="ar_placement" id="ar_elsewhere_3">
                                                 <span class="checkRadio"></span>
                                             </label>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Select Store Marker On Map</label>
-                                            <input type="text" id="store_address_1" name="store_address" class="form-control" placeholder="Start Typing Full Address..." >
-                                        </div>
-                                    </div>
+                                            <input type="text" id="store_address_3" name="store_address" class="form-control" placeholder="Start Typing Full Address..." >
+                                        </div> -->
+                                    <!-- </div> -->
 
                                 </div>
 
@@ -692,15 +692,15 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                <!-- <div class="col-sm-12 col-md-12 col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label">AR Coupon Location</label>
                                         <label class="btn-container">Outside Store
-                                            <input type="radio" name="ar_placement" id="ar_inside" checked>
+                                            <input type="radio" name="ar_placement" id="ar_inside_4" checked>
                                             <span class="checkRadio"></span>
                                         </label>
                                         <label class="btn-container">Somewhere Else
-                                            <input type="radio" name="ar_placement" id="ar_elsewhere">
+                                            <input type="radio" name="ar_placement" id="_4">
                                             <span class="checkRadio"></span>
                                         </label>
                                     </div>
@@ -708,7 +708,7 @@
                                         <label class="control-label">Select Store Marker On Map</label>
                                         <input type="text" id="store_address_4" name="store_address" class="form-control" placeholder="Start Typing Full Address..." >
                                     </div>
-                                </div>
+                                </div> -->
 
                             </div>
 
@@ -889,7 +889,7 @@
         var Markers = new Array();
         var Stores = new Array();
 
-        var last_store_id;
+        var last_store_id = 0;
 
         $(document).ready(function(){
 
@@ -954,6 +954,14 @@
             $('#crt_qr_4').show();
             $('#print_code_4').hide();
             $('#refresh_qr_4').hide();
+        }
+
+        function set_inside_store(id) {
+            if(id == 1) {
+                $('#store_loc_'+last_store_id).val(0);
+            } else {
+                $('#store_loc_'+id+'_'+last_store_id).val(0);
+            }
         }
 
         function mapInit(id){
@@ -1174,7 +1182,7 @@
                                 }
                             }
 
-//                            bind_data_location(store_id,latitude,longitude,1);
+                          // bind_data_location(store_id,latitude,longitude,1);
                             // bind_data_address(1,street_num,street_name,city,state,postal_code,country,latitude,longitude,full_address, country_short);
                             //alert(street_num + "-" +street_name);
                             infowindow.setContent(results[0].formatted_address);
@@ -1228,33 +1236,41 @@
             $('.fordate_'+id).css("display","none").removeAttr("required");
         }
 
-        function get_store_details(id) {
+        function get_store_details(store_id) {
 
-            last_store_id = id;
+            if($('#store' + store_id).prop('checked', true)) {
 
-            var store_lat = $('#store_lat_'+id).val();
-            var store_lng = $('#store_lng_'+id).val();
-            var is_outside = $('#store_loc_'+id).val();
-            //alert(is_outside);
+                // get store details 
+                $.get("{{ url('user/get_store_details') }}/"+parseInt(store_id),function(data){
 
-            $('#ar_inside').prop('checked', true);
+                    if(data['status'] == 1){
 
+                        var store = data['details'];
 
-            for(var i = 0; i < Markers.length; i++){
-                if(Markers[i][0] == id){
-                    var tmpMark = Markers[i][2];
-                    var tmpCont = Markers[i][1];
-                    var infowindow = new google.maps.InfoWindow();
-                    infowindow.setContent(tmpCont);
-                    infowindow.open(map, tmpMark);
-                }
+                        var st_lat = store[0]['latitude'];
+                        var st_lng = store[0]['longitude'];
+                        var st_info = store[0]['contact_name'];
+
+                        clearMarkers();
+
+                        create_marker(st_lat, st_lng, store_id, st_info, 14);
+
+                        $('#store_lat_'+store_id).val(st_lat);
+                        $('#store_lng_'+store_id).val(st_lng);
+                        $('#store_loc_'+store_id).val(0);
+
+                    }
+                });
+
+                last_store_id = store_id;
+            }
+            else { 
+                last_store_id = 0;
             }
 
-            var temp = new Array();
-            temp.push(id,store_lat,store_lng,is_outside);
-            Stores.push(temp);
+        
+            $('#ar_inside').prop('checked', true);
 
-            //alert(Stores);
         }
 
         function get_active_stores(){
@@ -1292,7 +1308,7 @@
                             var infowindow = new google.maps.InfoWindow();
                             infowindow.setContent(data[x]['contact_name']);
                             infowindow.open(map, marker);
-                            //get_store_details(data[x]['place_id']);
+                            get_store_details(data[x]['place_id']);
                             $('#store'+data[x]['place_id']).prop('checked', true);
                         }
 
@@ -1340,17 +1356,25 @@
         }
 
         function bind_data_location(store_id,latitude,longitude,is_outside){
-            console.log(store_id + "-" + is_outside);
-            $('#store_lat_'+store_id).val(latitude);
-            $('#store_lng_'+store_id).val(longitude);
-            $('#store_loc_'+store_id).val(is_outside);
+            if($('#ar_elsewhere').prop('checked', true)) {
+                if(store_id > 0) {
+                    console.log(store_id + "-" + is_outside);
+                    $('#store_lat_'+store_id).val(latitude);
+                    $('#store_lng_'+store_id).val(longitude);
+                    $('#store_loc_'+store_id).val(is_outside);
+                }
+            } 
         }
 
         function bind_data_location2(store_id,latitude,longitude,is_outside){
-            console.log(store_id + "-" + is_outside);
-            $('#store_lat_2_'+store_id).val(latitude);
-            $('#store_lng_2_'+store_id).val(longitude);
-            $('#store_loc_2_'+store_id).val(is_outside);
+            if($('#ar_elsewhere_2').prop('checked', true)) {
+                if(store_id > 0) {
+                    console.log(store_id + "-" + is_outside);
+                    $('#store_lat_2_'+store_id).val(latitude);
+                    $('#store_lng_2_'+store_id).val(longitude);
+                    $('#store_loc_2_'+store_id).val(is_outside);
+                }
+            }
         }
 
         function get_promo_details(promo_id,id){
@@ -1587,7 +1611,7 @@
         }
 
         function create_marker_promos(lat, lng, promo_id, id, info, zoom, place_id) {
-//            alert(place_id);
+            //alert(place_id);
             var center = new google.maps.LatLng(lat,lng);
 
             marker = new google.maps.Marker({
@@ -1615,7 +1639,7 @@
             })(marker));
 
             google.maps.event.addListener(marker, 'dragend', (function(marker, x) {
-//                alert(place_id);
+              //alert(place_id);
 
                 return function() {
                     var geocoder = new google.maps.Geocoder();
