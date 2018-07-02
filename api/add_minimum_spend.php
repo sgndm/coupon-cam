@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql = "SELECT * FROM `user_coupons` WHERE `device_id`='" . $device_id . "' AND `scan_coupon_id`='" . $coupon_id . "'";
         $res = $dbh->query($sql);
         $rows = $res->rowCount();
-        $saved_coupons = $res->fetchall(PDO::FETCH_OBJ);
+        $saved_coupons = $res->fetchAll(PDO::FETCH_OBJ);
 
         // get store id
         $store_id = $saved_coupons[0]->place_id;
@@ -40,7 +40,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         // get country of store
         $getStsql = "SELECT * FROM `places` WHERE `place_id`=" . $store_id;
         $excGetSt = $dbh->query($getStsql);
-        $stDetails = $excGetSt->fetchall(PDO::FETCH_OBJ);
+        $stDetails = $excGetSt->fetchAll(PDO::FETCH_OBJ);
 
         // country
         $st_country = $stDetails[0]->country_short;

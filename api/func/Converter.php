@@ -100,7 +100,7 @@ class Converter {
 
     public function get_server_time(){
 
-        $ip = '35.178.153.168';
+        $ip = '18.130.82.43';
 
         $url = file_get_contents('https://ipapi.co/' . $ip . '/json/');
         $json = json_decode($url, true);
