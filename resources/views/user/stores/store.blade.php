@@ -252,10 +252,19 @@
                                                 </table>
                                             </div>
                                             <h6 class="form-control-feedback text-danger" id="store_name_error_2"> </h6>
+
+
                                         </div>
+
 
                                     </div>
                                     <div class="col-sm-12 col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Store Address</label>
+                                            <input type="text" id="store_address_2" name="store_address" class="form-control" placeholder="Start Typing Full Address..." required oninput="error_hide('store_address_error_2');">
+                                            <h6 class="form-control-feedback text-danger" id="store_address_error_2"> </h6>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="control-label col-md-12 col-lg-12">Enter Full Address</label>
                                             <input type="text" id="street_num_2" name="street_num" class="form-control col-sm-12 col-md-3 col-lg-3" placeholder="Number" >
@@ -623,6 +632,81 @@
 
 
                 bind_data_address(1,street_num,street_name,city,state,postal_code,country,latitude,longitude,full_address,country_short);
+
+                infowindow.setContent(place.formatted_address);
+                infowindow.open(map, marker);
+
+            });
+        }
+
+        function get_address(){
+            var input = document.getElementById('store_address_2');
+            //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+            var geocoder = new google.maps.Geocoder();
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo('bounds', map);
+            var infowindow = new google.maps.InfoWindow();
+
+            autocomplete.addListener('place_changed', function() {
+                infowindow.close();
+                marker.setVisible(false);
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    window.alert("Autocomplete's returned place contains no geometry");
+                    return;
+                }
+
+                // If the place has a geometry, then present it on a map.
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(17);
+                }
+
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+                var address = place.address_components;
+
+                var street_num = "";
+                var street_name = "";
+                var city = "";
+                var state = "";
+                var postal_code = "";
+                var country = "";
+                var country_short = "";
+                var latitude = marker.getPosition().lat();
+                var longitude = marker.getPosition().lng();
+                var full_address = place.formatted_address;
+
+//                console.log(full_address);
+
+                for(var k = 0; k < address.length; k++){
+                    if(address[k]['types'].includes('street_number')){
+                        street_num = address[k]['long_name'];
+                    }
+                    if(address[k]['types'].includes('route')){
+                        street_name = address[k]['long_name'];
+                    }
+                    if((address[k]['types'].includes('sublocality')) || (address[k]['types'].includes('sublocality_level_1')) || (address[k]['types'].includes('administrative_area_level_2'))){
+                        city = address[k]['long_name'];
+                    }
+                    if(address[k]['types'].includes('administrative_area_level_1')){
+                        state = address[k]['long_name'];
+                    }
+                    if(address[k]['types'].includes('postal_code')){
+                        postal_code = address[k]['long_name'];
+                    }
+                    if(address[k]['types'].includes('country')){
+                        country = address[k]['long_name'];
+                        country_short = address[k]['short_name'];
+
+                    }
+                }
+
+
+                bind_data_address(2,street_num,street_name,city,state,postal_code,country,latitude,longitude,full_address,country_short);
 
                 infowindow.setContent(place.formatted_address);
                 infowindow.open(map, marker);
