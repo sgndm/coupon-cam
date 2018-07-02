@@ -118,6 +118,7 @@ foreach($nearbyPromos as $promo){
     }
     else {
         $curr = "$";
+        
     }
 
     $pref_coupon->currency = $curr;
