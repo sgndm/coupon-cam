@@ -17,7 +17,7 @@
 
                 @if($has_stores == 0)
                     @if($is_member == 0)
-                    <li class="nav-item">
+                    <li class="nav-item" onclick="generate_qr_code(1);">
                         <a class="nav-link active" data-toggle="tab" href="#tab-pane-1" role="tab" onclick="create_tab();">
                             <span class="hidden-sm-up"><i class="ti-user"></i></span>
                             <span class="hidden-xs-down">CREATE STORE</span>
@@ -50,7 +50,7 @@
                         </a>
                     </li>
                     @if($is_member == 0)
-                    <li class="nav-item">
+                    <li class="nav-item" onclick="generate_qr_code(1);">
                         <a class="nav-link" data-toggle="tab" href="#tab-pane-1" role="tab" onclick="create_tab();">
                             <span class="hidden-sm-up"><i class="ti-user"></i></span>
                             <span class="hidden-xs-down">CREATE STORE</span>
@@ -146,13 +146,13 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <label class="control-label">Coupon Code</label>
-                                        <img src="" style="width:100%;" id="qr_code_prev_1">
+                                        <label class="control-label">Coupon Code</label><br>
+                                        <img src="" style="width:70%;" id="qr_code_prev_1">
                                         <input type="hidden" name="promo_qr_code" id="promo_qr_code_1" >
                                         <input type="hidden" name="promo_qr_image" id="promo_qr_image_1" >
 
                                         <h6 class="form-control-feedback text-danger" id="qr_code_error_1"> </h6>
-                                        <div class="row justify-content-center">
+                                        <div class="row">
                                             <button type="button" class="custom_btn crt_qr_code col-md-8" style="margin:2px;" onclick="generate_qr_code(1);error_hide('qr_code_error_1');" id="crt_qr_1"></button>
 
                                             <button type="button" class="custom_btn view_qr_code col-md-8" style="margin:2px;" onclick="view_qr_code(1);" id="print_code_1"></button>
@@ -296,8 +296,8 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <label class="control-label">Coupon Code</label>
-                                        <img src="" style="width:100%;" id="qr_code_prev_2">
+                                        <label class="control-label">Coupon Code</label><br>
+                                        <img src="" style="width:70%;" id="qr_code_prev_2">
                                         <input type="hidden" name="promo_qr_code" id="promo_qr_code_2" >
                                         <input type="hidden" name="promo_qr_image" id="promo_qr_image_2" >
 
@@ -1034,9 +1034,11 @@
 
         function view_qr_code(id) {
             var src = $('#qr_code_prev_' + id).attr('src');
+            
             window.open(src);
             // alert(src);
         }
+        
 
         function get_categories(type_id, id){
             $.get("{{ url('user/get_categories') }}/"+parseInt(type_id),function(data){

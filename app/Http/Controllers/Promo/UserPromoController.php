@@ -40,7 +40,7 @@ class UserPromoController extends Controller
         $this->middleware('user');
     }
 
-    public function index() {
+    public function index(Request $request) {
         $view = view('user.promos.promo');
         $view->title = 'CouponCam::Promos';
 
@@ -65,6 +65,16 @@ class UserPromoController extends Controller
         if(sizeof($activePromos) > 0) {
             $has_promos = 1;
         }
+
+        $store_id_new = 0;
+        if(isset($request['store'])) {
+            $store_id_new = $request['store'];
+        }
+
+        if($store_id_new > 0) {
+            $has_promos = 0;
+        }
+        $view->new_store_id = $store_id_new;
 
         $view->has_promos = $has_promos;
 

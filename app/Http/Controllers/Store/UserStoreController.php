@@ -208,7 +208,7 @@ class UserStoreController extends Controller
             //    Mail::to(env('MAIL_USERNAME'))->send(new ContentPosted($msg1,$url1,$subject));
             //    Mail::to(Auth::user()->email)->send(new ContentPosted($msg2,$url2,$subject,'Create A Promo'));
 
-            return redirect('user/promos')->with(['success' => 'Store created successfully, now please create a promo for your store']);
+            return redirect('user/promos?store='. $store_id)->with(['success' => 'Store created successfully, now please create a promo for your store']);
         }  else {
             return back()->with(['error' => 'Store failed to create']);
         }

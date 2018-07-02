@@ -1,6 +1,7 @@
 @extends('layouts.user')
 
 @section('content')
+<!-- {{ $new_store_id }} -->
     <div class="col-md-12">
         <div class="card">
             <ul class="nav nav-tabs customtab" role="tablist">
@@ -880,6 +881,8 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQOQYd6y3PeucI2ajI2hXzcPTXVwlGfgs&libraries=places"></script>
     <script>
         var has_promos = {{ $has_promos }};
+        var new_store = {{ $new_store_id }};
+
         var map;
         var marker;
         var infowindow = new google.maps.InfoWindow();
@@ -896,6 +899,11 @@
             }else {
                 load_map(1);
                 get_active_stores_all();
+            }
+
+            if(new_store > 0) {
+                // alert(new_store);
+                $('#store'+ new_store).prop('checked', true);
             }
 
 
