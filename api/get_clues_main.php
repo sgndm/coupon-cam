@@ -121,9 +121,13 @@ else{
             $coops3 = $dbh->query($sql5);
             $all_coupons = $coops3->fetchAll(PDO::FETCH_OBJ);
 
+            foreach($all_coupons as $allC) {
+                $allC->currency = $curr;
+            }
+
 
             $time_difference = 0;
-            $diff = [];
+            // $diff = [];
 
             // | get system date time and create date object
             $now = date("Y-m-d H:i:s");
@@ -217,7 +221,7 @@ else{
 
             }
 
-            $diff = [];
+            // $diff = [];
 
             if(sizeof($diff) > 0 ) {
 
