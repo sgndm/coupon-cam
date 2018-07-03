@@ -2111,14 +2111,14 @@
             $('#image_' + page + '_' + id).attr('src',"{{ asset('resources/assets/user/images/imageplaceholder.png') }}" );
         }
 
-        $('#img_cropper_c_1').cropit({exportZoom: 4});
-        $('#img_cropper_c_2').cropit({exportZoom: 4});
-        $('#img_cropper_c_3').cropit({exportZoom: 4});
-        $('#img_cropper_c_4').cropit({exportZoom: 4});
-        $('#img_cropper_e_1').cropit({exportZoom: 4});
-        $('#img_cropper_e_2').cropit({exportZoom: 4});
-        $('#img_cropper_e_3').cropit({exportZoom: 4});
-        $('#img_cropper_e_4').cropit({exportZoom: 4});
+        $('#img_cropper_c_1').cropit({exportZoom: 3});
+        $('#img_cropper_c_2').cropit({exportZoom: 3});
+        $('#img_cropper_c_3').cropit({exportZoom: 3});
+        $('#img_cropper_c_4').cropit({exportZoom: 3});
+        $('#img_cropper_e_1').cropit({exportZoom: 3});
+        $('#img_cropper_e_2').cropit({exportZoom: 3});
+        $('#img_cropper_e_3').cropit({exportZoom: 3});
+        $('#img_cropper_e_4').cropit({exportZoom: 3});
 
         $('#coupon_photo_c_1').on('change', function() {
             activate_cropper('c', 1);
