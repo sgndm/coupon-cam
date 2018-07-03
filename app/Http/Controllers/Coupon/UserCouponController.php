@@ -212,6 +212,7 @@ class UserCouponController extends Controller
     }
 
     public function update(CouponRequest $request){
+        $isUpdated = 0;
         for($x = 1; $x < 5; $x++){
 
             // upload coupon photo
@@ -249,14 +250,13 @@ class UserCouponController extends Controller
 
 
             // update data
-            Coupon::where("coupon_id",$request->get('coupon_id_'.$x))->update([
+            $upd = Coupon::where("coupon_id",$request->get('coupon_id_'.$x))->update([
                 "coupon_title" => trim($request->get('coupon_name_'.$x)),
                 "estimated_value" => trim($request->get('coupon_value_'.$x)),
                 "coupon_availabilty" => trim($request->get('coupon_availability_'.$x)),
                 "terms_conditions" => trim($request->get('coupon_condition_'.$x)),
                 "coupon_information" => trim($request->get('coupon_info_'.$x)),
                 "promo_id" => trim($request->get('promo_id_1')),
-//                "user_id" => Auth::id(),
                 "coupon_photo" => $coupon_photo,
                 "coupon_model" => trim($request->get('ar_coupon_name_'.$x)),
                 "coupon_marker" => trim($request->get('ar_marker_name_'.$x)),
@@ -267,21 +267,15 @@ class UserCouponController extends Controller
                 "updated_at" => date('Y-m-d h:i:s')
             ]);
 
+            if($upd) {
+                $isUpdated += 1;
+            }
+            
+
 
         }
 
-
-
-        // update promo details
-        $get_user_details = UserTable::where(['id' => Auth::id()])->get();
-        $is_pre_launch = $get_user_details[0]->is_pre_launch;
-        if($is_pre_launch == 1) {
-          $id = Promo::where('promo_id',$request->get('promo_id_1'))->update(['used' => '1', 'status' => 3,'updated_at' => date('Y-m-d h:i:s') ]);
-        }
-        else {
-          $id = Promo::where('promo_id',$request->get('promo_id_1'))->update(['used' => '1', 'status' => 1,'updated_at' => date('Y-m-d h:i:s') ]);
-        }
-        if($id) {
+        if($isUpdated > 0) {
             return redirect('user/coupons')->with(['success' => 'Coupon Updated successfully']);
         } else {
             return back()->with(['error' => 'Coupon update Failed']);
