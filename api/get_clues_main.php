@@ -332,143 +332,145 @@ else{
 
 
 
-            // get all filterd nearby coupons
-            $filtered_coupons = $temp_nearby_coupons;
-
-            $result = [];
-
-            foreach ($filtered_coupons as $filtered_coupon) {
-                $t_coupon_id = $filtered_coupon['pref_coupon']->coupon_id;
-                $t_coup_lvl = $filtered_coupon['pref_coupon']->coupon_level;
-                $t_all_coups = $filtered_coupon['all_coupon'];
-
-                $new_prep_coup = [];
+            
 
 
-                if($t_coup_lvl < 4) {
+        }
 
-                    // new coupon level
-                    $new_coup_lvl = ($t_coup_lvl + 1);
+        // get all filterd nearby coupons
+        $filtered_coupons = $temp_nearby_coupons;
 
-                    for($x = $t_coup_lvl; $x < 4; $x++) {
+        $result = [];
 
-                        //$new_coup_lvl = $t_all_coups[$x]->coupon_level;
-                        $t_coupon_id_all = $t_all_coups[$x]->coupon_id;
-                        $t_coup_avl = $t_all_coups[$x]->coupon_availabilty;
-                        $t_coup_occ = $t_all_coups[$x]->count_occupied;
+        foreach ($filtered_coupons as $filtered_coupon) {
+            $t_coupon_id = $filtered_coupon['pref_coupon']->coupon_id;
+            $t_coup_lvl = $filtered_coupon['pref_coupon']->coupon_level;
+            $t_all_coups = $filtered_coupon['all_coupon'];
 
-                        if(($t_coup_avl > $t_coup_occ) || ($t_coup_avl == "Unlimited")) {
-                            // check if this lvl excluded
-                            $checkExcluded = "SELECT * FROM `exclued_coupons` WHERE `device_id`='" . $device_id . "' AND `coupon_id`=" . $t_coupon_id_all . " ORDER BY `id` ASC";
-                            $executeCkeck = $dbh->query($checkExcluded);
-                            $rowsCkeck = $executeCkeck->rowCount();
-                            $resExcludeCheck = $executeCkeck->fetchAll(PDO::FETCH_OBJ);
+            $new_prep_coup = [];
 
-                            if($rowsCkeck > 0) {
 
-                                // get last exclude
-                                $get_last  =  date($resExcludeCheck[$rowsCkeck - 1]->created_at);
+            if($t_coup_lvl < 4) {
 
-                                $last_date = date_create($get_last);
+                // new coupon level
+                $new_coup_lvl = ($t_coup_lvl + 1);
 
-                                $get_now = date('Y-m-d H:i:s');
-                                // add one hour
-                                $get_now2 = date('Y-m-d H:i:s', strtotime($now . "+1 hour"));
-                                $get_today = date_create($get_now2);
+                for($x = $t_coup_lvl; $x < 4; $x++) {
 
-                                $getTimeDiff = date_diff($last_date, $get_today);
+                    //$new_coup_lvl = $t_all_coups[$x]->coupon_level;
+                    $t_coupon_id_all = $t_all_coups[$x]->coupon_id;
+                    $t_coup_avl = $t_all_coups[$x]->coupon_availabilty;
+                    $t_coup_occ = $t_all_coups[$x]->count_occupied;
 
-                                $get_time_difference = 0;
+                    if(($t_coup_avl > $t_coup_occ) || ($t_coup_avl == "Unlimited")) {
+                        // check if this lvl excluded
+                        $checkExcluded = "SELECT * FROM `exclued_coupons` WHERE `device_id`='" . $device_id . "' AND `coupon_id`=" . $t_coupon_id_all . " ORDER BY `id` ASC";
+                        $executeCkeck = $dbh->query($checkExcluded);
+                        $rowsCkeck = $executeCkeck->rowCount();
+                        $resExcludeCheck = $executeCkeck->fetchAll(PDO::FETCH_OBJ);
 
-                                if(sizeof($getTimeDiff) > 0 ) {
+                        if($rowsCkeck > 0) {
 
-                                    if ($getTimeDiff->invert == 0) {
-                                        $get_time_difference = ((((($getTimeDiff->y * 365.25 + $getTimeDiff->m * 30 + $getTimeDiff->d) * 24 + $getTimeDiff->h) * 60 + $getTimeDiff->i) * 60 + $getTimeDiff->s) * 1000);
-                                    }
+                            // get last exclude
+                            $get_last  =  date($resExcludeCheck[$rowsCkeck - 1]->created_at);
+
+                            $last_date = date_create($get_last);
+
+                            $get_now = date('Y-m-d H:i:s');
+                            // add one hour
+                            $get_now2 = date('Y-m-d H:i:s', strtotime($now . "+1 hour"));
+                            $get_today = date_create($get_now2);
+
+                            $getTimeDiff = date_diff($last_date, $get_today);
+
+                            $get_time_difference = 0;
+
+                            if(sizeof($getTimeDiff) > 0 ) {
+
+                                if ($getTimeDiff->invert == 0) {
+                                    $get_time_difference = ((((($getTimeDiff->y * 365.25 + $getTimeDiff->m * 30 + $getTimeDiff->d) * 24 + $getTimeDiff->h) * 60 + $getTimeDiff->i) * 60 + $getTimeDiff->s) * 1000);
                                 }
-
-
-                                if(($get_time_difference > 0) && ($get_time_difference <= 86400000)) {
-                                    $new_coup_lvl = ($new_coup_lvl + 1);
-
-                                } else {
-                                    if($t_all_coups[$x]->coupon_level == $new_coup_lvl) {
-                                        $new_prep_coup = $t_all_coups[$x];
-                                    }
-                                }
-
-
                             }
-                            else {
+
+
+                            if(($get_time_difference > 0) && ($get_time_difference <= 86400000)) {
+                                $new_coup_lvl = ($new_coup_lvl + 1);
+
+                            } else {
                                 if($t_all_coups[$x]->coupon_level == $new_coup_lvl) {
                                     $new_prep_coup = $t_all_coups[$x];
                                 }
                             }
-                        } else {
-                            $new_coup_lvl += 1;
+
+
                         }
+                        else {
+                            if($t_all_coups[$x]->coupon_level == $new_coup_lvl) {
+                                $new_prep_coup = $t_all_coups[$x];
+                            }
+                        }
+                    } else {
+                        $new_coup_lvl += 1;
                     }
-
-
                 }
 
-                // check if this coupon has excluded
-                $getExcluded = "SELECT * FROM `exclued_coupons` WHERE `device_id`='" . $device_id . "' AND `coupon_id`=" . $t_coupon_id . " ORDER BY `id` ASC";
-                $execute = $dbh->query($getExcluded);
-                $rowsEcl = $execute->rowCount();
-                $resExclude = $execute->fetchAll(PDO::FETCH_OBJ);
 
-                if($rowsEcl > 0) {
-                    // get last exclude
-                    $t_last_date  =  date($resExclude[$rowsEcl - 1]->created_at);
+            }
 
-                    $last = date_create($t_last_date);
+            // check if this coupon has excluded
+            $getExcluded = "SELECT * FROM `exclued_coupons` WHERE `device_id`='" . $device_id . "' AND `coupon_id`=" . $t_coupon_id . " ORDER BY `id` ASC";
+            $execute = $dbh->query($getExcluded);
+            $rowsEcl = $execute->rowCount();
+            $resExclude = $execute->fetchAll(PDO::FETCH_OBJ);
 
-                    $now = date('Y-m-d H:i:s');
-                    // add one hour
-                    $now2 = date('Y-m-d H:i:s', strtotime($now . "+1 hour"));
-                    $today = date_create($now2);
+            if($rowsEcl > 0) {
+                // get last exclude
+                $t_last_date  =  date($resExclude[$rowsEcl - 1]->created_at);
 
-                    $timeDiff = date_diff($last, $today);
+                $last = date_create($t_last_date);
 
-                    $time_difference = 0;
+                $now = date('Y-m-d H:i:s');
+                // add one hour
+                $now2 = date('Y-m-d H:i:s', strtotime($now . "+1 hour"));
+                $today = date_create($now2);
 
-                    $api_info['diff'] = $timeDiff;
-                    $api_info['now'] = $today;
-                    $api_info['last'] = $last;
+                $timeDiff = date_diff($last, $today);
+
+                $time_difference = 0;
+
+                $api_info['diff'] = $timeDiff;
+                $api_info['now'] = $today;
+                $api_info['last'] = $last;
 
 
-                    if(sizeof($timeDiff) > 0 ) {
+                if(sizeof($timeDiff) > 0 ) {
 
-                        if ($timeDiff->invert == 0) {
-                            $time_difference = ((((($timeDiff->y * 365.25 + $timeDiff->m * 30 + $timeDiff->d) * 24 + $timeDiff->h) * 60 + $timeDiff->i) * 60 + $timeDiff->s) * 1000);
-                        }
+                    if ($timeDiff->invert == 0) {
+                        $time_difference = ((((($timeDiff->y * 365.25 + $timeDiff->m * 30 + $timeDiff->d) * 24 + $timeDiff->h) * 60 + $timeDiff->i) * 60 + $timeDiff->s) * 1000);
                     }
+                }
 
 
-                    if(($time_difference > 0) && ($time_difference <= 86400000)) {
-                        if(sizeof($new_prep_coup) > 0 ) {
-                            $filtered_coupon['pref_coupon'] = $new_prep_coup;
-                            $result[] = $filtered_coupon;
-                        }
-
-                    } else {
+                if(($time_difference > 0) && ($time_difference <= 86400000)) {
+                    if(sizeof($new_prep_coup) > 0 ) {
+                        $filtered_coupon['pref_coupon'] = $new_prep_coup;
                         $result[] = $filtered_coupon;
                     }
 
-
-                }
-                else {
+                } else {
                     $result[] = $filtered_coupon;
                 }
+
+
             }
-
-            $api_info['promo_info'] = $result;
-
-            $api_info['red_friday_promos'] = [];
-
-
+            else {
+                $result[] = $filtered_coupon;
+            }
         }
+
+        $api_info['promo_info'] = $result;
+
+        $api_info['red_friday_promos'] = [];
 
     } 
     else {
