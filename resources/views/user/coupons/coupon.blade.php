@@ -2616,8 +2616,7 @@
                 if(page == 'e'){
                     validate_coupon_form('e',2,0);
                 }
-
-                if(next_tab == 'cpn_l_5' ) {
+                else if(next_tab == 'cpn_l_5' ) {
                     validate_coupon_form('c',1,1);
                 } 
                 else if(next_tab == 'cpn_e_5') {
