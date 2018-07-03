@@ -354,6 +354,10 @@
                                         </div>
 
 
+                                        <a class="carousel-control-prev" href="#store_slider_stat" role="button" data-slide="prev">
+                                            <span> <img src="{{asset('resources/assets/custom/images/arrow_left.png')}}" style="width: 70px;" > </span>
+                                            <span class="sr-only">Prev</span>
+                                        </a>
                                         <a class="carousel-control-next" href="#store_slider_stat" role="button" data-slide="next">
                                             <span> <img src="{{asset('resources/assets/custom/images/arrow.png')}}" style="width: 70px;" > </span>
                                             <span class="sr-only">Next</span>
@@ -678,7 +682,10 @@
 
                                         </div>
 
-
+                                        <a class="carousel-control-prev" href="#promo_slider_store" role="button" data-slide="prev">
+                                            <span> <img src="{{asset('resources/assets/custom/images/arrow_left.png')}}" style="width: 70px;" > </span>
+                                            <span class="sr-only">Prev</span>
+                                        </a>
                                         <a class="carousel-control-next" href="#promo_slider_store" role="button" data-slide="next">
                                             <span> <img src="{{asset('resources/assets/custom/images/arrow.png')}}" style="width: 70px;" > </span>
                                             <span class="sr-only">Next</span>
@@ -1278,6 +1285,11 @@ VE
                                         </div>
 
 
+                                        <a class="carousel-control-next" href="#loyalty_slider_store" role="button" data-slide="next">
+                                        <a class="carousel-control-prev" href="#promo_slider_store" role="button" data-slide="prev">
+                                            <span> <img src="{{asset('resources/assets/custom/images/arrow_left.png')}}" style="width: 70px;" > </span>
+                                            <span class="sr-only">Prev</span>
+                                        </a>
                                         <a class="carousel-control-next" href="#loyalty_slider_store" role="button" data-slide="next">
                                             <span> <img src="{{asset('resources/assets/custom/images/arrow.png')}}" style="width: 70px;" > </span>
                                             <span class="sr-only">Next</span>

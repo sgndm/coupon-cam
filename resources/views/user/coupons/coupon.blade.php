@@ -231,7 +231,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_c_1" name="coupon_condition_1" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_c_1');"></textarea>
+                                                        <textarea id="coupon_condition_c_1" name="coupon_condition_1" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_c_1');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_c_1"> </h6>
                                                     </div>
                                                 </div>
@@ -388,7 +388,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_c_2" name="coupon_condition_2" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_c_2');"></textarea>
+                                                        <textarea id="coupon_condition_c_2" name="coupon_condition_2" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_c_2');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_c_2"> </h6>
                                                     </div>
                                                 </div>
@@ -534,7 +534,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_c_3" name="coupon_condition_3" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_c_3');"></textarea>
+                                                        <textarea id="coupon_condition_c_3" name="coupon_condition_3" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_c_3');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_c_3"> </h6>
                                                     </div>
                                                 </div>
@@ -673,7 +673,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_c_4" name="coupon_condition_4" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_c_4');"></textarea>
+                                                        <textarea id="coupon_condition_c_4" name="coupon_condition_4" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_c_4');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_c_4"> </h6>
                                                     </div>
                                                 </div>
@@ -1568,7 +1568,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_e_1" name="coupon_condition_1" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_e_1');"></textarea>
+                                                        <textarea id="coupon_condition_e_1" name="coupon_condition_1" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_e_1');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_e_1"> </h6>
                                                     </div>
                                                 </div>
@@ -1712,7 +1712,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_e_2" name="coupon_condition_2" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_e_2');"></textarea>
+                                                        <textarea id="coupon_condition_e_2" name="coupon_condition_2" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_e_2');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_e_2"> </h6>
                                                     </div>
                                                 </div>
@@ -1843,7 +1843,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_e_3" name="coupon_condition_3" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_e_3');"></textarea>
+                                                        <textarea id="coupon_condition_e_3" name="coupon_condition_3" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_e_3');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_e_3"> </h6>
                                                     </div>
                                                 </div>
@@ -1971,7 +1971,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_e_4" name="coupon_condition_4" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_e_4');"></textarea>
+                                                        <textarea id="coupon_condition_e_4" name="coupon_condition_4" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_e_4');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_e_4"> </h6>
                                                     </div>
                                                 </div>
@@ -2581,13 +2581,13 @@
                 $('#coupon_info_error_' + page + '_' + id).html(err_1);
             }
 
-            var coupon_desc = $('#coupon_condition_' + page + '_' + id).val();
+            // var coupon_desc = $('#coupon_condition_' + page + '_' + id).val();
 
-            if(coupon_desc.length > 0 ) {
-                $('#coupon_desc_error_' + page + '_' + id).html('');
-            } else {
-                $('#coupon_desc_error_' + page + '_' + id).html(err_1);
-            }
+            // if(coupon_desc.length > 0 ) {
+            //     $('#coupon_desc_error_' + page + '_' + id).html('');
+            // } else {
+            //     $('#coupon_desc_error_' + page + '_' + id).html(err_1);
+            // }
 
             var coupon_ar = $('#ar_coupon_name_' + page + '_' + id).val();
 
@@ -2597,7 +2597,7 @@
                 $('#coupon_ar_error_' + page + '_' + id).html(err_1);
             }
 
-            if( (promo_selected == 1) && (coup_img_selected == 1) && (coupon_name.length > 0 ) && (coupon_info.length > 0 ) && (coupon_desc.length > 0 ) && (coupon_ar.length > 0 ) ) {
+            if( (promo_selected == 1) && (coup_img_selected == 1) && (coupon_name.length > 0 ) && (coupon_info.length > 0 ) && (coupon_ar.length > 0 ) ) {
                 return 1;
             } else {
                 return 0;
