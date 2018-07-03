@@ -561,6 +561,7 @@
             Markers.push(marker);
 
             get_address();
+            get_address2();
             drag_marker();
         }
 
@@ -605,7 +606,7 @@
                 var longitude = marker.getPosition().lng();
                 var full_address = place.formatted_address;
 
-//                console.log(full_address);
+                // console.log(full_address);
 
                 for(var k = 0; k < address.length; k++){
                     if(address[k]['types'].includes('street_number')){
@@ -639,7 +640,7 @@
             });
         }
 
-        function get_address(){
+        function get_address2(){
             var input = document.getElementById('store_address_2');
             //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
             var geocoder = new google.maps.Geocoder();
@@ -680,7 +681,7 @@
                 var longitude = marker.getPosition().lng();
                 var full_address = place.formatted_address;
 
-//                console.log(full_address);
+                //console.log(full_address);
 
                 for(var k = 0; k < address.length; k++){
                     if(address[k]['types'].includes('street_number')){
