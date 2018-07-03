@@ -11,7 +11,7 @@ $remove_chars = ["[", "]", "\""];
 $latitude   = trim($_POST['latitude']);
 $longitude  = trim($_POST['longitude']);
 $device_id  = trim($_POST['device_id']);
-$radius = 0.5; // | 500m
+$radius = 1000000000; // | 500m
 
 if(empty($latitude)) {
 }
