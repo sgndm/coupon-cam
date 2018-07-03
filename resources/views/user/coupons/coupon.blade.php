@@ -2422,6 +2422,7 @@
                     $('#ar_prev_e_'+y).attr('src', "{{url('resources/assets/media')}}/"+data[x]['coupon_model']);
                     $('#image_e_'+y).attr('src', "{{url('resources/assets/coupons/full')}}/"+data[x]['coupon_photo']);
                     $('#coup_img_e_'+y).val(data[x]['coupon_photo']);
+                    $('#ar_marker_name_e_'+y).val(data[x]['coupon_marker']);
                     $('#heading_e_'+y).html(data[x]['coupon_title']);
 
                     var is_loyalty = data[x]['is_loyalty'];
@@ -2599,7 +2600,15 @@
                 $('#coupon_ar_error_' + page + '_' + id).html(err_1);
             }
 
-            if( (promo_selected == 1) && (coup_img_selected == 1) && (coupon_name.length > 0 ) && (coupon_info.length > 0 ) && (coupon_ar.length > 0 ) ) {
+            var coupon_marker = $('#ar_marker_name_' + page + '_' + id).val();
+            if(coupon_marker.length > 0 ) {
+                $('#coupon_ar_error_' + page + '_' + id).html('');
+            } else {
+                $('#coupon_ar_error_' + page + '_' + id).html("please select ar coupon again");
+            }
+
+
+            if( (promo_selected == 1) && (coup_img_selected == 1) && (coupon_name.length > 0 ) && (coupon_info.length > 0 ) && (coupon_ar.length > 0 ) && (coupon_marker.length > 0 )) {
                 return 1;
             } else {
                 return 0;
