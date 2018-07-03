@@ -24,13 +24,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$chkPrefExclude = "SELECT * FROM `exclued_coupons` WHERE `device_id`='" . $device_id . "' AND `coupon_id`=" . $pref_coup_id . " ORDER BY `id` ASC";
 		$exctChkPrefExclude = $dbh->query($chkPrefExclude);
 		$rowsPrefExclude = $exctChkPrefExclude->rowCount();
+		$prefExcleded = $exctChkPrefExclude->fetchAll(PDO::FETCH_OBJ);
 		
 		
 		if($rowsPrefExclude > 0) {
 			// if coupon has exclude 
 			// check time 
 			// get last exclude
-			$get_last  =  date($exctChkPrefExclude[$rowsPrefExclude - 1]->created_at);
+			$get_last  =  date($prefExcleded[$rowsPrefExclude - 1]->created_at);
 
 			$last_date = date_create($get_last);
 
@@ -42,7 +43,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$getTimeDiff = date_diff($last_date, $get_today);
 
 			$get_time_difference = 0;
-
+		
 			if(sizeof($getTimeDiff) > 0 ) {
 
 				if ($getTimeDiff->invert == 0) {
