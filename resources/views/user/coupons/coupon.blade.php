@@ -2086,7 +2086,7 @@
 
         function crop_image(page, id) {
 
-            var imageData = $('#img_cropper_' + page + '_' + id).cropit('export');
+            var imageData = $('#img_cropper_' + page + '_' + id).cropit('export', {type: 'image/png',quality: .75});
             $('#cp_img_name_' + page + '_' + id).val(imageData);
             $('#image_' + page + '_' + id).attr('src', imageData);
 
