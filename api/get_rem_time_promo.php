@@ -117,14 +117,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 		if(sizeof($diff) > 0 ) {
 
-			// if($diff->invert == 0){
+			if($diff->invert == 0){
 				$total_in_miliseconds = ((((($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i)*60 + $diff->s) * 1000);
 				$time_difference = $total_in_miliseconds;
 
 				$apiResponse['response_code'] = 200;
 				$apiResponse['response_data'] = $time_difference;
 				$apiResponse['response_msg'] = "time remaining";
-			// }
+			}
 		}
 
 	}
