@@ -12,9 +12,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$exec = $dbh->query($get_pref_coupon);
 	$pref_coupon = $exec->fetchAll(PDO::FETCH_OBJ);
 	$rowsPref = $exec->rowCount();
+	
 
 	if($rowsPref > 0) {
-
+		
 		// get coupon details
 		$pref_coup_id= $pref_coupon[0]->coupon_id;
 		$pref_coupon_lvl = $pref_coupon[0]->coupon_level; 
@@ -23,7 +24,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$chkPrefExclude = "SELECT * FROM `exclued_coupons` WHERE `device_id`='" . $device_id . "' AND `coupon_id`=" . $pref_coup_id . " ORDER BY `id` ASC";
 		$exctChkPrefExclude = $dbh->query($chkPrefExclude);
 		$rowsPrefExclude = $exctChkPrefExclude->rowCount();
-		  
+		
+		
 		if($rowsPrefExclude > 0) {
 			// if coupon has exclude 
 			// check time 
@@ -141,7 +143,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$apiResponse['response_code'] = 200;
 		$apiResponse['response_data'] = [];
 		$apiResponse['response_msg'] = "No Coupons are available";
-	}
+	} 
   
 }
 
