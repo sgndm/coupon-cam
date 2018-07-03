@@ -904,6 +904,7 @@
             if(new_store > 0) {
                 // alert(new_store);
                 $('#store'+ new_store).prop('checked', true);
+                last_store_id = new_store;
             }
 
 
