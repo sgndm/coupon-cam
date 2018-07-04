@@ -368,7 +368,7 @@ else{
             $prefExcludeDetails = $excChkPref->fetchAll(PDO::FETCH_OBJ);
 
             if($chkPrefExclude > 0) {
-                $api_info['not-excluded'][] = $nPrefCoupId;
+                $api_info['excluded'][] = $nPrefCoupId;
                 // if excluded 
                 // check last date time
                 $getLastDate = $prefExcludeDetails[$chkPrefExclude - 1]->date;
