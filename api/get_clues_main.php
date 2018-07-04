@@ -1,6 +1,7 @@
 <?php
 date_default_timezone_set('Europe/London');
 include('conn.php');
+include('func/Converter.php');
 
 $api_info = [];
 $api_info['promo_info'] = [];
@@ -14,12 +15,13 @@ $device_id  = trim($_POST['device_id']);
 $radius = 0.5; // | 500m
 
 if(empty($latitude)) {
+    $api_info['response_msg'] = "latitude_empty";
 }
 else if(empty($longitude)){
-
+    $api_info['response_msg'] = "longitude_empty";
 }
 else if(empty($device_id)){
-    
+    $api_info['response_msg'] = "device_id_empty";
 }
 else{
 
@@ -30,8 +32,8 @@ else{
     $device_details = $res1->fetchAll(PDO::FETCH_OBJ);
 
     if($row1 > 0) {
-
-        // | get nearby coupons (all)
+        // if user in the system 
+        // | get nearby coupons all
         $sql2 = "SELECT
         `promos`.`promo_id`,`promos`.`place_id`,
         `promos`.`add_date`, `promos`.`promo_name`,
@@ -39,7 +41,7 @@ else{
         `promos`.`is_shown`, `start_at`,`start_at_local`, `end_at`, `end_at_local`,
         `promo_length`, `advance_warning`,
         `promo_repeat`,  `promo_repeat_values`,
-        `places`.`contact_name`,`places`.`place_id` as store_id, `places`.`street_number`, `places`.`street_address`,`places`.`is_verified`, `places`.`verified_count`, `places`.`time_zone`,  `visible_now`,
+        `places`.`contact_name`,`places`.`place_id` as store_id, `places`.`street_number`, `places`.`street_address`,`places`.`is_verified`, `places`.`verified_count`, `places`.`time_zone`,`places`.`latitude` as store_lat,`places`.`longitude` as store_lng,  `visible_now`,
         promo_locations.lat_code as latitude, promo_locations.lng_code as longitude,
         (((acos(sin(($latitude*pi()/180)) * sin((promo_locations.lat_code*pi()/180))
         + cos(($latitude*pi()/180)) * cos((promo_locations.lat_code*pi()/180))
@@ -55,93 +57,70 @@ else{
         $res2 = $dbh->query($sql2);
         $nearbyPromos = $res2->fetchAll(PDO::FETCH_OBJ);
 
-        $tempAllPRomo = [];
-
         // | for every nearby promo
+        // | get promos available 
+        // | if user has saved a coupon ar used a saved coupon remove promotion from list
+        // | if coupon has expired shop add promo to list
+        $tempAllPRomo = [];
         foreach($nearbyPromos as $promo){
-            // | get details
-            $promo_id = $promo->promo_id;
 
-            // get place id
-            $place_ids = $promo->place_id;
-            $repstmt = trim(str_replace($remove_chars, ' ', $place_ids));
-            $list_ids = explode(",", $repstmt);
+            // check if coupon has promo has saved or not
+            $checkSaved = "SELECT * FROM `user_coupons` WHERE `device_id`='" . $device_id . "' AND `scan_promo_id`=". $promo->promo_id;
+            $execSVC = $dbh->query($checkSaved);
+            $checkSavedRows = $execSVC->rowCount();
+            $detailsCheckSaved = $execSVC->fetchAll(PDO::FETCH_OBJ);
 
-            $st_id = $list_ids[0];
-
-            // get store details
-            $get_st = "SELECT * FROM `places` WHERE `place_id`=" . $st_id;
-            $exceSt = $dbh->query($get_st);
-            $st_det = $exceSt->fetchAll(PDO::FETCH_OBJ);
-
-            $country_short = $st_det[0]->country_short;
-
-            // | get pref coupon
-            $sql3 = "SELECT * FROM coupons "
-            . "WHERE promo_id =".$promo_id."  AND "
-            . "(coupon_availabilty > count_occupied OR coupon_availabilty = 'Unlimited')"
-            . "ORDER BY coupon_id ASC LIMIT 0,1";
-            $coops = $dbh->query($sql3);
-            $num_rows = $coops->rowCount();
-
-            if($num_rows > 0){
-                $pref_coupon = $coops->fetch(PDO::FETCH_OBJ);
-            }else{
-                $sql4 = "SELECT * FROM coupons "
-                    . "WHERE promo_id =".$promo_id."  AND "
-                    . "coupon_availabilty = 'Unlimited'"
-                    . "ORDER BY coupon_id ASC LIMIT 0,1";
-                $coops2 = $dbh->query($sql4);
-                $pref_coupon = $coops2->fetch(PDO::FETCH_OBJ);
-            }
-
-            $curr = "$";
-            if($country_short == "GB") {
-                $curr = "£";
-            }
-            else if($country_short == "NZ") {
-                $curr = "$";
-            }
-            else if($country_short == "CA") {
-                $curr = "C$";
-            }
-            else if($country_short == "AU") {
-                $curr = "A$";
-            }
-            else {
-                $curr = "$";
+            if($checkSavedRows > 0) {
                 
+                $isSavedOrRedeemed = 0;
+                foreach($detailsCheckSaved as $saved) {
+                    if(($saved->scan_coupon_status == 4) || ($saved->scan_coupon_status == 2)) {
+                        $isSavedOrRedeemed = 1;
+                    }
+                }
+
+                if($isSavedOrRedeemed == 0) {
+                    $tempAllPRomo[] = $promo;
+                }
+
+            } else {
+                $tempAllPRomo[] = $promo;
             }
-
-            $pref_coupon->currency = $curr;
-
-            // | Get All Coupons
-            $sql5 = "SELECT * FROM coupons "
-            . "WHERE promo_id =".$promo_id;
-            $coops3 = $dbh->query($sql5);
-            $all_coupons = $coops3->fetchAll(PDO::FETCH_OBJ);
-
-            foreach($all_coupons as $allC) {
-                $allC->currency = $curr;
-            }
+        }
 
 
+        // | for all available promos 
+        // | get coupons and pref coupon
+        // | get remaining time 
+        // | store address
+        // | set currency
+        $tempNearByPromos = [];
+        foreach($tempAllPRomo as $tPromo) {
+
+            // | get details
+            $promo_id = $tPromo->promo_id;
+
+            // get remaining time 
             $time_difference = 0;
-            // $diff = [];
+            $diff = [];
 
             // | get system date time and create date object
             $now = date("Y-m-d H:i:s");
             $now_time = date_create($now);
 
             // | get promo details
-            $promo_repeate = $promo->promo_repeat;
-            $promo_repeate_value = trim($promo->promo_repeat_values);
-            $promo_start_time = trim($promo->start_at);
-            $promo_end_time = trim($promo->end_at);
+            $promo_repeate = $tPromo->promo_repeat;
+            $promo_repeate_value = trim($tPromo->promo_repeat_values);
+            $promo_start_time = trim($tPromo->start_at);
+            $promo_start_time_local = trim($tPromo->start_at_local);
+            $promo_end_time = trim($tPromo->end_at);
+
+            // create time 
+            $time_p_st = time($promo_start_time);
+            $time_p_st_local = time($promo_start_time_local);
 
             $promo_start = '';
             $name = '';
-            $diff = [];
 
             // | if one rime promo
             if($promo_repeate == "Date"){
@@ -222,265 +201,300 @@ else{
             }
 
             // $diff = [];
-
             if(sizeof($diff) > 0 ) {
 
-                if($diff->invert == 0){
-                    $total_in_miliseconds = ((((($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i)*60 + $diff->s) * 1000);
-                    $time_difference = $total_in_miliseconds;
-                }
-            }
-
-
-            // | Get store address
-            $address = $promo->street_number . " " . $promo->street_address;
-
-            // | output
-            $temp = [
-                'promo_id' => $promo_id,
-                'add_date' => $promo->add_date,
-                'promo_name' => $promo->promo_name,
-                'promo_length' => $promo->promo_length,
-                'advance_warning' => $promo->advance_warning,
-                'start_at' => $promo->start_at_local,
-                'end_at' => $promo->end_at_local,
-                'promo_repeat' => $promo->promo_repeat,
-                'promo_repeat_values' => $promo->promo_repeat_values,
-                'place_id' => $promo->store_id,
-                'is_verified' => $promo->is_verified,
-                'verified_count' => $promo->verified_count,
-                'contact_name' => $promo->contact_name,
-                'address' => $address,
-                'latitude' => $promo->latitude,
-                'longitude' => $promo->longitude,
-                'distance' => $promo->distance,
-                'pref_coupon' => $pref_coupon,
-                'all_coupon' => $all_coupons,
-                'time_remaining' => $time_difference,
-                'time_now' => date('H:i:s')
-            ];
-
-
-            // check if this promo has saved before
-            $checkSaved = "SELECT * FROM `user_coupons` WHERE `device_id`='" . $device_id . "' AND `scan_promo_id`=". $promo->promo_id;
-            $execSVC = $dbh->query($checkSaved);
-            $checkSavedRows = $execSVC->rowCount();
-
-            if(!($checkSavedRows > 0)) {
-                // if promo has not saved
-                // check promo repeat
-                if($promo_repeate == "Date"){
-                    $today = date('Y-md-d');
-                    $t_p_d = date('Y-m-d', strtotime($promo_repeate_value));
-
-                    if($today == $t_p_d) {
-
-                        $temp_nearby_coupons[] = $temp;
-                    }
-                }
-                else if ($promo_repeate == "Week"){
-                    $name = date("l");
-                    if(!($name == 'Saturday') || !($name == 'Sunday') ){
-                        $temp_nearby_coupons[] = $temp;
-                    }
-                }
-                else if ($promo_repeate == "Weekend"){
-                    $name = date("l");
-                    if(($name == 'Saturday') || ($name == 'Sunday') ){
-                        $temp_nearby_coupons[] = $temp;
-                    }
-                }
-                else if ($promo_repeate == "Days"){
-                    $name = date("l");
-                    $day_count = 0;
-
-                    if($name == 'Monday'){
-                        $day_count = '1';
-                    }
-                    else if($name == 'Tuesday'){
-                        $day_count = '2';
-                    }
-                    else if($name == 'Wednesday'){
-                        $day_count = '3';
-                    }
-                    else if($name == 'Thursday'){
-                        $day_count = '4';
-                    }
-                    else if($name == 'Friday'){
-                        $day_count = '5';
-                    }
-                    else if($name == 'Saturday'){
-                        $day_count = '6';
-                    }
-                    else if($name == 'Sunday'){
-                        $day_count = '7';
-                    }
-
-                    $remove_chars = ["[", "]", "\""];
-                    $stm = trim(str_replace($remove_chars, "", $promo_repeate_value));
-                    $list = explode(",", $stm);
-
-
-                    if(in_array($day_count, $list, TRUE)){
-                        $temp_nearby_coupons[] = $temp;
+                if($time_p_st > $time_p_st_local) {
+                    if($diff->invert == 0){
+                        $total_in_miliseconds = ((((($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i)*60 + $diff->s) * 1000);
+                        $time_difference = $total_in_miliseconds;
                     }
                 }
                 else {
-                    $temp_nearby_coupons[] = $temp;
+                    if($diff->invert == 1){
+                        $total_in_miliseconds = ((((($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i)*60 + $diff->s) * 1000);
+                        $time_difference = $total_in_miliseconds;
+                    }
                 }
+                
             }
 
+            // | set time remaining | //
+            $tPromo->time_remaining = $time_difference;
 
+            // get place id
+            $place_ids = $tPromo->place_id;
+            $repstmt = trim(str_replace($remove_chars, ' ', $place_ids));
+            $list_ids = explode(",", $repstmt);
 
-            
+            $st_id = $list_ids[0];
 
+            // get store details
+            $get_st = "SELECT * FROM `places` WHERE `place_id`=" . $st_id;
+            $exceSt = $dbh->query($get_st);
+            $st_det = $exceSt->fetchAll(PDO::FETCH_OBJ);
 
-        }
+            // | Get store address
+            $address = $st_det[0]->street_address;
+            // country short
+            $country_short = $st_det[0]->country_short;
 
-        // get all filterd nearby coupons
-        $filtered_coupons = $temp_nearby_coupons;
-
-        $result = [];
-
-        foreach ($filtered_coupons as $filtered_coupon) {
-            $t_coupon_id = $filtered_coupon['pref_coupon']->coupon_id;
-            $t_coup_lvl = $filtered_coupon['pref_coupon']->coupon_level;
-            $t_all_coups = $filtered_coupon['all_coupon'];
-
-            $new_prep_coup = [];
-
-
-            if($t_coup_lvl < 4) {
-
-                // new coupon level
-                $new_coup_lvl = ($t_coup_lvl + 1);
-
-                for($x = $t_coup_lvl; $x < 4; $x++) {
-
-                    //$new_coup_lvl = $t_all_coups[$x]->coupon_level;
-                    $t_coupon_id_all = $t_all_coups[$x]->coupon_id;
-                    $t_coup_avl = $t_all_coups[$x]->coupon_availabilty;
-                    $t_coup_occ = $t_all_coups[$x]->count_occupied;
-
-                    if(($t_coup_avl > $t_coup_occ) || ($t_coup_avl == "Unlimited")) {
-                        // check if this lvl excluded
-                        $checkExcluded = "SELECT * FROM `exclued_coupons` WHERE `device_id`='" . $device_id . "' AND `coupon_id`=" . $t_coupon_id_all . " ORDER BY `id` ASC";
-                        $executeCkeck = $dbh->query($checkExcluded);
-                        $rowsCkeck = $executeCkeck->rowCount();
-                        $resExcludeCheck = $executeCkeck->fetchAll(PDO::FETCH_OBJ);
-
-                        if($rowsCkeck > 0) {
-
-                            // get last exclude
-                            $get_last  =  date($resExcludeCheck[$rowsCkeck - 1]->created_at);
-
-                            $last_date = date_create($get_last);
-
-                            $get_now = date('Y-m-d H:i:s');
-                            // add one hour
-                            $get_now2 = date('Y-m-d H:i:s', strtotime($now . "+1 hour"));
-                            $get_today = date_create($get_now2);
-
-                            $getTimeDiff = date_diff($last_date, $get_today);
-
-                            $get_time_difference = 0;
-
-                            if(sizeof($getTimeDiff) > 0 ) {
-
-                                if ($getTimeDiff->invert == 0) {
-                                    $get_time_difference = ((((($getTimeDiff->y * 365.25 + $getTimeDiff->m * 30 + $getTimeDiff->d) * 24 + $getTimeDiff->h) * 60 + $getTimeDiff->i) * 60 + $getTimeDiff->s) * 1000);
-                                }
-                            }
-
-
-                            if(($get_time_difference > 0) && ($get_time_difference <= 86400000)) {
-                                $new_coup_lvl = ($new_coup_lvl + 1);
-
-                            } else {
-                                if($t_all_coups[$x]->coupon_level == $new_coup_lvl) {
-                                    $new_prep_coup = $t_all_coups[$x];
-                                }
-                            }
-
-
-                        }
-                        else {
-                            if($t_all_coups[$x]->coupon_level == $new_coup_lvl) {
-                                $new_prep_coup = $t_all_coups[$x];
-                            }
-                        }
-                    } else {
-                        $new_coup_lvl += 1;
-                    }
-                }
-
-
+            // get currency label
+            $curr = "$";
+            if($country_short == "GB") {
+                $curr = "£";
+            }
+            else if($country_short == "NZ") {
+                $curr = "$";
+            }
+            else if($country_short == "CA") {
+                $curr = "C$";
+            }
+            else if($country_short == "AU") {
+                $curr = "A$";
+            }
+            else {
+                $curr = "$";
+                
             }
 
-            // check if this coupon has excluded
-            $getExcluded = "SELECT * FROM `exclued_coupons` WHERE `device_id`='" . $device_id . "' AND `coupon_id`=" . $t_coupon_id . " ORDER BY `id` ASC";
-            $execute = $dbh->query($getExcluded);
-            $rowsEcl = $execute->rowCount();
-            $resExclude = $execute->fetchAll(PDO::FETCH_OBJ);
+            // get all coupons 
+            $sql5 = "SELECT * FROM `coupons`  WHERE `promo_id` =". $promo_id;
+            $coops3 = $dbh->query($sql5);
+            $all_coupons = $coops3->fetchAll(PDO::FETCH_OBJ);
 
-            if($rowsEcl > 0) {
-                // get last exclude
-                $t_last_date  =  date($resExclude[$rowsEcl - 1]->created_at);
+            // set currency
+            foreach($all_coupons as $coupon) {
+                $coupon->currency = $curr;
+            }
 
-                $last = date_create($t_last_date);
+            // | set all coupons | // 
+            $tPromo->all_coupon = $all_coupons;
 
-                $now = date('Y-m-d H:i:s');
-                // add one hour
-                $now2 = date('Y-m-d H:i:s', strtotime($now . "+1 hour"));
-                $today = date_create($now2);
+            // get pref_coupon
+            $sql3 = "SELECT * FROM `coupons` WHERE `promo_id` =" .$promo_id. " AND (`coupon_availabilty` > `count_occupied` OR `coupon_availabilty` = 'Unlimited') ORDER BY `coupon_id` ASC LIMIT 0,1";
+            $coops = $dbh->query($sql3);
+            $num_rows = $coops->rowCount();
+            $pref_coupon = $coops->fetchAll(PDO::FETCH_OBJ);
 
-                $timeDiff = date_diff($last, $today);
+            // | set currency | //
+            $pref_coupon[0]->currency = $curr;
 
-                $time_difference = 0;
+            // pref coupon id
+            $pref_coupon_id = $pref_coupon[0]->coupon_id;
+            // pref coupon level
+            $pref_coupon_lvl = $pref_coupon[0]->coupon_level;
 
-                $api_info['diff'] = $timeDiff;
-                $api_info['now'] = $today;
-                $api_info['last'] = $last;
+            // check if this has saved and expired
+            $chkSvd = "SELECT * FROM `user_coupons` WHERE `device_id`='" . $device_id . "' AND `scan_promo_id`=". $promo_id . " AND `scan_coupon_id`=" . $pref_coupon_id . " AND `scan_coupon_status`=3";
+            $runSQl = $dbh->query($chkSvd);
+            $chkRows = $runSQl->rowCount();
+            $chkDetails = $runSQl->fetchAll(PDO::FETCH_OBJ);
 
+            if($chkRows > 0) {
 
-                if(sizeof($timeDiff) > 0 ) {
+                // if coupon level < 4
+                // check other coupons for next best coupon
+                if($pref_coupon_lvl < 4) {
+                    // check all coupons
+                    $t_pref_coupon = [];
+                    for($x = $pref_coupon_lvl; $x < 4; $x++) {
+                        $t_availability = $all_coupons[$x]->coupon_availabilty;
+                        $t_occupied = $all_coupons[$x]->count_occupied;
 
-                    if ($timeDiff->invert == 0) {
-                        $time_difference = ((((($timeDiff->y * 365.25 + $timeDiff->m * 30 + $timeDiff->d) * 24 + $timeDiff->h) * 60 + $timeDiff->i) * 60 + $timeDiff->s) * 1000);
+                        if(($t_availability > $t_occupied) || ($t_availability == "Unlimited")) {
+                            // if coupons are available
+                            $t_pref_coupon = $all_coupons[$x];
+                            break;
+                        }
                     }
+
+                    // add pref coupon 
+                    $tPromo->pref_coupon = $t_pref_coupon;
+                } 
+                else {
+                    $pref_coupon = [];
+                    // add pref coupon 
+                    $tPromo->pref_coupon = $pref_coupon;
                 }
-
-
-                if(($time_difference > 0) && ($time_difference <= 86400000)) {
-                    if(sizeof($new_prep_coup) > 0 ) {
-                        $filtered_coupon['pref_coupon'] = $new_prep_coup;
-                        $result[] = $filtered_coupon;
-                    }
-
-                } else {
-                    $result[] = $filtered_coupon;
-                }
-
 
             }
             else {
-                $result[] = $filtered_coupon;
+                // if not saved 
+                // add pref coupon 
+                $tPromo->pref_coupon = $pref_coupon[0];
             }
+
+            // if there is pref coupon add to list
+            if(!(empty($tPromo->pref_coupon))) {
+                $tempNearByPromos[] = $tPromo;
+            }
+        
+        }
+
+        // $api_info['res'] = $tempNearByPromos;
+
+        // | for all filtered promos 
+        // | check for excluded coupons
+        // | set pref coupons
+        $result = [];
+
+        // get server details
+        $serverLocation = Converter::get_server_location();
+        $ser_lat = $serverLocation['latitude'];
+        $ser_lng = $serverLocation['longitude'];
+
+        // get server offset
+        $server_offset = Converter::get_time_zone($ser_lat, $ser_lng);
+
+        foreach($tempNearByPromos as $nPromo) {
+            // get pref coupon id, level and all coupons
+            $nPrefCoupId = $nPromo->pref_coupon->coupon_id;
+            $nPrefCoupLvl = $nPromo->pref_coupon->coupon_level;
+            $nAllCoupons = $nPromo->all_coupon;
+
+            // get store details 
+            $store_lat = $nPromo->store_lat;
+            $store_lng = $nPromo->store_lng;
+            
+            // get store offset 
+            $store_offset = Converter::get_time_zone($store_lat, $store_lng);
+
+        
+            // check for exclude 
+            $chkPrefExclude = "SELECT * FROM `exclued_coupons` WHERE `device_id`='" . $device_id . "' AND `coupon_id`=" . $nPrefCoupId . " ORDER BY `id` ASC";
+            $excChkPref = $dbh->query($chkPrefExclude);
+            $chkPrefExclude = $excChkPref->rowCount();
+            $prefExcludeDetails = $excChkPref->fetchAll(PDO::FETCH_OBJ);
+
+            if($chkPrefExclude > 0) {
+                // if excluded 
+                // check last date time
+                $getLastDate = $prefExcludeDetails[$chkPrefExclude - 1]->date;
+                $lastDate = ($getLastDate . " 23:59:00");
+                $lastDateTime = strtotime($lastDate);
+
+                // get server time 
+                $serverTime = Converter::get_server_time_by_store_time($lastDateTime, $store_offset, $server_offset);
+
+                // now 
+                $today = date('Y-m-d H:i:s');
+
+                // create date objects 
+                $serverDateObj = date_create($serverTime);
+                $todayDateObj = date_create($today);
+                
+                $diffPref = date_diff($serverDateObj, $todayDateObj);
+                $is_passed = 0;
+
+                // check time difference 
+                if(sizeof($diffPref) > 0){
+                    if($diffPref->invert == 0){
+                        $get_time_difference = ((((($diffPref->y * 365.25 + $diffPref->m * 30 + $diffPref->d) * 24 + $diffPref->h) * 60 + $diffPref->i) * 60 + $diffPref->s) * 1000);
+
+                        if($get_time_difference > 0) {
+                            $is_passed = 1;
+                        }
+                    }
+                }
+
+                if($is_passed > 0) {
+                    $result[] = $nPromo;
+                }
+                else {
+                    // get next best
+                    $new_prep_coup = [];
+                    for($y = $nPrefCoupLvl; $y < 4; $y++) {
+
+                        // get coupon details
+                        $t_cp_id = $nAllCoupons[$y]->coupon_id;
+                        $tcp_available = $nAllCoupons[$y]->coupon_availabilty;
+                        $tcp_occupied = $nAllCoupons[$y]->count_occupied;
+
+                        // check for exclude
+                        $chkNextExclude = "SELECT * FROM `exclued_coupons` WHERE `device_id`='" . $device_id . "' AND `coupon_id`=" . $t_cp_id . " ORDER BY `id` ASC";
+                        $excNextExclude = $dbh->query($chkNextExclude);
+                        $rowsNextExclude = $excNextExclude->rowCount();
+                        $detailsNextExclude = $excNextExclude->fetchAll(PDO::FETCH_OBJ);
+
+                        if($rowsNextExclude > 0) {
+                            // if excluded
+                            // check last date 
+                            $getTLastDate = $detailsNextExclude[$rowsNextExclude - 1]->date;
+                            $lastTDate = strtotime($getTLastDate . " 23:59:00");
+            
+                            // get server time 
+                            $serverTTime = Converter::get_server_time_by_store_time($lastTDate, $store_offset, $server_offset);
+            
+                            // now 
+                            $todayT = date('Y-m-d H:i:s');
+
+                            // create date objects 
+                            $serverTDateObj = date_create($serverTTime);
+                            $todayTDateObj = date_create($todayT);
+
+                            $diffPrefT = date_diff($serverTDateObj, $todayTDateObj);
+                            $is_passed_t = 0;
+
+                            // check time difference
+                            if(sizeof($diffPrefT) > 0){
+                                if($diffPref->invert == 0){
+                                    $get_time_difference = ((((($diffPrefT->y * 365.25 + $diffPrefT->m * 30 + $diffPrefT->d) * 24 + $diffPrefT->h) * 60 + $diffPrefT->i) * 60 + $diffPrefT->s) * 1000);
+
+                                    if($get_time_difference > 0) {
+                                        $is_passed_t = 1;
+                                    }
+                                }
+                            }
+
+            
+                            if($is_passed_t > 0) {
+                                $new_prep_coup = $nAllCoupons[$y];
+                                break;
+                            }else {
+                                continue;
+                            }
+                        }
+                        else {
+                            // if not excluded
+                            // check availability 
+                            if(($tcp_available > $tcp_occupied) || ($tcp_available == "Unlimited")) {
+                                $new_prep_coup = $nAllCoupons[$y];
+                                break;
+                            } else {
+                                continue;
+                            }
+                            
+                        }
+
+                    }
+
+                    $nPromo->pref_coupon = $new_prep_coup;
+                    $result[] = $nPromo;
+                }
+                
+
+            }
+            else {
+                // if not excluded
+                // add to final list
+                $result[] = $nPromo;
+            }
+
         }
 
         $api_info['promo_info'] = $result;
-
-        $api_info['red_friday_promos'] = [];
-
-    } 
+        
+    }
     else {
+        // if user is not in the system
         $api_info['response_msg'] = "device_not_found";
     }
-        
+
 }
 
-$api_info['response_code'] = 200;
 
+
+$api_info['response_code'] = 200;
 
 header('Content-Type: application/json');
 echo json_encode($api_info);
