@@ -404,70 +404,76 @@ else{
                 else {
                     // get next best
                     $new_prep_coup = [];
-                    for($y = $nPrefCoupLvl; $y < 4; $y++) {
+                    if($nPrefCoupLvl < 4) {
+                        for($y = $nPrefCoupLvl; $y < 4; $y++) {
 
-                        // get coupon details
-                        $t_cp_id = $nAllCoupons[$y]->coupon_id;
-                        $tcp_available = $nAllCoupons[$y]->coupon_availabilty;
-                        $tcp_occupied = $nAllCoupons[$y]->count_occupied;
-
-                        // check for exclude
-                        $chkNextExclude = "SELECT * FROM `exclued_coupons` WHERE `device_id`='" . $device_id . "' AND `coupon_id`=" . $t_cp_id . " ORDER BY `id` ASC";
-                        $excNextExclude = $dbh->query($chkNextExclude);
-                        $rowsNextExclude = $excNextExclude->rowCount();
-                        $detailsNextExclude = $excNextExclude->fetchAll(PDO::FETCH_OBJ);
-
-                        if($rowsNextExclude > 0) {
-                            // if excluded
-                            // check last date 
-                            $getTLastDate = $detailsNextExclude[$rowsNextExclude - 1]->date;
-                            $lastTDate = strtotime($getTLastDate . " 23:59:00");
-            
-                            // get server time 
-                            $serverTTime = Converter::get_server_time_by_store_time($lastTDate, $store_offset, $server_offset);
-            
-                            // now 
-                            $todayT = date('Y-m-d H:i:s');
-
-                            // create date objects 
-                            $serverTDateObj = date_create($serverTTime);
-                            $todayTDateObj = date_create($todayT);
-
-                            $diffPrefT = date_diff($serverTDateObj, $todayTDateObj);
-                            $is_passed_t = 0;
-
-                            // check time difference
-                            if(sizeof($diffPrefT) > 0){
-                                if($diffPref->invert == 0){
-                                    $get_time_difference = ((((($diffPrefT->y * 365.25 + $diffPrefT->m * 30 + $diffPrefT->d) * 24 + $diffPrefT->h) * 60 + $diffPrefT->i) * 60 + $diffPrefT->s) * 1000);
-
-                                    if($get_time_difference > 0) {
-                                        $is_passed_t = 1;
+                            // get coupon details
+                            $t_cp_id = $nAllCoupons[$y]->coupon_id;
+                            $tcp_available = $nAllCoupons[$y]->coupon_availabilty;
+                            $tcp_occupied = $nAllCoupons[$y]->count_occupied;
+    
+                            // check for exclude
+                            $chkNextExclude = "SELECT * FROM `exclued_coupons` WHERE `device_id`='" . $device_id . "' AND `coupon_id`=" . $t_cp_id . " ORDER BY `id` ASC";
+                            $excNextExclude = $dbh->query($chkNextExclude);
+                            $rowsNextExclude = $excNextExclude->rowCount();
+                            $detailsNextExclude = $excNextExclude->fetchAll(PDO::FETCH_OBJ);
+    
+                            if($rowsNextExclude > 0) {
+                                // if excluded
+                                // check last date 
+                                $getTLastDate = $detailsNextExclude[$rowsNextExclude - 1]->date;
+                                $lastTDate = strtotime($getTLastDate . " 23:59:00");
+                
+                                // get server time 
+                                $serverTTime = Converter::get_server_time_by_store_time($lastTDate, $store_offset, $server_offset);
+                
+                                // now 
+                                $todayT = date('Y-m-d H:i:s');
+    
+                                // create date objects 
+                                $serverTDateObj = date_create($serverTTime);
+                                $todayTDateObj = date_create($todayT);
+    
+                                $diffPrefT = date_diff($serverTDateObj, $todayTDateObj);
+                                $is_passed_t = 0;
+    
+                                // check time difference
+                                if(sizeof($diffPrefT) > 0){
+                                    if($diffPref->invert == 0){
+                                        $get_time_difference = ((((($diffPrefT->y * 365.25 + $diffPrefT->m * 30 + $diffPrefT->d) * 24 + $diffPrefT->h) * 60 + $diffPrefT->i) * 60 + $diffPrefT->s) * 1000);
+    
+                                        if($get_time_difference > 0) {
+                                            $is_passed_t = 1;
+                                        }
                                     }
                                 }
+    
+                
+                                if($is_passed_t == 1) {
+                                    $new_prep_coup = $nAllCoupons[$y];
+                                    break;
+                                }else {
+                                    continue;
+                                }
                             }
-
-            
-                            if($is_passed_t == 1) {
-                                $new_prep_coup = $nAllCoupons[$y];
-                                break;
-                            }else {
-                                continue;
+                            else {
+                                // if not excluded
+                                // check availability 
+                                if(($tcp_available > $tcp_occupied) || ($tcp_available == "Unlimited")) {
+                                    $new_prep_coup = $nAllCoupons[$y];
+                                    break;
+                                } else {
+                                    continue;
+                                }
+                                
                             }
+    
                         }
-                        else {
-                            // if not excluded
-                            // check availability 
-                            if(($tcp_available > $tcp_occupied) || ($tcp_available == "Unlimited")) {
-                                $new_prep_coup = $nAllCoupons[$y];
-                                break;
-                            } else {
-                                continue;
-                            }
-                            
-                        }
-
                     }
+                    else {
+                        $nPromo->pref_coupon = $new_prep_coup;
+                    }
+                    
 
                     $nPromo->pref_coupon = $new_prep_coup;
                     if(sizeof($nPromo->pref_coupon) > 0) {
