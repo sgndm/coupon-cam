@@ -486,6 +486,7 @@ else{
 
             }
             else {
+                $api_info['pref-ids2'][] = $nPrefCoupId;
                 // if not excluded
                 // add to final list
                 $result[] = $nPromo;
