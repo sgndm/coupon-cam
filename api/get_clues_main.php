@@ -388,6 +388,8 @@ else{
                 $diffPref = date_diff($serverDateObj, $todayDateObj);
                 $is_passed = 0;
 
+                $api_info['exclude_date'][] = ['mid-ser' => $serverTime, 'now-ser' => $today, 'diff' => $diffPref];
+
                 // check time difference 
                 if(sizeof($diffPref) > 0){
                     if($diffPref->invert == 0){
