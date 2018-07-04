@@ -326,7 +326,7 @@ else{
             }
 
             // if there is pref coupon add to list
-            if(!(empty($tPromo->pref_coupon))) {
+            if(sizeof($tPromo->pref_coupon) > 0) {
                 $tempNearByPromos[] = $tPromo;
             }
         
