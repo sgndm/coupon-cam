@@ -397,7 +397,7 @@ else{
                     }
                 }
 
-                if($is_passed > 0) {
+                if($is_passed == 1) {
                     $result[] = $nPromo;
                 }
                 else {
@@ -447,7 +447,7 @@ else{
                             }
 
             
-                            if($is_passed_t > 0) {
+                            if($is_passed_t == 1) {
                                 $new_prep_coup = $nAllCoupons[$y];
                                 break;
                             }else {
