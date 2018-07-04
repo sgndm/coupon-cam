@@ -470,7 +470,10 @@ else{
                     }
 
                     $nPromo->pref_coupon = $new_prep_coup;
-                    $result[] = $nPromo;
+                    if(sizeof(nPromo->pref_coupon) > 0) {
+                        $result[] = $nPromo;
+                    }
+                    
                 }
                 
 
