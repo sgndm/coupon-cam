@@ -202,19 +202,20 @@ else{
 
             // $diff = [];
             if(sizeof($diff) > 0 ) {
+                if($diff->invert == 0){
+                    $total_in_miliseconds = ((((($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i)*60 + $diff->s) * 1000);
+                    $time_difference = $total_in_miliseconds;
+                }
 
-                if($time_p_st > $time_p_st_local) {
-                    if($diff->invert == 0){
-                        $total_in_miliseconds = ((((($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i)*60 + $diff->s) * 1000);
-                        $time_difference = $total_in_miliseconds;
-                    }
-                }
-                else {
-                    if($diff->invert == 1){
-                        $total_in_miliseconds = ((((($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i)*60 + $diff->s) * 1000);
-                        $time_difference = $total_in_miliseconds;
-                    }
-                }
+                // if($time_p_st > $time_p_st_local) {
+                    
+                // }
+                // else {
+                //     if($diff->invert == 1){
+                //         $total_in_miliseconds = ((((($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i)*60 + $diff->s) * 1000);
+                //         $time_difference = $total_in_miliseconds;
+                //     }
+                // }
                 
             }
 
