@@ -472,6 +472,7 @@ else{
                     }
                     else {
                         $nPromo->pref_coupon = $new_prep_coup;
+                        break;
                     }
                     
 
