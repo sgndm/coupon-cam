@@ -368,7 +368,7 @@ else{
             $prefExcludeDetails = $excChkPref->fetchAll(PDO::FETCH_OBJ);
 
             if($chkPrefExclude > 0) {
-                $api_info['excluded'][] = $nPrefCoupId;
+                // $api_info['excluded'][] = $nPrefCoupId;
                 // if excluded 
                 // check last date time
                 $getLastDate = $prefExcludeDetails[$chkPrefExclude - 1]->date;
@@ -388,7 +388,7 @@ else{
                 $diffPref = date_diff($serverDateObj, $todayDateObj);
                 $is_passed = 0;
 
-                $api_info['exclude_date'][] = ['mid-ser' => $serverTime, 'now-ser' => $today, 'diff' => $diffPref];
+                // $api_info['exclude_date'][] = ['mid-ser' => $serverTime, 'now-ser' => $today, 'diff' => $diffPref];
 
                 // check time difference 
                 if(sizeof($diffPref) > 0){
@@ -489,7 +489,7 @@ else{
 
             }
             else {
-                $api_info['not-excluded'][] = $nPrefCoupId;
+                // $api_info['not-excluded'][] = $nPrefCoupId;
                 // if not excluded
                 // add to final list
                 $result[] = $nPromo;
