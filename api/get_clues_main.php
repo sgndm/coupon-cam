@@ -352,7 +352,7 @@ else{
             $nPrefCoupId = $nPromo->pref_coupon->coupon_id;
             $nPrefCoupLvl = $nPromo->pref_coupon->coupon_level;
             $nAllCoupons = $nPromo->all_coupon;
-
+            $api_info['pref-ids'][] = $nPrefCoupId; 
             // get store details 
             $store_lat = $nPromo->store_lat;
             $store_lng = $nPromo->store_lng;
