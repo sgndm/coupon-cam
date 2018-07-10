@@ -96,7 +96,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 								// if excluded 
 								// check date
 								// check last excluded time 
-								$get_last_n  =  ($resExcludeCheck[$rowsCkeck - 1]->created_at);
+								$get_last_n  =  ($resExcludeCheck[$rowsCheck - 1]->created_at);
 								$last_n = strtotime($get_last_n . " 23:59:00");
 	
 								// get server time 
