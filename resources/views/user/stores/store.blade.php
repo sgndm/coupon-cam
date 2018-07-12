@@ -527,7 +527,7 @@
 
         function create_tab() {
             load_map(1);
-            $('#crt_qr_1').show();
+            $('#crt_qr_1').hide();
             $('#print_code_1').hide();
             $('#refresh_qr_1').hide();
         }
