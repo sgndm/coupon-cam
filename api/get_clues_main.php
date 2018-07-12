@@ -88,6 +88,7 @@ else{
             }
         }
 
+       // $api_info['aaa'] = $tempAllPRomo;
 
         // | for all available promos 
         // | get coupons and pref coupon
@@ -206,17 +207,6 @@ else{
                     $total_in_miliseconds = ((((($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i)*60 + $diff->s) * 1000);
                     $time_difference = $total_in_miliseconds;
                 }
-
-                // if($time_p_st > $time_p_st_local) {
-                    
-                // }
-                // else {
-                //     if($diff->invert == 1){
-                //         $total_in_miliseconds = ((((($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i)*60 + $diff->s) * 1000);
-                //         $time_difference = $total_in_miliseconds;
-                //     }
-                // }
-                
             }
 
             // | set time remaining | //
@@ -347,12 +337,19 @@ else{
         // get server offset
         $server_offset = Converter::get_time_zone($ser_lat, $ser_lng);
 
+        // $count = 0;
+
         foreach($tempNearByPromos as $nPromo) {
+
+            // $count += 1;
             // get pref coupon id, level and all coupons
             $nPrefCoupId = $nPromo->pref_coupon->coupon_id;
             $nPrefCoupLvl = $nPromo->pref_coupon->coupon_level;
             $nAllCoupons = $nPromo->all_coupon;
-            $api_info['pref-ids'][] = $nPrefCoupId; 
+
+            // $api_info['pref-ids'][] = $nPrefCoupId;
+
+
             // get store details 
             $store_lat = $nPromo->store_lat;
             $store_lng = $nPromo->store_lng;
@@ -368,7 +365,9 @@ else{
             $prefExcludeDetails = $excChkPref->fetchAll(PDO::FETCH_OBJ);
 
             if($chkPrefExclude > 0) {
+
                 // $api_info['excluded'][] = $nPrefCoupId;
+
                 // if excluded 
                 // check last date time
                 $getLastDate = $prefExcludeDetails[$chkPrefExclude - 1]->date;
@@ -475,7 +474,7 @@ else{
                     }
                     else {
                         $nPromo->pref_coupon = $new_prep_coup;
-                        break;
+                        continue;
                     }
                     
 
@@ -498,7 +497,8 @@ else{
         }
 
         $api_info['promo_info'] = $result;
-        
+        // $api_info['count'] = $count;
+
     }
     else {
         // if user is not in the system
