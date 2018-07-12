@@ -509,10 +509,8 @@
 
             if(has_stores == 1) {
                 load_map(2);
-                $('a[aria-controls="tab-pane-2"]').trigger("click");
             } else {
                 load_map(1);
-                $('a[aria-controls="tab-pane-1"]').trigger("click");
 
             }
 
