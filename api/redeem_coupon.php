@@ -66,11 +66,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $executeChekc = $dbh->query($checkFirst);
         $rowCountCheck = $executeChekc->rowCount();
 
-        if($rowCountCheck == 1) {
-            $apiResponse['response_data']['is_first_time'] = 1;
-        } else {
-            $apiResponse['response_data']['is_first_time'] = 0;
-        }
+
 
         // get country of store
         $getStsql = "SELECT * FROM `places` WHERE `place_id`=" . $store_id;
@@ -423,6 +419,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $apiResponse['response_code'] = 200;
             $apiResponse['response_data'] = array('coupon_id' => $coupon_id, 'device_id' => $device_id, 'is_loyalty' => 0, 'loyalty_count' => 0, 'used_count' => 0);
             $apiResponse['response_msg'] = "Invalid coupon id or device id";
+        }
+
+        if($rowCountCheck == 1) {
+            $apiResponse['response_data']['is_first_time'] = 1;
+        } else {
+            $apiResponse['response_data']['is_first_time'] = 0;
         }
 
     }
