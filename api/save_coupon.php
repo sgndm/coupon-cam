@@ -190,7 +190,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $new_ocupied_count = $count_occupied + 1;
                             //
                             // update coupons table
-                            $sql5 = "UPDATE `coupons` SET `count_occupied`='" . $new_ocupied_count . "' WHERE `coupon_id` = '" . $coupon_id . "'";
+                            $sql5 = "UPDATE `coupons` SET `count_occupied`='" . $new_ocupied_count . "' WHERE `coupon_id` = " . $coupon_id;
                             $res5 = $dbh->query($sql5);
                             $rows5 = $res5->rowCount();
 
@@ -244,7 +244,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $new_ocupied_count = $count_occupied + 1;
                             //
                             // update coupons table
-                            $sql5 = "UPDATE `coupons` SET `count_occupied`='" . $new_ocupied_count . "' WHERE `coupon_id` = '" . $coupon_id . "'";
+                            $sql5 = "UPDATE `coupons` SET `count_occupied`='" . $new_ocupied_count . "' WHERE `coupon_id` = " . $coupon_id;
                             $res5 = $dbh->query($sql5);
                             $rows5 = $res5->rowCount();
 
@@ -295,7 +295,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $new_ocupied_count = $count_occupied + 1;
                         //
                         // update coupons table
-                        $sql5 = "UPDATE `coupons` SET `count_occupied`='" . $new_ocupied_count . "' WHERE `coupon_id` = '" . $coupon_id . "'";
+                        $sql5 = "UPDATE `coupons` SET `count_occupied`='" . $new_ocupied_count . "' WHERE `coupon_id` = " . $coupon_id;
                         $res5 = $dbh->query($sql5);
                         $rows5 = $res5->rowCount();
 
