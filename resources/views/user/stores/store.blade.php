@@ -510,8 +510,9 @@
             if(has_stores == 1) {
                 load_map(2);
             } else {
+                $('a[aria-controls="tab-pane-1"]').trigger("click");
                 load_map(1);
-
+                create_tab();
             }
 
 
