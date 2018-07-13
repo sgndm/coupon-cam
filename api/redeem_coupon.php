@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $qr_code = trim($_POST['qr_code']);
     $is_prelaunched = trim($_POST['is_prelaunched']);
 
-    if((!empty($device_id)) && (!empty($coupon_id)) && (!empty($qr_code)) ){
+    if((empty($device_id)) && (empty($coupon_id)) && (empty($qr_code)) ){
 
         $apiResponse['response_code'] = 200;
         $apiResponse['response_data'] = array('place_id' => $place_id, 'device_id' => $device_id);
