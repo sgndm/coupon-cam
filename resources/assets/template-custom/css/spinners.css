@@ -58,7 +58,7 @@ Preloader
 
 .cus_loader_lable{
   position: absolute;
-  top: calc(50% + 60px);
+  top: calc(50% + 70px);
   color: #e80602;
   white-space: nowrap;
   font-size: 18px;

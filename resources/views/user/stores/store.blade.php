@@ -261,7 +261,7 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Store Address</label>
-                                            <input type="text" id="store_address_2" name="store_address" class="form-control" placeholder="Start Typing Full Address..." required oninput="error_hide('store_address_error_2');">
+                                            <input type="text" id="store_address_2" name="store_address" class="form-control" placeholder="Start Typing Full Address..."  oninput="error_hide('store_address_error_2');">
                                             <h6 class="form-control-feedback text-danger" id="store_address_error_2"> </h6>
                                         </div>
 
@@ -1095,7 +1095,7 @@
         }
 
         function generate_qr_code(id) {
-
+            showSpinner();
             $('#crt_qr_'+id).hide();
 
             $.get("{{ url('user/generate_new_qr') }}",function(data){
@@ -1109,14 +1109,18 @@
 
             $('#print_code_'+id).show();
             $('#refresh_qr_'+id).show();
+            
+            hideSpinner();
         }
 
         function refresh_qr(id) {
+            showSpinner();
             // get image qr code name
             var old_qr = $('#promo_qr_image_'+id).val();
             $('#qr_code_prev_'+id).attr('src', "{{url('resources/assets/custom/images/no-image.png')}}");
 
             generate_qr_code(id);
+            hideSpinner();
         }
 
         function view_qr_code(id) {
@@ -1328,19 +1332,27 @@
         }
 
         function validate_crt(id) {
+            showSpinner();
             var validator = input_validate_custom(id);
 
             if(validator == 1) {
                 $('#store_form_' + id).submit();
             } else {
+                hideSpinner();
                 alert("Please Fill the missing data..");
             }
+            
         }
 
         function error_hide(field_id) {
             $('#'+ field_id).html('');
         }
 
+        function submit_form(event, id){
+            showSpinner();
+            $('#store_form_' + id).submit();
+            hideSpinner();
+        }
 
     </script>
 

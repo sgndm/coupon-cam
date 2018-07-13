@@ -63,7 +63,7 @@
             <div class="cus-loader-figure">
                 <!-- <img src="{{ asset('resources/assets/template/images/favicon.png') }}" style="width:16px; height: 16px;" > -->
             </div>
-            <p class="cus_loader_lable">Loading..</p>
+            <p class="cus_loader_lable">Loading...</p>
         </div>
     </div>
     <!-- ============================================================== -->
@@ -407,6 +407,15 @@
         }).find('input').change(function() {
             console.log(this.value);
         });
+
+
+        function showSpinner(){
+            $(".preloader").fadeIn();
+        }
+
+        function hideSpinner(){
+            $(".preloader").fadeOut();
+        }
     
 
     </script>
