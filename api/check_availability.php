@@ -51,7 +51,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$pref_coupon_lvl = $pref_coupon[0]->coupon_level; 
 
 		// check if this has saved 
-		$chkSaved = "SELECT * FROM `user_coupons` WHERE `scan_coupon_id`=" . $pref_coup_id . " And `device_id`='" . $device_id . "'";
+		$chkSaved = "SELECT * FROM `user_coupons` WHERE `scan_coupon_id`=" . $pref_coup_id . " And `device_id`='" . $device_id . "' AND ((`scan_coupon_status`=2) OR (`scan_coupon_status`=4))";
 		$excSvd = $dbh->query($chkSaved);
 		$svdRows = $excSvd->rowCount();
 
@@ -157,8 +157,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			else {
 				// if pref not available
 				$apiResponse['response_code'] = 200;
-				$apiResponse['response_data'] = [];
-				$apiResponse['response_msg'] = "No Coupons are available";
+				$apiResponse['response_data'] = ['coupon_id' => $pref_coup_id ];
+				$apiResponse['response_msg'] = "Next available coupon";
 			}
 		}
 		else {
@@ -217,15 +217,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 					if($pref_coupon_lvl < 4) {
 						for($x = $pref_coupon_lvl; $x < 4; $x++) {
 							// next coupon id
+
+
+
 							$t_n_coupon_id = $all_coupons[$x]->coupon_id;
 							$t_availability = $all_coupons[$x]->coupon_availabilty;
 							$t_occuepied = $all_coupons[$x]->count_occupied;
+
 
 							// check availability 
 							if(($t_availability > $t_occuepied) || ($t_availability == "Unlimited")) {
 								// if available
 								// check for saved 
-								$chkSaved2 = "SELECT * FROM `user_coupons` WHERE `scan_coupon_id`=" . $t_n_coupon_id . " And `device_id`='" . $device_id . "'";
+								$chkSaved2 = "SELECT * FROM `user_coupons` WHERE `scan_coupon_id`=" . $t_n_coupon_id . " And `device_id`='" . $device_id . "' AND ((`scan_coupon_status`=2) OR (`scan_coupon_status`=4))";
 								$excSvd2 = $dbh->query($chkSaved2);
 								$svdRows2 = $excSvd2->rowCount();
 
@@ -265,15 +269,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 										// check time difference 
 										if(sizeof($diffPref_n) > 0){
 											if($diffPref_n->invert == 0){
-												$get_time_difference = ((((($diffPref_n->y * 365.25 + $diffPref_n->m * 30 + $diffPref_n->d) * 24 + $diffPref_n->h) * 60 + $diffPref_n->i) * 60 + $diffPref_n->s) * 1000);
+												$get_time_difference_n = ((((($diffPref_n->y * 365.25 + $diffPref_n->m * 30 + $diffPref_n->d) * 24 + $diffPref_n->h) * 60 + $diffPref_n->i) * 60 + $diffPref_n->s) * 1000);
 			
-												if($get_time_difference > 0) {
-													$is_passed = 1;
+												if($get_time_difference_n > 0) {
+                                                    $is_passed_n = 1;
 												}
 											}
 										}
 
-										if($is_passed = 1) {
+										if($is_passed_n == 1) {
 											// if exclude expired
 											$apiResponse['response_code'] = 200;
 											$apiResponse['response_data'] = ['coupon_id' => $t_n_coupon_id ];
@@ -305,10 +309,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 						}
 					}
 					else {
+                        $apiResponse['extra'][] = "cp level == 4";
 						// if pref not available
 						$apiResponse['response_code'] = 200;
-						$apiResponse['response_data'] = [];
-						$apiResponse['response_msg'] = "No Coupons are available";
+						$apiResponse['response_data'] = ['coupon_id' => $pref_coup_id ];
+						$apiResponse['response_msg'] = "Next available coupon";
 					}
 
 				}
@@ -316,6 +321,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 			}
 			else {
+
+                $apiResponse['extra'][] = "exclude == 0";
 				// if not excluded 
 				$apiResponse['response_code'] = 200;
 				$apiResponse['response_data'] = ['coupon_id' => $pref_coup_id ];
