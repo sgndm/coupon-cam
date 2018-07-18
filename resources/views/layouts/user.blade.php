@@ -373,6 +373,7 @@
 
     var spinnerDefault;
     var spinnerProgress;
+    var spinnerProgressTimer;
 
     var defualtConfig
     var progressConfig;
