@@ -396,8 +396,9 @@
         maskBgColor: 'rgba(255, 255, 255,0.8)',
         animationWidth: 60,
         animationHeight: 60,
-					animationIn: false,
-					animationOut: false
+        animationIn: 'animated',
+        animationOut: 'animated',
+        animationDuration:  2000
     };
 
     function progressSpinner(text) {
@@ -419,8 +420,9 @@
             maskBgColor: 'rgba(255, 255, 255,0.8)',
             animationWidth: 60,
             animationHeight: 60,
-					animationIn: false,
-					animationOut: false
+        animationIn: 'animated',
+        animationOut: 'animated',
+        animationDuration:  2000
         };
 
         spinnerProgress = new Loading(progressConfig);
@@ -445,8 +447,9 @@
             maskBgColor: 'rgba(255, 255, 255,0.8)',
             animationWidth: 60,
             animationHeight: 60,
-					animationIn: false,
-					animationOut: false
+        animationIn: 'animated',
+        animationOut: 'animated',
+        animationDuration:  2000
         };
 
         spinnerProgressTimer = new Loading(progressConfig);
@@ -458,24 +461,6 @@
         spinnerProgress.out();
     }
 
-    /*spinnerDefault = new Loading({
-        direction: 'ver',
-        discription: 'Loading...',
-        discriptionColor:  '#e80602',
-        loadingWidth: 'auto',
-        loadingHeight: 'auto',
-        loadingPadding: 20,
-        loadingBgColor: 'transparent',
-        loadingBorderRadius: 12,
-        loadingPosition: 'fixed',
-        zIndex: 999,
-        defaultApply: false,
-        animationOriginColor: '#e80602',
-        mask: true,
-        maskBgColor: 'rgba(245,242,242,0.8)',
-        animationWidth: 60,
-        animationHeight: 60,
-    });*/
 
     $('.carousel').carousel({
         interval: false
