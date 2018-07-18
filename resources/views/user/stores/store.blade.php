@@ -253,12 +253,18 @@
                                             </div>
                                             <h6 class="form-control-feedback text-danger" id="store_name_error_2"> </h6>
 
-
+                                            <div class="form-group">
+                                                <br>
+                                                <label class="control-label">Store Name</label>
+                                                <input type="text" id="store_name_2" name="store_name" class="form-control" placeholder="Enter Name" required oninput="error_hide('store_name_error_1');" >
+                                                <h6 class="form-control-feedback text-danger" id="store_name_error_1"> </h6>
+                                            </div>
                                         </div>
 
 
                                     </div>
                                     <div class="col-sm-12 col-md-12 col-lg-6">
+
                                         <div class="form-group">
                                             <label class="control-label">Store Address</label>
                                             <input type="text" id="store_address_2" name="store_address" class="form-control" placeholder="Start Typing Full Address..."  oninput="error_hide('store_address_error_2');">
@@ -278,7 +284,7 @@
                                             <input type="hidden" id="store_lng_2" name="store_lng" required>
                                             <input type="hidden" id="country_short_2" name="country_short" required>
                                             <input type="hidden" id="formid_2" name="formid" required>
-                                            <input type="hidden" id="store_name_2" name="store_name" required>
+                                            {{--<input type="hidden" id="store_name_2" name="store_name" required>--}}
                                             <input type="hidden" id="store_image_hidden_2" name="store_image_hidden" required>
                                             <input type="hidden" id="store_ar_hidden_2" name="store_ar_hidden" required>
                                             <input type="hidden" id="store_marker_hidden_2" name="store_marker_hidden" required>
@@ -354,7 +360,7 @@
 
                                         <div class="form-group">
                                             <button type="button" name="update_store" class="col-md-8 custom_btn up_store" onclick="validate_crt(2);"></button>
-                                            <button type="submit" name="close_store" class="col-md-8 custom_btn cls_store"></button>
+                                            <button type="submit" onclick="beforeSubmit();" name="close_store" class="col-md-8 custom_btn cls_store"></button>
                                         </div>
                                     </div>
 
@@ -455,8 +461,8 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <button type="submit" name="reopen_store" class="col-md-8 custom_btn reop_store"></button>
-                                            <button type="submit" name="delete_store" class="col-md-8 custom_btn del_store"></button>
+                                            <button type="submit" onclick="beforeSubmit();" name="reopen_store" class="col-md-8 custom_btn reop_store"></button>
+                                            <button type="submit" onclick="beforeSubmit();" name="delete_store" class="col-md-8 custom_btn del_store"></button>
                                         </div>
                                     </div>
 
@@ -508,22 +514,13 @@
         $(document).ready(function(){
 
             if(has_stores == 1) {
-                load_map(2);
+                open_tab();
             } else {
-                $('a[aria-controls="tab-pane-1"]').trigger("click");
-                load_map(1);
                 create_tab();
             }
 
 
-            get_active_stores();
-
-            $('#crt_qr_2').hide();
-            $('#print_code_2').hide();
-            $('#refresh_qr_2').hide();
-
             $('.dropify').dropify();
-
 
         });
 
@@ -548,10 +545,10 @@
         }
 
         function mapInit(id){
-            var latlng = new google.maps.LatLng(37.8271784,-122.2913078);
+            var latlng = new google.maps.LatLng(37.794357,-122.5607304);
             map = new google.maps.Map(document.getElementById('map'+id), {
                 center: latlng,
-                zoom: 13
+                zoom: 10
             });
             marker = new google.maps.Marker({
                 map: map,
@@ -1095,7 +1092,7 @@
         }
 
         function generate_qr_code(id) {
-            showSpinner();
+            progressSpinner('Creating Coupon Code...');
             $('#crt_qr_'+id).hide();
 
             $.get("{{ url('user/generate_new_qr') }}",function(data){
@@ -1109,27 +1106,28 @@
 
             $('#print_code_'+id).show();
             $('#refresh_qr_'+id).show();
-            
-            hideSpinner();
+
+            hideProgressSpinner();
+
         }
 
         function refresh_qr(id) {
-            showSpinner();
+            progressSpinner('Refreshing Coupon Code...');
             // get image qr code name
             var old_qr = $('#promo_qr_image_'+id).val();
             $('#qr_code_prev_'+id).attr('src', "{{url('resources/assets/custom/images/no-image.png')}}");
 
+            hideProgressSpinner();
             generate_qr_code(id);
-            hideSpinner();
         }
 
         function view_qr_code(id) {
             var src = $('#qr_code_prev_' + id).attr('src');
-            
+
             window.open(src);
             // alert(src);
         }
-        
+
 
         function get_categories(type_id, id){
             $.get("{{ url('user/get_categories') }}/"+parseInt(type_id),function(data){
@@ -1332,16 +1330,16 @@
         }
 
         function validate_crt(id) {
-            showSpinner();
+            progressSpinner('Processing...');
             var validator = input_validate_custom(id);
 
             if(validator == 1) {
                 $('#store_form_' + id).submit();
             } else {
-                hideSpinner();
+                hideProgressSpinner();
                 alert("Please Fill the missing data..");
             }
-            
+
         }
 
         function error_hide(field_id) {
@@ -1349,9 +1347,13 @@
         }
 
         function submit_form(event, id){
-            showSpinner();
+            progressSpinner('Processing...');
             $('#store_form_' + id).submit();
-            hideSpinner();
+            hideProgressSpinner();
+        }
+
+        function beforeSubmit(){
+            progressSpinner('Processing...');
         }
 
     </script>

@@ -162,7 +162,7 @@
                                                                     <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
                                                                     <b>Drag and drop a file here or click</b>
 
-                                                                    <input type="file" name="coupon_photo_1" id="coupon_photo_c_1" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_c_1');" >
+                                                                    <input type="file" name="coupon_photo_1" id="coupon_photo_c_1" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_c_1');" accept=".png" >
                                                                 </div>
                                                                     
                                                                 <div class="cropit-preview" id="cropper_prev_c_1"></div>
@@ -2401,6 +2401,7 @@
         });
 
         function edit_active_coupons(promo_id){
+            progressSpinner('Processing...');
             $('a[aria-controls="tab-pane-4"]').trigger("click");
 
             $.get("{{ url('user/get_coupon_details') }}/"+parseInt(promo_id),function(data){
@@ -2457,7 +2458,7 @@
                 }
 
             });
-
+            hideProgressSpinner();
         }
 
         function get_curr_lable(page, id) {
@@ -2618,11 +2619,13 @@
         }
 
         function validate_coupon_1(page, id, next_tab) {
+            progressSpinner("Processing...");
             var valid = validate_input(page, id);
 
             if(valid == 1) {
 
                 if(page == 'e'){
+
                     validate_coupon_form('e',2,0);
                 }
                 else if(next_tab == 'cpn_l_5' ) {
@@ -2632,6 +2635,9 @@
                     validate_coupon_form('e',2,0);
                 }
                 else {
+                    hideProgressSpinner();
+                    var text = "Please Create Your Level " + (id  + 1) + " Coupon";
+                    progressSpinnerTimer(text, 3000);
                     nextTab(next_tab);
                 }
                 

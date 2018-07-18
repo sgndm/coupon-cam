@@ -100,7 +100,7 @@
                                                             <td style="width:93%;">{{ $store->contact_name . " - " . $store->city }}</td>
                                                             <td style="width:2%;">
                                                                 <label class="btn-container">
-                                                                    <input type="checkbox" value="{{ $store->place_id }}" id="store{{ $store->place_id }}" name="store_ids_1[]" onclick="get_store_details({{ $store->place_id }});error_hide('promo_store_error_1');">
+                                                                    <input type="checkbox" value="{{ $store->place_id }}" id="store{{ $store->place_id }}" class="checkstore" name="store_ids_1[]" onclick="get_store_details({{ $store->place_id }});error_hide('promo_store_error_1');">
                                                                     <span class="checkmark"></span>
                                                                     <input type="hidden" value="{{$store->latitude}}" id="store_lat_{{ $store->place_id  }}" name="store_lat_{{ $store->place_id }}">
                                                                     <input type="hidden" value="{{$store->longitude}}" id="store_lng_{{ $store->place_id  }}" name="store_lng_{{ $store->place_id }}">
@@ -318,7 +318,7 @@
                                                             <td style="width:93%;">{{ $store->contact_name . " - " . $store->city }}</td>
                                                             <td style="width:2%;">
                                                                 <label class="btn-container">
-                                                                    <input type="checkbox" value="{{ $store->place_id }}" id="store_2_{{ $store->place_id }}" name="store_ids_2[]" onclick="set_last({{ $store->place_id }});" class="checkstore">
+                                                                    <input class="checkstore" type="checkbox" value="{{ $store->place_id }}" id="store_2_{{ $store->place_id }}" name="store_ids_2[]" onclick="set_last({{ $store->place_id }});" >
                                                                     <span class="checkmark"></span>
                                                                     <input type="hidden" value="{{$store->latitude}}" id="store_lat_2_{{ $store->place_id  }}" name="store_lat_{{ $store->place_id }}">
                                                                     <input type="hidden" value="{{$store->longitude}}" id="store_lng_2_{{ $store->place_id  }}" name="store_lng_{{ $store->place_id }}">
@@ -466,7 +466,7 @@
 
                                         <div class="form-group">
                                             <button type="button" name="update_promo" class="col-md-8 custom_btn up_promo" onclick="validate_form(2);"></button>
-                                            <button type="submit" name="pause_promo" class="col-md-8 custom_btn paus_promo"></button>
+                                            <button type="submit" onclick="beforeSubmit();" name="pause_promo" class="col-md-8 custom_btn paus_promo"></button>
                                         </div>
 
 
@@ -643,8 +643,8 @@
                                         </div>
 
                                         <div class="row justify-content-center">
-                                            <button type="submit" name="activate_promo" class="col-md-8 custom_btn act_promo"></button>
-                                            <button type="submit" name="finish_promo" class="col-md-8 custom_btn finish_promo"></button>
+                                            <button type="submit" onclick="beforeSubmit();" name="activate_promo" class="col-md-8 custom_btn act_promo"></button>
+                                            <button type="submit" onclick="beforeSubmit();" name="finish_promo" class="col-md-8 custom_btn finish_promo"></button>
                                         </div>
 
 
@@ -894,17 +894,18 @@
         $(document).ready(function(){
 
             if(has_promos == 1) {
-                load_map(2);
-                get_active_promos();
+                open_tab();
             }else {
-                load_map(1);
-                get_active_stores_all();
+                create_tab();
             }
 
             if(new_store > 0) {
                 // alert(new_store);
-                $('#store'+ new_store).prop('checked', true);
+                $('#store'+ new_store).prop('checked', false);
+                $('#store'+ new_store).click();
                 last_store_id = new_store;
+
+
             }
 
 
@@ -917,14 +918,15 @@
                 startTime: '8.00 am'
             });
 
-            $('#crt_qr_1').show();
-            $('#print_code_1').hide();
-            $('#refresh_qr_1').hide();
+//            $('#crt_qr_1').show();
+//            $('#print_code_1').hide();
+//            $('#refresh_qr_1').hide();
         });
 
         function create_tab() {
             load_map(1);
             get_active_stores_all();
+
 
             $('#crt_qr_1').show();
             $('#print_code_1').hide();
@@ -1239,7 +1241,7 @@
 
         function get_store_details(store_id) {
 
-            if($('#store' + store_id).prop('checked', true)) {
+            if($('#store' + store_id).prop('checked')) {
 
                 // get store details 
                 $.get("{{ url('user/get_store_details') }}/"+parseInt(store_id),function(data){
@@ -1544,8 +1546,6 @@
 
 
         });
-
-
 
         // new map functions
         function create_marker(lat, lng, place_id, info, zoom){
@@ -1954,17 +1954,24 @@
         }
 
         function validate_form(id){
+
+            progressSpinner("Processing...");
             var valid = input_validate_custom(id);
 
             if(valid == 1) {
                 $('#promo_form_' + id).submit();
             } else {
+                hideProgressSpinner();
                 alert("Please Fill the missing data..")
             }
         }
 
         function error_hide(field_id) {
             $('#'+ field_id).html('');
+        }
+
+        function beforeSubmit(){
+            progressSpinner('Processing...');
         }
     </script>
 @endsection

@@ -67,6 +67,8 @@ class UserStoreController extends Controller
 
         $view->is_member = $get_user[0]->is_member;
 
+
+
         return $view;
     }
 

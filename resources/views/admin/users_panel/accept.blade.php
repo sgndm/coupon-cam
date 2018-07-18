@@ -59,49 +59,51 @@
                                             <div class="col-sm-12" id="term_condition" style="height: 200px; background-color: #FFF; border: #e4e4e4 solid 1px; padding: 5px 10px; overflow-x: hidden; margin-bottom: 10px;">
                                                 <h3 class="text-center">OUR BUSINESS AGREEMENT WITH YOUR COMPANY</h3>
 <br/>
-<p>Coupon GO Ltd. and associated companies will not charge your company any fees for using our service to promote your business. This includes but is not limited to, marketing fees, percentages and commissions.</p>
+<p>CouponCam Inc. and associated companies will NOT charge your company any fees for using our service to promote your business. This includes but is not limited to, set up costs, advertising costs, percentages, commissions and cancelation fees.</p>
 
-<p>Your company is not bound to any contract other than the terms and conditions outlined in this agreement.</p>
+<p>Your company is not bound to any contract to continue using our service but you must adhere to the terms outlined in this agreement and terms and conditions below to use our service.</p>
 
-<p>You have to right to cease use of the service at anytime and will not be subject to any cancelations charges.</p>
+<p>You have to right to cease use of the service at anytime but must honour any coupons already issued.</p>
 
 <p>Your personal data is kept secure and will not be sold or shared with any third parties.</p>
 
 
 
 
-<h3 class="text-center">UNDERSTANDING OF FEATURES</h3>
+<h3 class="text-center">UNDERSTANDING THE FEATURES</h3>
 <h5 class="text-center">(Merchant & User)</h5>
 <br/>
-<p>You, the merchant will add coupons, which will be available to users via the app.</p>
+<p>You, the merchant will add coupons, which will be available to users via the CouponCam app.</p>
 
-<p>You, the merchant will add terms and conditions and expiry dates to each coupon if they are required.</p>
+<p>When creating coupons via your account, you the merchant can set terms and conditions and claim times for individual coupons, it is your responsibility to ensure this information is correct, users cannot be refused the usage of coupons for terms and conditions not available to them via the app.</p>
 
-<p>Users will find coupons via the app and present their mobile device to a staff member in order to claim a coupon.</p>
+<p>Users will find coupons via the app and present their mobile device to a staff member of your store in order to claim a coupon.</p>
 
-<p>You, the merchant will honor coupons unless they are outside the preset terms and conditions or expiry date.</p>
+<p>Coupons are level based and the availability of level 1,2 and 3 is set by you, level 4 coupons are unlimited.</p>
 
-<p>Once a coupon is used it will become void and cannot be used again by the device holder.</p>
+<p>Once a coupon is used it will become void and cannot be used again by the device holder unless the coupon has loyalty activated.</p>
+
+<p>Loyalty Coupons allow users to be reissued coupons multiple times based on repeat spend within your store, once a user returns to your store an amount of times set by you, they will become eligible to use a coupon again.</p>
 
 
 
 
 
-<h3  class="text-center">COUPON GO TERMS & CONDITIONS</h3>
+<h3  class="text-center">TERMS & CONDITIONS</h3>
 
-<p>By continuing on this site you are agreeing to the following terms of and conditions. </p>
 <ol style="margin: 0; padding: 0 25px 10px 25px;">
-    <li>You will honor all promotions and coupons you add to this site and understand that they will be added to the Coupon GO app.</li>
+    <li>You will honor all promotions and coupons you add to this site and understand that they will be added to the CouponCam app.</li>
 
 <li>You will not upload explicit or offensive material.</li>
 
-<li>You own copyright of any images you post or have permission to use them.</li>
+<li>You are responsible for any images posted to the app via your account, you own the copyright or have permission to use them.</li>
 
 <li>Promotions and coupons cannot be removed from the app while active.</li>
 
-<li>If you pause or cancel any promotion or coupon they will be removed from the app at the end of the current cycle (Max cycle 48 hours)</li>
+<li>If you pause or cancel any promotion or coupon they will be removed from the app at the end of the day.
+    You will not claim coupons for your own business.</li>
 
-<li>You will not claim coupons for your own business or from businesses on the same street address as you.</li>
+<li>Please fill your first name, last name and legal company name to agree to our business agreement with your company, your understanding of the features and the terms and conditions of using our service.</li>
 </ol>
 
 <strong  class="text-center">Please fill your first name, last name and company name to agree to these terms and conditions. </strong>
