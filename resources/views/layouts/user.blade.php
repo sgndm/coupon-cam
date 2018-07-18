@@ -392,9 +392,11 @@
         defaultApply: true,
         animationOriginColor: '#e80602',
         mask: true,
-        maskBgColor: 'rgba(245,242,242,0.8)',
+        maskBgColor: 'rgba(255, 255, 255,0.8)',
         animationWidth: 60,
         animationHeight: 60,
+					animationIn: false,
+					animationOut: false
     };
 
     function progressSpinner(text) {
@@ -413,9 +415,11 @@
             defaultApply: true,
             animationOriginColor: '#e80602',
             mask: true,
-            maskBgColor: 'rgba(245,242,242,0.8)',
+            maskBgColor: 'rgba(255, 255, 255,0.8)',
             animationWidth: 60,
-            animationHeight: 60
+            animationHeight: 60,
+					animationIn: false,
+					animationOut: false
         };
 
         spinnerProgress = new Loading(progressConfig);
@@ -437,14 +441,16 @@
             defaultApply: true,
             animationOriginColor: '#e80602',
             mask: true,
-            maskBgColor: 'rgba(245,242,242,0.8)',
+            maskBgColor: 'rgba(255, 255, 255,0.8)',
             animationWidth: 60,
-            animationHeight: 60
+            animationHeight: 60,
+					animationIn: false,
+					animationOut: false
         };
 
-        spinnerProgerss = new Loading(progressConfig);
+        spinnerProgressTimer = new Loading(progressConfig);
 
-        setTimeout(function(){spinnerProgerss.out()}, time);
+        setTimeout(function(){spinnerProgressTimer.out()}, time);
     }
 
     function hideProgressSpinner() {
