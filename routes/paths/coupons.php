@@ -32,3 +32,7 @@ Route::post('/user/coupons/create', 'Coupon\UserCouponController@create');
 Route::post('/user/coupons/update', 'Coupon\UserCouponController@update');
 
 Route::get('user/get_curr_lable/{promo_id}','Coupon\UserCouponController@get_curr_lable');
+Route::get('user/coupons?promo={promo_id}','Coupon\UserCouponController@index');
+
+
+Route::post('coupons/upload_image','Coupon\UserCouponController@upload_image');

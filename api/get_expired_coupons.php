@@ -20,25 +20,29 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     // get store details
     $getSt = "SELECT * FROM `places` WHERE `place_id`=" . $store_id;
     $excute = $dbh->query($getSt);
-  	$store_details = $excute->fetchall(PDO::FETCH_OBJ);
+    $store_details = $excute->fetchall(PDO::FETCH_OBJ);
+    
+    /// store name 
+    $store_name = $store_details[0]->contact_name;
+    $saved->store_name = $store_name;
 
     // get country
     $country = $store_details[0]->country_short;
 
     if($country == 'GB') {
-      $saved->currency_lable = 'GBP';
+      $saved->currency_lable = '£';
     }
     else if($country == 'NZ') {
-      $saved->currency_lable = 'NZD';
+      $saved->currency_lable = '$';
     }
     else if($country == 'CA') {
-      $saved->currency_lable = 'CAD';
+      $saved->currency_lable = 'C$';
     }
     else if($country == 'AU') {
-      $saved->currency_lable = 'AUD';
+      $saved->currency_lable = 'A$';
     }
     else {
-      $saved->currency_lable = 'USD';
+      $saved->currency_lable = '$';
     }
 
     // get extend values for country

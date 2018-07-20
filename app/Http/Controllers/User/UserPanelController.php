@@ -40,6 +40,8 @@ use App\Classes\ExtraFunctions;
 use App\Classes\Converter;
 use App\Classes\PushNotification;
 
+use App\Jobs\SendPushReTarget;
+
 class UserPanelController extends Controller
 {
     public function __construct() {
@@ -158,17 +160,20 @@ class UserPanelController extends Controller
 
                             // get coupon level
                             $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                            $temp_cp_level = $get_cp_level[0]->coupon_level;
+                            if(sizeof($get_cp_level) > 0 ) {
+                                $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                            if($temp_cp_level == 1) {
-                                $stat_y['cp_1'] += $temp_cp_count;
-                            } else if($temp_cp_level == 2) {
-                                $stat_y['cp_2'] += $temp_cp_count;
-                            } else if($temp_cp_level == 3) {
-                                $stat_y['cp_3'] += $temp_cp_count;
-                            } else if($temp_cp_level == 4) {
-                                $stat_y['cp_4'] += $temp_cp_count;
+                                if($temp_cp_level == 1) {
+                                    $stat_y['cp_1'] += $temp_cp_count;
+                                } else if($temp_cp_level == 2) {
+                                    $stat_y['cp_2'] += $temp_cp_count;
+                                } else if($temp_cp_level == 3) {
+                                    $stat_y['cp_3'] += $temp_cp_count;
+                                } else if($temp_cp_level == 4) {
+                                    $stat_y['cp_4'] += $temp_cp_count;
+                                }
                             }
+                            
                         }
                     }
 
@@ -222,17 +227,20 @@ class UserPanelController extends Controller
 
                             // get coupon level
                             $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                            $temp_cp_level = $get_cp_level[0]->coupon_level;
+                            if(sizeof($get_cp_level) > 0) {
+                                $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                            if($temp_cp_level == 1) {
-                                $stat_w['cp_1'] += $temp_cp_count;
-                            } else if($temp_cp_level == 2) {
-                                $stat_w['cp_2'] += $temp_cp_count;
-                            } else if($temp_cp_level == 3) {
-                                $stat_w['cp_3'] += $temp_cp_count;
-                            } else if($temp_cp_level == 4) {
-                                $stat_w['cp_4'] += $temp_cp_count;
+                                if($temp_cp_level == 1) {
+                                    $stat_w['cp_1'] += $temp_cp_count;
+                                } else if($temp_cp_level == 2) {
+                                    $stat_w['cp_2'] += $temp_cp_count;
+                                } else if($temp_cp_level == 3) {
+                                    $stat_w['cp_3'] += $temp_cp_count;
+                                } else if($temp_cp_level == 4) {
+                                    $stat_w['cp_4'] += $temp_cp_count;
+                                }
                             }
+                            
                         }
                     }
 
@@ -289,17 +297,20 @@ class UserPanelController extends Controller
 
                             // get coupon level
                             $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                            $temp_cp_level = $get_cp_level[0]->coupon_level;
+                            if(sizeof($get_cp_level) > 0) {
+                                $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                            if($temp_cp_level == 1) {
-                                $stat_m['cp_1'] += $temp_cp_count;
-                            } else if($temp_cp_level == 2) {
-                                $stat_m['cp_2'] += $temp_cp_count;
-                            } else if($temp_cp_level == 3) {
-                                $stat_m['cp_3'] += $temp_cp_count;
-                            } else if($temp_cp_level == 4) {
-                                $stat_m['cp_4'] += $temp_cp_count;
+                                if($temp_cp_level == 1) {
+                                    $stat_m['cp_1'] += $temp_cp_count;
+                                } else if($temp_cp_level == 2) {
+                                    $stat_m['cp_2'] += $temp_cp_count;
+                                } else if($temp_cp_level == 3) {
+                                    $stat_m['cp_3'] += $temp_cp_count;
+                                } else if($temp_cp_level == 4) {
+                                    $stat_m['cp_4'] += $temp_cp_count;
+                                }
                             }
+                            
                         }
                     }
 
@@ -355,17 +366,20 @@ class UserPanelController extends Controller
 
                             // get coupon level
                             $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                            $temp_cp_level = $get_cp_level[0]->coupon_level;
+                            if(sizeof($get_cp_level) > 0) {
+                                $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                            if($temp_cp_level == 1) {
-                                $stat_a['cp_1'] += $temp_cp_count;
-                            } else if($temp_cp_level == 2) {
-                                $stat_a['cp_2'] += $temp_cp_count;
-                            } else if($temp_cp_level == 3) {
-                                $stat_a['cp_3'] += $temp_cp_count;
-                            } else if($temp_cp_level == 4) {
-                                $stat_a['cp_4'] += $temp_cp_count;
+                                if($temp_cp_level == 1) {
+                                    $stat_a['cp_1'] += $temp_cp_count;
+                                } else if($temp_cp_level == 2) {
+                                    $stat_a['cp_2'] += $temp_cp_count;
+                                } else if($temp_cp_level == 3) {
+                                    $stat_a['cp_3'] += $temp_cp_count;
+                                } else if($temp_cp_level == 4) {
+                                    $stat_a['cp_4'] += $temp_cp_count;
+                                }
                             }
+                            
                         }
                     }
 
@@ -402,16 +416,16 @@ class UserPanelController extends Controller
                  $promo_id = $ga_promo->promo_id;
 
                  // get stats for most recent day
-                 $stat_p_y = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0 ];
+                 $stat_p_y = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0, 'ret_c' => 0, 'loy_c' => 0, 'revenue' => 0 ];
 
                  // get stats for last week
-                 $stat_p_w = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0 ];
+                 $stat_p_w = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0, 'ret_c' => 0, 'loy_c' => 0, 'revenue' => 0 ];
 
                  // get stats for last month
-                 $stat_p_m = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0 ];
+                 $stat_p_m = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0, 'ret_c' => 0, 'loy_c' => 0, 'revenue' => 0 ];
 
                  // get stats for all time
-                 $stat_p_a = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0 ];
+                 $stat_p_a = [ 'cp_1' => 0, 'cp_2' => 0, 'cp_3' => 0, 'cp_4' => 0, 'new_c' => 0, 'ret_c' => 0, 'loy_c' => 0, 'revenue' => 0 ];
 
                  // stats for yesterday
                  // get coupon count
@@ -682,17 +696,20 @@ class UserPanelController extends Controller
 
                     // get coupon level
                     $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                    $temp_cp_level = $get_cp_level[0]->coupon_level;
+                    if(sizeof($get_cp_level) > 0) {
+                        $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                    if($temp_cp_level == 1) {
-                        $stat_a_y['cp_1'] += $temp_cp_count;
-                    } else if($temp_cp_level == 2) {
-                        $stat_a_y['cp_2'] += $temp_cp_count;
-                    } else if($temp_cp_level == 3) {
-                        $stat_a_y['cp_3'] += $temp_cp_count;
-                    } else if($temp_cp_level == 4) {
-                        $stat_a_y['cp_4'] += $temp_cp_count;
+                        if($temp_cp_level == 1) {
+                            $stat_a_y['cp_1'] += $temp_cp_count;
+                        } else if($temp_cp_level == 2) {
+                            $stat_a_y['cp_2'] += $temp_cp_count;
+                        } else if($temp_cp_level == 3) {
+                            $stat_a_y['cp_3'] += $temp_cp_count;
+                        } else if($temp_cp_level == 4) {
+                            $stat_a_y['cp_4'] += $temp_cp_count;
+                        }
                     }
+                    
                 }
             }
 
@@ -740,17 +757,20 @@ class UserPanelController extends Controller
 
                     // get coupon level
                     $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                    $temp_cp_level = $get_cp_level[0]->coupon_level;
+                    if(sizeof($get_cp_level) > 0) {
+                        $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                    if($temp_cp_level == 1) {
-                        $stat_a_w['cp_1'] += $temp_cp_count;
-                    } else if($temp_cp_level == 2) {
-                        $stat_a_w['cp_2'] += $temp_cp_count;
-                    } else if($temp_cp_level == 3) {
-                        $stat_a_w['cp_3'] += $temp_cp_count;
-                    } else if($temp_cp_level == 4) {
-                        $stat_a_w['cp_4'] += $temp_cp_count;
+                        if($temp_cp_level == 1) {
+                            $stat_a_w['cp_1'] += $temp_cp_count;
+                        } else if($temp_cp_level == 2) {
+                            $stat_a_w['cp_2'] += $temp_cp_count;
+                        } else if($temp_cp_level == 3) {
+                            $stat_a_w['cp_3'] += $temp_cp_count;
+                        } else if($temp_cp_level == 4) {
+                            $stat_a_w['cp_4'] += $temp_cp_count;
+                        }
                     }
+                    
                 }
             }
 
@@ -799,17 +819,21 @@ class UserPanelController extends Controller
 
                     // get coupon level
                     $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                    $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                    if($temp_cp_level == 1) {
-                        $stat_a_m['cp_1'] += $temp_cp_count;
-                    } else if($temp_cp_level == 2) {
-                        $stat_a_m['cp_2'] += $temp_cp_count;
-                    } else if($temp_cp_level == 3) {
-                        $stat_a_m['cp_3'] += $temp_cp_count;
-                    } else if($temp_cp_level == 4) {
-                        $stat_a_m['cp_4'] += $temp_cp_count;
+                    if(sizeof($get_cp_level) > 0) {
+                        $temp_cp_level = $get_cp_level[0]->coupon_level;
+
+                        if($temp_cp_level == 1) {
+                            $stat_a_m['cp_1'] += $temp_cp_count;
+                        } else if($temp_cp_level == 2) {
+                            $stat_a_m['cp_2'] += $temp_cp_count;
+                        } else if($temp_cp_level == 3) {
+                            $stat_a_m['cp_3'] += $temp_cp_count;
+                        } else if($temp_cp_level == 4) {
+                            $stat_a_m['cp_4'] += $temp_cp_count;
+                        }
                     }
+                    
                 }
             }
 
@@ -857,17 +881,21 @@ class UserPanelController extends Controller
 
                     // get coupon level
                     $get_cp_level = Coupon::where(['coupon_id' => $t_coup_id])->get();
-                    $temp_cp_level = $get_cp_level[0]->coupon_level;
 
-                    if($temp_cp_level == 1) {
-                        $stat_a_a['cp_1'] += $temp_cp_count;
-                    } else if($temp_cp_level == 2) {
-                        $stat_a_a['cp_2'] += $temp_cp_count;
-                    } else if($temp_cp_level == 3) {
-                        $stat_a_a['cp_3'] += $temp_cp_count;
-                    } else if($temp_cp_level == 4) {
-                        $stat_a_a['cp_4'] += $temp_cp_count;
+                    if(sizeof($get_cp_level) > 0) {
+                        $temp_cp_level = $get_cp_level[0]->coupon_level;
+
+                        if($temp_cp_level == 1) {
+                            $stat_a_a['cp_1'] += $temp_cp_count;
+                        } else if($temp_cp_level == 2) {
+                            $stat_a_a['cp_2'] += $temp_cp_count;
+                        } else if($temp_cp_level == 3) {
+                            $stat_a_a['cp_3'] += $temp_cp_count;
+                        } else if($temp_cp_level == 4) {
+                            $stat_a_a['cp_4'] += $temp_cp_count;
+                        }
                     }
+                   
                 }
             }
 
@@ -1730,58 +1758,9 @@ class UserPanelController extends Controller
                     'created_at' => date('Y-m-d H:i:s')
                 ]);
 
-                // send a push to users
+                $this->dispatch(new SendPushReTarget($store_id,$store_name,$coupon_id));
 
-                // get coupon details
-                $get_details = RetargetCoupon::where(['coupon_id' => $coupon_id])->get();
-                $t_coup_id = $get_details[0]->coupon_id;
-
-                $push_data = [];
-
-                // get device ids from saved coupons
-                $devices = SavedCoupons::where(['place_id' => $store_id])
-                    ->select('device_id')
-                    ->distinct()
-                    ->get();
-
-                // for all device
-                foreach ($devices as $device) {
-
-                    // check for saved
-                    $saved_c = RetargetSaved::where(['place_id' => $store_id, 'device_id' => $device->device_id, 'coupon_id' => $t_coup_id])->count();
-
-
-                    if($saved_c == 0) {
-                        // user haven't got any coupon
-                        // add an entry to retarget saved table
-                        $inst_svd = RetargetSaved::insert([
-                            'place_id' => $store_id,
-                            'coupon_id' => $t_coup_id,
-                            'device_id' => $device->device_id,
-                            'status' => 5,
-                            'is_push' => 1,
-                            'created_at' => date('Y-m-d H:i:s'),
-                            'updated_at' => date('Y-m-d H:i:s')
-                        ]);
-
-                        if($inst_svd) {
-                            // get player id
-                            $get_player_id = DeviceInfo::where(['device_id' => $device->device_id])->select('player_id')->get();
-
-                            // player id
-                            $t_player_id = $get_player_id[0]->player_id;
-
-                            // send push
-                            $notification = "Hey there you have got a coupon from " . $store_name ;
-                            $data = $push_data;
-                            $devices = [$t_player_id];
-                            PushNotification::create_notification($notification, $data, $devices);
-                        }
-                    }
-
-
-
-                }
+                
 
                 return redirect('dashboard')->with(['success' => "Successfully sent a push coupon!!"]);
             }
@@ -1792,20 +1771,35 @@ class UserPanelController extends Controller
             // insert a coupon
             // validate images
             $coupon_photo = '';
-            if($request->hasFile('coupon_photo')) {
+            $get_file = $request->get('cp_img_name_1');
+            $random = rand(0,1000000);
+            $coup_img_name = 'c'.date('Ymdhis').$random.".png";
+            $coup_img_path = 'resources/assets/coupons/full/';
 
-                $random = rand(0,1000000);
-                $coup_img = $request->file('coupon_photo');
-                $coup_extention = $coup_img->getClientOriginalExtension();
+            list($type, $get_file) = explode(';', $get_file);
+            list(, $get_file)      = explode(',', $get_file);
+            
+            $get_file = base64_decode($get_file);
+            
+            // upload image
+            file_put_contents($coup_img_path.$coup_img_name, $get_file);
 
-                $coup_img_name = 'c'.date('Ymdhis').$random.".".$coup_extention;
+            $coupon_photo = $coup_img_name;
 
-                //Move Uploaded File
-                $coup_img_path = 'resources/assets/coupons/full/';
-                $coup_img->move($coup_img_path,$coup_img_name);
+            // if($request->hasFile('coupon_photo')) {
 
-                $coupon_photo = $coup_img_name;
-            }
+            //     $random = rand(0,1000000);
+            //     $coup_img = $request->file('coupon_photo');
+            //     $coup_extention = $coup_img->getClientOriginalExtension();
+
+            //     $coup_img_name = 'c'.date('Ymdhis').$random.".".$coup_extention;
+
+            //     //Move Uploaded File
+            //     $coup_img_path = 'resources/assets/coupons/full/';
+            //     $coup_img->move($coup_img_path,$coup_img_name);
+
+            //     $coupon_photo = $coup_img_name;
+            // }
 
             $geo_campaign = 0;
             $status = 0;
@@ -1821,8 +1815,8 @@ class UserPanelController extends Controller
                 'coupon_info' => $request->coupon_info,
                 'coupon_details' => $request->coupon_condition,
                 'coupon_photo' => $coupon_photo,
-                'coupon_ar' => $request->ar_coupon_name,
-                'coupon_marker' => $request->ar_marker_name,
+                'coupon_ar' => '',
+                'coupon_marker' => '',
                 'geo_campaign' => $geo_campaign,
                 'status' => $status,
                 'created_at' => date('Y-m-d H:i:s'),
@@ -1858,59 +1852,11 @@ class UserPanelController extends Controller
                     'created_at' => date('Y-m-d H:i:s')
                 ]);
 
+                $this->dispatch(new SendPushReTarget($store_id,$store_name,$inst));
 
                 // send a push
                 if($inst){
-                    // get coupon details
-                    $get_details = RetargetCoupon::where(['coupon_id' => $inst])->get();
-                    $t_coup_id = $get_details[0]->coupon_id;
-
-                    $push_data = [];
-
-                    // get device ids from saved coupons
-                    $devices = SavedCoupons::where(['place_id' => $store_id])
-                        ->select('device_id')
-                        ->distinct()
-                        ->get();
-
-                    // for all device
-                    foreach ($devices as $device) {
-
-                        // check for saved
-                        $saved_c = RetargetSaved::where(['place_id' => $store_id, 'device_id' => $device->device_id, 'coupon_id' => $inst])->count();
-
-
-                        if($saved_c == 0) {
-                            // add an entry to retarget saved table
-                            $inst_svd = RetargetSaved::insert([
-                                'place_id' => $store_id,
-                                'coupon_id' => $t_coup_id,
-                                'device_id' => $device->device_id,
-                                'status' => 5,
-                                'is_push' => 1,
-                                'created_at' => date('Y-m-d H:i:s'),
-                                'updated_at' => date('Y-m-d H:i:s')
-                            ]);
-
-                            if($inst_svd) {
-                                // get player id
-                                $get_player_id = DeviceInfo::where(['device_id' => $device->device_id])->select('player_id')->get();
-
-                                // player id
-                                $t_player_id = $get_player_id[0]->player_id;
-
-                                // send push
-                                $notification = "Hey there you have got a coupon from " . $store_name ;
-                                $data = $push_data;
-                                $devices = [$t_player_id];
-                                PushNotification::create_notification($notification, $data, $devices);
-                            }
-                        }
-
-
-                    }
-
-
+                    
                     return redirect('dashboard')->with(['success' => "Successfully Send a push coupon!!"]);
                 }
                 else {

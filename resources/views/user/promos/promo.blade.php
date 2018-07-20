@@ -1,9 +1,12 @@
 @extends('layouts.user')
 
 @section('content')
+<!-- {{ $new_store_id }} -->
     <div class="col-md-12">
         <div class="card">
             <ul class="nav nav-tabs customtab" role="tablist">
+
+                @if($has_promos == 0)
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#tab-pane-1" role="tab" onclick="create_tab();">
                         <span class="hidden-sm-up"><i class="ti-user"></i></span>
@@ -28,6 +31,33 @@
                         <span class="hidden-xs-down">FINISHED PROMOS</span>
                     </a>
                 </li>
+                @else 
+                
+                <li class="nav-item ">
+                    <a class="nav-link active" data-toggle="tab" href="#tab-pane-2" role="tab" onclick="open_tab();">
+                        <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                        <span class="hidden-xs-down">ACTIVE PROMOS</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-pane-3" role="tab" onclick="cloased_tab();">
+                        <span class="hidden-sm-up"><i class="ti-email"></i></span>
+                        <span class="hidden-xs-down">PUASED PROMOS</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-pane-4" role="tab" onclick="finished_tab();">
+                        <span class="hidden-sm-up"><i class="ti-email"></i></span>
+                        <span class="hidden-xs-down">FINISHED PROMOS</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " data-toggle="tab" href="#tab-pane-1" role="tab" onclick="create_tab();">
+                        <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                        <span class="hidden-xs-down">CREATE PROMO</span>
+                    </a>
+                </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#tab-pane-5" role="tab">
                         <span class="hidden-sm-up"><i class="ti-email"></i></span>
@@ -46,7 +76,11 @@
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
+                @if($has_promos == 0)
                 <div class="tab-pane active p-20" id="tab-pane-1" role="tabpanel">
+                @else
+                <div class="tab-pane p-20" id="tab-pane-1" role="tabpanel">
+                @endif
                     <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/promos/create_promo') }}" id="promo_form_1">
                         {{ csrf_field() }}
                         <div class="row">
@@ -66,7 +100,7 @@
                                                             <td style="width:93%;">{{ $store->contact_name . " - " . $store->city }}</td>
                                                             <td style="width:2%;">
                                                                 <label class="btn-container">
-                                                                    <input type="checkbox" value="{{ $store->place_id }}" id="store{{ $store->place_id }}" name="store_ids_1[]" onclick="get_store_details({{ $store->place_id }});error_hide('promo_store_error_1');">
+                                                                    <input type="checkbox" value="{{ $store->place_id }}" id="store{{ $store->place_id }}" class="checkstore" name="store_ids_1[]" onclick="get_store_details({{ $store->place_id }});error_hide('promo_store_error_1');">
                                                                     <span class="checkmark"></span>
                                                                     <input type="hidden" value="{{$store->latitude}}" id="store_lat_{{ $store->place_id  }}" name="store_lat_{{ $store->place_id }}">
                                                                     <input type="hidden" value="{{$store->longitude}}" id="store_lng_{{ $store->place_id  }}" name="store_lng_{{ $store->place_id }}">
@@ -86,7 +120,7 @@
                                         <div class="form-group">
                                             <label class="control-label">AR Coupon Location</label>
                                             <label class="btn-container">Outside Store
-                                                <input type="radio" name="ar_placement" id="ar_inside" checked>
+                                                <input type="radio" name="ar_placement" id="ar_inside" checked onclick="set_inside_store(1);">
                                                 <span class="checkRadio"></span>
                                             </label>
                                             <label class="btn-container">Somewhere Else
@@ -109,11 +143,6 @@
                                             <label class="control-label">Promo Name</label>
                                             <input type="text" id="promo_name_1" name="promo_name" class="form-control" placeholder="Enter Name" required oninput="error_hide('promo_name_error_1');">
                                             <h6 class="form-control-feedback text-danger" id="promo_name_error_1"> </h6>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Promo Description</label>
-                                            <textarea id="promo_description_1" name="promo_description" class="form-control" placeholder="Describe Your Promo" required oninput="error_hide('promo_desc_error_1');"></textarea>
-                                            <h6 class="form-control-feedback text-danger" id="promo_desc_error_1"> </h6>
                                         </div>
 
                                         <div class="form-group">
@@ -195,8 +224,8 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Start Time </label>
-                                            <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                <input type="time" class="form-control" value="" name="promo_start" id="promo_start_1"  onclick="error_hide('promo_start_error_1');">
+                                            <div class="input-group" >
+                                                <input type="text" class="form-control jq-time-picker" value="" name="promo_start" id="promo_start_1"  onclick="error_hide('promo_start_error_1');">
 
                                             </div>
                                             <h6 class="form-control-feedback text-danger" id="promo_start_error_1"> </h6>
@@ -211,30 +240,10 @@
                                                 @endfor
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Adwanceed Warning</label><br>
+                                        <div class="form-group" style="display: none;">
+                                            <label class="control-label">Advanced Warning</label><br>
                                             <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="advance_warning" id="advance_warning_1" />
                                         </div>
-
-                                        {{--<div class="form-group" style="display: none;">--}}
-                                        {{--<img src="" style="width:100%;" id="qr_code_prev_1">--}}
-                                        {{--<input type="hidden" name="promo_qr_code" id="promo_qr_code_1" >--}}
-                                        {{--<input type="hidden" name="promo_qr_image" id="promo_qr_image_1" >--}}
-
-                                        {{--<div class="row justify-content-center">--}}
-                                        {{--<button type="button" class="custom_btn crt_qr_code col-md-8" style="margin:2px;" onclick="generate_qr_code(1);" id="crt_qr_1"></button>--}}
-
-                                        {{--<!-- <a class="" style="margin:2px;" target="_blank" href="" id="print_code_1" >--}}
-                                        {{--<img src="{{url('resources/assets/custom/images/eedit_qr_code.png')}}" style="width:140px; height: 40px; cursor:pointer;" alt="">--}}
-                                        {{--</a> -->--}}
-
-                                        {{--<button type="button" class="custom_btn view_qr_code col-md-8" style="margin:2px;" onclick="view_qr_code(1);" id="print_code_1"></button>--}}
-
-                                        {{--<button type="button" class="custom_btn refresh_qr_code col-md-8" style="margin:2px;" onclick="refresh_qr(1);" id="refresh_qr_1"></button>--}}
-
-                                        {{--</div>--}}
-
-                                        {{--</div>--}}
 
                                         <div class="form-group">
                                             <button type="button" class="custom_btn save_c col-md-8" onclick="validate_form(1);"></button>
@@ -254,7 +263,11 @@
                         </div>
                     </form>
                 </div>
+                @if($has_promos == 0)
                 <div class="tab-pane p-20" id="tab-pane-2" role="tabpanel">
+                @else
+                <div class="tab-pane active p-20" id="tab-pane-2" role="tabpanel">
+                @endif
                     <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/promos/update_promo') }}" id="promo_form_2">
                         {{ csrf_field() }}
                         <div class="row">
@@ -286,21 +299,56 @@
                                         </div>
                                     </div>
 
+
+
+                                </div>
+
+                                <hr>
+                                <div class="row">
+
+                                    <div class="col-sm-12 col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Select Store</label>
+                                            <div class="col-sm-12 col-md-12 col-lg-12 store_p_container left_scroll" >
+                                                <table class="category_table">
+                                                    @foreach($stores as $key => $store)
+
+                                                        <tr>
+                                                            <td style="width:5%;">&nbsp;</td>
+                                                            <td style="width:93%;">{{ $store->contact_name . " - " . $store->city }}</td>
+                                                            <td style="width:2%;">
+                                                                <label class="btn-container">
+                                                                    <input class="checkstore" type="checkbox" value="{{ $store->place_id }}" id="store_2_{{ $store->place_id }}" name="store_ids_2[]" onclick="set_last({{ $store->place_id }});" >
+                                                                    <span class="checkmark"></span>
+                                                                    <input type="hidden" value="{{$store->latitude}}" id="store_lat_2_{{ $store->place_id  }}" name="store_lat_{{ $store->place_id }}">
+                                                                    <input type="hidden" value="{{$store->longitude}}" id="store_lng_2_{{ $store->place_id  }}" name="store_lng_{{ $store->place_id }}">
+                                                                    <input type="hidden" value="0" id="store_loc_2_{{ $store->place_id  }}" name="store_loc_{{ $store->place_id }}">
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </table>
+                                            </div>
+                                            <h6 class="form-control-feedback text-danger" id="promo_store_error_2"> </h6>
+
+                                        </div>
+                                    </div>
+
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">AR Coupon Location</label>
                                             <label class="btn-container">Outside Store
-                                                <input type="radio" name="ar_placement" id="ar_inside" checked>
-                                                <span class="checkRadio"></span>
+                                                <input type="radio" name="ar_placement" id="ar_inside_2" checked  onclick="set_inside_store(2);">
+                                                <span class="checkRadio" ></span>
                                             </label>
                                             <label class="btn-container">Somewhere Else
-                                                <input type="radio" name="ar_placement" id="ar_elsewhere">
+                                                <input type="radio" name="ar_placement" id="ar_elsewhere_2">
                                                 <span class="checkRadio"></span>
                                             </label>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Select Store Marker On Map</label>
-                                            <input type="text" id="store_address_1" name="store_address" class="form-control" placeholder="Start Typing Full Address..." >
+                                            <input type="text" id="store_address_2" name="store_address" class="form-control" placeholder="Start Typing Full Address..." >
                                         </div>
                                     </div>
 
@@ -313,11 +361,6 @@
                                             <label class="control-label">Promo Name</label>
                                             <input type="text" id="promo_name_2" name="promo_name" class="form-control" placeholder="Enter Name" required oninput="error_hide('promo_name_error_2');">
                                             <h6 class="form-control-feedback text-danger" id="promo_name_error_2"> </h6>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Promo Description</label>
-                                            <textarea id="promo_description_2" name="promo_description" class="form-control" placeholder="Describe Your Promo" required oninput="error_hide('promo_desc_error_2');"></textarea>
-                                            <h6 class="form-control-feedback text-danger" id="promo_desc_error_2"> </h6>
                                         </div>
 
                                         <div class="form-group">
@@ -399,8 +442,9 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Start Time </label>
-                                            <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                <input type="time" class="form-control" value="" name="promo_start" id="promo_start_2" oninput="error_hide('promo_start_error_2')">
+
+                                            <div class="input-group">
+                                                <input type="text" class="form-control jq-time-picker" value="" name="promo_start" id="promo_start_2" oninput="error_hide('promo_start_error_2')">
                                             </div>
                                             <h6 class="form-control-feedback text-danger" id="promo_start_error_2"> </h6>
 
@@ -414,33 +458,15 @@
                                                 @endfor
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Adwanceed Warning</label><br>
+                                        <div class="form-group" style="display: none;">
+                                            <label class="control-label">Advanced Warning</label><br>
                                             <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="advance_warning" id="advance_warning_2" />
                                         </div>
 
-                                        {{--<div class="form-group"  style="display: none;">--}}
-                                        {{--<img src="" style="width:100%;" id="qr_code_prev_2">--}}
-                                        {{--<input type="hidden" name="promo_qr_code" id="promo_qr_code_2" >--}}
-                                        {{--<input type="hidden" name="promo_qr_image" id="promo_qr_image_2" >--}}
-
-                                        {{--<div class="row justify-content-center">--}}
-                                        {{--<button type="button" class="custom_btn crt_qr_code col-md-8" style="margin:2px;" onclick="generate_qr_code(2);" id="crt_qr_2"></button>--}}
-
-                                        {{--<button type="button" class="custom_btn view_qr_code col-md-8" style="margin:2px;" onclick="view_qr_code(2);" id="print_code_2"></button>--}}
-
-                                        {{--<button type="button" class="custom_btn refresh_qr_code col-md-8" style="margin:2px;" onclick="refresh_qr(3);" id="refresh_qr_2"></button>--}}
-                                        {{--<button type="submit" name="update_promo" class="col-md-8 custom_btn up_promo"></button>--}}
-                                        {{--<button type="submit" name="pause_promo" class="col-md-8 custom_btn paus_promo"></button>--}}
-                                        {{--</div>--}}
-
-
-
-                                        {{--</div>--}}
 
                                         <div class="form-group">
                                             <button type="button" name="update_promo" class="col-md-8 custom_btn up_promo" onclick="validate_form(2);"></button>
-                                            <button type="submit" name="pause_promo" class="col-md-8 custom_btn paus_promo"></button>
+                                            <button type="submit" onclick="beforeSubmit();" name="pause_promo" class="col-md-8 custom_btn paus_promo"></button>
                                         </div>
 
 
@@ -490,23 +516,23 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
+                                    <!-- <div class="col-sm-12 col-md-12 col-lg-6"> -->
+                                        <!-- <div class="form-group">
                                             <label class="control-label">AR Coupon Location</label>
                                             <label class="btn-container">Outside Store
-                                                <input type="radio" name="ar_placement" id="ar_inside" checked>
+                                                <input type="radio" name="ar_placement" id="ar_inside_3" checked>
                                                 <span class="checkRadio"></span>
                                             </label>
                                             <label class="btn-container">Somewhere Else
-                                                <input type="radio" name="ar_placement" id="ar_elsewhere">
+                                                <input type="radio" name="ar_placement" id="ar_elsewhere_3">
                                                 <span class="checkRadio"></span>
                                             </label>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Select Store Marker On Map</label>
-                                            <input type="text" id="store_address_1" name="store_address" class="form-control" placeholder="Start Typing Full Address..." >
-                                        </div>
-                                    </div>
+                                            <input type="text" id="store_address_3" name="store_address" class="form-control" placeholder="Start Typing Full Address..." >
+                                        </div> -->
+                                    <!-- </div> -->
 
                                 </div>
 
@@ -516,10 +542,6 @@
                                         <div class="form-group">
                                             <label class="control-label">Promo Name</label>
                                             <input type="text" id="promo_name_3" name="promo_name" class="form-control" placeholder="Enter Name" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Promo Description</label>
-                                            <textarea id="promo_description_3" name="promo_description" class="form-control" placeholder="Describe Your Promo" required></textarea>
                                         </div>
 
                                         <div class="form-group">
@@ -599,8 +621,8 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label class="control-label">Start Time </label>
-                                            <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                <input type="time" class="form-control" value="" name="promo_start" id="promo_start_3">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control jq-time-picker" value="" name="promo_start" id="promo_start_3">
                                             </div>
 
                                         </div>
@@ -615,21 +637,14 @@
                                         </div>
 
 
-                                        <div class="form-group">
-                                            <label class="control-label">Adwanceed Warning</label><br>
+                                        <div class="form-group" style="display: none;">
+                                            <label class="control-label">Advanced Warning</label><br>
                                             <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="advance_warning" id="advance_warning_3" />
                                         </div>
 
-                                        {{--<div class="form-group" style="display: none;">--}}
-                                        {{--<img src="" style="width:100%;" id="qr_code_prev_3">--}}
-
-                                        {{--</div>--}}
-
-
-
                                         <div class="row justify-content-center">
-                                            <button type="submit" name="activate_promo" class="col-md-8 custom_btn act_promo"></button>
-                                            <button type="submit" name="finish_promo" class="col-md-8 custom_btn finish_promo"></button>
+                                            <button type="submit" onclick="beforeSubmit();" name="activate_promo" class="col-md-8 custom_btn act_promo"></button>
+                                            <button type="submit" onclick="beforeSubmit();" name="finish_promo" class="col-md-8 custom_btn finish_promo"></button>
                                         </div>
 
 
@@ -677,15 +692,15 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                <!-- <div class="col-sm-12 col-md-12 col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label">AR Coupon Location</label>
                                         <label class="btn-container">Outside Store
-                                            <input type="radio" name="ar_placement" id="ar_inside" checked>
+                                            <input type="radio" name="ar_placement" id="ar_inside_4" checked>
                                             <span class="checkRadio"></span>
                                         </label>
                                         <label class="btn-container">Somewhere Else
-                                            <input type="radio" name="ar_placement" id="ar_elsewhere">
+                                            <input type="radio" name="ar_placement" id="_4">
                                             <span class="checkRadio"></span>
                                         </label>
                                     </div>
@@ -693,7 +708,7 @@
                                         <label class="control-label">Select Store Marker On Map</label>
                                         <input type="text" id="store_address_4" name="store_address" class="form-control" placeholder="Start Typing Full Address..." >
                                     </div>
-                                </div>
+                                </div> -->
 
                             </div>
 
@@ -703,10 +718,6 @@
                                     <div class="form-group">
                                         <label class="control-label">Promo Name</label>
                                         <input type="text" id="promo_name_4" name="promo_name" class="form-control" placeholder="Enter Name" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Promo Description</label>
-                                        <textarea id="promo_description_4" name="promo_description" class="form-control" placeholder="Describe Your Promo" required></textarea>
                                     </div>
 
                                     <div class="form-group">
@@ -786,8 +797,8 @@
                                 <div class="col-sm-12 col-md-12 col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label">Start Time </label>
-                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                            <input type="time" class="form-control" value="" name="promo_start" id="promo_start_4">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control jq-time-picker" value="" name="promo_start" id="promo_start_4">
                                         </div>
 
                                     </div>
@@ -802,8 +813,8 @@
                                     </div>
 
 
-                                    <div class="form-group">
-                                        <label class="control-label">Adwanceed Warning</label><br>
+                                    <div class="form-group" style="display: none;">
+                                        <label class="control-label">Advanced Warning</label><br>
                                         <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="advance_warning" id="advance_warning_4" />
                                     </div>
 
@@ -869,26 +880,53 @@
 @section('custom_js')
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQOQYd6y3PeucI2ajI2hXzcPTXVwlGfgs&libraries=places"></script>
     <script>
+        var has_promos = {{ $has_promos }};
+        var new_store = {{ $new_store_id }};
+
         var map;
         var marker;
         var infowindow = new google.maps.InfoWindow();
         var Markers = new Array();
         var Stores = new Array();
 
-        $(document).ready(function(){
-            // set_stat_tile();
-            load_map(1);
-            get_active_stores();
+        var last_store_id = 0;
 
-            $('#crt_qr_1').show();
-            $('#print_code_1').hide();
-            $('#refresh_qr_1').hide();
+        $(document).ready(function(){
+
+            if(has_promos == 1) {
+                open_tab();
+            }else {
+                create_tab();
+            }
+
+            if(new_store > 0) {
+                // alert(new_store);
+                $('#store'+ new_store).prop('checked', false);
+                $('#store'+ new_store).click();
+                last_store_id = new_store;
+
+
+            }
+
+
+            $('.jq-time-picker').timepicker({
+                timeFormat: 'h:mm p',
+                interval: 15,
+                dynamic: true,
+                dropdown: true,
+                scrollbar: true,
+                startTime: '8.00 am'
+            });
+
+//            $('#crt_qr_1').show();
+//            $('#print_code_1').hide();
+//            $('#refresh_qr_1').hide();
         });
 
         function create_tab() {
             load_map(1);
-            get_active_stores();
-            // set_stat_tile();
+            get_active_stores_all();
+
 
             $('#crt_qr_1').show();
             $('#print_code_1').hide();
@@ -897,7 +935,7 @@
 
         function open_tab() {
             load_map(2);
-            get_active_stores();
+            get_active_promos();
             // set_stat_tile();
 
             $('#crt_qr_2').hide();
@@ -907,8 +945,7 @@
 
         function cloased_tab(){
             load_map(3);
-            get_active_stores();
-//            set_stat_tile();
+            get_inactice_promos();
 
             $('#crt_qr_3').show();
             $('#print_code_3').hide();
@@ -920,6 +957,14 @@
             $('#crt_qr_4').show();
             $('#print_code_4').hide();
             $('#refresh_qr_4').hide();
+        }
+
+        function set_inside_store(id) {
+            if(id == 1) {
+                $('#store_loc_'+last_store_id).val(0);
+            } else {
+                $('#store_loc_'+id+'_'+last_store_id).val(0);
+            }
         }
 
         function mapInit(id){
@@ -937,13 +982,17 @@
 
             Markers.push(marker);
 
-            get_address();
-            //drag_marker();
+            if(id == 1){
+                get_address();
+            }
+            else if(id == 2) {
+                get_address2();
+            }
         }
 
         function get_address(){
             var input = document.getElementById('store_address_1');
-            //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
             var geocoder = new google.maps.Geocoder();
             var autocomplete = new google.maps.places.Autocomplete(input);
             autocomplete.bindTo('bounds', map);
@@ -1008,7 +1057,83 @@
                 }
 
 
-                bind_data_location(store_id,latitude,longitude,1);
+                bind_data_location(last_store_id,latitude,longitude,1);
+                //bind_data_address(1,street_num,street_name,city,state,postal_code,country,latitude,longitude,full_address,country_short);
+
+                infowindow.setContent(place.formatted_address);
+                infowindow.open(map, marker);
+
+            });
+        }
+
+        function get_address2(){
+            var input = document.getElementById('store_address_2');
+
+            var geocoder = new google.maps.Geocoder();
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo('bounds', map);
+            var infowindow = new google.maps.InfoWindow();
+
+            autocomplete.addListener('place_changed', function() {
+                infowindow.close();
+                marker.setVisible(false);
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    window.alert("Autocomplete's returned place contains no geometry");
+                    return;
+                }
+
+                // If the place has a geometry, then present it on a map.
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    /// map.setZoom(17);
+                }
+
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+                map.setZoom(20);
+
+                var address = place.address_components;
+
+                var street_num = "";
+                var street_name = "";
+                var city = "";
+                var state = "";
+                var postal_code = "";
+                var country = "";
+                var country_short = "";
+                var latitude = marker.getPosition().lat();
+                var longitude = marker.getPosition().lng();
+                var full_address = place.formatted_address;
+
+                for(var k = 0; k < address.length; k++){
+                    if(address[k]['types'].includes('street_number')){
+                        street_num = address[k]['long_name'];
+                    }
+                    if(address[k]['types'].includes('route')){
+                        street_name = address[k]['long_name'];
+                    }
+                    if((address[k]['types'].includes('sublocality')) || (address[k]['types'].includes('sublocality_level_1')) || (address[k]['types'].includes('administrative_area_level_2'))){
+                        city = address[k]['long_name'];
+                    }
+                    if(address[k]['types'].includes('administrative_area_level_1')){
+                        state = address[k]['long_name'];
+                    }
+                    if(address[k]['types'].includes('postal_code')){
+                        postal_code = address[k]['long_name'];
+                    }
+                    if(address[k]['types'].includes('country')){
+                        country = address[k]['long_name'];
+                        country_short = address[k]['short_name'];
+
+                    }
+                }
+
+
+                bind_data_location2(last_store_id,latitude,longitude,1);
                 //bind_data_address(1,street_num,street_name,city,state,postal_code,country,latitude,longitude,full_address,country_short);
 
                 infowindow.setContent(place.formatted_address);
@@ -1060,7 +1185,7 @@
                                 }
                             }
 
-//                            bind_data_location(store_id,latitude,longitude,1);
+                          // bind_data_location(store_id,latitude,longitude,1);
                             // bind_data_address(1,street_num,street_name,city,state,postal_code,country,latitude,longitude,full_address, country_short);
                             //alert(street_num + "-" +street_name);
                             infowindow.setContent(results[0].formatted_address);
@@ -1114,32 +1239,41 @@
             $('.fordate_'+id).css("display","none").removeAttr("required");
         }
 
-        function get_store_details(id) {
+        function get_store_details(store_id) {
 
+            if($('#store' + store_id).prop('checked')) {
 
-            var store_lat = $('#store_lat_'+id).val();
-            var store_lng = $('#store_lng_'+id).val();
-            var is_outside = $('#store_loc_'+id).val();
-            //alert(is_outside);
+                // get store details 
+                $.get("{{ url('user/get_store_details') }}/"+parseInt(store_id),function(data){
 
-            $('#ar_inside').prop('checked', true);
+                    if(data['status'] == 1){
 
+                        var store = data['details'];
 
-            for(var i = 0; i < Markers.length; i++){
-                if(Markers[i][0] == id){
-                    var tmpMark = Markers[i][2];
-                    var tmpCont = Markers[i][1];
-                    var infowindow = new google.maps.InfoWindow();
-                    infowindow.setContent(tmpCont);
-                    infowindow.open(map, tmpMark);
-                }
+                        var st_lat = store[0]['latitude'];
+                        var st_lng = store[0]['longitude'];
+                        var st_info = store[0]['contact_name'];
+
+                        clearMarkers();
+
+                        create_marker(st_lat, st_lng, store_id, st_info, 14);
+
+                        $('#store_lat_'+store_id).val(st_lat);
+                        $('#store_lng_'+store_id).val(st_lng);
+                        $('#store_loc_'+store_id).val(0);
+
+                    }
+                });
+
+                last_store_id = store_id;
+            }
+            else { 
+                last_store_id = 0;
             }
 
-            var temp = new Array();
-            temp.push(id,store_lat,store_lng,is_outside);
-            Stores.push(temp);
+        
+            $('#ar_inside').prop('checked', true);
 
-            //alert(Stores);
         }
 
         function get_active_stores(){
@@ -1177,7 +1311,7 @@
                             var infowindow = new google.maps.InfoWindow();
                             infowindow.setContent(data[x]['contact_name']);
                             infowindow.open(map, marker);
-                            //get_store_details(data[x]['place_id']);
+                            get_store_details(data[x]['place_id']);
                             $('#store'+data[x]['place_id']).prop('checked', true);
                         }
 
@@ -1225,19 +1359,43 @@
         }
 
         function bind_data_location(store_id,latitude,longitude,is_outside){
-            $('#store_lat_'+store_id).val(latitude);
-            $('#store_lng_'+store_id).val(longitude);
-            $('#store_loc_'+store_id).val(is_outside);
-            // alert( $('#store_loc_'+store_id).val());
-            //alert(store_id);
+            if($('#ar_elsewhere').prop('checked', true)) {
+                if(store_id > 0) {
+                    console.log(store_id + "-" + is_outside);
+                    $('#store_lat_'+store_id).val(latitude);
+                    $('#store_lng_'+store_id).val(longitude);
+                    $('#store_loc_'+store_id).val(is_outside);
+                }
+            } 
+        }
+
+        function bind_data_location2(store_id,latitude,longitude,is_outside){
+            if($('#ar_elsewhere_2').prop('checked', true)) {
+                if(store_id > 0) {
+                    console.log(store_id + "-" + is_outside);
+                    $('#store_lat_2_'+store_id).val(latitude);
+                    $('#store_lng_2_'+store_id).val(longitude);
+                    $('#store_loc_2_'+store_id).val(is_outside);
+                }
+            }
         }
 
         function get_promo_details(promo_id,id){
+
+            if($('#store'+promo_id).prop('checked', false)){
+                $('.radio').prop('checked', false);
+                $('#store'+promo_id).prop('checked', true);
+            }
+
+            clearMarkers();
+
             $.get("{{ url('user/get_promo_details') }}/"+parseInt(promo_id),function(data){
-                // console.log(data);
+                 console.log(data);
 
                 if(data['status'] == 1){
                     var promo = data['details'][0];
+
+
 
                     $('#formid_'+id).val('');
                     $('#promo_name_'+id).val('');
@@ -1245,12 +1403,6 @@
                     $('#promo_start_'+id).val('');
                     $('#qr_code_prev_'+id).attr('src',"{{url('resources/assets/custom/images/no-image.png')}}");
 
-//                    if(id <= 2){
-//                        $('#promo_qr_code_'+id).val('');
-//                        $('#promo_qr_image_'+id).val('');
-//                    }
-
-                    $('#advance_warning_'+id).prop('checked', false);
 
                     $("[name='repeat_promo']").prop('checked', false);
 
@@ -1258,21 +1410,10 @@
                     // bind values to form
                     $('#formid_'+id).val(promo['promo_id']);
                     $('#promo_name_'+id).val(promo['promo_name']);
-                    $('#promo_description_'+id).val(promo['main_clue']);
+                    // $('#promo_description_'+id).val(promo['main_clue']);
                     $('#promo_start_'+id).val(promo['start_at_local']);
 
                     $('#promo_length_'+id).val(promo['promo_length']);
-
-                    {{--$('#qr_code_prev_'+id).attr('src',"{{url('resources/assets/qr_codes')}}/"+promo['qr_image']);--}}
-
-                    // show buttons
-//                    $('#print_code_' + id).show();
-//                    $('#refresh_qr_' + id).show();
-
-//                    if(id <= 2){
-//                        $('#promo_qr_code_'+id).val(promo['qr_code']);
-//                        $('#promo_qr_image_'+id).val(promo['qr_image']);
-//                    }
 
 
                     var promo_repeate = promo['promo_repeat'];
@@ -1316,22 +1457,39 @@
                     var advance_warning = promo['advance_warning'];
 
                     if(advance_warning == '1'){
-                        $('#advance_warning_'+id).parent().find(".switchery").trigger("click");
+                        if($('#advance_warning_'+id).is(":checked")){
+                            
+                        } else {
+                            $('#advance_warning_'+id).parent().find(".switchery").trigger("click");
+                        }
+                    } else {
+                        if($('#advance_warning_'+id).is(":checked")){
+                            $('#advance_warning_'+id).parent().find(".switchery").trigger("click");
+                        }
                     }
 
 
                     var stores = promo['place_id'];
-                    //alert(stores);
-                    for(var j = 0; j < stores.length; j++){
 
-                        for(var i = 0; i < Markers.length; i++){
-                            if(Markers[i][0] == stores[j]){
-                                var tmpMark = Markers[i][2];
-                                var tmpCont = Markers[i][1];
-                                var infowindow = new google.maps.InfoWindow();
-                                infowindow.setContent(tmpCont);
-                                infowindow.open(map, tmpMark);
-                            }
+                    var pr_name = promo['promo_name'];
+                    var locations = data['details'][0]['locations'];
+
+                    $('.checkstore').prop('checked', false);
+
+                    for(var i = 0; i < locations.length; i++) {
+                        var p_lat = locations[i]['lat_code'];
+                        var p_lng = locations[i]['lng_code'];
+                        var is_out_side = locations[i]['is_outside'];
+
+                        var pl_id = locations[i]['store_id'];
+
+                        create_marker_promos(p_lat, p_lng, promo_id, id, pr_name, 14, pl_id);
+
+                        if(id == 2) {
+                            $('#store_2_'+pl_id).prop('checked', true);
+                            $('#store_lat_2_' + pl_id).val(p_lat);
+                            $('#store_lng_2_' + pl_id).val(p_lng);
+                            $('#store_loc_2_' + pl_id).val(is_out_side);
                         }
 
                     }
@@ -1356,32 +1514,6 @@
                     $('#revisits_count').html(data['revisits'])
                 });
             }
-        }
-
-        function generate_qr_code(id) {
-
-            $('#crt_qr_'+id).hide();
-
-            $.get("{{ url('user/generate_new_qr') }}",function(data){
-
-                $('#qr_code_prev_'+id).attr('src', "{{url('resources/assets/qr_codes')}}/"+data['qr_image']);
-                // $('#print_code_'+id).attr('href', "{{url('resources/assets/qr_codes')}}/"+data['qr_image']);
-                $('#promo_qr_image_'+id).val(data['qr_image']);
-                $('#promo_qr_code_'+id).val(data['qr_content']);
-
-            });
-
-            $('#print_code_'+id).show();
-            $('#refresh_qr_'+id).show();
-        }
-
-        function refresh_qr(id) {
-            // get image qr code name
-            var old_qr = $('#promo_qr_image_'+id).val();
-            $('#qr_code_prev_'+id).attr('src', "{{url('resources/assets/custom/images/no-image.png')}}");
-            $.get("{{ url('user/delete_old_qr') }}/"+old_qr,function(data){});
-
-            generate_qr_code(id);
         }
 
         $('#search_promo').on('input', function(){
@@ -1415,12 +1547,212 @@
 
         });
 
-        function view_qr_code(id) {
-            var src = $('#qr_code_prev_' + id).attr('src');
-            window.open(src);
-            // alert(src);
+        // new map functions
+        function create_marker(lat, lng, place_id, info, zoom){
+
+            var center = new google.maps.LatLng(lat,lng);
+
+            marker = new google.maps.Marker({
+                position: center,
+                map: map,
+                draggable: true,
+                anchorPoint: new google.maps.Point(0, -29)
+
+            });
+
+            infowindow = new google.maps.InfoWindow({
+                content: info
+            });
+
+            infowindow.open(map, marker);
+
+            Markers.push(marker);
+
+            google.maps.event.addListener(marker, 'click', (function(marker, x) {
+
+                return function() {
+                    $('#store'+place_id).prop('checked', true);
+                }
+
+            })(marker));
+
+            google.maps.event.addListener(marker, 'dragend', (function(marker, x) {
+
+                return function() {
+                    var geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+                        if (status === google.maps.GeocoderStatus.OK) {
+                            console.log(results[0]);
+                            if (results[0]) {
+
+                                var address = results[0]['address_components'];
+
+                                var latitude = marker.getPosition().lat();
+                                var longitude = marker.getPosition().lng();
+                                var full_address = results[0].formatted_address;
+
+                                bind_data_location(place_id,latitude,longitude,1);
+                                var infowindow = new google.maps.InfoWindow();
+                                infowindow.setContent(results[0].formatted_address);
+                                infowindow.open(map, marker);
+
+                            }else {
+                                window.alert('No results found');
+                            }
+                        } else {
+                            window.alert('Geocoder failed due to: ' + status);
+                        }
+                    });
+                }
+
+            })(marker));
+
+            map.setCenter(center);
+            map.setZoom(zoom);
         }
 
+        function create_marker_promos(lat, lng, promo_id, id, info, zoom, place_id) {
+            //alert(place_id);
+            var center = new google.maps.LatLng(lat,lng);
+
+            marker = new google.maps.Marker({
+                position: center,
+                map: map,
+                draggable: true,
+                anchorPoint: new google.maps.Point(0, -29)
+
+            });
+
+            infowindow = new google.maps.InfoWindow({
+                content: info
+            });
+
+            infowindow.open(map, marker);
+
+            Markers.push(marker);
+
+            google.maps.event.addListener(marker, 'click', (function(marker, x) {
+
+                return function() {
+                    get_promo_details(promo_id, id);
+                }
+
+            })(marker));
+
+            google.maps.event.addListener(marker, 'dragend', (function(marker, x) {
+              //alert(place_id);
+
+                return function() {
+                    var geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+                        if (status === google.maps.GeocoderStatus.OK) {
+                            console.log(results[0]);
+                            if (results[0]) {
+
+                                var address = results[0]['address_components'];
+
+                                var latitude = marker.getPosition().lat();
+                                var longitude = marker.getPosition().lng();
+                                var full_address = results[0].formatted_address;
+
+                                bind_data_location2(place_id,latitude,longitude,1);
+                                var infowindow = new google.maps.InfoWindow();
+                                infowindow.setContent(results[0].formatted_address);
+                                infowindow.open(map, marker);
+
+                            }else {
+                                window.alert('No results found');
+                            }
+                        } else {
+                            window.alert('Geocoder failed due to: ' + status);
+                        }
+                    });
+                }
+
+            })(marker));
+
+            map.setCenter(center);
+            map.setZoom(zoom);
+        }
+
+        function get_active_stores_all(){
+            marker.setMap(null);
+            Markers = [];
+
+            $.get("{{ url('user/get_active_store') }}",function(data) {
+
+                for (var x = 0; x < data.length; x++) {
+                    var lat = data[x]['latitude'];
+                    var lng = data[x]['longitude'];
+                    var store_id = data[x]['place_id'];
+                    var store_name = data[x]['contact_name'];
+
+                    create_marker(lat, lng, store_id, store_name, 8);
+                }
+            });
+        }
+
+        function get_active_promos(){
+            marker.setMap(null);
+            Markers = [];
+
+            $.get("{{ url('user/get_active_promos') }}",function(data) {
+
+                console.log(data);
+                for (var x = 0; x < data.length; x++) {
+                    var lat = data[x]['lat_code'];
+                    var lng = data[x]['lng_code'];
+                    var promo_id = data[x]['promo_id'];
+                    var promo_name = data[x]['promo_name'];
+                    var place_id = data[x]['store_id'];
+
+                    create_marker_promos(lat, lng, promo_id, 2, promo_name, 8, place_id);
+                }
+            });
+        }
+
+        function get_inactice_promos(){
+            marker.setMap(null);
+            Markers = [];
+
+            $.get("{{ url('user/get_inactive_promos') }}",function(data) {
+
+                console.log(data);
+                for (var x = 0; x < data.length; x++) {
+                    var lat = data[x]['lat_code'];
+                    var lng = data[x]['lng_code'];
+                    var promo_id = data[x]['promo_id'];
+                    var promo_name = data[x]['promo_name'];
+                    var place_id = data[x]['store_id'];
+
+                    create_marker_promos(lat, lng, promo_id, 3, promo_name, 8, place_id);
+                }
+            });
+        }
+
+        function setMapOnAll(map) {
+            for (var i = 0; i < Markers.length; i++) {
+                Markers[i].setMap(map);
+            }
+        }
+
+        function clearMarkers() {
+            setMapOnAll(null);
+        }
+
+        function deleteMarkers() {
+            clearMarkers();
+            Markers = [];
+        }
+
+
+//        $('#store_address_1').on('input', function (){
+//           get_address1();
+//        });
+
+        function set_last(place_id){
+            last_store_id = place_id;
+        }
 
 
     </script>
@@ -1467,13 +1799,6 @@
                 $('#promo_start_error_' + id).html('');
             } else {
                 $('#promo_start_error_' + id).html(err_1);
-            }
-
-            var promo_desc = $('#promo_description_' + id).val();
-            if(promo_desc.length > 0) {
-                $('#promo_desc_error_' + id).html('');
-            } else {
-                $('#promo_desc_error_' + id).html(err_1);
             }
 
             var promo_repeat = 0;
@@ -1600,7 +1925,7 @@
 
 
 
-            if( (stores == 1) && (promo_name.length > 0) && (promo_start.length > 0) && (promo_start.length > 0) && (promo_desc.length > 0) && (promo_repeat == 1) ) {
+            if( (stores == 1) && (promo_name.length > 0) && (promo_start.length > 0) && (promo_start.length > 0) && (promo_repeat == 1) ) {
 
                 if(date_checked == 1) {
 
@@ -1629,17 +1954,24 @@
         }
 
         function validate_form(id){
+
+            progressSpinner("Processing...");
             var valid = input_validate_custom(id);
 
             if(valid == 1) {
                 $('#promo_form_' + id).submit();
             } else {
+                hideProgressSpinner();
                 alert("Please Fill the missing data..")
             }
         }
 
         function error_hide(field_id) {
             $('#'+ field_id).html('');
+        }
+
+        function beforeSubmit(){
+            progressSpinner('Processing...');
         }
     </script>
 @endsection

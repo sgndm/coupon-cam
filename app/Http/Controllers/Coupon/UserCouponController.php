@@ -24,6 +24,15 @@ use App\Http\Controllers\Controller;
 
 use App\Classes\ExtraFunctions;
 
+
+// image manipulations
+// use Treinetic\ImageArtist\lib\Overlays\Overlay;
+// use Treinetic\ImageArtist\lib\Text\Color;
+// use Treinetic\ImageArtist\lib\Shapes\PolygonShape;
+// use Treinetic\ImageArtist\lib\Commons\Node;
+// use Treinetic\ImageArtist\lib\Image;
+// use Treinetic\ImageArtist\lib\Shapes\Square;
+
 class UserCouponController extends Controller
 {
     public function __construct() {
@@ -31,7 +40,7 @@ class UserCouponController extends Controller
         $this->middleware('user');
     }
 
-    public function index() {
+    public function index(Request $request) {
         $view = view('user.coupons.coupon');
         $view->title = 'CouponCam::Coupons';
 
@@ -43,13 +52,33 @@ class UserCouponController extends Controller
             ->orderBY('promos.updated_at', 'DESC')
             ->get();
 
-        $view->activePromos = Promo::join('promo_locations', 'promo_locations.promo_id','=','promos.promo_id')
+        $activePromos = Promo::join('promo_locations', 'promo_locations.promo_id','=','promos.promo_id')
             ->join('store_user', 'store_user.place_id','=','promo_locations.store_id')
             ->select('promos.*')
             ->distinct()
             ->where(['store_user.user_id' => Auth::id(), 'promo_locations.status' => 1, 'promos.status' => 1, 'promos.used' => '1'])
             ->orderBY('promos.updated_at', 'DESC')
             ->get();
+
+        $view->activePromos = $activePromos;
+
+        $has_coupons = 0;
+
+        if(sizeof($activePromos) > 0) {
+            $has_coupons = 1;
+        }
+
+        $promo_id = 0;
+        if(isset($request['promo'])) {
+            $promo_id = $request['promo'];
+        }
+
+        if($promo_id > 0) {
+            $has_coupons = 0;
+        }
+        $view->new_promo_id = $promo_id;
+
+        $view->has_coupons = $has_coupons;
 
         $view->puasedPromos = Promo::join('promo_locations', 'promo_locations.promo_id','=','promos.promo_id')
             ->join('store_user', 'store_user.place_id','=','promo_locations.store_id')
@@ -81,26 +110,49 @@ class UserCouponController extends Controller
         return $view;
     }
 
+    public function upload_image(Request $request) {
+        $data = $_POST['file'];
+
+        $random = rand(0, 1000000);
+
+        list($type, $data) = explode(';', $data);
+        list(, $data)      = explode(',', $data);
+
+        $data = base64_decode($data);
+
+        $cp_image_path = 'resources/assets/coupons/full/';
+        $image_name = 's'.date('Ymdhis').$random.".png";
+
+        file_put_contents($cp_image_path.$image_name, $data);
+        
+
+        return $image_name;
+
+    }
+
     public function create(CouponRequest $request){
 
         for($x = 1; $x < 5; $x++){
 
             // upload coupon photo
             $coupon_photo = '';
-            if($request->hasFile('coupon_photo_'.$x)) {
+            // $new_photo = $request->get('cp_img_name_'.$x);
 
-                $random = rand(0,1000000);
-                $coup_img = $request->file('coupon_photo_'.$x);
-                $coup_extention = $coup_img->getClientOriginalExtension();
+            $get_file = $request->get('cp_img_name_'.$x);
 
-                $coup_img_name = 'c'.date('Ymdhis').$random.".".$coup_extention;
+            $random = rand(0,1000000);
+            $coup_img_name = 'c'.date('Ymdhis').$random.".png";
+            $coup_img_path = 'resources/assets/coupons/full/';
 
-                //Move Uploaded File
-                $coup_img_path = 'resources/assets/coupons/full/';
-                $coup_img->move($coup_img_path,$coup_img_name);
+            list($type, $get_file) = explode(';', $get_file);
+            list(, $get_file)      = explode(',', $get_file);
+            
+            $get_file = base64_decode($get_file);
+            
+            // upload image
+            file_put_contents($coup_img_path.$coup_img_name, $get_file);
 
-                $coupon_photo = $coup_img_name;
-            }
+            $coupon_photo = $coup_img_name;
 
             // check loyalty coupons
             $is_loyalty = 0;
@@ -110,6 +162,12 @@ class UserCouponController extends Controller
                 $loyalty_count = $request->get('coupon_count_'.$x);
             }
 
+            //get min spend 
+            $min_spend = 0;
+
+            if($x == 1) {
+                $min_spend = $request->get('min_spent_1');
+            }
 
            // insert data
             $new_coup = new Coupon();
@@ -130,6 +188,7 @@ class UserCouponController extends Controller
             $new_coup->add_date = date('Y-m-d h:i:s');
             $new_coup->created_at = date('Y-m-d h:i:s');
             $new_coup->updated_at = date('Y-m-d h:i:s');
+            $new_coup->min_spend = $min_spend;
 
             $new_coup->save();
 
@@ -153,23 +212,30 @@ class UserCouponController extends Controller
     }
 
     public function update(CouponRequest $request){
+        $isUpdated = 0;
         for($x = 1; $x < 5; $x++){
 
             // upload coupon photo
+            $cp_name = $request->get('cp_img_name_'.$x);
             $coupon_photo = '';
-            if($request->hasFile('coupon_photo_'.$x)) {
+            if(strlen($cp_name) > 0) {
+
+                $get_file = $request->get('cp_img_name_'.$x);
 
                 $random = rand(0,1000000);
-                $coup_img = $request->file('coupon_photo_'.$x);
-                $coup_extention = $coup_img->getClientOriginalExtension();
-
-                $coup_img_name = 'c'.date('Ymdhis').$random.".".$coup_extention;
-
-                //Move Uploaded File
+                $coup_img_name = 'c'.date('Ymdhis').$random.".png";
                 $coup_img_path = 'resources/assets/coupons/full/';
-                $coup_img->move($coup_img_path,$coup_img_name);
+
+                list($type, $get_file) = explode(';', $get_file);
+                list(, $get_file)      = explode(',', $get_file);
+                
+                $get_file = base64_decode($get_file);
+                
+                // upload image
+                file_put_contents($coup_img_path.$coup_img_name, $get_file);
 
                 $coupon_photo = $coup_img_name;
+
             } else {
                 $coupon_photo = $request->get('coup_img_'.$x);
             }
@@ -184,14 +250,13 @@ class UserCouponController extends Controller
 
 
             // update data
-            Coupon::where("coupon_id",$request->get('coupon_id_'.$x))->update([
+            $upd = Coupon::where("coupon_id",$request->get('coupon_id_'.$x))->update([
                 "coupon_title" => trim($request->get('coupon_name_'.$x)),
                 "estimated_value" => trim($request->get('coupon_value_'.$x)),
                 "coupon_availabilty" => trim($request->get('coupon_availability_'.$x)),
                 "terms_conditions" => trim($request->get('coupon_condition_'.$x)),
                 "coupon_information" => trim($request->get('coupon_info_'.$x)),
                 "promo_id" => trim($request->get('promo_id_1')),
-//                "user_id" => Auth::id(),
                 "coupon_photo" => $coupon_photo,
                 "coupon_model" => trim($request->get('ar_coupon_name_'.$x)),
                 "coupon_marker" => trim($request->get('ar_marker_name_'.$x)),
@@ -202,24 +267,18 @@ class UserCouponController extends Controller
                 "updated_at" => date('Y-m-d h:i:s')
             ]);
 
+            if($upd) {
+                $isUpdated += 1;
+            }
+            
+
 
         }
 
-
-
-        // update promo details
-        $get_user_details = UserTable::where(['id' => Auth::id()])->get();
-        $is_pre_launch = $get_user_details[0]->is_pre_launch;
-        if($is_pre_launch == 1) {
-          $id = Promo::where('promo_id',$request->get('promo_id_1'))->update(['used' => '1', 'status' => 3,'updated_at' => date('Y-m-d h:i:s') ]);
-        }
-        else {
-          $id = Promo::where('promo_id',$request->get('promo_id_1'))->update(['used' => '1', 'status' => 1,'updated_at' => date('Y-m-d h:i:s') ]);
-        }
-        if($id) {
-            return redirect('user/coupons')->with(['success' => 'Coupon created successfully']);
+        if($isUpdated > 0) {
+            return redirect('user/coupons')->with(['success' => 'Coupon Updated successfully']);
         } else {
-            return back()->with(['error' => 'Store failed to create']);
+            return back()->with(['error' => 'Coupon update Failed']);
         }
     }
 
@@ -265,7 +324,7 @@ class UserCouponController extends Controller
     }
 
     public function get_coupon_details($id){
-        $coupons  = Coupon::where(['promo_id' => $id,'status' => '1'])->get();
+        $coupons  = Coupon::where(['promo_id' => $id])->get();
 
         // get store details
         $get_curr = Store::join('promo_locations', 'promo_locations.store_id', '=', 'places.place_id')
@@ -280,6 +339,10 @@ class UserCouponController extends Controller
 
         if($country == "GB") {
             $curr_lbl = "£";
+        }
+
+        foreach($coupons as $coupon) {
+            $coupon->cur_lable = $curr_lbl;
         }
 
         return($coupons);

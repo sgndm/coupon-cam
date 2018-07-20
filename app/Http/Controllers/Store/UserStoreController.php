@@ -39,12 +39,22 @@ class UserStoreController extends Controller
         $view->categories = StoreCategory::where(['status' => '1'])->get();
         $view->business_types = BusinessTypes::get();
 
-        $view->openStores = Store::join('store_user', 'store_user.place_id', '=', 'places.place_id')
+        $openStores = Store::join('store_user', 'store_user.place_id', '=', 'places.place_id')
             ->where(['store_user.user_id' => Auth::id(), 'places.status' => 1])
             ->select('places.*')
             ->distinct()
             ->orderBY('places.updated_at', 'DESC')
             ->get();
+
+            $view->openStores = $openStores;
+
+        $has_stores = 0;
+
+        if(sizeof($openStores) > 0) {
+            $has_stores = 1;
+        }
+
+        $view->has_stores = $has_stores;
 
         $view->closedStores = Store::join('store_user', 'store_user.place_id', '=', 'places.place_id')
             ->where(['store_user.user_id' => Auth::id(), 'places.status' => 0])
@@ -56,6 +66,8 @@ class UserStoreController extends Controller
         $get_user = UserTable::where(['id' => Auth::id()])->select('is_member')->get();
 
         $view->is_member = $get_user[0]->is_member;
+
+
 
         return $view;
     }
@@ -86,10 +98,10 @@ class UserStoreController extends Controller
     public function create_store(StoreRequest $request) {
 
         // validate
-        $this->validate($request, [
-            'store_image' => 'required|image|mimes:jpeg,png,jpg',
-            'store_ar' => 'required|image|mimes:png',
-        ]);
+        // $this->validate($request, [
+        //     'store_image' => 'required|image|mimes:jpeg,png,jpg',
+        //     'store_ar' => 'required|image|mimes:png',
+        // ]);
 
 
         $store_image = '';
@@ -97,57 +109,57 @@ class UserStoreController extends Controller
         $store_marker = '';
         $random = rand(0, 1000000);
         // get store image
-        if($request->hasFile('store_image')) {
+        // if($request->hasFile('store_image')) {
 
-            $file = $request->file('store_image');
-            $file_extention = $file->getClientOriginalExtension();
+        //     $file = $request->file('store_image');
+        //     $file_extention = $file->getClientOriginalExtension();
 
-            $file_name = 's'.date('Ymdhis').$random.".".$file_extention;
+        //     $file_name = 's'.date('Ymdhis').$random.".".$file_extention;
 
-            //Move Uploaded File
-            $store_image_path = 'resources/assets/stores/store_photo/';
-            $file->move($store_image_path,$file_name);
+        //     //Move Uploaded File
+        //     $store_image_path = 'resources/assets/stores/store_photo/';
+        //     $file->move($store_image_path,$file_name);
 
-            $store_image = $file_name;
-        }
+        //     $store_image = $file_name;
+        // }
 
         // get store ar image
-        if($request->hasFile('store_ar')) {
+        // if($request->hasFile('store_ar')) {
 
-            $ar_img = $request->file('store_ar');
-            $ar_extention = $ar_img->getClientOriginalExtension();
+        //     $ar_img = $request->file('store_ar');
+        //     $ar_extention = $ar_img->getClientOriginalExtension();
 
-            $ar_name = 's'.date('Ymdhis').$random.".".$ar_extention;
+        //     $ar_name = 's'.date('Ymdhis').$random.".".$ar_extention;
 
-            //Move Uploaded File
-            $store_ar_path = 'resources/assets/stores/store_ar/';
-            $ar_img->move($store_ar_path,$ar_name);
+        //     //Move Uploaded File
+        //     $store_ar_path = 'resources/assets/stores/store_ar/';
+        //     $ar_img->move($store_ar_path,$ar_name);
 
-            // resize ar
-            $star_img = new Image($store_ar_path.$ar_name);
-            $star_img->resize(300,300);
-            $star_img->save($store_ar_path.$ar_name,IMAGETYPE_PNG);
+        //     // resize ar
+        //     $star_img = new Image($store_ar_path.$ar_name);
+        //     $star_img->resize(300,300);
+        //     $star_img->save($store_ar_path.$ar_name,IMAGETYPE_PNG);
 
-            $store_ar = $ar_name;
+        //     $store_ar = $ar_name;
 
-            // create marker
-            $marker_name = 'marker' . time().$random . '.png';
-            $img_1 = new Image($store_ar_path.$ar_name);
-            $img_1->scale(60);
-            $img_2 = new Image('resources/assets/custom/images/marker.png');
-            $img_2->merge($img_1,170,60);
-            $img_2->resize(300,300);
-            $img_2->save($store_ar_path.$marker_name,IMAGETYPE_PNG);
+        //     // create marker
+        //     $marker_name = 'marker' . time().$random . '.png';
+        //     $img_1 = new Image($store_ar_path.$ar_name);
+        //     $img_1->scale(60);
+        //     $img_2 = new Image('resources/assets/custom/images/marker.png');
+        //     $img_2->merge($img_1,170,60);
+        //     $img_2->resize(300,300);
+        //     $img_2->save($store_ar_path.$marker_name,IMAGETYPE_PNG);
 
-            $store_marker = $marker_name;
-        }
+        //     $store_marker = $marker_name;
+        // }
 
         $is_give_away = 0;
 
         $store_id = Store::insertGetId([
             'under_category' => json_encode($request->category_1),
             'contact_name' => trim($request->store_name),
-            'store_promo' => trim($request->store_promo),
+            'store_promo' => '',
             'street_number' =>  trim($request->street_num),
             'street_address' => trim($request->street_name),
             'city' => trim($request->city),
@@ -164,7 +176,7 @@ class UserStoreController extends Controller
             'store_ar' => $store_ar,
             'store_marker' => $store_marker,
             'country_short' => trim($request->country_short),
-            'store_description' => trim($request->store_description),
+            'store_description' => '',
             'is_give_away' => $is_give_away,
             'qr_code' => trim($request->promo_qr_code),
             'qr_image' => trim($request->promo_qr_image)
@@ -198,7 +210,7 @@ class UserStoreController extends Controller
             //    Mail::to(env('MAIL_USERNAME'))->send(new ContentPosted($msg1,$url1,$subject));
             //    Mail::to(Auth::user()->email)->send(new ContentPosted($msg2,$url2,$subject,'Create A Promo'));
 
-            return redirect('user/promos')->with(['success' => 'Store created successfully, now please create a promo for your store']);
+            return redirect('user/promos?store='. $store_id)->with(['success' => 'Store created successfully, now please create a promo for your store']);
         }  else {
             return back()->with(['error' => 'Store failed to create']);
         }
@@ -230,10 +242,10 @@ class UserStoreController extends Controller
         else {
 
             // validate
-            $this->validate($request, [
-                'store_image' => 'image|mimes:jpeg,png,jpg',
-                'store_ar' => 'image|mimes:png',
-            ]);
+            // $this->validate($request, [
+            //     'store_image' => 'image|mimes:jpeg,png,jpg',
+            //     'store_ar' => 'image|mimes:png',
+            // ]);
 
 
             $store_image = '';
@@ -241,58 +253,58 @@ class UserStoreController extends Controller
             $store_marker ='';
             $random = rand(0, 1000000);
             // get store image
-            if($request->hasFile('store_image')) {
+            // if($request->hasFile('store_image')) {
 
-                $file = $request->file('store_image');
-                $file_extention = $file->getClientOriginalExtension();
+            //     $file = $request->file('store_image');
+            //     $file_extention = $file->getClientOriginalExtension();
 
-                $file_name = date('Ymdhis').$random.".".$file_extention;
+            //     $file_name = date('Ymdhis').$random.".".$file_extention;
 
-                //Move Uploaded File
-                $store_image_path = 'resources/assets/stores/store_photo/';
-                $file->move($store_image_path,$file_name);
+            //     //Move Uploaded File
+            //     $store_image_path = 'resources/assets/stores/store_photo/';
+            //     $file->move($store_image_path,$file_name);
 
-                $store_image = $file_name;
-            }
-            else {
-                $store_image = trim($request->store_image_hidden);
-            }
+            //     $store_image = $file_name;
+            // }
+            // else {
+            //     $store_image = trim($request->store_image_hidden);
+            // }
 
             // get store ar image
-            if($request->hasFile('store_ar')) {
+            // if($request->hasFile('store_ar')) {
 
-                $ar_img = $request->file('store_ar');
-                $ar_extention = $ar_img->getClientOriginalExtension();
+            //     $ar_img = $request->file('store_ar');
+            //     $ar_extention = $ar_img->getClientOriginalExtension();
 
-                $ar_name = date('Ymdhis').$random.".".$ar_extention;
+            //     $ar_name = date('Ymdhis').$random.".".$ar_extention;
 
-                //Move Uploaded File
-                $store_ar_path = 'resources/assets/stores/store_ar/';
-                $ar_img->move($store_ar_path,$ar_name);
+            //     //Move Uploaded File
+            //     $store_ar_path = 'resources/assets/stores/store_ar/';
+            //     $ar_img->move($store_ar_path,$ar_name);
 
-                // resize ar
-                $star_img = new Image($store_ar_path.$ar_name);
-                $star_img->resize(300,300);
-                $star_img->save($store_ar_path.$ar_name,IMAGETYPE_PNG);
+            //     // resize ar
+            //     $star_img = new Image($store_ar_path.$ar_name);
+            //     $star_img->resize(300,300);
+            //     $star_img->save($store_ar_path.$ar_name,IMAGETYPE_PNG);
 
-                $store_ar = $ar_name;
+            //     $store_ar = $ar_name;
 
-                // create marker
-                $marker_name = 'marker' . time().$random . '.png';
-                $img_1 = new Image($store_ar_path.$ar_name);
-                $img_1->scale(60);
-                $img_2 = new Image('resources/assets/custom/images/marker.png');
-                $img_2->merge($img_1,170,60);
-                $img_2->resize(300,300);
-                $img_2->save($store_ar_path.$marker_name,IMAGETYPE_PNG);
+            //     // create marker
+            //     $marker_name = 'marker' . time().$random . '.png';
+            //     $img_1 = new Image($store_ar_path.$ar_name);
+            //     $img_1->scale(60);
+            //     $img_2 = new Image('resources/assets/custom/images/marker.png');
+            //     $img_2->merge($img_1,170,60);
+            //     $img_2->resize(300,300);
+            //     $img_2->save($store_ar_path.$marker_name,IMAGETYPE_PNG);
 
-                $store_marker = $marker_name;
+            //     $store_marker = $marker_name;
 
-            }
-            else {
-                $store_ar = trim($request->store_ar_hidden);
-                $store_marker = trim($request->store_marker_hidden);
-            }
+            // }
+            // else {
+            //     $store_ar = trim($request->store_ar_hidden);
+            //     $store_marker = trim($request->store_marker_hidden);
+            // }
 
             $is_give_away = 0;
 
@@ -300,7 +312,7 @@ class UserStoreController extends Controller
                 ->update([
                     'under_category' => json_encode($request->category_2),
                     'contact_name' => trim($request->store_name),
-                    'store_promo' => trim($request->store_promo),
+                    'store_promo' => '',
                     'street_number' =>  trim($request->street_num),
                     'street_address' => trim($request->street_name),
                     'city' => trim($request->city),
@@ -317,7 +329,7 @@ class UserStoreController extends Controller
                     'store_ar' => $store_ar,
                     'store_marker' => $store_marker,
                     'country_short' => trim($request->country_short),
-                    'store_description' => trim($request->store_description),
+                    'store_description' => '',
                     'is_give_away' => $is_give_away,
                     'qr_code' => trim($request->promo_qr_code),
                     'qr_image' => trim($request->promo_qr_image)

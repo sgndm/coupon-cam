@@ -18,6 +18,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-pane-5" role="tab">
+                        <span class="hidden-sm-up"><i class="ti-email"></i></span>
+                        <span class="hidden-xs-down">LOYALTY STATS</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#tab-pane-3" role="tab">
                         <span class="hidden-sm-up"><i class="ti-email"></i></span>
                         <span class="hidden-xs-down">TOTAL STATS</span>
@@ -29,12 +35,7 @@
                         <span class="hidden-xs-down">RETARGET CUSTOMERS</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <!-- <a class="nav-link" data-toggle="tab" href="#tab-pane-5" role="tab">
-                        <span class="hidden-sm-up"><i class="ti-email"></i></span>
-                        <span class="hidden-xs-down">SEARCH</span>
-                    </a> -->
-                </li>
+                
 
             </ul>
             <!-- Tab panes -->
@@ -84,7 +85,7 @@
                                                                     <div class="col-12 stat-larg-tile">
                                                                         <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                         <h2 class="text-center stat_count" id="" >{{ $stores[0]['recent_day']['new_c'] }}</h2>
-                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER ON MOST RECENT DAY</p>
                                                                     </div>
                                                                 </div>
 
@@ -119,7 +120,7 @@
                                                                     <div class="col-12 stat-larg-tile">
                                                                         <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                         <h2 class="text-center stat_count" id="" >{{ $stores[0]['7_day']['new_c'] }}</h2>
-                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER IN LAST 7 DAYS</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -153,7 +154,7 @@
                                                                     <div class="col-12 stat-larg-tile">
                                                                         <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                         <h2 class="text-center stat_count" id="" >{{ $stores[0]['30_day']['new_c'] }}</h2>
-                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER IN LAST 30 DAYS</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -187,7 +188,7 @@
                                                                     <div class="col-12 stat-larg-tile">
                                                                         <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                         <h2 class="text-center stat_count" id="" >{{ $stores[0]['all']['new_c'] }}</h2>
-                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER SINCE STARTING THE PROMO</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -233,7 +234,7 @@
                                                                         <div class="col-12 stat-larg-tile">
                                                                             <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                             <h2 class="text-center stat_count" id="" >{{ $stores[$x]['recent_day']['new_c'] }}</h2>
-                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER ON MOST RECENT DAY</p>
                                                                         </div>
                                                                     </div>
 
@@ -268,7 +269,7 @@
                                                                         <div class="col-12 stat-larg-tile">
                                                                             <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                             <h2 class="text-center stat_count" id="" >{{ $stores[$x]['7_day']['new_c'] }}</h2>
-                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER IN LAST 7 DAYS</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -302,7 +303,7 @@
                                                                         <div class="col-12 stat-larg-tile">
                                                                             <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                             <h2 class="text-center stat_count" id="" >{{ $stores[$x]['30_day']['new_c'] }}</h2>
-                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER IN LAST 30 DAYS</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -336,7 +337,7 @@
                                                                         <div class="col-12 stat-larg-tile">
                                                                             <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                             <h2 class="text-center stat_count" id="" >{{ $stores[$x]['all']['new_c'] }}</h2>
-                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER SINCE STARTING THE PROMO</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -353,6 +354,10 @@
                                         </div>
 
 
+                                        <a class="carousel-control-prev" href="#store_slider_stat" role="button" data-slide="prev">
+                                            <span> <img src="{{asset('resources/assets/custom/images/arrow_left.png')}}" style="width: 70px;" > </span>
+                                            <span class="sr-only">Prev</span>
+                                        </a>
                                         <a class="carousel-control-next" href="#store_slider_stat" role="button" data-slide="next">
                                             <span> <img src="{{asset('resources/assets/custom/images/arrow.png')}}" style="width: 70px;" > </span>
                                             <span class="sr-only">Next</span>
@@ -367,19 +372,20 @@
                     </div>
 
                 </div>
-                <div class="tab-pane p-20" id="tab-pane-2" role="tabpanel">
+                <div class="tab-pane" id="tab-pane-2" role="tabpanel">
                     <div class="col-sm-12 col-lg-12">
                         <div class="card">
                             <div class="card-body">
                                 @if(sizeof($promos) > 0)
                                     <div id="promo_slider_store" class="carousel slide" data-ride="carousel">
-                                        <div class="carousel-inner" role="listbox">
+                                        <div class="carousel-inner" role="listbox" >
 
                                             <?PHP $promoCount = sizeof($promos); ?>
 
                                             <div class="carousel-item active">
 
                                                 <h3 class="text-center m-b-5 text-danger"> {{ strtoupper($promos[0]['promo_name']) }}</h3>
+                                                <h6 class="text-center m-b-20  text-white"><br></h6>
                                                 <div class="row">
 
                                                     <div class="col-sm-6 col-md-6 col-lg-3">
@@ -410,7 +416,7 @@
                                                                     <div class="col-12 stat-larg-tile">
                                                                         <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                         <h2 class="text-center stat_count" id="" >{{ $promos[0]['recent_day']['new_c'] }}</h2>
-                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER ON MOST RECENT DAY</p>
                                                                     </div>
                                                                 </div>
 
@@ -445,7 +451,7 @@
                                                                     <div class="col-12 stat-larg-tile">
                                                                         <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                         <h2 class="text-center stat_count" id="" >{{ $promos[0]['7_day']['new_c'] }}</h2>
-                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER IN LAST 7 DAYS</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -479,7 +485,7 @@
                                                                     <div class="col-12 stat-larg-tile">
                                                                         <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                         <h2 class="text-center stat_count" id="" >{{ $promos[0]['30_day']['new_c'] }}</h2>
-                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER IN LAST 30 DAYS</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -513,7 +519,7 @@
                                                                     <div class="col-12 stat-larg-tile">
                                                                         <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                         <h2 class="text-center stat_count" id="" >{{ $promos[0]['all']['new_c'] }}</h2>
-                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER SINCE STARTING THE PROMO</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -527,7 +533,8 @@
                                             @for($x = 1; $x < $promoCount; $x++)
                                                 <div class="carousel-item">
 
-                                                    <h3 class="text-center m-b-5 text-danger"> {{ strtoupper($promos[$x]['promo_name']) }}</h3>
+                                                    <h3 class="text-center m-b-5 text-danger stat-header-h3"> {{ strtoupper($promos[$x]['promo_name']) }}</h3>
+                                                    <h6 class="text-center m-b-20  text-white"><br></h6>
                                                     <div class="row">
 
                                                         <div class="col-sm-6 col-md-6 col-lg-3">
@@ -558,7 +565,7 @@
                                                                         <div class="col-12 stat-larg-tile">
                                                                             <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                             <h2 class="text-center stat_count" id="" >{{ $promos[$x]['recent_day']['new_c'] }}</h2>
-                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER ON MOST RECENT DAY</p>
                                                                         </div>
                                                                     </div>
 
@@ -593,7 +600,7 @@
                                                                         <div class="col-12 stat-larg-tile">
                                                                             <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                             <h2 class="text-center stat_count" id="" >{{ $promos[$x]['7_day']['new_c'] }}</h2>
-                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER IN LAST 7 DAYS</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -627,7 +634,7 @@
                                                                         <div class="col-12 stat-larg-tile">
                                                                             <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                             <h2 class="text-center stat_count" id="" >{{ $promos[$x]['30_day']['new_c'] }}</h2>
-                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER IN LAST 30 DAYS</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -661,7 +668,7 @@
                                                                         <div class="col-12 stat-larg-tile">
                                                                             <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                             <h2 class="text-center stat_count" id="" >{{ $promos[$x]['all']['new_c'] }}</h2>
-                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                            <p class="text-center stat_lable" id="">NEW CUSTOMER SINCE STARTING THE PROMO</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -675,7 +682,10 @@
 
                                         </div>
 
-
+                                        <a class="carousel-control-prev" href="#promo_slider_store" role="button" data-slide="prev">
+                                            <span> <img src="{{asset('resources/assets/custom/images/arrow_left.png')}}" style="width: 70px;" > </span>
+                                            <span class="sr-only">Prev</span>
+                                        </a>
                                         <a class="carousel-control-next" href="#promo_slider_store" role="button" data-slide="next">
                                             <span> <img src="{{asset('resources/assets/custom/images/arrow.png')}}" style="width: 70px;" > </span>
                                             <span class="sr-only">Next</span>
@@ -689,7 +699,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane p-20" id="tab-pane-3" role="tabpanel">
+                <div class="tab-pane " id="tab-pane-3" role="tabpanel">
                     <div class="col-sm-12 col-lg-12">
                         <div class="card">
                             <div class="card-body">
@@ -700,6 +710,7 @@
                                             <div class="carousel-item active">
 
                                                 <h3 class="text-center m-b-5 text-danger"> ALL STATS </h3>
+                                                <h6 class="text-center m-b-20  text-white"><br></h6>
                                                 <div class="row">
 
                                                     <div class="col-sm-6 col-md-6 col-lg-3">
@@ -730,7 +741,7 @@
                                                                     <div class="col-12 stat-larg-tile">
                                                                         <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                         <h2 class="text-center stat_count" id="" >{{ $all_stats[0]['recent_day']['new_c'] }}</h2>
-                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER ON MOST RECENT DAY</p>
                                                                     </div>
                                                                 </div>
 
@@ -765,7 +776,7 @@
                                                                     <div class="col-12 stat-larg-tile">
                                                                         <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                         <h2 class="text-center stat_count" id="" >{{ $all_stats[0]['7_day']['new_c'] }}</h2>
-                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER IN LAST 7 DAYS</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -799,7 +810,7 @@
                                                                     <div class="col-12 stat-larg-tile">
                                                                         <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                         <h2 class="text-center stat_count" id="" >{{ $all_stats[0]['30_day']['new_c'] }}</h2>
-                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER IN LAST 30 DAYS</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -833,7 +844,7 @@
                                                                     <div class="col-12 stat-larg-tile">
                                                                         <p class="text-center stat_lable" id="">THIS PROMO BROUGHT A TOTAL OF</p>
                                                                         <h2 class="text-center stat_count" id="" >{{ $all_stats[0]['all']['new_c'] }}</h2>
-                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER THIS MONTH</p>
+                                                                        <p class="text-center stat_lable" id="">NEW CUSTOMER SINCE STARTING THE PROMO</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -859,7 +870,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane p-20" id="tab-pane-4" role="tabpanel">
+                <div class="tab-pane p-20 " id="tab-pane-4" role="tabpanel">
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="row">
 
@@ -901,19 +912,35 @@
                                                 <label class="control-label">Estimated Value</label>
                                                 <input type="number" id="coupon_value_1" name="coupon_value" class="form-control" placeholder="" required min="0" step="0.1">
                                             </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Coupon Info & Basic Conditions</label>
-                                                <textarea id="coupon_info_1" name="coupon_info" class="form-control" placeholder="" required></textarea>
-                                            </div>
+                                            
 
                                         </div>
                                         <div class="col-sm-12 col-md-12 col-lg-6">
 
                                             <div class="form-group">
                                                 <label class="control-label">Coupon Photo</label>
-                                                <input type="file" id="coupon_photo_1" name="coupon_photo" class="dropify" data-height="100"  required />
+                                                <div id="img_cropper_c_1">
+                                                    <div class="uploader" id="uploader_c_1">
+
+                                                        <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                        <b>Drag and drop a file here or click</b>
+
+                                                        <input type="file" name="coupon_photo" id="coupon_photo_c_1" class="filePhoto cropit-image-input" >
+                                                    </div>
+                                                        
+                                                    <div class="cropit-preview" id="cropper_prev_c_1"></div>
+                                                    <input type="range" class="cropit-image-zoom-input" id="ranger_c_1"/>
+                                                    
+
+                                                    <button id="crop_btn_c_1" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                    <button id="rem_c_1" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                    <input type="hidden" name="cp_img_name_1" id="cp_img_name_c_1">
+                                                </div>
+
+                                                <!-- <input type="file" id="coupon_photo_1" name="coupon_photo" class="dropify" data-height="100"  required /> -->
                                             </div>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label class="control-label">Choose Or Upload AR Coupon</label>
                                                 <table id="searc_ar_model">
                                                     <tr>
@@ -932,6 +959,10 @@
                                                     <input type="hidden" name="ar_coupon_name" id="ar_coupon_name_1">
                                                     <input type="hidden" name="ar_marker_name" id="ar_marker_name_1">
                                                 </div>
+                                            </div> -->
+                                            <div class="form-group">
+                                                <label class="control-label">Coupon Info & Basic Conditions</label>
+                                                <textarea id="coupon_info_1" name="coupon_info" class="form-control" placeholder="" required></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label">Detailed Terms & Conditions</label>
@@ -1023,7 +1054,255 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="tab-pane p-20" id="tab-pane-5" role="tabpanel">5</div> -->
+                <div class="tab-pane" id="tab-pane-5" role="tabpanel">
+                    <div class="col-sm-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                            @if(sizeof($promos) > 0)
+                                    <div id="loyalty_slider_store" class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner" role="listbox">
+
+                                            <?PHP $promoCount = sizeof($promos); ?>
+
+                                            <div class="carousel-item active">
+
+                                                <h3 class="text-center m-b-5 text-danger"> {{ strtoupper($promos[0]['promo_name']) }}</h3>
+                                                <h6 class="text-center m-b-20  text-white"><br></h6>
+                                                <div class="row">
+
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <p class="text-center text-danger"><b>MOST RECENT DAY</b></p>
+                                                        <div class="card">
+                                                            <div class="stat-container">
+                                                                <div class="col-12 row justify-content-center">
+                                                                    <div class="stat-tile">
+                                                                        <h2 class="text-center stat_count" id="" >{{ $promos[0]['recent_day']['ret_c'] }}</h2>
+                                                                        <p class="text-center stat_lable" id="">RETURNING CUSTOMERS</p>
+                                                                    </div>
+                                                                    <div class="stat-tile">
+                                                                        <h2 class="text-center stat_count" id="" >{{ $promos[0]['recent_day']['loy_c'] }}</h2>
+                                                                        <p class="text-center stat_lable" id="">LOYALTY  COUPONS ISSUED</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 row justify-content-center">
+                                                                    <div class="col-12 stat-larg-tile">
+                                                                        <p class="text-center stat_lable" id="">LOYALTY COUPONS BROUGHT A TOTAL OF</p>
+                                                                        <h2 class="text-center stat_count" id="" >{{ $promos[0]['recent_day']['revenue'] }}</h2>
+                                                                        <p class="text-center stat_lable" id="">REVENUE ON THE MOST RECENT DAY</p>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <p class="text-center text-danger"><b>LAST 7 DAYS</b></p>
+                                                        <div class="card">
+                                                            <div class="stat-container">
+                                                                <div class="col-12 row justify-content-center">
+                                                                    <div class="stat-tile">
+                                                                        <h2 class="text-center stat_count" id="" >{{ $promos[0]['7_day']['ret_c'] }}</h2>
+                                                                        <p class="text-center stat_lable" id="">RETURNING CUSTOMERS</p>
+                                                                    </div>
+                                                                    <div class="stat-tile">
+                                                                        <h2 class="text-center stat_count" id="" >{{ $promos[0]['7_day']['loy_c'] }}</h2>
+                                                                        <p class="text-center stat_lable" id="">LOYALTY  COUPONS ISSUED</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 row justify-content-center">
+                                                                    <div class="col-12 stat-larg-tile">
+                                                                        <p class="text-center stat_lable" id="">LOYALTY COUPONS BROUGHT A TOTAL OF</p>
+                                                                        <h2 class="text-center stat_count" id="" >{{ $promos[0]['7_day']['revenue'] }}</h2>
+                                                                        <p class="text-center stat_lable" id="">REVENUE IN LAST 7 DAYS</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <p class="text-center text-danger"><b>LAST 30 DAYS</b></p>
+                                                        <div class="card">
+                                                            <div class="stat-container">
+                                                                <div class="col-12 row justify-content-center">
+                                                                    <div class="stat-tile">
+                                                                        <h2 class="text-center stat_count" id="" >{{ $promos[0]['30_day']['ret_c'] }}</h2>
+                                                                        <p class="text-center stat_lable" id="">RETURNING CUSTOMERS</p>
+                                                                    </div>
+                                                                    <div class="stat-tile">
+                                                                        <h2 class="text-center stat_count" id="" >{{ $promos[0]['30_day']['loy_c'] }}</h2>
+                                                                        <p class="text-center stat_lable" id="">LOYALTY  COUPONS ISSUED</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 row justify-content-center">
+                                                                    <div class="col-12 stat-larg-tile">
+                                                                        <p class="text-center stat_lable" id="">LOYALTY COUPONS BROUGHT A TOTAL OF</p>
+                                                                        <h2 class="text-center stat_count" id="" >{{ $promos[0]['30_day']['revenue'] }}</h2>
+                                                                        <p class="text-center stat_lable" id="">REVENUE IN LAST 30 DAYS</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <p class="text-center text-danger"><b>ALL TIME</b></p>
+                                                        <div class="card">
+                                                            <div class="stat-container">
+                                                                <div class="col-12 row justify-content-center">
+                                                                    <div class="stat-tile">
+                                                                        <h2 class="text-center stat_count" id="" >{{ $promos[0]['all']['ret_c'] }}</h2>
+                                                                        <p class="text-center stat_lable" id="">RETURNING CUSTOMERS</p>
+                                                                    </div>
+                                                                    <div class="stat-tile">
+                                                                        <h2 class="text-center stat_count" id="" >{{ $promos[0]['all']['loy_c'] }}</h2>
+                                                                        <p class="text-center stat_lable" id="">LOYALTY  COUPONS ISSUED</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 row justify-content-center">
+                                                                    <div class="col-12 stat-larg-tile">
+                                                                        <p class="text-center stat_lable" id="">LOYALTY COUPONS BROUGHT A TOTAL OF</p>
+                                                                        <h2 class="text-center stat_count" id="" >{{ $promos[0]['all']['revenue'] }}</h2>
+                                                                        <p class="text-center stat_lable" id="">REVENUE SINCE STARTING THE PROMO</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            @for($x = 1; $x < $promoCount; $x++)
+                                                <div class="carousel-item">
+
+                                                    <h3 class="text-center m-b-5 text-danger"> {{ strtoupper($promos[$x]['promo_name']) }}</h3>
+                                                <h6 class="text-center m-b-20  text-white"><br></h6>
+                                                    <div class="row">
+
+                                                        <div class="col-sm-6 col-md-6 col-lg-3">
+                                                            <p class="text-center text-danger"><b>MOST RECENT DAY</b></p>
+                                                            <div class="card">
+                                                                <div class="stat-container">
+                                                                    <div class="col-12 row justify-content-center">
+                                                                        <div class="stat-tile">
+                                                                            <h2 class="text-center stat_count" id="" >{{ $promos[$x]['recent_day']['ret_c'] }}</h2>
+                                                                            <p class="text-center stat_lable" id="">RETURNING CUSTOMERS</p>
+                                                                        </div>
+                                                                        <div class="stat-tile">
+                                                                            <h2 class="text-center stat_count" id="" >{{ $promos[$x]['recent_day']['loy_c'] }}</h2>
+                                                                            <p class="text-center stat_lable" id="">LOYALTY  COUPONS ISSUED</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 row justify-content-center">
+                                                                        <div class="col-12 stat-larg-tile">
+                                                                            <p class="text-center stat_lable" id="">LOYALTY COUPONS BROUGHT A TOTAL OF</p>
+                                                                            <h2 class="text-center stat_count" id="" >{{ $promos[$x]['recent_day']['revenue'] }}</h2>
+                                                                            <p class="text-center stat_lable" id="">REVENUE ON THE MOST RECENT DAY</p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-3">
+                                                            <p class="text-center text-danger"><b>LAST 7 DAYS</b></p>
+                                                            <div class="card">
+                                                                <div class="stat-container">
+                                                                    <div class="col-12 row justify-content-center">
+                                                                        <div class="stat-tile">
+                                                                            <h2 class="text-center stat_count" id="" >{{ $promos[$x]['7_day']['ret_c'] }}</h2>
+                                                                            <p class="text-center stat_lable" id="">RETURNING CUSTOMERS</p>
+                                                                        </div>
+                                                                        <div class="stat-tile">
+                                                                            <h2 class="text-center stat_count" id="" >{{ $promos[$x]['7_day']['loy_c'] }}</h2>
+                                                                            <p class="text-center stat_lable" id="">LOYALTY  COUPONS ISSUED</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 row justify-content-center">
+                                                                        <div class="col-12 stat-larg-tile">
+                                                                            <p class="text-center stat_lable" id="">LOYALTY COUPONS BROUGHT A TOTAL OF</p>
+                                                                            <h2 class="text-center stat_count" id="" >{{ $promos[$x]['7_day']['revenue'] }}</h2>
+                                                                            <p class="text-center stat_lable" id="">REVENUE IN LAST 7 DAYS</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-3">
+                                                            <p class="text-center text-danger"><b>LAST 30 DAYS</b></p>
+                                                            <div class="card">
+                                                                <div class="stat-container">
+                                                                    <div class="col-12 row justify-content-center">
+                                                                        <div class="stat-tile">
+                                                                            <h2 class="text-center stat_count" id="" >{{ $promos[$x]['30_day']['ret_c'] }}</h2>
+                                                                            <p class="text-center stat_lable" id="">RETURNING CUSTOMERS</p>
+                                                                        </div>
+                                                                        <div class="stat-tile">
+                                                                            <h2 class="text-center stat_count" id="" >{{ $promos[$x]['30_day']['loy_c'] }}</h2>
+                                                                            <p class="text-center stat_lable" id="">LOYALTY  COUPONS ISSUED</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 row justify-content-center">
+                                                                        <div class="col-12 stat-larg-tile">
+                                                                            <p class="text-center stat_lable" id="">LOYALTY COUPONS BROUGHT A TOTAL OF</p>
+                                                                            <h2 class="text-center stat_count" id="" >{{ $promos[$x]['30_day']['revenue'] }}</h2>
+                                                                            <p class="text-center stat_lable" id="">REVENUE IN LAST 30 DAYS</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-3">
+                                                            <p class="text-center text-danger"><b>ALL TIME</b></p>
+                                                            <div class="card">
+                                                                <div class="stat-container">
+                                                                    <div class="col-12 row justify-content-center">
+                                                                        <div class="stat-tile">
+                                                                            <h2 class="text-center stat_count" id="" >{{ $promos[$x]['all']['ret_c'] }}</h2>
+                                                                            <p class="text-center stat_lable" id="">RETURNING CUSTOMERS</p>
+                                                                        </div>
+                                                                        <div class="stat-tile">
+                                                                            <h2 class="text-center stat_count" id="" >{{ $promos[$x]['all']['loy_c'] }}</h2>
+                                                                            <p class="text-center stat_lable" id="">LOYALTY  COUPONS ISSUED</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 row justify-content-center">
+                                                                        <div class="col-12 stat-larg-tile">
+                                                                            <p class="text-center stat_lable" id="">LOYALTY COUPONS BROUGHT A TOTAL OF</p>
+                                                                            <h2 class="text-center stat_count" id="" >{{ $promos[$x]['all']['revenue'] }}</h2>
+                                                                            <p class="text-center stat_lable" id="">REVENUE SINCE STARTING THE PROMO</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+VE
+                                                    </div>
+
+                                                </div>
+                                            @endfor
+
+                                        </div>
+
+
+                                        <a class="carousel-control-next" href="#loyalty_slider_store" role="button" data-slide="next">
+                                        <a class="carousel-control-prev" href="#promo_slider_store" role="button" data-slide="prev">
+                                            <span> <img src="{{asset('resources/assets/custom/images/arrow_left.png')}}" style="width: 70px;" > </span>
+                                            <span class="sr-only">Prev</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#loyalty_slider_store" role="button" data-slide="next">
+                                            <span> <img src="{{asset('resources/assets/custom/images/arrow.png')}}" style="width: 70px;" > </span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                                @else
+                                    {{ 'You have No Promos.. Please create a Promo.. '}}
+
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -1041,11 +1320,56 @@
             $('.dropify').dropify();
 
             //$('#loyalty_coupon_c_1').prop('checked', true);
+            $('.cropit-preview').hide();
+            $('.crop_btn').hide();
+            $('.res_btn').hide();
+            $('.cropit-image-zoom-input').hide();
         });
 
         function cloased_tab(){
 //      set_stat_tile();
         }
+
+        $('#img_cropper_c_1').cropit();
+
+        function crop_image(page, id) {
+
+            var imageData = $('#img_cropper_' + page + '_' + id).cropit('export');
+            $('#cp_img_name_' + page + '_' + id).val(imageData);
+            // $('#image_' + page + '_' + id).attr('src', imageData);
+
+        }
+
+        function activate_cropper(page, id) {
+            $('#uploader_' + page + '_' + id).hide();
+            $('#cropper_prev_' + page + '_' + id).show();
+            $('#ranger_' + page + '_' + id).show();
+            $('#crop_btn_' + page + '_' + id).show();
+            $('#rem_' + page + '_' + id).show();
+        }
+
+        function clear_cropper(page, id) {
+            $('#uploader_' + page + '_' + id).show();
+            $('#cropper_prev_' + page + '_' + id).hide();
+            $('#ranger_' + page + '_' + id).hide();
+            $('#crop_btn_' + page + '_' + id).hide();
+            $('#rem_' + page + '_' + id).hide();
+
+            $('#cp_img_name_' + page + '_' + id).val('');
+            // $('#image_' + page + '_' + id).attr('src',"{{ asset('resources/assets/user/images/imageplaceholder.png') }}" );
+        }
+
+        $('#coupon_photo_c_1').on('change', function() {
+            activate_cropper('c', 1);
+        });
+
+        $('#crop_btn_c_1').on('click',function () {
+            crop_image('c', 1);
+        });
+
+        $('#rem_c_1').on('click', function() {
+            clear_cropper('c', 1);
+        });
 
         $(".radio").change(function() {
             $(".radio").prop('checked', false);

@@ -40,7 +40,7 @@ class UserPromoController extends Controller
         $this->middleware('user');
     }
 
-    public function index() {
+    public function index(Request $request) {
         $view = view('user.promos.promo');
         $view->title = 'CouponCam::Promos';
 
@@ -50,13 +50,33 @@ class UserPromoController extends Controller
             ->orderBY('places.updated_at', 'DESC')
             ->get();
 
-        $view->activePromos = Promo::join('promo_locations', 'promo_locations.promo_id','=','promos.promo_id')
+        $activePromos = Promo::join('promo_locations', 'promo_locations.promo_id','=','promos.promo_id')
             ->join('store_user', 'store_user.place_id','=','promo_locations.store_id')
             ->where(['store_user.user_id' => Auth::id(), 'promo_locations.status' => 1, 'promos.status' => 1, 'promos.used' => '1'])
             ->select('promos.*')
             ->distinct()
             ->orderBY('promos.updated_at', 'DESC')
             ->get();
+
+        $view->activePromos = $activePromos;
+
+        $has_promos = 0;
+
+        if(sizeof($activePromos) > 0) {
+            $has_promos = 1;
+        }
+
+        $store_id_new = 0;
+        if(isset($request['store'])) {
+            $store_id_new = $request['store'];
+        }
+
+        if($store_id_new > 0) {
+            $has_promos = 0;
+        }
+        $view->new_store_id = $store_id_new;
+
+        $view->has_promos = $has_promos;
 
         $view->puasedPromos = Promo::join('promo_locations', 'promo_locations.promo_id','=','promos.promo_id')
             ->join('store_user', 'store_user.place_id','=','promo_locations.store_id')
@@ -82,61 +102,61 @@ class UserPromoController extends Controller
 
         $save_path = 'resources/assets/qr_codes/';
         $file_name = 'qr'.date('YmdHis').rand(0, 10000).".png";
-        $content = rand(0, 100000000).date('YmdHis');
+        $content = 'qr_code_' . rand(0, 100000000).date('YmdHis');
 
-        $service_url = 'https://qrcode-monkey.p.mashape.com/qr/custom';
-
-        $curl = curl_init($service_url);
-        $curl_post_data = array(
-            'data' => $content,
-            'config' => array(
-                "body" => "circle",
-                "eye" => "frame12",
-                "eyeBall" => "ball14",
-                "erf1" => [],
-                "erf2" => [],
-                "erf3" => [],
-                "brf1" => [],
-                "brf2" => [],
-                "brf3" => [],
-                "bodyColor" => "#e80602",
-                "bgColor" => "#fff",
-                "eye1Color" => "#e80602",
-                "eye2Color" => "#e80602",
-                "eye3Color" => "#e80602",
-                "eyeBall1Color" => "#e80602",
-                "eyeBall2Color" => "#e80602",
-                "eyeBall3Color" => "#e80602",
-                "gradientColor1" => "",
-                "gradientColor2" => "",
-                "gradientType" => "linear",
-                "gradientOnEyes" => "false",
-                "logo" => "http://login.couponcam.com/resources/assets/custom/images/logo-min.png"
-            ),
-            'size' => 300,
-            'download' => 'false',
-            'file' => 'png',
-        );
-
-        $post_data = json_encode($curl_post_data);
-
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-            'X-Mashape-Key: yxBNWNKhItmshiOORWMsvumwIm8tp1AMo56jsnzJ7zEWZ1F3y9',
-            'Content-Type: application/json',
-            'Accept: application/json'
-        ));
-
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
-
-        $curl_response = curl_exec($curl);
-
-
-        $decoded = base64_encode($curl_response);
-
-        $image_qr = new Image('data:image/png;base64,'.$decoded);
-        $image_qr->save($save_path.$file_name,IMAGETYPE_PNG);
+//        $service_url = 'https://qrcode-monkey.p.mashape.com/qr/custom';
+//
+//        $curl = curl_init($service_url);
+//        $curl_post_data = array(
+//            'data' => $content,
+//            'config' => array(
+//                "body" => "circle",
+//                "eye" => "frame12",
+//                "eyeBall" => "ball14",
+//                "erf1" => [],
+//                "erf2" => [],
+//                "erf3" => [],
+//                "brf1" => [],
+//                "brf2" => [],
+//                "brf3" => [],
+//                "bodyColor" => "#e80602",
+//                "bgColor" => "#fff",
+//                "eye1Color" => "#e80602",
+//                "eye2Color" => "#e80602",
+//                "eye3Color" => "#e80602",
+//                "eyeBall1Color" => "#e80602",
+//                "eyeBall2Color" => "#e80602",
+//                "eyeBall3Color" => "#e80602",
+//                "gradientColor1" => "",
+//                "gradientColor2" => "",
+//                "gradientType" => "linear",
+//                "gradientOnEyes" => "false",
+//                "logo" => "http://login.couponcam.com/resources/assets/custom/images/logo-min.png"
+//            ),
+//            'size' => 300,
+//            'download' => 'false',
+//            'file' => 'png',
+//        );
+//
+//        $post_data = json_encode($curl_post_data);
+//
+//        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+//            'X-Mashape-Key: yxBNWNKhItmshiOORWMsvumwIm8tp1AMo56jsnzJ7zEWZ1F3y9',
+//            'Content-Type: application/json',
+//            'Accept: application/json'
+//        ));
+//
+//        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+//        curl_setopt($curl, CURLOPT_POST, true);
+//        curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
+//
+//        $curl_response = curl_exec($curl);
+//
+//
+//        $decoded = base64_encode($curl_response);
+//
+//        $image_qr = new Image('data:image/png;base64,'.$decoded);
+//        $image_qr->save($save_path.$file_name,IMAGETYPE_PNG);
 
 
 
@@ -146,7 +166,7 @@ class UserPromoController extends Controller
         // new qr for new promo
 
 
-//        QrCode::format('png')->size(500)->color(232,6,2)->merge('resources/assets/custom/images/logo-min.png', .3, true)->errorCorrection('H')->generate($content, $save_path.$file_name);
+        QrCode::format('png')->size(500)->color(232,6,2)->merge('resources/assets/custom/images/logo-min.png', .3, true)->errorCorrection('H')->generate($content, $save_path.$file_name);
 
         $return = array('qr_content' => $content,'qr_image' => $file_name);
 
@@ -195,10 +215,10 @@ class UserPromoController extends Controller
         $start_time = Converter::get_server_time_by_local_time($get_start_time, $get_offset, $server_offset);
         $end_time = Converter::get_server_time_by_local_time($get_end_time, $get_offset, $server_offset);
 
-
-        if(isset($request->advance_warning)){
-            $advance_warn = 1;
-        }
+        $advance_warn = 1;
+        // if(isset($request->advance_warning)){
+        //     $advance_warn = 1;
+        // }
 
         $promo_repete = $request->repeat_promo_1;
         $promo_repeate_val = "";
@@ -224,7 +244,7 @@ class UserPromoController extends Controller
             'end_at_local' => gmdate("H:i:s", strtotime($get_end_time)),
             'promo_length' => $promo_length,
             'advance_warning' => $advance_warn,
-            'main_clue' => $request->promo_description,
+            'main_clue' => '',
             'promo_repeat' => $promo_repete,
             'promo_repeat_values' => $promo_repeate_val,
             'internal_promo'  => 1,
@@ -278,7 +298,7 @@ class UserPromoController extends Controller
 
             PromoLocations::insert($store_locations);
 
-            return redirect('user/coupons')->with(['success' => 'Promo Created successfully']);
+            return redirect('user/coupons?promo='. $promo_id)->with(['success' => 'Promo Created successfully']);
         }  else {
             return back()->with(['error' => 'Promo failed to create']);
         }
@@ -328,9 +348,10 @@ class UserPromoController extends Controller
             $end_time = Converter::get_server_time_by_local_time($get_end_time, $get_offset, $server_offset);
 
 
-            if(isset($request->advance_warning)){
-                $advance_warn = 1;
-            }
+            $advance_warn = 1;
+            // if(isset($request->advance_warning)){
+            //     $advance_warn = 1;
+            // }
 
             $promo_repete = $request->repeat_promo_2;
             $promo_repeate_val = "";
@@ -365,6 +386,56 @@ class UserPromoController extends Controller
 //                    'qr_image' => $request->promo_qr_image,
                     'updated_at' => date('Y-m-d H:i:s')
                 ]);
+
+
+
+            // update promo locations
+
+            $store_locations = [];
+
+            $stores = json_encode($request->store_ids_2);
+
+            $remove = array("[","]","\"");
+            $stm = trim(str_replace($remove, " ", $stores));
+
+            $store_list = explode(',',$stm);
+
+            if(sizeof($store_list) > 0 ) {
+                // get promo locations old
+                $up_promo_id = $request->formid;
+
+                PromoLocations::where(['promo_id' => $up_promo_id])->delete();
+
+                for($n = 0; $n < sizeof($store_list); $n++){
+
+                    $stId = (int)$store_list[$n];
+
+                    $is_outside = $request->get('store_loc_'.$stId);
+                      echo $stId."-".$is_outside."<br>";
+
+                    if($is_outside == 1){
+                        $lat = $request->get('store_lat_'.$stId);
+                        $lng = $request->get('store_lng_'.$stId);
+                        $xxx  = '1';
+                    }else{
+                        $inst = Store::where("place_id",$stId)->first();
+                        $lat = $inst->latitude;
+                        $lng = $inst->longitude;
+                        $xxx  = '0';
+                    }
+
+                    $store_locations[] = [
+                        'promo_id' => $up_promo_id,
+                        'store_id' => $stId,
+                        'lat_code' => $lat,
+                        'lng_code' => $lng,
+                        'is_outside' => $xxx
+                    ];
+                }
+
+                PromoLocations::insert($store_locations);
+            }
+
 
             if($promo_id){
                 return redirect('user/promos')->with(['success' => 'Promo Updated successfully']);
@@ -435,6 +506,11 @@ class UserPromoController extends Controller
         $stores = explode(",", $list2);
 
         $promo_details[0]->place_id = $stores;
+
+        // get promo_locations
+        $pr_locs = PromoLocations::where(['promo_id' => $id])->get();
+
+        $promo_details[0]->locations = $pr_locs;
 
         if(sizeof($promo_details) > 0) {
 
@@ -541,6 +617,26 @@ class UserPromoController extends Controller
 
         return($promos);
     }
+
+    public function get_active_promos() {
+        $promos = Promo::join('promo_locations', 'promo_locations.promo_id', '=', 'promos.promo_id')
+            ->select('promos.promo_id','promos.promo_name', 'promo_locations.*')
+            ->where(['promos.status' => '1', 'promos.used' => '1'])
+            ->get();
+
+        return ($promos);
+    }
+
+     public function get_inactive_promos() {
+        $promos = Promo::join('promo_locations', 'promo_locations.promo_id', '=', 'promos.promo_id')
+            ->select('promos.promo_id','promos.promo_name', 'promo_locations.*')
+            ->where(['promos.status' => '0', 'promos.used' => '1'])
+            ->get();
+
+        return ($promos);
+    }
+
+
 
 
 }

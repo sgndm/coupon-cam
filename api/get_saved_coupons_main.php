@@ -53,13 +53,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     // return nearby geo coupons
-    $apiResponse['response_data']['geo_coupons'] = $geo_coupons;
+    // $apiResponse['response_data']['geo_coupons'] = $geo_coupons;
 
     // end of nearby geo coupons
 
     // geo coupons saved
     // get saved geo coupons | order by distance
-    $getReSaved = "SELECT `retarget_saved`.*,`retarget_saved`.`place_id` as store_id,`places`.`contact_name`,(((acos(sin(($latitude*pi()/180)) * sin((places.latitude*pi()/180))
+    $getReSaved = "SELECT `retarget_saved`.*, `retarget_saved`.`status` as scan_coupon_status,`retarget_saved`.`place_id` as store_id,`places`.* ,(((acos(sin(($latitude*pi()/180)) * sin((places.latitude*pi()/180))
             + cos(($latitude*pi()/180)) * cos((places.latitude*pi()/180))
             * cos((($longitude - places.longitude)*pi()/180))))
             * 180/pi())*60*1.1515*1.609344)
@@ -68,7 +68,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $exGetReSvd = $dbh->query($getReSaved);
     $retargetSaved = $exGetReSvd->fetchAll(PDO::FETCH_OBJ);
 
-    $apiResponse['response_data']['geo_coupon_saved'] = $retargetSaved;
+//    $apiResponse['response_data']['geo_coupon_saved'] = $retargetSaved;
     // end for geo coupons saved
 
     // output saved
@@ -114,6 +114,33 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $rows2 = $res2->rowCount();
                 $lat_lng = $res2->fetchAll(PDO::FETCH_OBJ);
 
+                // get store country 
+                $sql3 = "SELECT * FROM `places` WHERE `place_id`=" . $store_id;
+                $res3 = $dbh->query($sql3);
+                $rows3 = $res3->rowCount();
+                $get_country = $res3->fetchAll(PDO::FETCH_OBJ);
+
+                $country_short = $get_country[0]->country_short;
+
+                $curr = "$";
+                if($country_short == "GB") {
+                    $curr = "£";
+                } 
+                else if($country_short == "NZ") {
+                    $curr = "$";
+                }
+                else if($country_short == "CA") {
+                    $curr = "C$";
+                }
+                else if($country_short == "AU") {
+                    $curr = "A$";
+                }
+                else {
+                    $curr = "$";
+                }
+
+                $coupons->currency = $curr;
+
                 // store lat long
                 $lat = $lat_lng[0]->lat_code;
                 $lng = $lat_lng[0]->lng_code;
@@ -126,6 +153,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $coupons->qr_code = $t_store_qr_code;
                 $coupons->qr_image = $t_store_qr_image;
                 $coupons->distance = $t_store_distance;
+                $coupons->is_retarget = 0;
 
                 $out_saved[] = $coupons;
 
@@ -135,8 +163,61 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     }
 
+   
+
+   foreach($retargetSaved as $coupon) {
+
+        $r_store_id = $coupon->store_id;
+
+       // get store country
+       $sql3 = "SELECT * FROM `places` WHERE `place_id`=" . $r_store_id;
+       $res3 = $dbh->query($sql3);
+       $rows3 = $res3->rowCount();
+       $get_country = $res3->fetchAll(PDO::FETCH_OBJ);
+
+       $r_country_short = $get_country[0]->country_short;
+
+       $r_curr = "$";
+       if($r_country_short == "GB") {
+           $r_curr = "£";
+       }
+       else if($r_country_short == "NZ") {
+           $r_curr = "$";
+       }
+       else if($r_country_short == "CA") {
+           $r_curr = "C$";
+       }
+       else if($r_country_short == "AU") {
+           $r_curr = "A$";
+       }
+       else {
+           $r_curr = "$";
+       }
+
+        $coupon->is_retarget = 1;
+        $coupon->scan_coupon_id = $coupon->coupon_id;
+        $coupon->is_bonus = 0;
+        $coupon->used_times = 0;
+        $coupon->total_used_times = 0;
+        $coupon->has_extended = 0;
+        $coupon->is_shared = 0;
+        $coupon->promo_name = "";
+        $coupon->coupon_title = $coupon->coupon_name;
+        $coupon->coupon_information = $coupon->coupon_info;
+        $coupon->terms_conditions = $coupon->coupon_details;
+        $coupon->coupon_model = "";
+        $coupon->coupon_marker = "";
+        $coupon->coupon_level = 1;
+        $coupon->is_loyalty = 0;
+        $coupon->loyalty_count = 0;
+        $coupon->currency = $r_curr;
+        $coupon->min_spend = 0;
+        $coupon->store_name = $coupon->contact_name;
+
+    $out_saved[] = $coupon;
+   }
+
     // out put saved
-//    $apiResponse['response_data']['saved_coupons'] = $out_saved;
     $apiResponse['response_data'] = $out_saved;
 
     // end of saved coupons

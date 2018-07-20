@@ -84,24 +84,10 @@ class Converter {
         return $return;
     }
 
-
-    public function get_time_zone($latitude, $longitude){
-
-        $api_key = 'AIzaSyBAGhaRi_7Fpl9z49bzX-BRyAt0h00mHAE';
-
-        $url = file_get_contents('https://maps.googleapis.com/maps/api/timezone/json?location=' . $latitude . ',' . $longitude . '&timestamp=1331766000&key=' . $api_key);
-        $json = json_decode($url, true);
-
-        $dayLightSaving = $json['dstOffset'];
-        $offset = $json['rawOffset'];
-
-        return(array('dayLightSaving' => $dayLightSaving, 'timeOffset' => $offset));
-    }
-
-    public function get_server_time(){
-
-        $ip = '35.178.153.168';
-
+    public function get_server_location(){
+        
+        $ip = '18.130.82.43';
+        
         $url = file_get_contents('https://ipapi.co/' . $ip . '/json/');
         $json = json_decode($url, true);
 
@@ -109,6 +95,30 @@ class Converter {
         $longitude = $json['longitude'];
 
         return (array('latitude' => $latitude,'longitude' => $longitude));
+    }
+    
+    public function get_time_zone($latitude, $longitude){
+        
+        $api_key = 'AIzaSyBAGhaRi_7Fpl9z49bzX-BRyAt0h00mHAE';
+    
+        $url = file_get_contents('https://maps.googleapis.com/maps/api/timezone/json?location=' . $latitude . ',' . $longitude . '&timestamp=1524138098&key=' . $api_key);
+        $json = json_decode($url, true);
+    
+        $dayLightSaving = $json['dstOffset'];
+        $offset = $json['rawOffset'];
+        
+        $return = ($dayLightSaving + $offset);
+    
+        //return(array('dayLightSaving' => $dayLightSaving, 'timeOffset' => $offset));
+        return $return;
+    }
+
+    public function get_server_time_by_store_time($store_time, $store_offset, $server_offset) {
+        $temp_server_time = ($store_time + $server_offset - $store_offset);
+        
+        $server_time = date('Y-m-d H:i:s', $temp_server_time);
+
+        return($server_time);
     }
 
 }

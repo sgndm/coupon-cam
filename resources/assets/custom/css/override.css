@@ -60,11 +60,16 @@ body {
 
 /* carousel */
 .carousel-inner{
-    width: 93%;
+    left: 6%;
+    width: 88%;
 }
 
 .carousel .carousel-control-next{
-    width: 7%;
+    width: 6%;
+    background-color: transparent;
+}
+.carousel .carousel-control-prev{
+    width: 6%;
     background-color: transparent;
 }
 

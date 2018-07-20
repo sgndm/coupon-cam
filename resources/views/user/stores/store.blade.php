@@ -14,26 +14,50 @@
     <div class="col-md-12">
         <div class="card">
             <ul class="nav nav-tabs customtab" role="tablist">
-                @if($is_member == 0)
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#tab-pane-1" role="tab" onclick="create_tab();">
-                        <span class="hidden-sm-up"><i class="ti-user"></i></span>
-                        <span class="hidden-xs-down">CREATE STORE</span>
-                    </a>
-                </li>
+
+                @if($has_stores == 0)
+                    @if($is_member == 0)
+                    <li class="nav-item" onclick="generate_qr_code(1);">
+                        <a class="nav-link active" data-toggle="tab" href="#tab-pane-1" role="tab" onclick="create_tab();">
+                            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                            <span class="hidden-xs-down">CREATE STORE</span>
+                        </a>
+                    </li>
+                    @endif
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab-pane-2" role="tab" onclick="open_tab();">
+                            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                            <span class="hidden-xs-down">ACTIVE STORES</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab-pane-3" role="tab" onclick="cloased_tab();">
+                            <span class="hidden-sm-up"><i class="ti-email"></i></span>
+                            <span class="hidden-xs-down">INACTIVE STORES</span>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#tab-pane-2" role="tab" onclick="open_tab();">
+                            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                            <span class="hidden-xs-down">ACTIVE STORES</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab-pane-3" role="tab" onclick="cloased_tab();">
+                            <span class="hidden-sm-up"><i class="ti-email"></i></span>
+                            <span class="hidden-xs-down">INACTIVE STORES</span>
+                        </a>
+                    </li>
+                    @if($is_member == 0)
+                    <li class="nav-item" onclick="generate_qr_code(1);">
+                        <a class="nav-link" data-toggle="tab" href="#tab-pane-1" role="tab" onclick="create_tab();">
+                            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                            <span class="hidden-xs-down">CREATE STORE</span>
+                        </a>
+                    </li>
+                    @endif
                 @endif
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#tab-pane-2" role="tab" onclick="open_tab();">
-                        <span class="hidden-sm-up"><i class="ti-user"></i></span>
-                        <span class="hidden-xs-down">ACTIVE STORES</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#tab-pane-3" role="tab" onclick="cloased_tab();">
-                        <span class="hidden-sm-up"><i class="ti-email"></i></span>
-                        <span class="hidden-xs-down">INACTIVE STORES</span>
-                    </a>
-                </li>
                 <li class="nav-item">
                 </li>
                 <li class="nav-item">
@@ -55,7 +79,11 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 @if($is_member == 0)
+                @if($has_stores == 0)
                 <div class="tab-pane active p-20" id="tab-pane-1" role="tabpanel">
+                @else
+                <div class="tab-pane p-20" id="tab-pane-1" role="tabpanel">
+                @endif
 
                     <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/stores/create_store') }}" id="store_form_1">
                         {{ csrf_field() }}
@@ -70,12 +98,6 @@
                                             <label class="control-label">Store Name</label>
                                             <input type="text" id="store_name_1" name="store_name" class="form-control" placeholder="Enter Name" required oninput="error_hide('store_name_error_1');" >
                                             <h6 class="form-control-feedback text-danger" id="store_name_error_1"> </h6>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="control-label">Store Promo</label>
-                                            <input type="text" id="store_promo_1" name="store_promo" class="form-control" placeholder="Enter Promo" required oninput="error_hide('store_promo_error_1');" >
-                                            <h6 class="form-control-feedback text-danger" id="store_promo_error_1"> </h6>
                                         </div>
 
                                         <div class="form-group">
@@ -122,60 +144,23 @@
 
                                 <hr>
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Store Photo/Logo</label>
-                                            <input type="file" id="store_image_1" name="store_image" class="dropify" data-height="100" required onchange="error_hide('store_image_error_1');" accept=".png,.jpg,.jpeg">
-                                            <h6 class="form-control-feedback text-danger" id="store_image_error_1"> </h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Store AR Image</label>
-                                            <input type="file" id="store_ar_1" name="store_ar" class="dropify" data-height="100"  required onchange="error_hide('store_ar_error_1');" accept=".png">
-                                            <small class="form-control-feedback text-center">Please upload only pngs </small><br>
-                                            <h6 class="form-control-feedback text-danger" id="store_ar_error_1"> </h6>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Store Description</label>
-                                            <textarea id="store_description_1" name="store_description" class="form-control" required oninput="error_hide('store_description_error_1');"  ></textarea>
-                                            <h6 class="form-control-feedback text-danger" id="store_description_error_1"> </h6>
-                                        </div>
-                                    </div>
 
                                     <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <label class="control-label">Coupon Code</label>
-                                        <img src="" style="width:100%;" id="qr_code_prev_1">
+                                        <label class="control-label">Coupon Code</label><br>
+                                        <img src="" style="width:70%;" id="qr_code_prev_1">
                                         <input type="hidden" name="promo_qr_code" id="promo_qr_code_1" >
                                         <input type="hidden" name="promo_qr_image" id="promo_qr_image_1" >
 
                                         <h6 class="form-control-feedback text-danger" id="qr_code_error_1"> </h6>
-                                        <div class="row justify-content-center">
+                                        <div class="row">
                                             <button type="button" class="custom_btn crt_qr_code col-md-8" style="margin:2px;" onclick="generate_qr_code(1);error_hide('qr_code_error_1');" id="crt_qr_1"></button>
-
-                                        <!-- <a class="" style="margin:2px;" target="_blank" href="" id="print_code_1" >
-                                          <img src="{{url('resources/assets/custom/images/eedit_qr_code.png')}}" style="width:140px; height: 40px; cursor:pointer;" alt="">
-                                        </a> -->
 
                                             <button type="button" class="custom_btn view_qr_code col-md-8" style="margin:2px;" onclick="view_qr_code(1);" id="print_code_1"></button>
 
                                             <button type="button" class="custom_btn refresh_qr_code col-md-8" style="margin:2px;" onclick="refresh_qr(1);error_hide('qr_code_error_1');" id="refresh_qr_1"></button>
-                                            {{--<button type="submit" class="custom_btn save_c col-md-8"></button>--}}
                                         </div>
                                     </div>
 
-                                    <!-- <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Give Away Price</label><br>
-                                            <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="give_away" id="give_away_1" />
-                                        </div>
-                                    </div> -->
                                 </div>
 
                                 <hr>
@@ -203,20 +188,6 @@
                                             <div class="col-sm-12 col-md-8 col-lg-8 category_container left_scroll" >
                                                 <table class="category_table" id="category_table_1">
 
-
-                                                    {{--@foreach($categories as $key => $category)
-
-                                                        <tr>
-                                                            <td style="width:5%;">&nbsp;</td>
-                                                            <td style="width:93%;">{{$category->category}}</td>
-                                                            <td style="width:2%;">
-                                                                <label class="btn-container">
-                                                                    <input type="checkbox" value="{{ $category->id }}" id="category" name="category[]">
-                                                                    <span class="checkmark"></span>
-                                                                </label>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach--}}
                                                 </table>
 
                                             </div>
@@ -240,7 +211,13 @@
                         </div>
                     </form>
                 </div>
+
+                @if($has_stores == 0)
                 <div class="tab-pane p-20" id="tab-pane-2" role="tabpanel">
+                @else
+                <div class="tab-pane active p-20" id="tab-pane-2" role="tabpanel">
+                @endif
+
                 @else
                 <div class="tab-pane active p-20" id="tab-pane-2" role="tabpanel">
                 @endif
@@ -275,10 +252,25 @@
                                                 </table>
                                             </div>
                                             <h6 class="form-control-feedback text-danger" id="store_name_error_2"> </h6>
+
+                                            <div class="form-group">
+                                                <br>
+                                                <label class="control-label">Store Name</label>
+                                                <input type="text" id="store_name_2" name="store_name" class="form-control" placeholder="Enter Name" required oninput="error_hide('store_name_error_1');" >
+                                                <h6 class="form-control-feedback text-danger" id="store_name_error_1"> </h6>
+                                            </div>
                                         </div>
+
 
                                     </div>
                                     <div class="col-sm-12 col-md-12 col-lg-6">
+
+                                        <div class="form-group">
+                                            <label class="control-label">Store Address</label>
+                                            <input type="text" id="store_address_2" name="store_address" class="form-control" placeholder="Start Typing Full Address..."  oninput="error_hide('store_address_error_2');">
+                                            <h6 class="form-control-feedback text-danger" id="store_address_error_2"> </h6>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="control-label col-md-12 col-lg-12">Enter Full Address</label>
                                             <input type="text" id="street_num_2" name="street_num" class="form-control col-sm-12 col-md-3 col-lg-3" placeholder="Number" >
@@ -292,7 +284,7 @@
                                             <input type="hidden" id="store_lng_2" name="store_lng" required>
                                             <input type="hidden" id="country_short_2" name="country_short" required>
                                             <input type="hidden" id="formid_2" name="formid" required>
-                                            <input type="hidden" id="store_name_2" name="store_name" required>
+                                            {{--<input type="hidden" id="store_name_2" name="store_name" required>--}}
                                             <input type="hidden" id="store_image_hidden_2" name="store_image_hidden" required>
                                             <input type="hidden" id="store_ar_hidden_2" name="store_ar_hidden" required>
                                             <input type="hidden" id="store_marker_hidden_2" name="store_marker_hidden" required>
@@ -312,53 +304,15 @@
                                 </div>
 
                                 <hr>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Store Photo/Logo</label>
-                                            <input type="file" id="store_image_2" name="store_image" class="dropify" data-height="100" onchange="error_hide('store_image_error_2');" accept=".png,.jpg,.jpeg">
-                                            <h6 class="form-control-feedback text-danger" id="store_image_error_2"> </h6>
-                                        </div>
-                                        <div class="form-group">
-                                            <img id="store_img_prev_2" style="width: 100%; max-height: 150px;">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Store AR Image</label>
-                                            <input type="file" id="store_ar_2" name="store_ar" class="dropify" data-height="100" onchange="error_hide('store_ar_error_2');" accept=".png">
-                                            <small class="form-control-feedback text-center">Please upload only pngs </small><br>
-                                            <h6 class="form-control-feedback text-danger" id="store_ar_error_2"> </h6>
-                                        </div>
-                                        <div class="form-group">
-                                            <img id="store_ar_prev_2" style="width: 100%; max-height: 150px;">
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <hr>
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Store Promo</label>
-                                            <textarea id="store_promo_2" name="store_promo" class="form-control" required oninput="error_hide('store_promo_error_2');" ></textarea>
-                                            <h6 class="form-control-feedback text-danger" id="store_promo_error_2"> </h6>
-                                        </div>
-                                    </div>
 
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Store Description</label>
-                                            <textarea id="store_description_2" name="store_description" class="form-control" required oninput="error_hide('store_description_error_2');" ></textarea>
-                                            <h6 class="form-control-feedback text-danger" id="store_description_error_2"> </h6>
-                                        </div>
-                                    </div>
 
                                     <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <label class="control-label">Coupon Code</label>
-                                        <img src="" style="width:100%;" id="qr_code_prev_2">
+                                        <label class="control-label">Coupon Code</label><br>
+                                        <img src="" style="width:70%;" id="qr_code_prev_2">
                                         <input type="hidden" name="promo_qr_code" id="promo_qr_code_2" >
                                         <input type="hidden" name="promo_qr_image" id="promo_qr_image_2" >
 
@@ -372,12 +326,7 @@
 
                                         </div>
                                     </div>
-                                    <!-- <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Give Away Price</label><br>
-                                            <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="give_away" id="give_away_2" />
-                                        </div>
-                                    </div> -->
+
                                 </div>
 
                                 <hr>
@@ -403,19 +352,7 @@
                                             <label class="control-label">Select Relevant Category</label>
                                             <div class="col-sm-12 col-md-8 col-lg-8 category_container left_scroll" >
                                                 <table class="category_table" id="category_table_2">
-                                                    {{--@foreach($categories as $category)
 
-                                                        <tr>
-                                                            <td style="width:5%;">&nbsp;</td>
-                                                            <td style="width:93%;">{{$category->category}}</td>
-                                                            <td style="width:2%;">
-                                                                <label class="btn-container">
-                                                                    <input type="checkbox" value="{{ $category->id }}" id="category_2{{ $category->id }}" name="category[]" class="cat_check">
-                                                                    <span class="checkmark"></span>
-                                                                </label>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach--}}
                                                 </table>
                                             </div>
                                             <h6 class="form-control-feedback text-danger" id="category_error_2"> </h6>
@@ -423,7 +360,7 @@
 
                                         <div class="form-group">
                                             <button type="button" name="update_store" class="col-md-8 custom_btn up_store" onclick="validate_crt(2);"></button>
-                                            <button type="submit" name="close_store" class="col-md-8 custom_btn cls_store"></button>
+                                            <button type="submit" onclick="beforeSubmit();" name="close_store" class="col-md-8 custom_btn cls_store"></button>
                                         </div>
                                     </div>
 
@@ -517,27 +454,15 @@
                                             <label class="control-label">Select Relevant Category</label>
                                             <div class="col-sm-12 col-md-8 col-lg-8 category_container left_scroll">
                                                 <table class="category_table" id="category_table_3">
-                                                    {{--@foreach($categories as $category)
 
-                                                        <tr>
-                                                            <td style="width:5%;">&nbsp;</td>
-                                                            <td style="width:93%;">{{$category->category}}</td>
-                                                            <td style="width:2%;">
-                                                                <label class="btn-container">
-                                                                    <input type="checkbox" value="{{ $category->id }}" id="category_3{{ $category->id }}" name="category[]" class="cat_check">
-                                                                    <span class="checkmark"></span>
-                                                                </label>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach--}}
                                                 </table>
                                             </div>
 
                                         </div>
 
                                         <div class="form-group">
-                                            <button type="submit" name="reopen_store" class="col-md-8 custom_btn reop_store"></button>
-                                            <button type="submit" name="delete_store" class="col-md-8 custom_btn del_store"></button>
+                                            <button type="submit" onclick="beforeSubmit();" name="reopen_store" class="col-md-8 custom_btn reop_store"></button>
+                                            <button type="submit" onclick="beforeSubmit();" name="delete_store" class="col-md-8 custom_btn del_store"></button>
                                         </div>
                                     </div>
 
@@ -580,23 +505,28 @@
 @section('custom_js')
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQOQYd6y3PeucI2ajI2hXzcPTXVwlGfgs&libraries=places"></script>
     <script>
+        var has_stores = {{ $has_stores }};
         var map;
         var marker;
         var infowindow = new google.maps.InfoWindow();
         var Markers = new Array();
 
         $(document).ready(function(){
-            load_map(1);
+
+            if(has_stores == 1) {
+                open_tab();
+            } else {
+                create_tab();
+            }
+
+
             $('.dropify').dropify();
 
-            $('#crt_qr_1').show();
-            $('#print_code_1').hide();
-            $('#refresh_qr_1').hide();
         });
 
         function create_tab() {
             load_map(1);
-            $('#crt_qr_1').show();
+            $('#crt_qr_1').hide();
             $('#print_code_1').hide();
             $('#refresh_qr_1').hide();
         }
@@ -615,10 +545,10 @@
         }
 
         function mapInit(id){
-            var latlng = new google.maps.LatLng(37.8271784,-122.2913078);
+            var latlng = new google.maps.LatLng(37.794357,-122.5607304);
             map = new google.maps.Map(document.getElementById('map'+id), {
                 center: latlng,
-                zoom: 13
+                zoom: 10
             });
             marker = new google.maps.Marker({
                 map: map,
@@ -630,6 +560,7 @@
             Markers.push(marker);
 
             get_address();
+            get_address2();
             drag_marker();
         }
 
@@ -674,7 +605,7 @@
                 var longitude = marker.getPosition().lng();
                 var full_address = place.formatted_address;
 
-//                console.log(full_address);
+                // console.log(full_address);
 
                 for(var k = 0; k < address.length; k++){
                     if(address[k]['types'].includes('street_number')){
@@ -701,6 +632,81 @@
 
 
                 bind_data_address(1,street_num,street_name,city,state,postal_code,country,latitude,longitude,full_address,country_short);
+
+                infowindow.setContent(place.formatted_address);
+                infowindow.open(map, marker);
+
+            });
+        }
+
+        function get_address2(){
+            var input = document.getElementById('store_address_2');
+            //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+            var geocoder = new google.maps.Geocoder();
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo('bounds', map);
+            var infowindow = new google.maps.InfoWindow();
+
+            autocomplete.addListener('place_changed', function() {
+                infowindow.close();
+                marker.setVisible(false);
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    window.alert("Autocomplete's returned place contains no geometry");
+                    return;
+                }
+
+                // If the place has a geometry, then present it on a map.
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(17);
+                }
+
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+                var address = place.address_components;
+
+                var street_num = "";
+                var street_name = "";
+                var city = "";
+                var state = "";
+                var postal_code = "";
+                var country = "";
+                var country_short = "";
+                var latitude = marker.getPosition().lat();
+                var longitude = marker.getPosition().lng();
+                var full_address = place.formatted_address;
+
+                //console.log(full_address);
+
+                for(var k = 0; k < address.length; k++){
+                    if(address[k]['types'].includes('street_number')){
+                        street_num = address[k]['long_name'];
+                    }
+                    if(address[k]['types'].includes('route')){
+                        street_name = address[k]['long_name'];
+                    }
+                    if((address[k]['types'].includes('sublocality')) || (address[k]['types'].includes('sublocality_level_1')) || (address[k]['types'].includes('administrative_area_level_2'))){
+                        city = address[k]['long_name'];
+                    }
+                    if(address[k]['types'].includes('administrative_area_level_1')){
+                        state = address[k]['long_name'];
+                    }
+                    if(address[k]['types'].includes('postal_code')){
+                        postal_code = address[k]['long_name'];
+                    }
+                    if(address[k]['types'].includes('country')){
+                        country = address[k]['long_name'];
+                        country_short = address[k]['short_name'];
+
+                    }
+                }
+
+
+                bind_data_address(2,street_num,street_name,city,state,postal_code,country,latitude,longitude,full_address,country_short);
 
                 infowindow.setContent(place.formatted_address);
                 infowindow.open(map, marker);
@@ -768,6 +774,110 @@
             });
         }
 
+        function create_marker(lat, lng, place_id, id, info, zoom) {
+            var center = new google.maps.LatLng(lat,lng);
+
+            marker = new google.maps.Marker({
+                position: center,
+                map: map,
+                draggable: true,
+                anchorPoint: new google.maps.Point(0, -29)
+
+            });
+
+            infowindow = new google.maps.InfoWindow({
+                content: info
+            });
+
+            infowindow.open(map, marker);
+
+            Markers.push(marker);
+            //console.log(Markers);
+
+            google.maps.event.addListener(marker, 'click', (function(marker, x) {
+
+                return function() {
+                    get_store_details(place_id, id);
+                }
+
+            })(marker));
+
+            google.maps.event.addListener(marker, 'dragend', (function(marker,x) {
+
+                return function() {
+                    var geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+                        if (status === google.maps.GeocoderStatus.OK) {
+                            console.log(results[0]);
+                            if (results[0]) {
+
+                                var address = results[0]['address_components'];
+
+                                var street_num = "";
+                                var street_name = "";
+                                var city = "";
+                                var state = "";
+                                var postal_code = "";
+                                var country = "";
+                                var country_short = "";
+                                var latitude = marker.getPosition().lat();
+                                var longitude = marker.getPosition().lng();
+                                var full_address = results[0].formatted_address;
+
+                                for(var k = 0; k < address.length; k++){
+                                    if(address[k]['types'].includes('street_number')){
+                                        street_num = address[k]['long_name'];
+                                    }
+                                    if(address[k]['types'].includes('route')){
+                                        street_name = address[k]['long_name'];
+                                    }
+                                    if((address[k]['types'].includes('sublocality')) || (address[k]['types'].includes('sublocality_level_1')) || (address[k]['types'].includes('administrative_area_level_2'))){
+                                        city = address[k]['long_name'];
+                                    }
+                                    if(address[k]['types'].includes('administrative_area_level_1')){
+                                        state = address[k]['long_name'];
+                                    }
+                                    if(address[k]['types'].includes('postal_code')){
+                                        postal_code = address[k]['long_name'];
+                                    }
+                                    if(address[k]['types'].includes('country')){
+                                        country = address[k]['long_name'];
+                                        country_short = address[k]['short_name'];
+                                    }
+
+                                }
+
+
+                                bind_data_address(2,street_num,street_name,city,state,postal_code,country,latitude,longitude,full_address,country_short);
+
+                                infowindow.setContent(results[0].formatted_address);
+                                infowindow.open(map, marker);
+
+                            }else {
+                                window.alert('No results found');
+                            }
+                        } else {
+                            window.alert('Geocoder failed due to: ' + status);
+                        }
+                    });
+                }
+
+            })(marker));
+
+            map.setCenter(center);
+            map.setZoom(zoom);
+        }
+
+        function setMapOnAll(map) {
+            for (var i = 0; i < Markers.length; i++) {
+                Markers[i].setMap(map);
+            }
+        }
+
+        function clearMarkers() {
+            setMapOnAll(null);
+        }
+
         function bind_data_address(id,street_num,street_name,city,state,postal_code,country,latitude,longitude,full_address, country_short){
             $('#store_address_'+id).val('');
             $('#street_num_'+id).val('');
@@ -796,6 +906,8 @@
 
         function get_store_details(store_id, id){
 
+            clearMarkers();
+
             if($('#store'+id+store_id).prop('checked', false)){
                 $('.radio').prop('checked', false);
                 $('#store'+id+store_id).prop('checked', true);
@@ -821,8 +933,6 @@
                     $('#store_lat_'+id).val('');
                     $('#store_lng_'+id).val('');
                     $('#country_short_'+id).val('');
-                    $('#store_image_hidden_'+id).val('');
-                    $('#store_ar_hidden_'+id).val('');
                     $('#store_description_'+id).val('');
                     if(id == 2) {
                         $('#store_marker_hidden_2').val('');
@@ -834,31 +944,19 @@
 
                     $('#category_table_' + id).html('');
 
-                    // if($('#give_away_'+id).prop('checked', true)){
-                    //     $('#give_away_'+id).parent().find(".switchery").trigger("click");
-                    // }
-
-                    // unset images
-                    $('#store_img_prev_'+id).attr('src',"{{url('resources/assets/custom/images/no-image.png')}}");
-                    $('#store_ar_prev_'+id).attr('src',"{{url('resources/assets/custom/images/no-image.png')}}");
-
                     // uncheck all checkbox
                     $('.cat_check').prop('checked',false);
-//                    $('.checkRadio').prop('checked',false);
 
                     $("input:radio[name='radio']").each(function(i) {
                         this.checked = false;
                     });
 
-                    // show marker
-                    for(var i = 0; i < Markers.length; i++){
-                        if(Markers[i][0] == store_id){
-                            var tmpMark = Markers[i][2];
-                            var tmpCont = Markers[i][1];
-                            infowindow.setContent(tmpCont);
-                            infowindow.open(map, tmpMark);
-                        }
-                    }
+                    var st_lat = store[0]['latitude'];
+                    var st_lng = store[0]['longitude'];
+                    var st_info = store[0]['contact_name'];
+
+                    create_marker(st_lat, st_lng, store_id, id, st_info, 14);
+
                     //console.log(store);
                     $('#formid_'+id).val(store[0]['place_id']);
                     $('#store_name_'+id).val(store[0]['contact_name']);
@@ -872,32 +970,14 @@
                     $('#store_lat_'+id).val(store[0]['latitude']);
                     $('#store_lng_'+id).val(store[0]['longitude']);
                     $('#country_short_'+id).val(store[0]['country_short']);
-                    $('#store_image_hidden_'+id).val(store[0]['store_photo']);
-                    $('#store_ar_hidden_'+id).val(store[0]['store_ar']);
                     $('#store_description_'+id).val(store[0]['store_description']);
 
 
 
                     if(id == 2) {
-                        $('#store_marker_hidden_'+id).val(store[0]['store_marker']);
                         $('#promo_qr_code_'+id).val(store[0]['qr_code']);
                         $('#promo_qr_image_'+id).val(store[0]['qr_image']);
 
-
-                        // set images
-                        if((store[0]['store_photo']).length > 0) {
-                            $('#store_img_prev_'+id).attr('src',"{{url('resources/assets/stores/store_photo')}}/"+store[0]['store_photo']);
-                        }
-
-                        var store_img_prev = "{{url('resources/assets/stores/store_photo')}}/"+store[0]['store_photo'];
-                        $("#store_image_" + id).attr("data-default-file","http://localhost/couponcam/CC_new/resources/assets/stores/store_photo/s20180529105304344621.jpg");
-//                            $('#store_image_' + id).dropify({
-//                            defaultFile: store_img_prev
-//                        });
-
-                        if((store[0]['store_ar']).length > 0) {
-                            $('#store_ar_prev_'+id).attr('src',"{{url('resources/assets/stores/store_ar')}}/"+store[0]['store_ar']);
-                        }
 
                         if((store[0]['qr_image']).length > 0) {
                             $('#qr_code_prev_'+id).attr('src',"{{url('resources/assets/qr_codes')}}/"+store[0]['qr_image']);
@@ -915,21 +995,12 @@
 
                     var give_away = store[0]['is_give_away'];
 
-                    // if(give_away == '1'){
-                    //     $('#give_away_'+id).parent().find(".switchery").trigger("click");
-                    // }
 
                     var business_id = business[0]['id'];
-//                    alert(business_id);
+
                     $('#business_type_' + id + "_" + business_id).prop('checked', true);
                     get_categories_select(business_id, id, categories);
 
-//                    console.log(categories);
-/*                    for(var j = 0; j < categories.length; j++){
-                        $('#category_'+id+'_'+categories[j]).prop('checked', true);
-                    }
-
-                    $('#category_2_1').prop('checked', true);*/
 
                     input_validate_custom(id);
 
@@ -955,100 +1026,7 @@
                     var store_id = data[x]['place_id'];
                     var store_name = data[x]['contact_name'];
 
-                    var center = new google.maps.LatLng(lat,lng);
-
-                    marker = new google.maps.Marker({
-                        position: center,
-                        map: map,
-                        draggable: true,
-                        anchorPoint: new google.maps.Point(0, -29)
-
-                    });
-
-
-                    var temp = new Array();
-                    temp.push(store_id, store_name, marker);
-
-                    Markers.push(temp);
-                    //console.log(Markers);
-
-                    google.maps.event.addListener(marker, 'click', (function(marker, x) {
-
-                        return function() {
-                            infowindow.setContent(data[x]['contact_name']);
-                            infowindow.open(map, marker);
-                            get_store_details(data[x]['place_id'], 2);
-                        }
-
-                    })(marker, x));
-
-                    google.maps.event.addListener(marker, 'dragend', (function(marker, x) {
-
-                        return function() {
-                            var geocoder = new google.maps.Geocoder();
-                            geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
-                                if (status === google.maps.GeocoderStatus.OK) {
-                                    console.log(results[0]);
-                                    if (results[0]) {
-
-                                        var address = results[0]['address_components'];
-
-                                        var street_num = "";
-                                        var street_name = "";
-                                        var city = "";
-                                        var state = "";
-                                        var postal_code = "";
-                                        var country = "";
-                                        var country_short = "";
-                                        var latitude = marker.getPosition().lat();
-                                        var longitude = marker.getPosition().lng();
-                                        var full_address = results[0].formatted_address;
-
-                                        for(var k = 0; k < address.length; k++){
-                                            if(address[k]['types'].includes('street_number')){
-                                                street_num = address[k]['long_name'];
-                                            }
-                                            if(address[k]['types'].includes('route')){
-                                                street_name = address[k]['long_name'];
-                                            }
-                                            if((address[k]['types'].includes('sublocality')) || (address[k]['types'].includes('sublocality_level_1')) || (address[k]['types'].includes('administrative_area_level_2'))){
-                                                city = address[k]['long_name'];
-                                            }
-                                            if(address[k]['types'].includes('administrative_area_level_1')){
-                                                state = address[k]['long_name'];
-                                            }
-                                            if(address[k]['types'].includes('postal_code')){
-                                                postal_code = address[k]['long_name'];
-                                            }
-                                            if(address[k]['types'].includes('country')){
-                                                country = address[k]['long_name'];
-                                                country_short = address[k]['short_name'];
-                                            }
-
-                                        }
-
-
-                                        bind_data_address(2,street_num,street_name,city,state,postal_code,country,latitude,longitude,full_address,country_short);
-
-                                        infowindow.setContent(results[0].formatted_address);
-                                        infowindow.open(map, marker);
-
-                                    }else {
-                                        window.alert('No results found');
-                                    }
-                                } else {
-                                    window.alert('Geocoder failed due to: ' + status);
-                                }
-                            });
-                        }
-
-                    })(marker, x));
-
-                    map.setCenter(center);
-                    map.setZoom(8);
-
-                    //drag_marker(2);
-
+                    create_marker(lat, lng, store_id, 2, store_name, 7);
                 }
 
             });
@@ -1066,98 +1044,7 @@
                     var store_id = data[x]['place_id'];
                     var store_name = data[x]['contact_name'];
 
-                    var center = new google.maps.LatLng(lat,lng);
-
-                    marker = new google.maps.Marker({
-                        position: center,
-                        map: map,
-                        draggable: false,
-                        anchorPoint: new google.maps.Point(0, -29)
-
-                    });
-
-
-                    var temp = new Array();
-                    temp.push(store_id, store_name, marker);
-
-                    Markers.push(temp);
-                    //console.log(Markers);
-
-                    google.maps.event.addListener(marker, 'click', (function(marker, x) {
-
-                        return function() {
-                            infowindow.setContent(data[x]['contact_name']);
-                            infowindow.open(map, marker);
-                            get_store_details(data[x]['place_id'], 3);
-                        }
-
-                    })(marker, x));
-
-                    google.maps.event.addListener(marker, 'dragend', (function(marker, x) {
-
-                        return function() {
-                            var geocoder = new google.maps.Geocoder();
-                            geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
-                                if (status === google.maps.GeocoderStatus.OK) {
-                                    console.log(results[0]);
-                                    if (results[0]) {
-
-                                        var address = results[0]['address_components'];
-
-                                        var street_num = "";
-                                        var street_name = "";
-                                        var city = "";
-                                        var state = "";
-                                        var postal_code = "";
-                                        var country = "";
-                                        var latitude = marker.getPosition().lat();
-                                        var longitude = marker.getPosition().lng();
-                                        var full_address = results[0].formatted_address;
-
-                                        for(var k = 0; k < address.length; k++){
-                                            if(address[k]['types'].includes('street_number')){
-                                                street_num = address[k]['long_name'];
-                                            }
-                                            if(address[k]['types'].includes('route')){
-                                                street_name = address[k]['long_name'];
-                                            }
-                                            if((address[k]['types'].includes('sublocality')) || (address[k]['types'].includes('sublocality_level_1')) || (address[k]['types'].includes('administrative_area_level_2'))){
-                                                city = address[k]['long_name'];
-                                            }
-                                            if(address[k]['types'].includes('administrative_area_level_1')){
-                                                state = address[k]['long_name'];
-                                            }
-                                            if(address[k]['types'].includes('postal_code')){
-                                                postal_code = address[k]['long_name'];
-                                            }
-                                            if(address[k]['types'].includes('country')){
-                                                country = address[k]['long_name'];
-                                            }
-
-                                        }
-
-
-                                        bind_data_address(3,street_num,street_name,city,state,postal_code,country,latitude,longitude,full_address);
-
-                                        infowindow.setContent(results[0].formatted_address);
-                                        infowindow.open(map, marker);
-
-                                    }else {
-                                        window.alert('No results found');
-                                    }
-                                } else {
-                                    window.alert('Geocoder failed due to: ' + status);
-                                }
-                            });
-                        }
-
-                    })(marker, x));
-
-                    map.setCenter(center);
-                    map.setZoom(8);
-
-                    //drag_marker(2);
-
+                    create_marker(lat, lng, store_id, 3, store_name, 7);
                 }
 
             });
@@ -1204,8 +1091,8 @@
 
         }
 
-        function    generate_qr_code(id) {
-
+        function generate_qr_code(id) {
+            progressSpinner('Creating Coupon Code...');
             $('#crt_qr_'+id).hide();
 
             $.get("{{ url('user/generate_new_qr') }}",function(data){
@@ -1219,26 +1106,32 @@
 
             $('#print_code_'+id).show();
             $('#refresh_qr_'+id).show();
+
+            hideProgressSpinner();
+
         }
 
         function refresh_qr(id) {
+            progressSpinner('Refreshing Coupon Code...');
             // get image qr code name
             var old_qr = $('#promo_qr_image_'+id).val();
             $('#qr_code_prev_'+id).attr('src', "{{url('resources/assets/custom/images/no-image.png')}}");
-            {{--$.get("{{ url('user/delete_old_qr') }}/"+old_qr,function(data){});--}}
 
+            hideProgressSpinner();
             generate_qr_code(id);
         }
 
         function view_qr_code(id) {
             var src = $('#qr_code_prev_' + id).attr('src');
+
             window.open(src);
             // alert(src);
         }
 
+
         function get_categories(type_id, id){
             $.get("{{ url('user/get_categories') }}/"+parseInt(type_id),function(data){
-                console.log(data);
+                // console.log(data);
                 // empty category list
                 $('#category_table_' + id).html('');
 
@@ -1270,13 +1163,13 @@
             $.get("{{ url('user/get_categories') }}/"+parseInt(type_id),function(data){
                 $('#category_table_' + id).html('');
 
-                console.log(categories);
+               // console.log(categories);
 
                 var html_t = [];
 
                 if(data.length > 0) {
                     for(var i = 0; i < data.length; i++) {
-                        console.log(data[i]['id']);
+                       // console.log(data[i]['id']);
 
                         if($.inArray(data[i]['id'].toString(), categories) != -1){
                             var row = "<tr>" +
@@ -1319,13 +1212,6 @@
         // validate store
         function input_validate_custom(id){
             var err_1 = "This field is required";
-//            var chars = /[&\/\\#,+()$~%.'":*?<>{}]/;
-
-//            var newRegExp = new RegExp(chars, 'g');
-            {{--var string = 'sref$32@32@##$$';--}}
-
-//            var xx = string.replace(newRegExp, '_');
-//            alert(xx);
 
             var st_name = $('#store_name_' + id).val();
             if(st_name.length > 0) {
@@ -1339,7 +1225,6 @@
                 $('#street_error_' + id).html('');
                 $('#input_manual_error_' + id).html('');
             } else {
-//                $('#street_error_' + id).html("Please Fill all fields..");
                 $('#input_manual_error_' + id).html("Click 'Input Manually' to fill the address manually");
             }
 
@@ -1347,28 +1232,24 @@
             if(town.length > 0) {
                 $('#town_error_' + id).html('');
             } else {
-//                $('#street_error_' + id).html("Please Fill all fields..");
                 $('#input_manual_error_' + id).html("Click 'Input Manually' to fill the address manually");
             }
             var state = $('#state_' + id).val();
             if(state.length > 0) {
                 $('#state_error_' + id).html('');
             } else {
-//                $('#street_error_' + id).html("Please Fill all fields..");
                 $('#input_manual_error_' + id).html("Click 'Input Manually' to fill the address manually");
             }
             var zipcode = $('#postal_code_' + id).val();
             if(zipcode.length > 0) {
                 $('#zip_code_error_' + id).html('');
             } else {
-//                $('#street_error_' + id).html("Please Fill all fields..");
                 $('#input_manual_error_' + id).html("Click 'Input Manually' to fill the address manually");
             }
             var country = $('#country_' + id).val();
             if(country.length > 0) {
                 $('#country_error_' + id).html('');
             } else {
-//                $('#street_error_' + id).html("Please Fill all fields..");
                 $('#input_manual_error_' + id).html("Click 'Input Manually' to fill the address manually");
             }
 
@@ -1376,26 +1257,18 @@
             if(st_lat.length > 0) {
                 $('#store_lat_error_' + id).html('');
             } else {
-//                $('#store_lat_error_' + id).html("Error in store location.. please re-enter store address");
             }
             var st_lng = $('#store_lng_' + id).val();
             if(st_lng.length > 0) {
                 $('#store_lng_error_' + id).html('');
             } else {
-//                $('#store_lng_error_' + id).html("Error in store location.. please re-enter store address");
             }
             var country_short = $('#country_short_' + id).val();
             if(country_short.length > 0) {
                 $('#country_short_error_' + id).html('');
             } else {
-//                $('#country_short_error_' + id).html("Error in store location.. please re-enter store address");
             }
-            var st_desc = $('#store_description_' + id).val();
-            if(st_desc.length > 0) {
-                $('#store_description_error_' + id).html('');
-            } else {
-                $('#store_description_error_' + id).html(err_1);
-            }
+
             var qr_code = $('#promo_qr_code_' + id).val();
             if(qr_code.length > 0) {
                 $('#qr_code_error_' + id).html('');
@@ -1445,94 +1318,43 @@
             }
 
             // images
-            var c_st_img = 0;
-            if(id == 1) {
-                var store_img = $('#store_image_' + id).val();
+            var c_st_img = 1;
+            var c_st_ar = 1;
 
-                if (store_img) {
-                    $('#store_image_error_' + id).html('');
-                    switch (store_img.substring(store_img.lastIndexOf('.') + 1).toLowerCase()) {
-                        case 'jpg':
-                        case 'png':
-                            $('#store_image_error_' + id).html('');
-                            c_st_img = 1;
-                            break;
-                        default:
-                            $('#store_image_error_' + id).html("Please select a png or jpg");
-                            break;
-
-                    }
-                } else {
-                    $('#store_image_error_' + id).html(err_1);
-                }
-            } else if (id == 2) {
-                var pre_img = $('#store_image_hidden_' + id).val();
-
-                if(pre_img.length > 0) {
-                    c_st_img = 1;
-                    $('#store_image_error_' + id).html('');
-                } else {
-                    $('#store_image_error_' + id).html("Please select a image");
-                }
-            }
-
-
-            var c_st_ar = 0;
-
-            if(id == 1) {
-                var store_ar = $('#store_ar_' + id).val();
-
-                if (store_ar) {
-                    $('#store_ar_error_' + id).html('');
-                    switch (store_ar.substring(store_ar.lastIndexOf('.') + 1).toLowerCase()) {
-                        case 'png':
-                            $('#store_ar_error_' + id).html('');
-                            c_st_ar = 1;
-                            break;
-                        default:
-                            $('#store_ar_error_' + id).html("Please select a png ");
-                            break;
-
-                    }
-                } else {
-                    $('#store_ar_error_' + id).html(err_1);
-                }
-            } else if (id == 2) {
-                var pre_ar = $('#store_ar_hidden_' + id).val();
-
-                if(pre_ar.length > 0) {
-                    c_st_ar = 1;
-                    $('#store_ar_error_' + id).html('');
-                } else {
-                    $('#store_ar_error_' + id).html("Please select a png");
-                }
-            }
-
-
-            if( (st_name.length > 0) && (street_name.length > 0) && (town.length > 0) && (state.length > 0) && (zipcode.length > 0) && (country.length > 0) && (st_desc.length > 0) && (qr_code.length > 0) && (qr_img.length > 0) && (st_lat.length > 0) && (st_lng.length > 0) && (country_short.length > 0) && (business == 1) && (category == 1) &&(c_st_img == 1) && (c_st_ar == 1) ) {
+            if( (st_name.length > 0) && (street_name.length > 0) && (town.length > 0) && (state.length > 0) && (zipcode.length > 0) && (country.length > 0) && (qr_code.length > 0) && (qr_img.length > 0) && (st_lat.length > 0) && (st_lng.length > 0) && (country_short.length > 0) && (business == 1) && (category == 1) &&(c_st_img == 1) && (c_st_ar == 1) ) {
                 return 1;
             } else {
                 return 0;
             }
 
-
-
         }
 
         function validate_crt(id) {
+            progressSpinner('Processing...');
             var validator = input_validate_custom(id);
 
             if(validator == 1) {
                 $('#store_form_' + id).submit();
             } else {
+                hideProgressSpinner();
                 alert("Please Fill the missing data..");
             }
+
         }
 
         function error_hide(field_id) {
             $('#'+ field_id).html('');
         }
 
+        function submit_form(event, id){
+            progressSpinner('Processing...');
+            $('#store_form_' + id).submit();
+            hideProgressSpinner();
+        }
+
+        function beforeSubmit(){
+            progressSpinner('Processing...');
+        }
 
     </script>
 

@@ -5,6 +5,7 @@
         <div class="card">
             <div class="card">
                 <ul class="nav nav-tabs customtab" role="tablist">
+                    @if($has_coupons == 0)
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#tab-pane-1" role="tab" >
                             <span class="hidden-sm-up"><i class="ti-user"></i></span>
@@ -23,6 +24,27 @@
                             <span class="hidden-xs-down">PAUSED COUPONS</span>
                         </a>
                     </li>
+                    @else 
+                    
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#tab-pane-2" role="tab" >
+                            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                            <span class="hidden-xs-down">ACTIVE COUPONS</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab-pane-3" role="tab">
+                            <span class="hidden-sm-up"><i class="ti-email"></i></span>
+                            <span class="hidden-xs-down">PAUSED COUPONS</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " data-toggle="tab" href="#tab-pane-1" role="tab" >
+                            <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                            <span class="hidden-xs-down">CREATE COUPONS</span>
+                        </a>
+                    </li>
+                    @endif
                     <li class="nav-item" >
                         <a class="nav-link" data-toggle="tab" href="#tab-pane-4" aria-controls="tab-pane-4" role="tab" style="display: none;">
                             <span class="hidden-sm-up"><i class="ti-email"></i></span>
@@ -47,11 +69,16 @@
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
+                @if($has_coupons == 0)
                     <div class="tab-pane active p-20" id="tab-pane-1" role="tabpanel">
+                    @else 
+                    <div class="tab-pane p-20" id="tab-pane-1" role="tabpanel">
+                    @endif
 
                         <div class="row">
                             <div class="col-md-9">
 
+                                
                                 <ul class="nav nav-tabs customtab_2" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" data-toggle="tab" aria-controls="cpn_l_1" href="#cpn_l_1" role="tab" >
@@ -98,9 +125,16 @@
                                                             <option value="0">Select Promo</option>
                                                             @if(sizeof($inactivePromos) > 0)
                                                                 @foreach($inactivePromos as $promo)
+                                                                    @if($new_promo_id > 0)
+                                                                        @if($new_promo_id == $promo->promo_id)
+                                                                        <option value="{{$promo->promo_id}}" selected>{{$promo->promo_name}}</option>
+                                                                        @else
+                                                                        <option value="{{$promo->promo_id}}">{{$promo->promo_name}}</option>
+                                                                        @endif
 
+                                                                    @else 
                                                                     <option value="{{$promo->promo_id}}">{{$promo->promo_name}}</option>
-
+                                                                    @endif
                                                                 @endforeach
                                                             @else
                                                                 <option>-- No Promos Available.. Please create a Promo..</option>
@@ -121,20 +155,28 @@
                                                         <div class="form-group row-justify-content-center" >
                                                             <label class="control-label col-xs-12 col-sm-12">Coupon Photo</label>
 
-                                                            <div class="uploader" onclick="$('#filePhoto').click()" id="uploader_c_1">
-                                                                <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
-                                                               <b>Drag and drop a file here or click</b> 
-                                                                <input type="file" name="coupon_photo_1" class="filePhoto"  id="coupon_photo_c_1" onchange="error_hide('coupon_photo_error_c_1');" />
+
+                                                            <div id="img_cropper_c_1">
+                                                                <div class="uploader" id="uploader_c_1">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_1" id="coupon_photo_c_1" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_c_1');" accept=".png" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_c_1"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_c_1"/>
+                                                                
+
+                                                                <button id="crop_btn_c_1" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_c_1" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_1" id="cp_img_name_c_1">
                                                             </div>
 
-                                                            <div class="col-md-12 text-center cropper_cont">
-                                                                <div id="crop_view_1" style="width:250px"></div>
-                                                            </div>
-                                                            <button id="crop_btn" class="btn btn-danger col-sm-12" type="button">Crop & Save</button> &nbsp;
-                                                            <button id="rem" class="btn btn-danger col-sm-12" type="button">Remove</button>
-
-                                                            <!-- <input type="file" id="coupon_photo_c_1" name="coupon_photo_1" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_1');"/> -->
-
+                                                            
+                                                          
                                                         </div>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_1"> </h6>
                                                     </div>
@@ -168,7 +210,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_c_1" name="coupon_name_1" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_1');">
+                                                        <input type="text" id="coupon_name_c_1" name="coupon_name_1" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_1');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_c_1"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -189,7 +231,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_c_1" name="coupon_condition_1" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_c_1');"></textarea>
+                                                        <textarea id="coupon_condition_c_1" name="coupon_condition_1" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_c_1');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_c_1"> </h6>
                                                     </div>
                                                 </div>
@@ -214,6 +256,17 @@
                                                     <div class="form-group" id="lc_cont_c_1" style="display: none;">
                                                         <label class="control-label">Loyalty Count</label>
                                                         <input type="number" min="1" max="10" value="1" id="coupon_count_c_1" name="coupon_count_1" class="form-control" placeholder="" >
+
+                                                        <br>
+                                                        <br>
+                                                        <label class="control-label">Minimunm Spend</label>
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="min_lbl_c_1">$</span>
+                                                            </div>
+                                                            <input type="number" min="1" value="1" step="0.1" id="min_spent_c_1" name="min_spent_1" class="form-control" placeholder="" >
+                                                            </div>
+
                                                     </div>
                                                     <div class="form-group">
                                                         <button type="button" class="col-md-12 custom_btn save_c_c" onclick="validate_coupon_1('c',1,'cpn_l_2');" ></button>
@@ -224,7 +277,7 @@
                                         <div class="tab-pane p-20" id="cpn_l_2" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <label class="control-label">Promo</label>
                                                         <select class="form-control custom-select" name="promo_id_2" id="promo_id_c_2">
                                                             <option>Select Promo</option>
@@ -238,7 +291,7 @@
                                                                 <option>-- No Promos Available.. Please create a Promo..</option>
                                                             @endif
                                                         </select>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group">
                                                         <label class="control-label">Not Sure What To Offer?</label>
                                                         <select class="form-control custom-select" id="suggestion_1">
@@ -247,11 +300,36 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                                <div class="col-sm-12 col-md-6 col-lg-4">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_c_2" name="coupon_photo_2" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_2');" />
+
+                                                            <div id="img_cropper_c_2">
+                                                                <div class="uploader" id="uploader_c_2">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_2" id="coupon_photo_c_2" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_c_2');" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_c_2"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_c_2"/>
+                                                                
+
+                                                                <button id="crop_btn_c_2" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_c_2" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_2" id="cp_img_name_c_2">
+
+
+                                                                <label class="btn-container"> Use Same Photo as Previous Coupon
+                                                                    <input type="checkbox" value="" id="use_prev_c_2" name="use_prev_c_2" onclick="use_prev_photo('c',2);">
+                                                                    <span class="checkmark"></span>
+                                                                </label>  
+
+                                                            </div>
                                                             <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_2"> </h6>
                                                         </div>
                                                     </div>
@@ -266,6 +344,10 @@
                                                                 <td><br><br><img src="{{url('resources/assets/custom/images/search.png')}}" style="width: 20px;" ></td>
                                                             </tr>
                                                         </table>
+                                                        <label class="btn-container"> Use Same AR Coupon as Previous Coupon
+                                                                    <input type="checkbox" value="" id="use_prev_ar_c_2" name="use_prev_ar_c_2" onclick="use_prev_ar_model('c',2);">
+                                                                    <span class="checkmark"></span>
+                                                                </label> 
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group">
@@ -285,7 +367,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_c_2" name="coupon_name_2" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_2');">
+                                                        <input type="text" id="coupon_name_c_2" name="coupon_name_2" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_2');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_c_2"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -306,7 +388,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_c_2" name="coupon_condition_2" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_c_2');"></textarea>
+                                                        <textarea id="coupon_condition_c_2" name="coupon_condition_2" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_c_2');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_c_2"> </h6>
                                                     </div>
                                                 </div>
@@ -322,7 +404,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group" style="display:none;">
                                                         <label class="control-label">Loyalty Coupon ?</label><br>
                                                         <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="loyalty_coupon_2" id="loyalty_coupon_c_2" onchange="showHideLoyaltyCount(2, 'c');" />
                                                     </div>
@@ -339,7 +421,7 @@
                                         <div class="tab-pane p-20" id="cpn_l_3" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <label class="control-label">Promo</label>
                                                         <select class="form-control custom-select" name="promo_id_3" id="promo_id_c_2">
                                                             <option>Select Promo</option>
@@ -353,7 +435,7 @@
                                                                 <option>-- No Promos Available.. Please create a Promo..</option>
                                                             @endif
                                                         </select>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group">
                                                         <label class="control-label">Not Sure What To Offer?</label>
                                                         <select class="form-control custom-select" id="suggestion_1">
@@ -362,11 +444,37 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                                <div class="col-sm-12 col-md-6 col-lg-4">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_c_3" name="coupon_photo_3" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_3');" />
+
+                                                            <div id="img_cropper_c_3">
+                                                                <div class="uploader" id="uploader_c_3">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_3" id="coupon_photo_c_3" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_c_3');" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_c_3"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_c_3"/>
+                                                                
+
+                                                                <button id="crop_btn_c_3" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_c_3" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_3" id="cp_img_name_c_3">
+
+
+                                                                <label class="btn-container"> Use Same Photo as Previous Coupon
+                                                                    <input type="checkbox" value="" id="use_prev_c_3" name="use_prev_c_3" onclick="use_prev_photo('c',3);">
+                                                                    <span class="checkmark"></span>
+                                                                </label>  
+
+
+                                                            </div>
                                                             <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_3"> </h6>
 
                                                         </div>
@@ -382,6 +490,10 @@
                                                                 <td><br><br><img src="{{url('resources/assets/custom/images/search.png')}}" style="width: 20px;" ></td>
                                                             </tr>
                                                         </table>
+                                                        <label class="btn-container"> Use Same AR Coupon as Previous Coupon
+                                                                    <input type="checkbox" value="" id="use_prev_ar_c_3" name="use_prev_ar_c_3" onclick="use_prev_ar_model('c',3);">
+                                                                    <span class="checkmark"></span>
+                                                                </label> 
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group">
@@ -401,7 +513,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_c_3" name="coupon_name_3" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_3');">
+                                                        <input type="text" id="coupon_name_c_3" name="coupon_name_3" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_3');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_c_3"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -422,7 +534,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_c_3" name="coupon_condition_3" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_c_3');"></textarea>
+                                                        <textarea id="coupon_condition_c_3" name="coupon_condition_3" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_c_3');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_c_3"> </h6>
                                                     </div>
                                                 </div>
@@ -438,7 +550,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group" style="display:none;">
                                                         <label class="control-label">Loyalty Coupon ?</label><br>
                                                         <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="loyalty_coupon_3" id="loyalty_coupon_c_3" onchange="showHideLoyaltyCount(3, 'c');" />
                                                     </div>
@@ -455,7 +567,7 @@
                                         <div class="tab-pane p-20" id="cpn_l_4" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <label class="control-label">Promo</label>
                                                         <select class="form-control custom-select" name="promo_id_4" id="promo_id_c_2">
                                                             <option>Select Promo</option>
@@ -469,7 +581,7 @@
                                                                 <option>-- No Promos Available.. Please create a Promo..</option>
                                                             @endif
                                                         </select>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group">
                                                         <label class="control-label">Not Sure What To Offer?</label>
                                                         <select class="form-control custom-select" id="suggestion_1">
@@ -478,11 +590,35 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                                <div class="col-sm-12 col-md-6 col-lg-4">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_c_4" name="coupon_photo_4" class="dropify" data-height="100"  required onchange="error_hide('coupon_photo_error_c_4');" />
+
+                                                            <div id="img_cropper_c_4">
+                                                                <div class="uploader" id="uploader_c_4">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_4" id="coupon_photo_c_4" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_c_4');" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_c_4"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_c_4"/>
+                                                                
+
+                                                                <button id="crop_btn_c_4" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_c_4" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_4" id="cp_img_name_c_4">
+                                                                
+                                                                <label class="btn-container"> Use Same Photo as Previous Coupon
+                                                                    <input type="checkbox" value="" id="use_prev_c_4" name="use_prev_c_4" onclick="use_prev_photo('c',4);">
+                                                                    <span class="checkmark"></span>
+                                                                </label>  
+
+                                                            </div>
                                                             <h6 class="form-control-feedback text-danger" id="coupon_photo_error_c_4"> </h6>
                                                         </div>
                                                     </div>
@@ -497,6 +633,11 @@
                                                                 <td><br><br><img src="{{url('resources/assets/custom/images/search.png')}}" style="width: 20px;" ></td>
                                                             </tr>
                                                         </table>
+
+                                                        <label class="btn-container"> Use Same AR Coupon as Previous Coupon
+                                                                    <input type="checkbox" value="" id="use_prev_ar_c_4" name="use_prev_ar_c_4" onclick="use_prev_ar_model('c',4);">
+                                                                    <span class="checkmark"></span>
+                                                                </label>  
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group">
@@ -516,7 +657,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_c_4" name="coupon_name_4" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_4');">
+                                                        <input type="text" id="coupon_name_c_4" name="coupon_name_4" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_c_4');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_c_4"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -532,7 +673,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_c_4" name="coupon_condition_4" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_c_4');"></textarea>
+                                                        <textarea id="coupon_condition_c_4" name="coupon_condition_4" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_c_4');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_c_4"> </h6>
                                                     </div>
                                                 </div>
@@ -548,7 +689,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group" style="display:none;">
                                                         <label class="control-label">Loyalty Coupon ?</label><br>
                                                         <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="loyalty_coupon_4" id="loyalty_coupon_c_4" onchange="showHideLoyaltyCount(4, 'c');" />
                                                     </div>
@@ -613,8 +754,11 @@
                         </div>
 
                     </div>
-
+                    @if($has_coupons == 0)
                     <div class="tab-pane p-20" id="tab-pane-2" role="tabpanel">
+                    @else
+                    <div class="tab-pane active p-20" id="tab-pane-2" role="tabpanel">
+                    @endif
                         <?php
                         $promoCount = sizeof($activePromos);
                         $itemCount = 0;
@@ -1351,8 +1495,25 @@
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_e_1" name="coupon_photo_1" class="dropify" data-height="100" onchange="error_hide('coupon_photo_error_e_1');"/>
 
+                                                            <div id="img_cropper_e_1">
+                                                                <div class="uploader" id="uploader_e_1">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_1" id="coupon_photo_e_1" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_e_1');" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_e_1"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_e_1"/>
+                                                                
+
+                                                                <button id="crop_btn_e_1" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_e_1" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_1" id="cp_img_name_e_1">
+                                                            </div>
                                                         </div>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_photo_error_e_1"> </h6>
                                                     </div>
@@ -1386,7 +1547,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_e_1" name="coupon_name_1" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_1');">
+                                                        <input type="text" id="coupon_name_e_1" name="coupon_name_1" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_1');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_e_1"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -1407,7 +1568,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_e_1" name="coupon_condition_1" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_e_1');"></textarea>
+                                                        <textarea id="coupon_condition_e_1" name="coupon_condition_1" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_e_1');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_e_1"> </h6>
                                                     </div>
                                                 </div>
@@ -1431,6 +1592,15 @@
                                                     <div class="form-group" id="lc_cont_e_1" style="display: none;">
                                                         <label class="control-label">Loyalty Count</label>
                                                         <input type="number" min="1" max="10" value="1" id="coupon_count_e_1" name="coupon_count_1" class="form-control" placeholder="" >
+                                                        <br>
+                                                        <br>
+                                                        <label class="control-label">Minimunm Spend</label>
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="min_lbl_e_1">$</span>
+                                                            </div>
+                                                            <input type="number" min="1" value="1" step="0.1" id="min_spent_e_1" name="min_spent_1" class="form-control" placeholder="" >
+                                                            </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <button type="button" class="col-md-12 custom_btn save_e_c" onclick="validate_coupon_1('e',1,'cpn_e_2');" ></button>
@@ -1441,7 +1611,7 @@
                                         <div class="tab-pane p-20" id="cpn_e_2" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <label class="control-label">Promo</label>
                                                         <select class="form-control custom-select" name="promo_id_2" id="promo_id_e_2" disabled>
                                                             <option>Select Promo</option>
@@ -1455,7 +1625,7 @@
                                                                 <option>-- No Promos Available.. Please create a Promo..</option>
                                                             @endif
                                                         </select>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group">
                                                         <label class="control-label">Not Sure What To Offer?</label>
                                                         <select class="form-control custom-select" id="suggestion_1">
@@ -1468,7 +1638,25 @@
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_e_2" name="coupon_photo_2" class="dropify" data-height="100" onchange="error_hide('coupon_photo_error_e_2');" />
+
+                                                            <div id="img_cropper_e_2">
+                                                                <div class="uploader" id="uploader_e_2">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_2" id="coupon_photo_e_2" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_e_2');" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_e_2"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_e_2"/>
+                                                                
+
+                                                                <button id="crop_btn_e_2" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_e_2" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_2" id="cp_img_name_e_2">
+                                                            </div>
 
                                                         </div>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_photo_error_e_2"> </h6>
@@ -1503,7 +1691,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_e_2" name="coupon_name_2" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_2');">
+                                                        <input type="text" id="coupon_name_e_2" name="coupon_name_2" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_2');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_e_2"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -1524,7 +1712,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_e_2" name="coupon_condition_2" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_e_2');"></textarea>
+                                                        <textarea id="coupon_condition_e_2" name="coupon_condition_2" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_e_2');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_e_2"> </h6>
                                                     </div>
                                                 </div>
@@ -1540,7 +1728,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group" style="display:none;">
                                                         <label class="control-label">Loyalty Coupon ?</label><br>
                                                         <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="loyalty_coupon_2" id="loyalty_coupon_e_2" onchange="showHideLoyaltyCount(2, 'e');" />
                                                     </div>
@@ -1557,7 +1745,7 @@
                                         <div class="tab-pane p-20" id="cpn_e_3" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <label class="control-label">Promo</label>
                                                         <select class="form-control custom-select" name="promo_id_3" id="promo_id_e_2" disabled>
                                                             <option>Select Promo</option>
@@ -1569,7 +1757,7 @@
                                                                 @endforeach
                                                             @endif
                                                         </select>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group">
                                                         <label class="control-label">Not Sure What To Offer?</label>
                                                         <select class="form-control custom-select" id="suggestion_1">
@@ -1582,7 +1770,25 @@
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_e_3" name="coupon_photo_3" class="dropify" data-height="100" onchange="error_hide('coupon_photo_error_e_3');" />
+
+                                                            <div id="img_cropper_e_3">
+                                                                <div class="uploader" id="uploader_e_3">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_3" id="coupon_photo_e_3" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_e_3');" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_e_3"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_e_3"/>
+                                                                
+
+                                                                <button id="crop_btn_e_3" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_e_3" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_3" id="cp_img_name_e_3">
+                                                            </div>
                                                         </div>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_photo_error_e_3"> </h6>
                                                     </div>
@@ -1616,7 +1822,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_e_3" name="coupon_name_3" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_3');">
+                                                        <input type="text" id="coupon_name_e_3" name="coupon_name_3" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_3');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_e_3"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -1637,7 +1843,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_e_3" name="coupon_condition_3" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_e_3');"></textarea>
+                                                        <textarea id="coupon_condition_e_3" name="coupon_condition_3" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_e_3');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_e_3"> </h6>
                                                     </div>
                                                 </div>
@@ -1653,7 +1859,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group" style="display:none;">
                                                         <label class="control-label">Loyalty Coupon ?</label><br>
                                                         <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="loyalty_coupon_3" id="loyalty_coupon_e_3" onchange="showHideLoyaltyCount(3, 'e');" />
                                                     </div>
@@ -1670,7 +1876,7 @@
                                         <div class="tab-pane p-20" id="cpn_e_4" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <label class="control-label">Promo</label>
                                                         <select class="form-control custom-select" name="promo_id_4" id="promo_id_e_2" disabled>
                                                             <option>Select Promo</option>
@@ -1684,7 +1890,7 @@
                                                                 <option>-- No Promos Available.. Please create a Promo..</option>
                                                             @endif
                                                         </select>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group">
                                                         <label class="control-label">Not Sure What To Offer?</label>
                                                         <select class="form-control custom-select" id="suggestion_1">
@@ -1697,7 +1903,25 @@
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Coupon Photo</label>
-                                                            <input type="file" id="coupon_photo_e_4" name="coupon_photo_4" class="dropify" data-height="100" onchange="error_hide('coupon_photo_error_e_4');" />
+
+                                                            <div id="img_cropper_e_4">
+                                                                <div class="uploader" id="uploader_e_4">
+
+                                                                    <img src="{{url('resources/assets/custom/images/up-cloud.png')}}" alt="" class="up-icon"><br>
+                                                                    <b>Drag and drop a file here or click</b>
+
+                                                                    <input type="file" name="coupon_photo_4" id="coupon_photo_e_4" class="filePhoto cropit-image-input" onchange="error_hide('coupon_photo_error_e_4');" >
+                                                                </div>
+                                                                    
+                                                                <div class="cropit-preview" id="cropper_prev_e_4"></div>
+                                                                <input type="range" class="cropit-image-zoom-input" id="ranger_e_4"/>
+                                                                
+
+                                                                <button id="crop_btn_e_4" class="btn btn-danger col-sm-12 crop_btn" type="button">Crop & Save</button> &nbsp;
+                                                                <button id="rem_e_4" class="btn btn-danger col-sm-12 res_btn" type="button">Remove</button>
+
+                                                                <input type="hidden" name="cp_img_name_4" id="cp_img_name_e_4">
+                                                            </div>
                                                         </div>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_photo_error_e_4"> </h6>
                                                     </div>
@@ -1731,7 +1955,7 @@
                                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label class="control-label">Coupon Name</label>
-                                                        <input type="text" id="coupon_name_e_4" name="coupon_name_4" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_4');">
+                                                        <input type="text" id="coupon_name_e_4" name="coupon_name_4" class="form-control" placeholder="Enter Name" required oninput="error_hide('coupon_name_error_e_4');" maxlength="20" >
                                                         <h6 class="form-control-feedback text-danger" id="coupon_name_error_e_4"> </h6>
                                                     </div>
                                                     <div class="form-group">
@@ -1747,7 +1971,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Detailed Terms & Conditions</label>
-                                                        <textarea id="coupon_condition_e_4" name="coupon_condition_4" class="form-control" placeholder="" required oninput="error_hide('coupon_desc_error_e_4');"></textarea>
+                                                        <textarea id="coupon_condition_e_4" name="coupon_condition_4" class="form-control" placeholder="" oninput="error_hide('coupon_desc_error_e_4');"></textarea>
                                                         <h6 class="form-control-feedback text-danger" id="coupon_desc_error_e_4"> </h6>
                                                     </div>
                                                 </div>
@@ -1763,7 +1987,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group" style="display:none;">
                                                         <label class="control-label">Loyalty Coupon ?</label><br>
                                                         <input type="checkbox" class="js-switch" data-color="#e80602" data-size="small" name="loyalty_coupon_4" id="loyalty_coupon_e_4" onchange="showHideLoyaltyCount(4, 'e');" />
                                                     </div>
@@ -1843,39 +2067,157 @@
 
 <!-- | Custom css for this page only | -->
 @section('custom_css')
-    <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/croppie.css">
 @endsection
 
 <!-- | Custom js for this page only | -->
 @section('custom_js')
-    <script src="http://demo.itsolutionstuff.com/plugin/croppie.js"></script>
+
     <script>
 
-        // var xwidth;
-        // $(window).resize(function(){
-        //     var ww = $('#c_p_f_c_1').width();
-        //     xwidth = ww;
-        //     // alert(xwidth);
-        //     console.log(xwidth);
-        // });
-
         $(document).ready(function(){
-
-            // var ww = $('#c_p_f_c_1').width();
-            // xwidth = ww;
-            
-
             // $('.dropify').dropify();
-            // $('#coupon_photo_c_1').dropify();
 
-            //$('#loyalty_coupon_c_1').prop('checked', true);
-            $('#crop_view_1').hide();
-            $('#crop_btn').hide();
-            $('#rem').hide();
-            
-            // $('#uploader_c_1').prop('width', xwidth);
+            $('.cropit-preview').hide();
+            $('.crop_btn').hide();
+            $('.res_btn').hide();
+            $('.cropit-image-zoom-input').hide();
+
         });
 
+        function crop_image(page, id) {
+
+            var imageData = $('#img_cropper_' + page + '_' + id).cropit('export');
+            $('#cp_img_name_' + page + '_' + id).val(imageData);
+            $('#image_' + page + '_' + id).attr('src', imageData);
+
+        }
+
+        function activate_cropper(page, id) {
+            $('#uploader_' + page + '_' + id).hide();
+            $('#cropper_prev_' + page + '_' + id).show();
+            $('#ranger_' + page + '_' + id).show();
+            $('#crop_btn_' + page + '_' + id).show();
+            $('#rem_' + page + '_' + id).show();
+        }
+
+        function clear_cropper(page, id) {
+            $('#uploader_' + page + '_' + id).show();
+            $('#cropper_prev_' + page + '_' + id).hide();
+            $('#ranger_' + page + '_' + id).hide();
+            $('#crop_btn_' + page + '_' + id).hide();
+            $('#rem_' + page + '_' + id).hide();
+
+            $('#cp_img_name_' + page + '_' + id).val('');
+            $('#image_' + page + '_' + id).attr('src',"{{ asset('resources/assets/user/images/imageplaceholder.png') }}" );
+        }
+
+        $('#img_cropper_c_1').cropit({exportZoom: 3});
+        $('#img_cropper_c_2').cropit({exportZoom: 3});
+        $('#img_cropper_c_3').cropit({exportZoom: 3});
+        $('#img_cropper_c_4').cropit({exportZoom: 3});
+        $('#img_cropper_e_1').cropit({exportZoom: 3});
+        $('#img_cropper_e_2').cropit({exportZoom: 3});
+        $('#img_cropper_e_3').cropit({exportZoom: 3});
+        $('#img_cropper_e_4').cropit({exportZoom: 3});
+
+        $('#coupon_photo_c_1').on('change', function() {
+            activate_cropper('c', 1);
+        });
+
+        $('#crop_btn_c_1').on('click',function () {
+            crop_image('c', 1);
+        });
+
+        $('#rem_c_1').on('click', function() {
+            clear_cropper('c', 1);
+        });
+
+        $('#coupon_photo_c_2').on('change', function() {
+            activate_cropper('c', 2);
+        });
+
+        $('#crop_btn_c_2').on('click',function () {
+            crop_image('c', 2);
+        });
+
+        $('#rem_c_2').on('click', function() {
+            clear_cropper('c', 2);
+        });
+
+
+        $('#coupon_photo_c_3').on('change', function() {
+            activate_cropper('c', 3);
+        });
+
+        $('#crop_btn_c_3').on('click',function () {
+            crop_image('c', 3);
+        });
+
+        $('#rem_c_3').on('click', function() {
+            clear_cropper('c', 3);
+        });
+
+        $('#coupon_photo_c_4').on('change', function() {
+            activate_cropper('c', 4);
+        });
+
+        $('#crop_btn_c_4').on('click',function () {
+            crop_image('c', 4);
+        });
+
+        $('#rem_c_4').on('click', function() {
+            clear_cropper('c', 4);
+        });
+
+
+        $('#coupon_photo_e_1').on('change', function() {
+            activate_cropper('e', 1);
+        });
+
+        $('#crop_btn_e_1').on('click',function () {
+            crop_image('e', 1);
+        });
+
+        $('#rem_e_1').on('click', function() {
+            clear_cropper('e', 1);
+        });
+
+
+        $('#coupon_photo_e_2').on('change', function() {
+            activate_cropper('e', 2);
+        });
+
+        $('#crop_btn_e_2').on('click',function () {
+            crop_image('e', 2);
+        });
+
+        $('#rem_e_2').on('click', function() {
+            clear_cropper('e', 2);
+        });
+        
+        $('#coupon_photo_e_3').on('change', function() {
+            activate_cropper('e', 3);
+        });
+
+        $('#crop_btn_e_3').on('click',function () {
+            crop_image('e', 3);
+        });
+
+        $('#rem_e_3').on('click', function() {
+            clear_cropper('e', 3);
+        });
+
+        $('#coupon_photo_e_4').on('change', function() {
+            activate_cropper('e', 4);
+        });
+
+        $('#crop_btn_e_4').on('click',function () {
+            crop_image('e', 4);
+        });
+
+        $('#rem_e_4').on('click', function() {
+            clear_cropper('e', 4);
+        });
         
 
         function showHideLoyaltyCount(id, page){
@@ -1934,83 +2276,55 @@
             $('a[aria-controls="'+next_tab+'"]').trigger("click");
         }
 
-        // crop view
-        $crop_v_1 = $('#crop_view_1').croppie({
 
-            enableExif: true,
-            viewport: {
-                width: 180,
-                height: 60,
-                type: 'square'
-            },
-            boundary: {
-                width: 200,
-                height: 100
-            },
-            enableOrientation: true
+        function use_prev_photo(page, id) {
 
-        });
+            if($('#use_prev_'+page+'_'+id).is(':checked')) {
+                // get prev image 
+                var prev = $('#cp_img_name_' + page + '_' + (id - 1)).val();
 
-        $('#coupon_photo_c_1').on('change', function () { 
-            // alert(xwidth);
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-
-                $crop_v_1.croppie('bind', {   
-
-                    url: e.target.result
-
-                }).then(function(){
-
-                    console.log('jQuery bind complete');
-
-                });
-
+                $('#cp_img_name_' + page + '_' + id).val(prev);
+                $('#image_' + page + '_' + id).attr('src', prev);
             }
+            else {
+                $('#cp_img_name_' + page + '_' + id).val('');
+                $('#image_' + page + '_' + id).attr('src',"{{ asset('resources/assets/user/images/imageplaceholder.png') }}" );
+            }
+        }
 
-            reader.readAsDataURL(this.files[0]);
+        function use_prev_ar_model(page, id) {
+            if($('#use_prev_ar_'+page+'_'+id).is(':checked')) {
+                // get prev image 
+                var prev_ar = $('#ar_coupon_name_' + page + '_' + (id - 1)).val();
+                var prev_marker = $('#ar_marker_name_' + page + '_' + (id - 1)).val();
 
-            $('#uploader_c_1').hide();
-            $('#crop_view_1').show();
-            $('#crop_btn').show();
-            $('#rem').show();
-
-        });
-
-        $('#crop_btn').on('click', function (ev) {
-
-            $crop_v_1.croppie('result', {
-                type: 'canvas',
-                size: 'viewport'
-            }).then(function (resp) {
-                $('#image_c_1').attr('src', resp);
-            }); 
-
-        });
-
-        $('#rem').on('click', function()  {
-            $('#image_c_1').attr('src', "{{ asset('resources/assets/user/images/imageplaceholder.png') }}");
-            $('#uploader_c_1').show();
-            $('#crop_view_1').hide();
-            $('#crop_btn').hide();
-            $('#rem').hide();
-
-        });
+                $('#ar_coupon_name_' + page + '_' + id).val(prev_ar);
+                $('#ar_marker_name_' + page + '_' + id).val(prev_marker);
+                $('#ar_prev_' + page + '_' + id).attr('src', "{{url('resources/assets/media')}}/"+prev_ar);
+                $('#coupon_ar_error_' + page + '_' + id).html('');
+            } 
+            else {
+                $('#ar_coupon_name_' + page + '_' + id).val('');
+                $('#ar_marker_name_' + page + '_' + id).val('');
+                $('#ar_prev_' + page + '_' + id).attr('src', "{{url('resources/assets/custom/images/no-image.png')}}");
+                $('#coupon_ar_error_' + page + '_' + id).html('This Field is required');
+            }
+        }
+         
 
 
         // $('#coupon_photo_c_1').on('change', function(){
         //     readURL(this,1,'c');
         // });
-        $('#coupon_photo_c_2').on('change', function(){
-            readURL(this,2,'c');
-        });
-        $('#coupon_photo_c_3').on('change', function(){
-            readURL(this,3,'c');
-        });
-        $('#coupon_photo_c_4').on('change', function(){
-            readURL(this,4,'c');
-        });
+    //    $('#coupon_photo_c_2').on('change', function(){
+    //        readURL(this,2,'c');
+    //    });
+    //    $('#coupon_photo_c_3').on('change', function(){
+    //        readURL(this,3,'c');
+    //    });
+    //    $('#coupon_photo_c_4').on('change', function(){
+    //        readURL(this,4,'c');
+    //    });
 
         $('#coupon_name_c_1').on('input', function(){
             var coupon_name = $('#coupon_name_c_1').val();
@@ -2029,18 +2343,18 @@
             $('#heading_c_4').html(coupon_name);
         });
 
-        $('#coupon_photo_e_1').on('change', function(){
-            readURL(this,1,'e');
-        });
-        $('#coupon_photo_e_2').on('change', function(){
-            readURL(this,2,'e');
-        });
-        $('#coupon_photo_e_3').on('change', function(){
-            readURL(this,3,'e');
-        });
-        $('#coupon_photo_e_4').on('change', function(){
-            readURL(this,4,'e');
-        });
+    //    $('#coupon_photo_e_1').on('change', function(){
+    //        readURL(this,1,'e');
+    //    });
+    //    $('#coupon_photo_e_2').on('change', function(){
+    //        readURL(this,2,'e');
+    //    });
+    //    $('#coupon_photo_e_3').on('change', function(){
+    //        readURL(this,3,'e');
+    //    });
+    //    $('#coupon_photo_e_4').on('change', function(){
+    //        readURL(this,4,'e');
+    //    });
 
         $('#coupon_name_e_1').on('input', function(){
             var coupon_name = $('#coupon_name_c_4').val();
@@ -2087,10 +2401,10 @@
         });
 
         function edit_active_coupons(promo_id){
+            progressSpinner('Processing...');
             $('a[aria-controls="tab-pane-4"]').trigger("click");
 
             $.get("{{ url('user/get_coupon_details') }}/"+parseInt(promo_id),function(data){
-
 
                 for(var x = 0; x < data.length; x++) {
 
@@ -2109,20 +2423,42 @@
                     $('#ar_prev_e_'+y).attr('src', "{{url('resources/assets/media')}}/"+data[x]['coupon_model']);
                     $('#image_e_'+y).attr('src', "{{url('resources/assets/coupons/full')}}/"+data[x]['coupon_photo']);
                     $('#coup_img_e_'+y).val(data[x]['coupon_photo']);
+                    $('#ar_marker_name_e_'+y).val(data[x]['coupon_marker']);
+                    $('#heading_e_'+y).html(data[x]['coupon_title']);
+
                     var is_loyalty = data[x]['is_loyalty'];
                     var loyalty_count = data[x]['loyalty_count'];
+                    var min_spend = data[x]['min_spend'];
 
                     if(is_loyalty == 1){
-                        $('#loyalty_coupon_e_'+y).parent().find(".switchery").trigger("click");
+
+                        if($('#loyalty_coupon_e_'+y).is(":checked")){
+                            // $('#loyalty_coupon_e_1').parent().find(".switchery").trigger("click");
+                        } else {
+                            $('#loyalty_coupon_e_'+y).parent().find(".switchery").trigger("click");
+                        }
+
                         $('#coupon_count_e_'+y).val(loyalty_count);
                         $('#lc_cont_e_'+y).show();
+
+                        $('#min_spent_e_'+y).val(min_spend);
+                    } else {
+                        if($('#loyalty_coupon_e_'+y).is(":checked")){
+                            $('#loyalty_coupon_e_1').parent().find(".switchery").trigger("click");
+                        }
                     }
+
+                    $('#min_lbl_e_1').html(data[x]['cur_lable']);
+                    $('#curr_lbl_e_1').html(data[x]['cur_lable']);
+                    $('#curr_lbl_e_2').html(data[x]['cur_lable']);
+                    $('#curr_lbl_e_3').html(data[x]['cur_lable']);
+                    $('#curr_lbl_e_4').html(data[x]['cur_lable']);
 
 
                 }
 
             });
-
+            hideProgressSpinner();
         }
 
         function get_curr_lable(page, id) {
@@ -2137,6 +2473,8 @@
                     $('#curr_lbl_'+page+'_2').html(data);
                     $('#curr_lbl_'+page+'_3').html(data);
                     $('#curr_lbl_'+page+'_4').html(data);
+
+                    $('#min_lbl_'+page+'_1').html(data);
                 }
 //                alert(data);
             });
@@ -2166,30 +2504,68 @@
 
             var coup_img_selected = 0;
             if(page == 'c') {
-                var coupon_img = $('#coupon_photo_' + page + '_' + id).val();
 
-                if (coupon_img) {
-                    $('#store_image_error_' + id).html('');
-                    switch (coupon_img.substring(coupon_img.lastIndexOf('.') + 1).toLowerCase()) {
-                        case 'jpg':
-                        case 'png':
-                            $('#coupon_photo_error_' + page + '_' + id).html('');
-                            coup_img_selected = 1;
-                            break;
-                        default:
-                            $('#coupon_photo_error_' + page + '_' + id).html("Please select a png or jpg");
-                            break;
+                var new_img = $('#cp_img_name_'+ page + '_' + id).val();
+
+                if(new_img.length > 0) {
+                    coup_img_selected = 1;
+                } else {
+                    crop_image(page, id);
+                    coup_img_selected = 1;
+                    // $('#coupon_photo_error_' + page + '_' + id).html(err_1);
+                }
+
+                // var coupon_img = $('#coupon_photo_' + page + '_' + id).val();
+                // if ( $('input[name="use_prev_c_2"]').is(':checked') ) {
+                //     alert("checked");
+                // } else {
+                //     alert('not checked');
+                // }
+
+                if($('#use_prev_'+page+'_'+id).is(':checked')) {
+                    $('#coupon_photo_error_' + page + '_' + id).html('');
+                } 
+                else {
+                    if (coupon_img) {
+                        $('#store_image_error_' + id).html('');
+                        switch (coupon_img.substring(coupon_img.lastIndexOf('.') + 1).toLowerCase()) {
+                            case 'jpg':
+                            case 'png':
+                                $('#coupon_photo_error_' + page + '_' + id).html('');
+    //                            coup_img_selected = 1;
+                                break;
+                            default:
+                                $('#coupon_photo_error_' + page + '_' + id).html("Please select a png or jpg");
+                                break;
+
+                        }
+                    } else {
+                        $('#coupon_photo_error_' + page + '_' + id).html(err_1);
+                    }
+                }
+
+                
+                
+            } else if(page == 'e') {
+
+                var new_img = $('#cp_img_name_'+ page + '_' + id).val();
+
+                if(new_img.length > 0) {
+                    coup_img_selected = 1;
+                } else {
+
+                    crop_image(page, id);
+                    coup_img_selected = 1;
+
+                    var coupon_img = $('#coup_img_'+ page + '_' + id).val();
+
+                    if(coupon_img.length > 0) {
+                        coup_img_selected = 1;
 
                     }
-                } else {
-                    $('#coupon_photo_error_' + page + '_' + id).html(err_1);
                 }
-            } else if(page == 'e') {
-                var coupon_img = $('#coup_img_'+ page + '_' + id).val();
 
-                if(coupon_img.length > 0) {
-                    coup_img_selected = 1;
-                }
+
             }
 
 
@@ -2209,13 +2585,13 @@
                 $('#coupon_info_error_' + page + '_' + id).html(err_1);
             }
 
-            var coupon_desc = $('#coupon_condition_' + page + '_' + id).val();
+            // var coupon_desc = $('#coupon_condition_' + page + '_' + id).val();
 
-            if(coupon_desc.length > 0 ) {
-                $('#coupon_desc_error_' + page + '_' + id).html('');
-            } else {
-                $('#coupon_desc_error_' + page + '_' + id).html(err_1);
-            }
+            // if(coupon_desc.length > 0 ) {
+            //     $('#coupon_desc_error_' + page + '_' + id).html('');
+            // } else {
+            //     $('#coupon_desc_error_' + page + '_' + id).html(err_1);
+            // }
 
             var coupon_ar = $('#ar_coupon_name_' + page + '_' + id).val();
 
@@ -2225,7 +2601,15 @@
                 $('#coupon_ar_error_' + page + '_' + id).html(err_1);
             }
 
-            if( (promo_selected == 1) && (coup_img_selected == 1) && (coupon_name.length > 0 ) && (coupon_info.length > 0 ) && (coupon_desc.length > 0 ) && (coupon_ar.length > 0 ) ) {
+            var coupon_marker = $('#ar_marker_name_' + page + '_' + id).val();
+            if(coupon_marker.length > 0 ) {
+                $('#coupon_ar_error_' + page + '_' + id).html('');
+            } else {
+                $('#coupon_ar_error_' + page + '_' + id).html("please select ar coupon again");
+            }
+
+
+            if( (promo_selected == 1) && (coup_img_selected == 1) && (coupon_name.length > 0 ) && (coupon_info.length > 0 ) && (coupon_ar.length > 0 ) && (coupon_marker.length > 0 )) {
                 return 1;
             } else {
                 return 0;
@@ -2235,10 +2619,28 @@
         }
 
         function validate_coupon_1(page, id, next_tab) {
+            progressSpinner("Processing...");
             var valid = validate_input(page, id);
 
             if(valid == 1) {
-                nextTab(next_tab);
+
+                if(page == 'e'){
+
+                    validate_coupon_form('e',2,0);
+                }
+                else if(next_tab == 'cpn_l_5' ) {
+                    validate_coupon_form('c',1,1);
+                } 
+                else if(next_tab == 'cpn_e_5') {
+                    validate_coupon_form('e',2,0);
+                }
+                else {
+                    hideProgressSpinner();
+                    var text = "Please Create Your Level " + (id  + 1) + " Coupon";
+                    progressSpinnerTimer(text, 3000);
+                    nextTab(next_tab);
+                }
+                
             } else {
                 alert("Please Fill the missing data..");
             }
