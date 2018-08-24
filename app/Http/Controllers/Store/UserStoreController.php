@@ -335,6 +335,11 @@ class UserStoreController extends Controller
                     'qr_image' => trim($request->promo_qr_image)
                 ]);
 
+                $promo_location_update = PromoLocations::where('store_id', $request->formid) 
+                ->update(['lat_code' => trim($request->store_lat),
+                'lng_code' => trim($request->store_lng)
+                ]);
+
             if($store_id){
 
                 return redirect('user/stores')->with(['success' => 'Store Updated successfully']);
