@@ -42,31 +42,70 @@ foreach($nearbyPromos as $promo){
 	$checkSaved = "SELECT * FROM `user_coupons` WHERE `device_id`='" . $device_id . "' AND `scan_promo_id`=". $promo->promo_id;
 	$execSVC = $dbh->query($checkSaved);
     $checkSavedRows = $execSVC->rowCount();
+
+    //check excluded coupons
+    $excludedCouponsQuery = "SELECT * FROM `exclued_coupons` WHERE `device_id`='".$device_id."'";
+// file_put_contents('php://stderr',print_r($checkExcluded, TRUE));
+    $execSVC = $dbh->query($excludedCouponsQuery);
+// file_put_contents('php://stderr',print_r($execSVC, TRUE));
+    $excludedCoupons = $execSVC;
+// file_put_contents('php://stderr',print("getAllPromosLog1"));
+// file_put_contents('php://stderr',print_r($checkExcludedRows, TRUE));
+    // error_log("getAllPromosErrorLog1");
+    // file_put_contents('php://stderr',print_r($excludedCoupons, TRUE));
+    // file_put_contents('php://stderr',print_r($excludedCoupons->count, TRUE));
+
+    $excluded_count_for_promo = 0;
+
+    $sql2 = "SELECT * FROM `coupons` WHERE `promo_id` =" .$promo_id;
+    $coups = $dbh->query($sql2);
+    $num_rows = $coups->rowCount();
+    $all_coupons = $coups->fetchAll(PDO::FETCH_OBJ);
+
+    foreach($excludedCoupons as $coupon){
+        error_log("getAllPromosErrorLog2");
+        file_put_contents('php://stderr',print_r($coupon, TRUE));
+        error_log("getAllPromosErrorLog3: ".$coupon->coupon_id);
+
+        $excluded_coupon_id = $coupon[0]->coupon_id;
+
+        foreach($all_coupons as $all_coupon){
+            error_log("getAllPromosErrorLog4: ".$all_coupon->coupon_id);
+            file_put_contents('php://stderr',print_r($all_coupon, TRUE));
+
+            if ($all_coupon->coupon_id == $excluded_coupon_id){
+                $excluded_count_for_promo = $excluded_count_for_promo + 1;
+            }
+        }
+    
+    }
+
+    
    
     
-    if(!($checkSavedRows > 0)) {
+    if(!($checkSavedRows > 0) && $excluded_count_for_promo < 4) {
         $api_info['promo_info'][] = $promo;
     }
 
 }
 
-//check excluded coupons
-$excludedCouponsQuery = "SELECT * FROM `exclued_coupons` WHERE `device_id`='".$device_id."'";
-// file_put_contents('php://stderr',print_r($checkExcluded, TRUE));
-$execSVC = $dbh->query($excludedCouponsQuery);
-// file_put_contents('php://stderr',print_r($execSVC, TRUE));
-$excludedCoupons = $execSVC;
-// file_put_contents('php://stderr',print("getAllPromosLog1"));
-// file_put_contents('php://stderr',print_r($checkExcludedRows, TRUE));
-error_log("getAllPromosErrorLog1");
-file_put_contents('php://stderr',print_r($excludedCoupons, TRUE));
-file_put_contents('php://stderr',print_r($excludedCoupons->count, TRUE));
+// //check excluded coupons
+// $excludedCouponsQuery = "SELECT * FROM `exclued_coupons` WHERE `device_id`='".$device_id."'";
+// // file_put_contents('php://stderr',print_r($checkExcluded, TRUE));
+// $execSVC = $dbh->query($excludedCouponsQuery);
+// // file_put_contents('php://stderr',print_r($execSVC, TRUE));
+// $excludedCoupons = $execSVC;
+// // file_put_contents('php://stderr',print("getAllPromosLog1"));
+// // file_put_contents('php://stderr',print_r($checkExcludedRows, TRUE));
+// error_log("getAllPromosErrorLog1");
+// file_put_contents('php://stderr',print_r($excludedCoupons, TRUE));
+// file_put_contents('php://stderr',print_r($excludedCoupons->count, TRUE));
 
-foreach($excludedCoupons as $coupon){
-    error_log("getAllPromosErrorLog2");
-    file_put_contents('php://stderr',print_r($coupon, TRUE));
-    $api_info['excluded_coupons'][] = $coupon;
-}
+// foreach($excludedCoupons as $coupon){
+//     error_log("getAllPromosErrorLog2");
+//     file_put_contents('php://stderr',print_r($coupon, TRUE));
+//     // $api_info['excluded_coupons'][] = $coupon;
+// }
 
 $api_info['response_code'] = 200;
 $api_info['response_msg'] = "all_promos";
