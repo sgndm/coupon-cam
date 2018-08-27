@@ -217,6 +217,9 @@ else{
             $repstmt = trim(str_replace($remove_chars, ' ', $place_ids));
             $list_ids = explode(",", $repstmt);
 
+            
+
+
             $st_id = $list_ids[0];
 
             // get store details
@@ -224,10 +227,15 @@ else{
             $exceSt = $dbh->query($get_st);
             $st_det = $exceSt->fetchAll(PDO::FETCH_OBJ);
 
+            error_log("getCluesMain1: Lat: ".$st_det[0]->latitude);
+            error_log("\ngetCluesMain2: Lng: ".$st_det[0]->longitude);
+
             // | Get store address
             $address = $st_det[0]->street_address;
             // country short
             $country_short = $st_det[0]->country_short;
+
+            error_log("\ngetCluesMain3: Street Address".$st_det[0]->address);
 
             // get currency label
             $curr = "$";
@@ -347,12 +355,21 @@ else{
             $nPrefCoupLvl = $nPromo->pref_coupon->coupon_level;
             $nAllCoupons = $nPromo->all_coupon;
 
+            error_log("getAlCluesMain_");
+
             // $api_info['pref-ids'][] = $nPrefCoupId;
 
 
             // get store details 
             $store_lat = $nPromo->store_lat;
             $store_lng = $nPromo->store_lng;
+
+            $promo_lat = $nPromo->latitude;
+            $promo_lng = $nPromo->longitude;
+
+            error_log("\ngetAlCluesMain_StoreLatLong1: ".$store_lat.", ".$store_lng);
+            error_log("\ngetAlCluesMain_StoreLatLong2: ".$promo_lat.", ".$promo_lat);
+
             
             // get store offset 
             $store_offset = Converter::get_time_zone($store_lat, $store_lng);
