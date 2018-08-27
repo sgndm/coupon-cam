@@ -65,15 +65,16 @@ foreach($nearbyPromos as $promo){
     foreach($excludedCoupons as $coupon){
         error_log("getAllPromosErrorLog2");
         file_put_contents('php://stderr',print_r($coupon, TRUE));
-        error_log("getAllPromosErrorLog3: ".$coupon->coupon_id);
+        error_log("getAllPromosErrorLog3: ".$coupon[2]);
 
-        $excluded_coupon_id = $coupon[0]->coupon_id;
+        $excluded_coupon_id = $coupon[2];
 
         foreach($all_coupons as $all_coupon){
             error_log("getAllPromosErrorLog4: ".$all_coupon->coupon_id);
             file_put_contents('php://stderr',print_r($all_coupon, TRUE));
 
             if ($all_coupon->coupon_id == $excluded_coupon_id){
+                error_log("getAllPromosErrorLog5 coupon_ids matched: ".$all_coupon->coupon_id);
                 $excluded_count_for_promo = $excluded_count_for_promo + 1;
             }
         }
@@ -85,6 +86,10 @@ foreach($nearbyPromos as $promo){
     
     if(!($checkSavedRows > 0) && $excluded_count_for_promo < 4) {
         $api_info['promo_info'][] = $promo;
+    }
+    else{
+        error_log("getAllPromosErrorLog5 skipped adding a promo");
+
     }
 
 }
